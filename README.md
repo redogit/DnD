@@ -2,24 +2,27 @@
 
 The original repository is a .NET 6 MAUI shell. It remains intact as the predecessor.
 
-## Current build
+## Current build — v2
 
 From the repository root:
 
 ```bash
 dotnet build REDOGIT.slnx --configuration Release
-dotnet run --project successors/redogit-2026/DnD.Core.csproj --configuration Release --no-build
+dotnet run --project successors/redogit-2026-v2/DnD.SelfCheck/DnD.SelfCheck.csproj --configuration Release --no-build
 ```
 
-`REDOGIT.slnx` is the current solution entry point. The historical MAUI project and `Orbit.Engine.sln` remain predecessor material rather than being rewritten into the successor.
+`REDOGIT.slnx` is the current solution entry point. v2 separates reusable tabletop behavior from verification:
 
-The current .NET 10 redo starts from reusable tabletop behavior rather than UI scaffolding:
+- `DnD.Core` — dice parsing, range calculation, injectable randomness, and ability modifiers;
+- `DnD.SelfCheck` — executable contract for parsing, min/max totals, deterministic rolling, ability modifiers, and malformed-input rejection.
 
-- parse common dice expressions such as `2d6+3`;
-- evaluate rolls through an injectable random source;
-- compute standard ability modifiers;
-- keep the domain core independent of MAUI and Orbit.
+GitHub Actions builds this same root solution and runs the same verifier.
 
-The executable runs deterministic checks and exits nonzero if the contract fails.
+## Preserved predecessors
+
+- The historical MAUI project and `Orbit.Engine.sln` remain predecessor material.
+- `successors/redogit-2026/` remains the first verified framework-independent successor and is now the predecessor to v2.
+
+This successor intentionally contains reusable tabletop calculations only. It does not reproduce proprietary adventure, setting, or rulebook text.
 
 See [`REDOGIT.md`](REDOGIT.md).
