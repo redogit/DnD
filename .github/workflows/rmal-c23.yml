@@ -106,3 +106,20 @@ jobs:
       - name: Tests
         shell: pwsh
         run: ctest --test-dir build/windows-c23 --output-on-failure
+      - name: Install staged SDK
+        shell: pwsh
+        run: cmake --install build/windows-c23 --prefix stage/windows-c23 --config Release
+      - name: Staged executable smoke test
+        shell: pwsh
+        run: |
+          .\stage\windows-c23\bin\rmalc.exe version
+          .\stage\windows-c23\bin\rmalc.exe selfcheck
+      - name: Package Windows x64 SDK
+        shell: pwsh
+        run: cpack --config build/windows-c23/CPackConfig.cmake -G ZIP -B dist -D "CPACK_PACKAGE_FILE_NAME=RMAL-3.1.0-windows-x64-c23"
+      - name: Upload Windows x64 SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: RMAL-3.1.0-windows-x64-c23
+          path: dist/RMAL-3.1.0-windows-x64-c23.zip
+          if-no-files-found: error
