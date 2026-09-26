@@ -1,0 +1,100 @@
+name: RMAL C23 Toolchain
+
+on:
+  push:
+    paths:
+      - "CMakeLists.txt"
+      - "include/**"
+      - "src/**"
+      - "spec/**"
+      - "tests/**"
+      - "examples/**"
+      - "scripts/**"
+      - "provenance/library/RMALC.rmal"
+      - ".github/workflows/rmal-c23.yml"
+  pull_request:
+    paths:
+      - "CMakeLists.txt"
+      - "include/**"
+      - "src/**"
+      - "spec/**"
+      - "tests/**"
+      - "examples/**"
+      - "scripts/**"
+      - "provenance/library/RMALC.rmal"
+      - ".github/workflows/rmal-c23.yml"
+
+jobs:
+  linux-clang-c23:
+    name: Linux / Clang / C23
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          clang --version
+          cmake --version
+          ninja --version
+      - name: Configure
+        run: cmake -S . -B build/linux-c23 -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build/linux-c23 --parallel
+      - name: Version
+        run: build/linux-c23/rmalc version
+      - name: Self-check
+        run: build/linux-c23/rmalc selfcheck
+      - name: Language spec
+        run: build/linux-c23/rmalc language-spec --format json
+      - name: Recovered surface
+        run: build/linux-c23/rmalc check tests/recovered_surface.rmal
+      - name: Historical RMALC carrier
+        run: build/linux-c23/rmalc check provenance/library/RMALC.rmal
+      - name: Example
+        run: build/linux-c23/rmalc run examples/hello.rmal
+      - name: Manifest
+        run: build/linux-c23/rmalc manifest tests/recovered_surface.rmal --json
+      - name: Tests
+        run: ctest --test-dir build/linux-c23 --output-on-failure
+
+  windows-clang-c23:
+    name: Windows x64 / Clang / C23
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        shell: pwsh
+        run: |
+          Get-Command clang.exe
+          clang --version
+          cmake --version
+          ninja --version
+      - name: Configure
+        shell: pwsh
+        run: cmake -S . -B build/windows-c23 -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        shell: pwsh
+        run: cmake --build build/windows-c23 --parallel
+      - name: Version
+        shell: pwsh
+        run: .\build\windows-c23\rmalc.exe version
+      - name: Self-check
+        shell: pwsh
+        run: .\build\windows-c23\rmalc.exe selfcheck
+      - name: Language spec
+        shell: pwsh
+        run: .\build\windows-c23\rmalc.exe language-spec --format json
+      - name: Recovered surface
+        shell: pwsh
+        run: .\build\windows-c23\rmalc.exe check tests\recovered_surface.rmal
+      - name: Historical RMALC carrier
+        shell: pwsh
+        run: .\build\windows-c23\rmalc.exe check provenance\library\RMALC.rmal
+      - name: Example
+        shell: pwsh
+        run: .\build\windows-c23\rmalc.exe run examples\hello.rmal
+      - name: Manifest
+        shell: pwsh
+        run: .\build\windows-c23\rmalc.exe manifest tests\recovered_surface.rmal --json
+      - name: Tests
+        shell: pwsh
+        run: ctest --test-dir build/windows-c23 --output-on-failure
