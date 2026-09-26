@@ -1,0 +1,53 @@
+{
+  "schema": "rmal/native-c23-windows-validation/v1",
+  "date": "2026-09-26",
+  "verified_head": "b6b9c6819b13017efdeac0047d4ef366b067449a",
+  "workflow": {
+    "name": "RMAL C23 Toolchain",
+    "run_id": 36231758598,
+    "conclusion": "success"
+  },
+  "linux": {
+    "job_id": 108376113424,
+    "target": "Linux / Clang / C23",
+    "conclusion": "success"
+  },
+  "windows": {
+    "job_id": 108376113544,
+    "runner_os": "Windows Server 2025",
+    "runner_version": "10.0.26100",
+    "image": "windows-2025-vs2026",
+    "clang_version": "20.1.8",
+    "clang_target": "x86_64-pc-windows-msvc",
+    "cmake_version": "4.4.3",
+    "ninja_version": "1.13.2",
+    "conclusion": "success"
+  },
+  "passed": [
+    "toolchain discovery",
+    "CMake configure",
+    "strict C23 compile",
+    "rmalc version",
+    "native selfcheck",
+    "language-spec introspection",
+    "recovered-surface parser check",
+    "historical RMALC.rmal parser check",
+    "hello example execution",
+    "JSON manifest generation",
+    "CTest semantic regression suite"
+  ],
+  "semantic_witnesses": [
+    "CONST mutation rejection",
+    "typed equality",
+    "STATE/SET distinction",
+    "recursive functions",
+    "source-coordinate trace/manifest metadata"
+  ],
+  "boundaries": [
+    "WINDOWS_BUILD_PASS != UNIVERSAL_CORRECTNESS",
+    "COMPILED != SCIENTIFICALLY_VALID",
+    "TRACE != PROOF",
+    "FINITE_VERIFICATION != UNIVERSALITY"
+  ],
+  "claim_ceiling": "NATIVE_C23_WINDOWS_AND_LINUX_EXACT_HEAD_VERIFIED"
+}
