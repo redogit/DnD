@@ -1,0 +1,49 @@
+{
+  "schema": "rmal/native-cpp-formalization-evidence/v1",
+  "date": "2026-09-26",
+  "verified_head": "b9c07ac3fe8d15828dedf190d740565fb9be1baf",
+  "workflow": {
+    "name": "RMAL C++ Toolchain",
+    "run_id": 36207543711,
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "checks": [
+    "configure",
+    "build",
+    "native self-check",
+    "language-spec introspection",
+    "legacy syntax check",
+    "recovered surface check",
+    "historical RMALC carrier check",
+    "execute example",
+    "manifest recovered surface",
+    "audit recovered surface",
+    "CTest"
+  ],
+  "established": [
+    "current C++20 toolchain builds on GitHub Actions",
+    "native selfcheck passes",
+    "recovered core syntax is accepted",
+    "preserved historical RMALC.rmal parses under the current compatibility surface",
+    "compiled directives survive into manifest metadata",
+    "current example executes",
+    "audit and CTest pass"
+  ],
+  "not_established": [
+    "full RMAL 2.1.x feature parity",
+    "typed RMAL-SIR2 implementation",
+    "RMALOBJ1 or RMALEXE1 emitter/linker",
+    "full RMALKDVMLLL executable frontend",
+    "scientific truth of claims carried by RMAL programs",
+    "universal compiler correctness"
+  ],
+  "boundaries": [
+    "PARSED != EXECUTED",
+    "COMPILED != SCIENTIFICALLY_VALID",
+    "AUDIT_PASS != SEMANTIC_TRUTH",
+    "TRACE != PROOF",
+    "FINITE_VERIFICATION != UNIVERSALITY"
+  ]
+}
