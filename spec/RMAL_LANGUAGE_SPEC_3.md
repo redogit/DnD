@@ -1,7 +1,7 @@
 # RMAL 3 Formal Language Contract
 
 **Canonical repository:** `redogit/DnD`  
-**Implementation language:** C++20  
+**Implementation language:** ISO C23  
 **Language identity:** RMAL — Ryan McMillan April Language
 
 ## 1. Authority model
@@ -10,7 +10,7 @@ RMAL is formalized from four distinct evidence classes:
 
 1. **Native current implementation** — behavior established by the C++ source in this repository.
 2. **Recovered executable predecessor** — behavior documented/validated in retained RMAL Tool Chain 2.1.x artifacts.
-3. **Specified semantic surface** — defined language/VM/link/reconstruction semantics not yet fully lowered by the current C++ compiler.
+3. **Specified semantic surface** — defined language/VM/link/reconstruction semantics not yet fully lowered by the current C23 compiler.
 4. **Historical/recovery material** — chat, Library, repository, or predecessor material retained for reconstruction but not automatically canonical.
 
 ```text
@@ -47,7 +47,7 @@ RMAL source/surface
  -> RMALEXE1
 ```
 
-The second path is the formal target architecture. The current C++ implementation does **not** yet establish all stages.
+The second path is the formal target architecture. The current C23 implementation does **not** yet establish all stages.
 
 ## 3. Implementation-status classes
 
@@ -383,3 +383,23 @@ SOURCE
 ```
 
 No step is inferred from adjacency.
+
+
+## 16. Native implementation profile — RMAL 3.1
+
+Current native implementation authority is ISO C23.
+
+```text
+Windows x64 / Clang / C23
+Linux x64 / Clang / C23
+```
+
+Semantic repairs promoted in 3.1:
+
+- `CONST` immutability is enforced;
+- `STATE` declaration and `SET` mutation are distinct;
+- `SET` requires an existing mutable binding;
+- equality is type-sensitive;
+- source line/column coordinates survive into bytecode, manifests, and traces.
+
+The C++20 implementation is retained under `history/cpp20/` as a predecessor.
