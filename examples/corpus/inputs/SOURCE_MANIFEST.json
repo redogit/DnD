@@ -1,0 +1,232 @@
+[
+  {
+    "path": "00_COMPLETE_MEMORY_LEDGER.md",
+    "bytes": 34682,
+    "sha256": "a2bcc47c53a86fc5ce4b5fb64077041b61988e6601b43e158bbe5808a5402192"
+  },
+  {
+    "path": "01_GYRO_DEAN4_ALL_PROOFS_EXACT.md",
+    "bytes": 33614,
+    "sha256": "1b881f5d55ae46f3e6ced37c6755c85aefc54012f6cf691f5865989452169f2a"
+  },
+  {
+    "path": "sources/CRACK_ALL_IN_MY_LANGUAGE.rmal",
+    "bytes": 383500,
+    "sha256": "aaca16d73b5ce126fcf107f8bb83f9210f3e0ee46c8464c60780c749faca51fa"
+  },
+  {
+    "path": "sources/CROSS_REPO_CLAIM_AUDIT_PASS2_2026-09-17.md",
+    "bytes": 4887,
+    "sha256": "c59255ff8bdecb8f537eb32afd7f72a541d59aa5a6711bb7b1b131909a503b18"
+  },
+  {
+    "path": "sources/DIMENSIONAL_SEAM_REAL4_TO_COMPLEX4.md",
+    "bytes": 2585,
+    "sha256": "6afcacdac2b89c5de454ffe4bc1597effa54fa66d01571ac5e215d45578631f7"
+  },
+  {
+    "path": "sources/FULL_CONTEXT_CRACK_2026-09-18.rmal",
+    "bytes": 16137,
+    "sha256": "f68e80e8441ce22953be87781a9267bb63a63b11872edd26c22d845539d515d9"
+  },
+  {
+    "path": "sources/GSFL_BIDIRECTIONAL_RESULTS.json",
+    "bytes": 1629,
+    "sha256": "93d9a9a188d7af0bad33f731206fc15259561b647db8f20ae33a477fa44952e5"
+  },
+  {
+    "path": "sources/GSFL_PROVERBIAL_RESULTS.json",
+    "bytes": 4753,
+    "sha256": "1bb893645a9f039faff7c42379b73abf1726682da3d31aa4340ae4285dc9c55b"
+  },
+  {
+    "path": "sources/HODGE_NEXT.rmal",
+    "bytes": 2382,
+    "sha256": "3a0cfc69b930635a4237fa7f0505d0f23cabcad3203264b98fe4e365a1b1b61d"
+  },
+  {
+    "path": "sources/MASTER_COINED_NAME_REGISTRY_PASS4.md",
+    "bytes": 65760,
+    "sha256": "e9ab68b6f00a42e7f56a5d8a08d528366aeaf17c2f0af688f3e24f6fc420600a"
+  },
+  {
+    "path": "sources/P_VS_NP_NEXT.rmal",
+    "bytes": 2213,
+    "sha256": "efb733061023e7a725b891341c142fa8f957bd6fe3651809efdeed9e19efaa70"
+  },
+  {
+    "path": "sources/RMALC_V1_2_REMAINDER_CLOSURE_RESULT.md",
+    "bytes": 2706,
+    "sha256": "1a7072e4c31394a4dcc1b6739f7056333c4df6c828f11b84629f21a456c020b1"
+  },
+  {
+    "path": "sources/RMALKDVMLLL_APPROVAL_CURRENT.md",
+    "bytes": 693,
+    "sha256": "9594dc15a1348b467c229c358fe18c53e0a0e9bd0f83a81d17ccedac37296196"
+  },
+  {
+    "path": "sources/RMALKDVMLLL_BOOK_OF_BOOKS.md",
+    "bytes": 18912,
+    "sha256": "fc552fd4104f6649ba3fafb520ee6c9656a178241bf5fe2a9d37a56d1197457b"
+  },
+  {
+    "path": "sources/RMAL_POLYMETA_PROOF_TOOLCHAIN_DESIGN.md",
+    "bytes": 15168,
+    "sha256": "f9cde45addf5b51f10203581c962088ffe46fd7bfaf3ea68776bfd7f87f67cc4"
+  },
+  {
+    "path": "sources/RMAL_TOOL_CHAIN_V1_README.md",
+    "bytes": 5133,
+    "sha256": "fd88ecd45371177ad0a3ebffd5d6fa2ed85346250a111d4dafa8df44ce4e6d82"
+  },
+  {
+    "path": "sources/SCIENTIFIC_RESULT_TBCL002.md",
+    "bytes": 3776,
+    "sha256": "7d0edd49804c09e09ee86a69e4b43d87bf9c77df763f96368b064b578cd76f38"
+  },
+  {
+    "path": "sources/gyro_dean4/CLAIMS.md",
+    "bytes": 1486,
+    "sha256": "22bc5eee617c6eaacc595fdb3260f047621373d446d36eab998d7c6e6f7fb550"
+  },
+  {
+    "path": "sources/gyro_dean4/EVIDENCE_BOUNDARY.md",
+    "bytes": 3183,
+    "sha256": "3559f1b4e2bbcc96bff9474286f972c0bff2cc0f3cafa615dd0b806daa8be13c"
+  },
+  {
+    "path": "sources/gyro_dean4/PROOF_REPORT.md",
+    "bytes": 2448,
+    "sha256": "d0162839689ef3a7e688d3f79141b83f25285cbff276de20b3b6e8543f717af8"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/01_DEAN4_NP_COMPLETENESS.md",
+    "bytes": 581,
+    "sha256": "b768d804a5068c9362c88569cb33b8e136cd1f6a1d04645d8023461eb984d9ca"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/02_PRESSURE_CLOSURE.md",
+    "bytes": 609,
+    "sha256": "f1d1e08d4632dbd731aec2d849de9d757a565754553020fa99d8fc425fb3e080"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/03_CONTEXT_SIGNATURE.md",
+    "bytes": 461,
+    "sha256": "e2a1c43ebf0e8ebdbcc34893242dc1e2fc42501c8c2dcf7c12dd9083e7dce506"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/04_CERTIFIED_RANK_GRAVITY.md",
+    "bytes": 465,
+    "sha256": "53a22663e5a0a2c0f09441acd221ee56e72a20ce81367546cb04ff3b6af8fc0f"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/05_FOUR_RESULT_SELF_REDUCTION.md",
+    "bytes": 413,
+    "sha256": "7908723d2072866055fc66725a96174fc01bf5acceae5099ff4f3be7ffd55899"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/06_SOLVER_CORRECTNESS_AND_TERMINATION.md",
+    "bytes": 3233,
+    "sha256": "ad907d47975a6bd2e1b404ce837b6a09cc005ed3ee241d5aeb2b6e359d388458"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/07_CAPPED_RECURRENCE_AND_FACTORIZATION.md",
+    "bytes": 1362,
+    "sha256": "ed8f8e43fa9923ceec53b727827f1ba2be97ac5dec7cb2ef0ab7ac3e67b805e8"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/08_VERTEX_COVER_DUALITY_AND_KERNEL.md",
+    "bytes": 1379,
+    "sha256": "c59a1020d7ade3f6ef5a762a191f936fe57b0a6848428a27fa44b67bca98772f"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/09_REGULAR_CORE_PLATEAU.md",
+    "bytes": 2179,
+    "sha256": "fe44bb61ba1463131ab6224f168722ad0f772fd6e73ea9167972712a53af71c1"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/10_CONTEXT_FRONTIER_AND_RANK_BARRIERS.md",
+    "bytes": 1692,
+    "sha256": "2927a5804adc85e44590b23d4f3ab90ec9b4a0afaed10f45b5c9c70012a4a9de"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/11_GYRO_CLOSURE_AND_FRONTIER_MASS.md",
+    "bytes": 1618,
+    "sha256": "53f99e328725b35e6f255ece48b22ebbdd2b6bb7c4e4bb90989c63ff70aa7e01"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/12_MAXIMAL_LINEAR_PCA.md",
+    "bytes": 1752,
+    "sha256": "513df403423a83d557ec45530e0869371cbe48e9fabcf4804d7346824c294903"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/13_CERTIFIED_MACAULAY_ENGINE.md",
+    "bytes": 2288,
+    "sha256": "44bc6dfcf31b64a4257b0235510e46a1ac949002b2cebb46371cfa425be603ec"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/14_LIFTED_MPCA_CURVATURE.md",
+    "bytes": 1688,
+    "sha256": "77b90feb3d005262fcf6f8d183650948c7bcabf4dd5f3bfe81d1d01b23fb9bd3"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/15_SEMANTIC_JACOBIAN_AND_BLOCK_ATTACKS.md",
+    "bytes": 1688,
+    "sha256": "8b4c44b85e5cbe7c2d6117c3e75df9dc1a4438577e3ad142fde878cfde58af8d"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/16_GRAPH_HILBERT_BRIDGE.md",
+    "bytes": 1069,
+    "sha256": "328690518d29325391f7722d097fe7aee286524f00996fa66210e41b74696307"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/17_DUAL_SUPPORT_FRAME_THEOREMS.md",
+    "bytes": 2400,
+    "sha256": "4aac93f433fcaa7bff5eee6e2f6ff5d49a0599858e808714ff57dfd9853406b6"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/18_MULTI_FRAME_RANK_COLLAPSE.md",
+    "bytes": 1517,
+    "sha256": "790a1b02e645f10a757668a6775a2bc8c83411e1e6f99dd19161976e7613ed6f"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/19_SUBMODULAR_RANK_GRAVITY.md",
+    "bytes": 1383,
+    "sha256": "a28b591662ca1fb9e743f5aa5692542f59ff3f156dbb77be745fffb96a89ada4"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/20_PROOF_STATUS_AND_OPEN_CLAIMS.md",
+    "bytes": 2310,
+    "sha256": "2506d25db8a5d8164a3bbcb25fab81c91611f2d94a6d331380b9ce4a0bfba9b1"
+  },
+  {
+    "path": "sources/gyro_dean4/proofs/21_CLAIM_FALSIFICATION_LEDGER.md",
+    "bytes": 2363,
+    "sha256": "0349526b3f3d66d3e93970abbfeaeefb93767e403cbe5218dcc50a79941c1cd4"
+  },
+  {
+    "path": "sources/hodge/DEGREE70_EXISTENCE_VS_EXPLICIT_CONSTRUCTION.md",
+    "bytes": 2872,
+    "sha256": "a06b9bb6e24427f4016167be2cbeac820657943af973f18fbbc3465c95e418eb"
+  },
+  {
+    "path": "sources/hodge/DEGREE70_GAMMA_CURVE_SURFACE_LIFT_AUDIT.md",
+    "bytes": 2131,
+    "sha256": "fc06d65c6af1fe7f569cda3fa20efffaaa18bb63e85437896a322f9914c15b42"
+  },
+  {
+    "path": "sources/hodge/FERMAT_SEXTIC_750_GAP_CLOSED.md",
+    "bytes": 1532,
+    "sha256": "6feee54e6a96411b9e066e7ceb7de27b24387e86d4fe68863609a8413383a706"
+  },
+  {
+    "path": "sources/hodge/FERMAT_SEXTIC_EXPLICIT_SECOND_ORDER_WITNESS.md",
+    "bytes": 1971,
+    "sha256": "e1de03efe761046eceb62f0200c85df9e81425da3ccf9e0edaad143236d1b0a6"
+  },
+  {
+    "path": "sources/hodge/WITNESS_PRESERVING_CONORMAL_SYZYGY_LAYER.md",
+    "bytes": 3083,
+    "sha256": "a2fcd2aa8ccd409efd00454a60316e4ea3a9c1bd92503f1468cbc869c3c0b9de"
+  }
+]

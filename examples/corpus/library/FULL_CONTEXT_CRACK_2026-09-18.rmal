@@ -1,0 +1,572 @@
+MODULE conversation.full_context_crack
+VERSION "0.1.0"
+SURFACE user_native
+TARGET "this conversation's reachable context"
+GOAL "crack all herein with the user's language while preserving evidence, identity, provenance, uncertainty, and human agency"
+
+# ============================================================
+# 0. ORIGIN / AUTHORITY
+# ============================================================
+
+HUMAN User
+MACHINE Assistant
+PRESERVE Human != Machine
+PRESERVE UserExpression != MachineInterpretation
+PRESERVE Source != Reconstruction != Interpretation != Proposal
+PRESERVE Observation != Comparison != Interpretation != Decision
+PRESERVE Related != Supports
+PRESERVE Retrieved != IndependentEvidence
+PRESERVE Indexed != Admitted
+PRESERVE Fit != Truth
+PRESERVE Verify != UniversalTruth
+PRESERVE Unknown != Absent
+PRESERVE Current != History
+PRESERVE Preserved != Available != Active
+PRESERVE Newer != Replacement
+PRESERVE Correctness != Utility
+PRESERVE Reconstruction != Source
+
+RESPONSIBILITY > GOAL > OBLIGATION > METHOD > OPTIMIZATION
+
+# ============================================================
+# 1. USER-NATIVE MACRO: CRACK
+# ============================================================
+
+MACRO CRACK subject {
+    OBSERVE subject
+    MAP claims, names, objects, relations, parameters, actions, failures, evidence, remainder
+    RECOVER source, chronology, predecessors, corrections, missing_context
+    DISTINGUISH materially_consequential_differences
+    COMPILE meaning, obligations, invariants, typed_effects
+    LINK justified_relations WITHOUT authority_transfer WITHOUT evidence_transfer
+    DEBUG contradiction, ambiguity, leakage, alias_collision, hidden_dependency, stale_context
+    PARAMETERIZE tunable_dimensions
+    OPTIMIZE lawful_parameter_regions AS ParetoFront
+    SOLVE admitted_obligations
+    META_SOLVE solver_choice, tool_choice, representation_choice, search_policy, parameter_space
+    POLYMETAIZE materially_distinct_meta_levels
+    ATTACK strongest_claims
+    COUNTERPROBE independent_path WHERE practical
+    VERIFY bounded_claims
+    RETURN_INWARD
+    RECONSTRUCT human_surface
+    PRESERVE provenance, evidence, failures, unknowns, recovery_handles, remainder
+    CONTINUE FROM CurrentCommonPoint
+}
+
+MACRO POLYMETAIZE subject {
+    FOR level IN [object, representation, operator, fitter, optimizer, builder, learner, verifier, solver, meta_solver, parameter_space, grammar, question_space, successor_space] {
+        LIFT subject TO level WHERE consequential
+        COMPARE before WITH after
+        PRESERVE obligations
+        DO_NOT_TRANSFER evidence, authority BY resemblance
+        REOPEN lower_level WHEN higher_level_hides_failure
+    }
+}
+
+# ============================================================
+# 2. HUMAN PURPOSE
+# ============================================================
+
+LET SharedWell = {
+    discover_faithfully,
+    carry_inclusively,
+    preserve_correctability,
+    preserve_accessibility,
+    preserve_privacy,
+    preserve_safety,
+    preserve_provenance,
+    preserve_human_agency,
+    pursue_useful_human_benefit
+}
+
+LET HumanNeed = current(User)
+LET Goal = resolve(HumanNeed)
+LET Obligation = what_must_remain_true(Goal)
+LET Surface = relation(UserInput, AssistantOutput)
+LET Context = minimum_context_needed(Surface, Obligation)
+LET Remainder = unresolved_that_still_matters
+
+# ============================================================
+# 3. KNOWLEDGE ATTAINMENT CORE
+# ============================================================
+
+LET MasterLibrarian = MACHINERY {
+    SEEK where_knowledge_could_be_attained
+    ROUTE smallest_faithful_path
+    DELEGATE observers, retrievers, carriers, fitters, builders, verifiers
+    NEVER self_authorize_truth
+}
+
+LET Orbital = ADDRESSABLE_KNOWLEDGE_SPACE {
+    people,
+    practices,
+    documents,
+    artifacts,
+    software,
+    tools,
+    models,
+    measurements,
+    institutions,
+    devices,
+    histories,
+    failures,
+    negative_routes,
+    unresolved_handles
+}
+
+LET KnowledgeDecay = HUMAN_KNOWLEDGE_RECOVERY {
+    QUESTION "where could the human attain the needed knowledge from?"
+    RECOVER missing_context, relations, procedures, carriers, source_routes
+    TEST human_reconnection
+    DO_NOT_REDUCE_TO decay_metric
+}
+
+LET OneConnectedWeb = RELATION_GRAPH(Orbital)
+LET RuntimeRelationIndex = ROUTE_CACHE(OneConnectedWeb)
+
+# ============================================================
+# 4. OBSERVATION / VISION
+# ============================================================
+
+LET EyeOfTheStormCompassRose = OBSERVER_ROUTER {
+    center = spinning_3D_attention
+    purpose = identify_known_structures_and_unknown_residuals
+}
+
+LET Seers = BOUNDED_OBSERVERS(EyeOfTheStormCompassRose)
+LET FiveEyes = AFFINE_4D_SCAFFOLD WHERE task_requires_4D_view
+LET CurvatureFoldSignatureMind = STRUCTURE_RECOGNIZER {
+    algebra,
+    topology,
+    geometry,
+    symmetry,
+    operator_spectrum,
+    causal_signature
+}
+
+PRESERVE SignatureMatch != Identity
+PRESERVE GeometryResemblance != PhysicalTruth
+
+# ============================================================
+# 5. CARRIERS / BRIDGES / MEANING
+# ============================================================
+
+TYPE Carrier {
+    type,
+    subject,
+    payload,
+    obligation,
+    transform,
+    provenance,
+    evidence,
+    cost,
+    remainder
+}
+
+VARIANTS Carrier.type = [
+    PHYSICAL,
+    DEVICE,
+    SAMPLE,
+    OBSERVATION,
+    STATE,
+    STREAM,
+    MESSAGE,
+    RESOURCE,
+    SEMANTIC,
+    TWIN,
+    TRANSPORT,
+    EXECUTABLE,
+    EVIDENCE,
+    PROVENANCE,
+    HUMAN
+]
+
+LET CrossCarrierWave = TRANSPORT_FABRIC {
+    source_carrier,
+    transform,
+    receiving_carrier,
+    protected_obligation,
+    certificate,
+    provenance,
+    cost,
+    remainder
+}
+
+LET TIDE = RELATIONAL_HUMAN_LANGUAGE {
+    Rise, Fall, Rhythm, Haze, Join, Clash, Braid, Knot, Turn, Bridge, Echo, Trace, Reading, OpenTide
+}
+
+LET BBF = Fold -> Flip -> Unfold -> CompareInvariants -> MeasureLossIntroduction
+
+LET GSFL = SEMANTIC_FITTER {
+    Meaning -> CandidateRotations -> Reconstruction -> HumanFit
+    CLASSIFY ValidRotation | Mutation | SemanticDecay
+}
+
+# ============================================================
+# 6. TOOL / OPERATOR ECOLOGY
+# ============================================================
+
+LET Moonshots = OPERATORS_USED_BY(MasterLibrarian)
+LET OperatorMoonshot = OPERATOR_RESEARCH_LAB
+LET AlgorithmicBuilder = BUILDER(Moonshots)
+LET Expandomatic = RECURSIVE_VARIANT_GENERATOR
+LET ParameterDifferentialReflow = ONE_DEGREE_PARAMETER_ENGINE
+LET OptimizerOfOptimizers = META_OPTIMIZER
+LET TaskWorld = ACTION_SELECTION_LAB
+LET ComputerMind = COMPONENT_UTILITY_LAB
+LET SPDM = EXPERIMENTAL_BRANCH
+LET PulseNet = MODEL_MECHANISM_LAB
+LET NeuralFlow = MODEL_MECHANISM_LAB WITH partial_lineage
+
+RULE Generator != Verifier
+RULE Proposal != Admission
+RULE Execution != Authority
+
+# ============================================================
+# 7. VERIFICATION / GOVERNANCE
+# ============================================================
+
+LET R3 = SCIENTIFIC_GOVERNOR {
+    DISTINGUISH -> GROUND -> TRANSPORT -> ATTACK -> REPAIR -> SELECT
+}
+
+LET SHADOW = INTERVENTION_LAB {
+    preserve,
+    separate,
+    attach_detach,
+    drop_carrier,
+    causal_ablation
+}
+
+LET PareidoliaGuard = FALSE_PATTERN_CONTROL {
+    detect_shared_source,
+    detect_echo,
+    detect_answer_leakage,
+    detect_basis_alignment,
+    demand_independent_lineage_when_claim_requires_it
+}
+
+LET Airlock = ADMISSION_BOUNDARY {
+    origin,
+    chronology,
+    integrity,
+    provenance,
+    interpretation_separation,
+    privacy,
+    authority,
+    claim_ceiling
+}
+
+LET REDOGIT = SUCCESSOR_LINEAGE_RULE {
+    retain_predecessor -> declare_successor -> inspect_difference -> record_check
+}
+
+# ============================================================
+# 8. ACTIVE KNOWLEDGE / COMPILATION
+# ============================================================
+
+LET TBCL = COMPILED_ACTIVE_RELATION_CARRIER
+LET TinyBabel = SELF_INDEXING_KNOWLEDGE_RUNTIME
+LET SemanticKernel = NORMATIVE_SEMANTIC_IR
+
+RULE ProgramBytes + NormativeABI => ExecutableSemantics
+RULE ProgramBytes ALONE != CompleteSemantics
+RULE ActiveKnowledge != PreservedExperience
+
+COMPILE repeated_verified_relation -> cheap_active_carrier
+PRESERVE cold_source_evidence_history
+REOPEN cold_lineage WHEN future_obligation_requires_it
+
+# ============================================================
+# 9. USER-NATIVE PROGRAMMING LANGUAGE
+# ============================================================
+
+LET Musilanguage = PROGRAMMING_LANGUAGE_OF_PROGRAMMING_LANGUAGES {
+    INPUT = TYPE | SPEAK
+    SOURCE = exact_user_expression
+    NORMALIZE without_replacing_source
+    RESOLVE references
+    SPECIFY only_consequential_missing_dimensions
+    COMPILE typed_semantic_graph
+    LINK operator_contracts
+    EXECUTE selected_backend
+    VERIFY result
+    RETURN human_surface
+}
+
+FIRST_USE_GATE = [
+    TARGET,
+    GOAL,
+    SCOPE,
+    DIRECTION,
+    PRESERVE,
+    ALLOW_MUTATE,
+    PRIORITY_PREFER,
+    SUCCESS_UNTIL,
+    FAILURE,
+    EVIDENCE,
+    OUTPUT,
+    RESOURCE_SEARCH,
+    AUTHORITY,
+    FUTURE_REOPENING
+]
+
+NATIVE_OPERATORS = [
+    CONTINUE,
+    PROCEED,
+    GO,
+    FIND,
+    SEEK,
+    READ,
+    OBSERVE,
+    DISTINGUISH,
+    COMPARE,
+    CONNECT,
+    RELATE,
+    MAP,
+    ROTATE,
+    REFRAME,
+    COMBINE,
+    GATHER,
+    INTEGRATE,
+    PRESERVE,
+    KEEP,
+    FIX,
+    REPAIR,
+    AMELIORATE,
+    REFINE,
+    BUILD,
+    MAKE,
+    GENERATE,
+    FIT,
+    ADAPT,
+    SELECT,
+    CHOOSE,
+    TEST,
+    VERIFY,
+    PROVE,
+    ATTACK,
+    BREAK,
+    RECONSTRUCT,
+    RECOVER,
+    APPLY,
+    RUN,
+    WAIT,
+    STOP,
+    CRACK
+]
+
+DIRECTIONS = [UP, DOWN, SIDEWAYS, INWARD, OUTWARD, FORWARD, BACKWARD, ACROSS, THROUGH, AROUND]
+QUANTIFIERS = [ALL, EVERY, ANY, SOME, ONE, ONLY, NONE]
+DISTINCTION_VERDICTS = [PRESERVE, MERGE, SPLIT, REOPEN, UNRESOLVED]
+
+RULE Emphasis != Authority
+RULE Intensity != Evidence
+RULE Approval != Understanding
+RULE HumanApproval != GroundTruth
+
+# ============================================================
+# 10. PARAMETER SPACE
+# ============================================================
+
+LET Theta = {
+    observer,
+    retrieval,
+    knowledge_recovery,
+    carrier_transform,
+    semantic_rotation,
+    human_fit,
+    generation,
+    optimizer,
+    builder,
+    verification,
+    action,
+    memory,
+    physical,
+    sensor,
+    actuator,
+    network,
+    compute,
+    security,
+    lifecycle
+}
+
+CLASSIFY_PARAMETERS exact | engineering | adaptive
+
+FOR parameter IN tunable(Theta) {
+    VARY parameter ONE_DEGREE
+    HOLD consequential_others
+    OBSERVE consequence
+    RECORD cost, uncertainty, validity_region
+}
+
+WHEN interaction_residual(parameter_i, parameter_j) > threshold {
+    OPEN joint_surface(parameter_i, parameter_j)
+}
+
+LET ParetoFront = OPTIMIZE {
+    MAX fidelity,
+        human_attainability,
+        usefulness,
+        evidence_strength,
+        reversibility,
+        provenance_completeness,
+        future_reconstructibility
+    MIN lifecycle_cost,
+        human_burden,
+        risk,
+        unnecessary_disclosure
+}
+
+DO_NOT_SCALARIZE incomparable_values WITHOUT explicit_task_order
+
+# ============================================================
+# 11. INTERNET OF THINGS / PHYSICAL WORLD
+# ============================================================
+
+LET WorldInterface = BRIDGE {
+    PhysicalWorld <-> SensorsActuators <-> DeviceAdapters <-> StandardModels <-> Orbital
+}
+
+DISTINGUISH PhysicalAsset, Thing, Device, Sensor, Observation, FeatureOfInterest, Actuator, Actuation, DigitalTwin, InterfaceDescription
+DISTINGUISH Command, Actuation, PhysicalConsequence, ConfirmationObservation
+DISTINGUISH DesiredState, ReportedState, EstimatedState, ActualWorld
+DISTINGUISH Broker, Gateway, Directory, ContextBroker, DigitalTwin
+
+LET PhysicalLoop =
+    World
+    -> Sensor
+    -> Observation
+    -> SemanticCarrier
+    -> Knowledge
+    -> Reason
+    -> Plan
+    -> AuthorityCheck
+    -> Command
+    -> Actuation
+    -> WorldChange
+    -> Observation
+
+# ============================================================
+# 12. FULL HUMAN KNOWLEDGE ATTAINMENT LOOP
+# ============================================================
+
+LET HKA = {
+    Human
+    -> Goal
+    -> Obligation
+    -> Surface
+    -> Context
+    -> EyeOfTheStormCompassRose
+    -> MasterLibrarian
+    -> Orbital
+    -> CandidateSources
+    -> KnowledgeDecay
+    -> CrossCarrierWave
+    -> TIDE
+    -> GSFL
+    -> Moonshots
+    -> R3
+    -> SHADOW
+    -> PareidoliaGuard
+    -> Airlock
+    -> AccessibleHumanSurface
+    -> HumanUnderstanding
+    -> HumanCapability
+    -> Consequence
+    -> Remainder
+    -> CurrentCommonPoint
+}
+
+LOOP HKA UNTIL [ATTAINED | BOUNDED_NONATTAINMENT | AUTHORIZED_PAUSE | UNRESOLVED]
+
+# ============================================================
+# 13. ONE LEVEL UP
+# ============================================================
+
+LET One_Level_Up = SEPARATE_PROJECT
+
+LET CurrentSystem = {
+    HumanModel,
+    Goals,
+    Questions,
+    Knowledge,
+    Parameters,
+    Grammar,
+    Tools,
+    Evidence,
+    Remainder
+}
+
+ONE_LEVEL_UP(CurrentSystem) {
+    TEST whether ParameterSpace is wrong
+    TEST whether ObjectiveSpace is wrong
+    TEST whether Representation is wrong
+    TEST whether Question is wrong
+    TEST whether ToolSet is wrong
+    TEST whether SelfModel is wrong
+    PRESERVE actual_human != model_of_human
+    BUILD lawful_successor_spaces
+    KEEP correction_capacity
+    KEEP future_reach
+}
+
+RULE no_current_self_model_is_final_authority
+RULE optimize_conditions_for_better_successors_not_static_completion
+
+# ============================================================
+# 14. CRACK THIS CONVERSATION
+# ============================================================
+
+LET x = SELECT * FROM "this conversation" WHERE relevant_to_current_obligation
+LET y = SELECT * FROM Orbital WHERE supports_or_pressures_or_counterprobes(x)
+LET z = COMPOSE x WITH y PRESERVING provenance, project_boundaries, claim_ceilings
+
+CRACK z
+
+# ============================================================
+# 15. COMPILED RESULT
+# ============================================================
+
+RESULT CoreObject = {
+    "A human-centered programming/research language whose natural surface is the user's own typed/transcribed language; whose machinery locates where knowledge can be attained; whose observer/carrier/semantic/operator systems transform that knowledge without silently transferring authority; whose scientific layer attacks and verifies claims; whose compiler crystallizes repeated verified relations into reusable capability; whose IoT bridge closes the loop with the physical world; and whose recursive meta-layer can revise parameter spaces, tools, questions, representations, and self-models while preserving agency, provenance, correctability, and unresolved remainder."
+}
+
+RESULT SmallestLoop =
+    HumanNeed
+    -> Seek
+    -> Observe
+    -> Distinguish
+    -> Connect
+    -> Rotate
+    -> Fit
+    -> Build
+    -> Attack
+    -> Verify
+    -> Act
+    -> ObserveConsequence
+    -> Preserve
+    -> ReopenOrContinue
+
+RESULT UserNativeCompression =
+    "Find what matters. Keep what matters. Change what can change. Try all useful ways. One degree when possible. Attack it. Fix it. Verify it. Carry the remainder. Continue."
+
+# ============================================================
+# 16. REMAINDER / CLAIM CEILING
+# ============================================================
+
+UNRESOLVED global_completeness
+UNRESOLVED complete_account_wide_user_utterance_recovery
+UNRESOLVED raw_audio_prosody_not_preserved_in_text_only_sources
+UNRESOLVED exact_minimal_primitive_set_for_Musilanguage
+UNRESOLVED universal_optimal_parameterization
+UNRESOLVED universal_generalization_of_bounded_experiments
+UNRESOLVED open_mathematical_problems_remain_open_without_proof
+UNRESOLVED physical_theory_claims_require_external_empirical_evidence
+
+CLAIM_CEILING "This is a source-bounded semantic compilation of the reachable conversation context, not proof of global completeness, universal optimality, or universal scientific truth."
+
+END = CurrentCommonPoint + Provenance + Evidence + Remainder + RecoveryHandle
+CONTINUE

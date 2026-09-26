@@ -1,0 +1,31 @@
+PROBLEM_FRAME "P vs NP" GOAL "advance exactly one consequential degree" SCOPE "" AUTHORITY "NONE" RESOURCE "bounded"
+PRESERVE provenance claim_boundary total_cost_accounting
+ALLOW representation_change decomposition
+EXCLUDE authority_transfer silent_mutation
+CLAIM_CEILING "OPEN"
+RELEVANT Problem.PvsNP KIND "OPEN_PROBLEM" STATUS "OPEN" NAME "P versus NP research branch"
+RELEVANT Result.T7Quotient KIND "VERIFIED_BOUNDED_RESULT" STATUS "EXACT_FINITE" NAME "t=7 quotient / square-pyramid finite target"
+RELEVANT Section-508FB01F86B3810A777D KIND "DOCUMENT_SECTION" STATUS "INDEXED_NOT_ADMITTED" NAME "2. Current exact P-vs-NP laboratory"
+RELEVANT Section-F5602B8F5C238E19BBF6 KIND "DOCUMENT_SECTION" STATUS "INDEXED_NOT_ADMITTED" NAME "2. Current exact P-vs-NP laboratory"
+RELEVANT Artifact-17E7C196E0C58AB77F18 KIND "ARTIFACT" STATUS "PRESERVED_SOURCE" NAME "RECURSIVE_SURVIVOR_CARRIER_INTEGRATION_2026-09-13.md"
+RELEVANT Artifact-9EAF9B813E4F5C771F2E KIND "ARTIFACT" STATUS "PRESERVED_SOURCE" NAME "RECURSIVE_SURVIVOR_CARRIER_INTEGRATION_2026-09-13.md"
+RELEVANT Language.RMAL KIND "LANGUAGE" STATUS "CURRENT" NAME "Ryan McMillan April Language"
+RELEVANT Object.SurvivorCarrier KIND "TASK_LOCAL_INTERFACE" STATUS "ACTIVE" NAME "Survivor Carrier"
+CANDIDATE_OPERATOR DISTINGUISH
+CANDIDATE_OPERATOR GROUND
+CANDIDATE_OPERATOR GENERATE
+CANDIDATE_OPERATOR ROTATE
+CANDIDATE_OPERATOR SPLIT
+CANDIDATE_OPERATOR FIT
+CANDIDATE_OPERATOR SELECT
+CANDIDATE_OPERATOR COUNTERPROBE
+CANDIDATE_OPERATOR VERIFY
+CANDIDATE_OPERATOR REPAIR
+CANDIDATE_OPERATOR RECONSTRUCT
+CANDIDATE_OPERATOR CONTINUE
+COUNTERPROBE "COUNTERPROBE the strongest current interpretation with an independent carrier or representation."
+COUNTERPROBE "VERIFY that any apparent improvement did not export cost, lose provenance, or exceed the claim ceiling."
+COUNTERPROBE "COUNTERPROBE relation strength: RELATED/SIMILAR must not silently become SUPPORTS/ISOMORPHIC."
+NEXT_STEP "VARY one coupling/representation degree while holding the relation language and total cost accounting fixed; recompute the exact survivor boundary and counterprobe cost migration."
+REMAINDER "CLAIM_REMAINS_OPEN"
+REMAINDER "CONTINUE only from an evidence-bearing unresolved distinction."

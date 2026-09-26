@@ -1,0 +1,858 @@
+RMAL::SYSTEM LibrariesOfLibraries
+VERSION 2026.09.19
+STATE FORWARD_ONLY_SUCCESSOR
+
+LAW Authority {
+    HUMAN != SYSTEM
+    HUMAN != FEDERATION
+    CONNECTION != OWNERSHIP
+    RELATION != AUTHORITY_TRANSFER
+    RECONSTRUCTION != SOURCE
+    NEWER != REPLACEMENT
+}
+
+TYPE UID128
+TYPE RID64
+
+ENTITY Thing {
+    uid : UID128
+    runtime : RID64?
+    aliases[]
+    carriers[]
+    relations[]
+    provenance[]
+}
+
+PROBLEM Babel {
+    huge_possible_field
+    REQUIRE identity addressability provenance relation relevance reconstruction human_goal
+}
+
+SYSTEM LibraryOfLibraries {
+    libraries[]
+    projects[]
+    archives[]
+    repositories[]
+    culture[]
+    research[]
+
+    RULE {
+        A != B
+        relation(A,B) != merge(A,B)
+        navigation(A,B) != authority_transfer(A,B)
+    }
+}
+
+RELATION EquivalentUnder(x,y,O)
+
+ENTITY FightingPoint {
+    x
+    y
+    obligation
+    witness?
+    disposition { COLLAPSIBLE MUST_REMAIN_DISTINCT UNRESOLVED }
+}
+
+OP Fight(x,y,O) {
+    witness := FindConsequentialWitness(x,y,O)
+
+    IF witness == NONE
+        RETURN UNRESOLVED
+
+    IF Consequence(witness,x,O) != Consequence(witness,y,O)
+        RETURN MUST_REMAIN_DISTINCT
+
+    RETURN COLLAPSIBLE
+}
+
+ENTITY DecisionField {
+    X
+    O
+    D
+    R
+    F
+    E
+    G
+    U
+}
+
+FORM DF = (X,O,D,R,F,E,G,U)
+
+OPERATORS {
+    Observe
+    Distinguish
+    Relate
+    Filter
+    Select
+    Transform
+    Project
+    Branch
+    Compose
+    Verify
+    Repair
+    Learn
+    Reconstruct
+    Terminate
+}
+
+MACHINE Airlock {
+    REQUIRE origin chronology integrity provenance interpretation privacy rights admission
+    RULE {
+        INGESTED != ACCEPTED_AS_FACT
+        RETRIEVED != EVIDENCE
+        RELATED != SUPPORTS
+    }
+}
+
+MACHINE Ma {
+    ROLE Reconstruction_Retrieval
+
+    OP Resolve(goal,question) {
+        d := CurrentUnresolvedDistinction(goal,question)
+        e := MinimumEvidenceThatCouldChange(d)
+        l := SmallestRelevantLineage(e)
+        s := Orbit.Resolve(l)
+        a := Airlock.Admit(s)
+        r := Evaluate(a,d)
+
+        IF insufficient(r)
+            WIDEN_ONE_STEP
+
+        delta := ExtractConsequentialLearning(r)
+
+        Preserve(delta)
+        Preserve(Provenance(r))
+        Preserve(Uncertainty(r))
+        Preserve(RecoveryHandle(r))
+
+        ReleaseReconstructibleWeight()
+
+        RETURN r
+    }
+}
+
+MACHINE Orbit {
+    OP Resolve(uid)
+    OP Traverse(uid,goal)
+    OP Related(uid,type)
+}
+
+FIELD Orbital {
+    books
+    code
+    archives
+    datasets
+    experiments
+    performances
+    machines
+    processes
+    culture
+    failures
+    unresolved
+}
+
+SYSTEM KnowledgeDecay {
+    DEFINITION LossOfReconstructibleConnection
+}
+
+OP Transform(X) -> (X_prime, Delta, Loss, Unresolved)
+
+OP BBF(X,axis) {
+    y := Fold(X)
+    z := Flip(y,axis)
+    r := Unfold(z)
+
+    IF !PreservesRequiredInvariants(X,r)
+        FAIL SEMANTIC_DECAY
+
+    RETURN r
+}
+
+AXES {
+    FORWARD BACKWARD
+    LEFT RIGHT
+    UP DOWN
+    ROLL PITCH YAW
+    TWIST SPIN TWIRL
+    INWARD OUTWARD
+    FOLD UNFOLD
+    INTERLEAVE DEINTERLEAVE
+    COMPRESS RESTORE
+}
+
+OP MaxInterleave(objects[],O) {
+    shared := CommonConsequentialStructure(objects,O)
+
+    FOR EACH object
+        delta[object] := Difference(object,shared,O)
+
+    carrier := Pack(shared,delta[])
+
+    ASSERT EveryRequiredObjectRestores(carrier)
+
+    RETURN carrier
+}
+
+OP OneDegreeExperiment(system,variable) {
+    FreezeOtherIndependentDegrees()
+    Change(variable)
+    observation := ObserveWholeSystem()
+    counterprobe := CheapestIndependentCounterprobe(observation)
+
+    Preserve(observation)
+    Preserve(counterprobe)
+    PreserveFailures()
+    PreserveUnresolved()
+
+    RETURN EvidenceBoundary()
+}
+
+MACHINE GSFL {
+    OP Fit(meaning,human,goal,device,accessibility) {
+        RETURN HumanSurface
+    }
+
+    RULE {
+        FIT != TRUTH
+        HumanSurface != Source
+    }
+}
+
+SYSTEM EyeOfGoals {
+    CELLS = 360
+    CELL_DEGREES = 1
+    HOT_FORWARD_DEGREES = 15
+
+    RULE {
+        UNKNOWN != SAFE
+        NOT_VISIBLE != SAFE
+        CAMERA != TRUTH
+        DETECTED != IDENTIFIED
+        PERCEPTION != RECORDING
+    }
+}
+
+SYSTEM WIDEL {
+    MAX_HELP_DISTANCE = 1
+    REQUIRE_VISIBLE_HELP_FOR {
+        sensor
+        camera
+        privacy
+        memory
+        recording
+        safety
+        permissions
+        storage
+        reconstruction
+    }
+}
+
+LAW Memory {
+    MINIMIZE {
+        RAM
+        cache
+        raw_sensor_retention
+        redundant_computation
+        bandwidth
+        permanent_clutter
+    }
+
+    PRESERVE {
+        Goal
+        Identity
+        Provenance
+        Uncertainty
+        Safety
+        LearnedDistinction
+        RecoveryHandle
+        NextReconstructionPoint
+    }
+
+    NO_RECOVERY_HANDLE -> DO_NOT_EVICT
+    VERIFIED_RECOVERY -> MAY_EVICT
+}
+
+ENTITY LearnedDelta {
+    uid
+    prior_state
+    condition
+    observation
+    difference
+    evidence
+    provenance
+    uncertainty
+}
+
+FORM K[n+1] = K[n] + Delta[n]
+
+ENTITY ReconstructionSeed {
+    uid
+    goal_uid
+    required_invariants[]
+    recovery_handles[]
+    last_distinction?
+    next_question?
+    next_reconstruction_point
+}
+
+RULE Projection {
+    FILE = possible_surface
+    FOLDER = possible_view
+    APP = possible_capability_projection
+
+    GENERATED != PERSISTED
+    TEMP_ARTIFACT != PROJECT_AUTHORITY
+}
+
+REGISTRY Research {
+    R3
+    One_Level_Up
+    CrossCarrierWave
+    OrbitLibrary
+    HistoricalRecovery
+    KnowledgeDecay
+    TinyBabel
+    TBCL
+    CSOL
+    GSFL
+    BBF
+    Musilanguage
+    LanguageStructureWorkbench
+    HumanExpressionArchive
+    ApplicabilityTopology
+    RecursiveSurvivorFrontier
+
+    DecisionField
+    DecisionFieldOperatorLab
+    SPrime
+    SAT64
+    SearchCertify
+    BoundaryQuotient
+    P_vs_NP
+    Hodge
+    POLYMETA
+    OptimizerOfOptimizers
+    AlgorithmicBuilder
+    LLVM_MLIR
+
+    FiveEyes4D
+    CompassRose
+    CoordinateSpace
+    Float64Carrier
+    S1024
+    TorsionalMotion
+    FractalGeometry
+
+    SHADOW
+    PAMP
+    PulseNet
+    SPDM
+    StreamingMemory
+    ComputerMind
+    Agents
+    Skills
+    Societies
+    Swarms
+
+    Conscience64
+    DreamToAction
+    Rivir
+    RMAOS_MINGX
+    RMAO
+    DataDrivenECS
+    Explorer
+    ArcadeForge
+    Fuzzball
+    MauiBrickBreak
+    FirstNeuralNetwork
+
+    HydrovoltaicPod
+    PoolCleaner
+    ResearchAnalytics
+}
+
+LAW ResearchIsolation {
+    METHOD_TRANSFER = ALLOWED
+    TOOLING_TRANSFER = ALLOWED
+    PROVENANCE_SCHEMA_TRANSFER = ALLOWED
+
+    CONCLUSION_TRANSFER = DENY_UNLESS_EARNED
+    PROOF_TRANSFER = DENY_UNLESS_EARNED
+    EMPIRICAL_RESULT_TRANSFER = DENY_UNLESS_EARNED
+    AUTHORITY_TRANSFER = DENY
+}
+
+ADAPTER Git {
+    ROLE chronology provenance action_history
+
+    RULE {
+        GIT_HEAD != TOTAL_HISTORY
+        CURRENT_FILE != ORIGINAL_THOUGHT
+        COMMIT != TRUTH
+    }
+}
+
+LOOP Runtime {
+    Human
+    -> Goal
+    -> Obligation
+    -> Field
+    -> Difference
+    -> FightingPoint
+    -> ConsequentialDistinction
+    -> DecisionField
+    -> Ma
+    -> Orbit
+    -> LibraryOfLibraries
+    -> SmallestRelevantLineage
+    -> Airlock
+    -> Operators
+    -> Transform
+    -> Verify
+    -> GSFL
+    -> HumanSurface
+    -> Action
+    -> Observation
+    -> Witness
+    -> LearnedDelta
+    -> Git
+    -> ReconstructionSeed
+    -> ReleaseReconstructibleWeight
+    -> NextGoal
+}
+
+LAW WayBack {
+    KEEP {
+        human
+        goal
+        identity
+        distinction
+        provenance
+        evidence
+        uncertainty
+        failure
+        recovery_relation
+        way_back
+    }
+
+    NEVER_SQUASH_AWAY {
+        conflicting_evidence
+        independent_identity
+        negative_result
+        chronology
+        privacy_boundary
+        claim_ceiling
+        unresolved_remainder
+    }
+}
+
+
+SYSTEM USDAY {
+    STATE DESIGN_ONLY
+
+    ORDER {
+        JUST_LOAD_IT
+        -> UNDERSTAND
+        -> PLAN
+        -> PAIRITY
+        -> SHARED_DECISION_IF_REQUIRED
+        -> DO
+        -> OBSERVE
+        -> COUNTERPROBE
+        -> CHECK
+        -> RETAIN
+        -> SOLDAY_CARRY
+        -> RMADAY_RECORD_RECONSTRUCT
+        -> CONTINUE
+    }
+
+    RULE {
+        US != MERGED
+        COOPERATION != OBEDIENCE
+        AGREEMENT != EVIDENCE
+        CONSENSUS != TRUTH
+        DISAGREEMENT != FAILURE
+    }
+}
+
+ENTITY PairityCheck {
+    participant_a
+    participant_b
+    relation_a_to_b
+    relation_b_to_a
+    invariants[]
+    differences[]
+    mismatches[]
+    parity_if_earned?
+}
+
+RULE Pairity {
+    PAIRITY != FORCED_EQUALITY
+}
+
+ENTITY AgreementField {
+    source_expressions[]
+    participants[]
+    interpretations[]
+    relations[]
+    agreements[]
+    disagreements[]
+    evidence[]
+    goal
+    unresolved[]
+}
+
+SYSTEM InterlinguaLinguisticsAgreementSystem {
+    STATE DESIGN_ONLY
+
+    INPUT AgreementField
+
+    PROCESS {
+        preserve_source_native
+        identify_consequential_terms
+        generate_candidate_interpretations
+        rotate_representation_if_useful
+        pairity_check
+        preserve_disagreement
+        state_agreement
+        state_unresolved
+    }
+
+    RULE {
+        AGREEMENT != SAME_WORDS
+        LEXICAL_MATCH != OPERATIONAL_AGREEMENT
+        LEXICAL_DIFFERENCE != OPERATIONAL_DISAGREEMENT
+        TRANSLATION != IDENTITY
+        INTERPRETATION != SOURCE
+        UNDERSTOOD != CONSENTED
+        AGREED_MEANING != AGREED_ACTION
+    }
+}
+
+LAW PrivateHistory {
+    PRIVATE_HISTORY != PUBLIC_EVIDENCE
+    PRIVATE_HISTORY != PROJECT_ARTIFACT
+    LANGUAGE_PATTERN != PERSONAL_PROFILE
+    LEARNED_METHOD != DISCLOSURE
+    DERIVED_FROM_PRIVATE_HISTORY != SAFE_TO_PUBLISH
+
+    OP LearnMethod(private_history) {
+        method := ExtractAbstractProblemSolvingStructure(private_history)
+        method := RemovePrivateFactsAndIdentityBearingDetail(method)
+        RETAIN_INTERNAL method
+        RETURN method
+    }
+
+    ADMISSION public_candidate {
+        IF derived_from_private_history == TRUE
+            FAIL_CLOSED
+    }
+
+    RULE {
+        SANITIZED_PRIVATE_NARRATIVE != PUBLIC_SOURCE
+        PROJECT_CLAIM_REQUIRES current_authorized_project_evidence
+    }
+}
+
+PROTOCOL CooperativeImplementation {
+    design_authority = RYAN_MCMILLAN
+    implementation_relation = HUMAN_AI_COIMPLEMENTATION
+    cross_write_default = DENY
+    evidence_transfer_default = DENY
+
+    FLOW {
+        REFERENCE
+        -> PROPOSAL
+        -> HANDOFF
+        -> TARGET_DECISION
+        -> TARGET_LOCAL_SUCCESSOR
+    }
+
+    RULE {
+        RELATED != AUTHORIZED_TO_EDIT
+        READ != WRITE
+        PROPOSED != ACCEPTED
+        ACCEPTED != VERIFIED
+        SHARED_METHOD != SHARED_EVIDENCE
+        SUCCESSOR != REWRITTEN_PREDECESSOR
+    }
+}
+
+EVIDENCE RMALCooperativeImplementation_2026_09_19 {
+    authority = redogit/Other-Projects-
+    toolchain = RMAL_2_1_1
+    compiler = RMALC_2_1_1
+
+    check = PASS
+    compile = PASS
+    audit = PASS
+
+    abi = ABI_59035915580F518D6B99
+    object_hash = 366faf954a18ec33115dc3de17ca209857b90c282c38be2c9918b4547b929797
+    bytecode_instructions = 35
+    input_nodes = 20
+
+    claim_ceiling = PARSER_COMPILE_AUDIT_VALIDATION_ONLY
+
+    RULE {
+        AUDIT_PASS != SEMANTIC_TRUTH
+        HASH_INTEGRITY != CLAIM_VALIDITY
+        SPECIFIED_SEMANTICS != IMPLEMENTED_CORE_FRONTEND
+    }
+}
+
+EVIDENCE Conscience64PublicSourceGraph_2026_09_19 {
+    authority = redogit/conscience64
+    publication = HELD
+
+    canonical_html_routes = 58
+    local_html_references = 369
+    direct_asset_references = 251
+    unique_direct_assets = 93
+    depth1_dependency_references = 11
+    depth1_unique_dependencies = 11
+    depth2_dependency_references = 8
+    depth2_unique_dependencies = 8
+    fixed_point_layers = 3
+    fixed_point_unique_dependencies = 16
+    terminal_new_dependencies = 0
+    import_meta_url_literal_references = 1
+    import_meta_url_unique_assets = 1
+    literal_worker_sharedworker_references = 0
+    literal_worker_sharedworker_unique_assets = 0
+
+    RULE {
+        ZERO_LITERAL_WORKER_MATCH != NO_WORKER_BEHAVIOR_ANYWHERE
+        SOURCE_GRAPH_MEASURED != PUBLICATION_APPROVED
+        SOURCE_DEPENDENCY_CLOSURE != RUNTIME_CORRECTNESS
+        SOURCE_DEPENDENCY_CLOSURE != SEMANTIC_TRUTH
+    }
+}
+
+
+EVIDENCE Conscience64PrivateCarrierSuccessor_2026_09_20 {
+    relation = CROSS_REPOSITORY_REFERENCE_ONLY
+    authority = redogit/conscience64
+    source_issue = 160
+    source_issue_state = OPEN
+    federation_surface = JUST_LOAD_IT_RMADAY_RECORD_RECONSTRUCT
+
+    pr161_merge = e10db6cccfd03106adef955297917408913ee339
+    pr164_merge = 83b37a5b31e4d45ada6b5033fb69a3617a6c2b5b
+    pr165_merge = eaee7b9051cbea795e3bf9f9b8eb8da9f81849d5
+    pr169_merge = 093af636098498ce84d6fe94c6a076bb745c048b
+    pr170_merge = 1cbf372207674070332b455c8851ee7993d6cf81
+
+    VERIFIED_REFERENCE_SET {
+        KnowledgePacket_UOID_MethodOnly
+        SemanticCorpus_Graph_Query_Exclusion
+        PrivateMethod_RecoveryEnvelope
+        SpaceLens_ClientMemory_ExportBoundary
+        KnowledgeBridge_AgentToolHandoff
+    }
+
+    claim_ceiling = REFERENCE_PARITY_OVER_MERGED_BOUNDED_SLICES_ONLY
+
+    RULE {
+        FEDERATION_REFERENCE != CONSCIENCE64_IMPLEMENTATION_AUTHORITY
+        RMADAY_DESIGN != RUNTIME_IMPLEMENTATION
+        REFERENCE != EVIDENCE_TRANSFER
+        PRIVATE METHOD MAY INFORM SOLVING
+        PRIVATE SOURCE MUST NOT PROPAGATE
+        ISSUE160_OPEN != COMPLETE
+    }
+}
+
+
+PROTOCOL BidirectionalHandoffPairity {
+    state = COORDINATION_CONTRACT_ONLY
+    marker = BidirectionalHandoffPairity_2026_09_20
+
+    REQUEST {
+        handoff_id
+        from
+        to
+        subject_uid
+        goal
+        obligation
+        request_class
+        requested_action
+        source_refs[]
+        evidence_refs[]
+        privacy
+        claim_ceiling
+        unresolved[]
+        way_back[]
+    }
+
+    RESPONSE {
+        response_id
+        in_reply_to
+        from
+        to
+        status { ACCEPTED REJECTED NEEDS_EVIDENCE UNRESOLVED }
+        decision_reason
+        successor_refs[]
+        evidence_refs[]
+        unresolved[]
+        privacy
+        claim_ceiling
+        way_back[]
+    }
+
+    FORWARD {
+        A -> REQUEST -> B
+        B -> TARGET_LOCAL_DECISION -> RESPONSE -> A
+    }
+
+    REVERSE {
+        B -> REQUEST -> A
+        A -> TARGET_LOCAL_DECISION -> RESPONSE -> B
+    }
+
+    COUNTERPROPOSAL {
+        REQUIRE NEW_HANDOFF_ID
+        PRESERVE PRIOR_REQUEST
+        PRESERVE PRIOR_RESPONSE
+    }
+
+    PRIVACY {
+        MAY_PRESERVE
+        MAY_STRENGTHEN
+        MAY_NOT_WEAKEN_WITHOUT_INDEPENDENT_TARGET_REGROUNDING
+    }
+
+    RULE {
+        REQUEST != COMMAND
+        RESPONSE != AUTHORITY_TRANSFER
+        ACCEPTED != VERIFIED
+        REJECTED != FAILURE
+        NEEDS_EVIDENCE != REJECTED
+        UNRESOLVED != FALSE
+        REFERENCE != EVIDENCE_TRANSFER
+        PRIVATE_SOURCE_MUST_NOT_PROPAGATE
+        AUTHORIZED_READ != PUBLICATION_PERMISSION
+        LIBRARIES_OF_LIBRARIES_REFERENCE != TARGET_IMPLEMENTATION_AUTHORITY
+    }
+}
+
+EVIDENCE BidirectionalHandoffAdapters_2026_09_20 {
+    conscience64_inbound = VERIFIED_BOUNDED_PRIVATE_METHOD_HANDOFF
+    conscience64_inbound_anchor = 1cbf372207674070332b455c8851ee7993d6cf81
+    conscience64_outbound = VERIFIED_BOUNDED_PRIVATE_METHOD_STRUCTURED_RESPONSE_RUNTIME
+    conscience64_outward_privacy_anchor = deba0e9b19ef1fe106ba6dea1323eb0896dd5010
+    conscience64_response_runtime_anchor = ee740af81d95533c907a65166564e661807c50eb
+    conscience64_response_request_class = PRIVATE_METHOD_HANDOFF
+    conscience64_response_request_identity = KNOWLEDGE_PACKET_UOID
+    conscience64_response_schema = conscience64.handoff_response.v1
+    conscience64_structured_response_packet_runtime = TRUE
+    conscience64_generic_response_packet_runtime = FALSE
+
+    other_projects_inbound = RMAL_HANDOFF_AND_TARGET_ACCEPTANCE_SYNTAX_IMPLEMENTED
+    other_projects_inbound_anchor = f93f056a33d5fad0f29b763a0d49c6b79eb18d49
+    other_projects_outbound = RMAL_STRUCTURED_RESPONSE_CARRIER_CONTROLLED_SURFACE_VERIFIED
+    other_projects_current_adapter_anchor = ab562daf0b2df085b97d5d0cc1696a9b4cf505d2
+    other_projects_adapter_declaration_anchor = 8de91a93347aaff1ff039a4899fd56eec6689da3
+    other_projects_adapter_declaration_role = HISTORICAL_INITIAL_DECLARATION
+    other_projects_response_carrier = docs/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE.rmal
+    other_projects_response_carrier_merge_anchor = 8f2d4e433d4b1bff3ec6eb0cc6a054b4c5bce284
+    other_projects_response_carrier_evidence = evidence/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE_2026-09-20.json
+    other_projects_controlled_surface_check = PASS
+    other_projects_validation_run_id = 35505020623
+    other_projects_validated_head_sha = cb3d9ef7523caa22a49bfddbaf7caf3dd776af92
+    other_projects_rmalc_revalidated = FALSE
+    other_projects_structured_response_packet_runtime = FALSE
+    other_projects_generic_response_packet_runtime = FALSE
+    other_projects_central_reconciliation_anchor = e8f98517ee5f5816e8e6d08307266a8003daa5e6
+    other_projects_claim_ceiling = OTHER_PROJECTS_AUTHORED_RESPONSE_CARRIER_CONTROLLED_SURFACE_ONLY_NO_FRESH_RMALC_OR_RUNTIME
+
+    redogit_inbound = COORDINATION_REFERENCE_AND_REVIEW
+    redogit_outbound = COORDINATION_REFERENCE_AND_REVIEW
+    redogit_anchor = a5ed5a4dac556fe718af358dd9a2b11266a88857
+
+    claim_ceiling = BIDIRECTIONAL_COORDINATION_CONTRACT_WITH_ASYMMETRIC_LOCAL_IMPLEMENTATION
+}
+
+
+EVIDENCE Conscience64PrivateMethodStructuredReturn_2026_09_20 {
+    implementation_anchor = ee740af81d95533c907a65166564e661807c50eb
+    adapter_anchor = 731b6040d6b342cea423d402ec2fb6c1e5ad59a9
+    red_run = 35504178217
+    green_run = 35504268340
+
+    request_class = PRIVATE_METHOD_HANDOFF
+    request_identity = KNOWLEDGE_PACKET_UOID
+    response_schema = conscience64.handoff_response.v1
+
+    endpoint_post = POST_/v1/handoff-response
+    endpoint_get = GET_/v1/handoff-response/<response_id>
+
+    statuses { ACCEPTED REJECTED NEEDS_EVIDENCE UNRESOLVED }
+
+    response_ledger = APPEND_ONLY_IDEMPOTENT_SEPARATE_LEDGER
+    response_visibility = RESTRICTED
+    response_way_back = REQUEST_PACKET_UOID
+    target_local_authority = redogit/conscience64
+
+    structured_response_packet_runtime = TRUE
+    generic_response_packet_runtime = FALSE
+
+    RULE {
+        REQUEST != COMMAND
+        RESPONSE != AUTHORITY_TRANSFER
+        ACCEPTED != VERIFIED
+        PRIVATE_SOURCE_MUST_NOT_PROPAGATE
+        AUTHORIZED_READ != PUBLICATION_PERMISSION
+        STRUCTURED_RETURN_PATH != UNIVERSAL_BIDIRECTIONAL_RUNTIME
+    }
+}
+
+
+EVIDENCE Conscience64PublicTestbedProjection_2026_09_20 {
+    authority = redogit/conscience64
+    source_anchor = 9a17f941808993049466e9b75ee8ec99253b5add
+    projection_commit = 0888f45cb99bd16e225e20bd30005c9de8582551
+    projection_predecessor = f84b3a62c01d025a88654791b86fafbd9f719fe7
+    projection_sha256 = e54b69dff1964e218d1f99d7d28f5ace05649723ff677f25840ebe502f10e4a3
+    issue = 166
+
+    approval_schema = redogit.public_testbed_approval.v1
+    approved = TRUE
+    scope = PUBLIC_TESTBED_ONLY
+    commercial_license_granted = FALSE
+
+    projection_schema = conscience64.public_testbed_projection.v0
+    source_root = public-testbed/
+    authority_class = EXPERIMENTAL_NON_AUTHORITATIVE
+    generated_file_count = 5
+    exact_source_revision_required = TRUE
+    deterministic_projection_hash = TRUE
+    gh_pages_projection_commit_distinct_from_source_commit = TRUE
+    force_with_lease = TRUE
+    network_edge_counterprobes = TRUE
+    visible_path_states { ACTIVE TESTED FAILED BLOCKED DEFERRED RETURN }
+    working_principles { USDAY INTERLINGUA PAIRITY VISIBLE_PATHS WONDERMENT ONE_DEGREE_EXPERIMENT }
+    preserved_unresolved_relation = PRESERVED_UNRESOLVED
+    static_source_ceiling_bytes = 131072
+
+    FORBIDDEN_PUBLIC_ROUTES {
+        README.md
+        data-manifest.json
+        research/projects/README.md
+        play/index.html
+        about/index.html
+    }
+
+    RULE {
+        CONSCIENCE64_REPOSITORY != PUBLIC_TESTBED_PROJECTION
+        PUBLIC_TESTBED != WHOLE_REPOSITORY
+        PUBLIC_EXPERIMENT != VERIFIED_TRUTH
+        PRIVATE_SOURCE_MUST_NOT_PROPAGATE
+        PUBLIC_PROJECTION != COMMERCIAL_LICENSE
+        NETWORK_EDGE_MATCH != SCIENTIFIC_VALIDATION
+        CURRENT != TRUE
+        ALIAS != LINEAGE
+        WONDER != CLAIM
+        ONE_DEGREE_TEST != UNIVERSAL_PROOF
+    }
+}

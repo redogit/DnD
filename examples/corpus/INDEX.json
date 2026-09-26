@@ -1,0 +1,188 @@
+{
+  "schema": "rmal/example-corpus/v1",
+  "generated_at": "2026-09-26",
+  "rule": "Preserve every retrievable .rmal path and associated input/output witness; duplicate content is retained when provenance paths differ.",
+  "counts": {
+    "total_entries": 39,
+    "rmal_files": 32,
+    "input_files": 1,
+    "output_files": 6
+  },
+  "entries": [
+    {
+      "path": "examples/corpus/git/redogit/DnD/examples/hello.rmal",
+      "blob_sha": "d2c9bcdefd575e1fb25a80a14d2542fb48818a9f"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/Decision Field MMORPG/DYNAMIC_RMAL_CHARACTERS.rmal",
+      "blob_sha": "c6b86d1c81479b742134ee08ca9e83b087afcf9d"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/RMAOS MiniGX/circuits/w114_perturbation.rmal",
+      "blob_sha": "f73de2f53acf70e33967a336e75015ab8601b4aa"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/docs/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE.rmal",
+      "blob_sha": "ae6147ca1c706374f52dd9675c842d51d4bdc0e6"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/docs/RMAL_COOPERATIVE_IMPLEMENTATION_PROTOCOL.rmal",
+      "blob_sha": "fb7725c1e22db3c2b8a342687a7ed7fc5f8ffd17"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/conscience64/play/mmo/DYNAMIC_RMAL_CHARACTERS.rmal",
+      "blob_sha": "0078e73143b3e1a706b28593f0ffab499942554b"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/library/CRACK_ALL_IN_MY_LANGUAGE.rmal",
+      "blob_sha": "af537389db8ea0e25c0fa363e66cb7ce1a25096b"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/library/RMALC.rmal",
+      "blob_sha": "a097fdf7a0c9428a08c6f23da0dddff927492ade"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/redogit/libraries-of-libraries.rmal",
+      "blob_sha": "9c01e1a2a5273775c6091d4f810d619dbe4bfad7"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/rmal/DYNAMIC_RMAL_CHARACTERS.rmal",
+      "blob_sha": "c6b86d1c81479b742134ee08ca9e83b087afcf9d"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/rmal/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE.rmal",
+      "blob_sha": "ae6147ca1c706374f52dd9675c842d51d4bdc0e6"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/rmal/RMAL_COOPERATIVE_IMPLEMENTATION_PROTOCOL.rmal",
+      "blob_sha": "fb7725c1e22db3c2b8a342687a7ed7fc5f8ffd17"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/rmal/libraries-of-libraries.rmal",
+      "blob_sha": "9c01e1a2a5273775c6091d4f810d619dbe4bfad7"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/rmal/w114_perturbation.rmal",
+      "blob_sha": "f73de2f53acf70e33967a336e75015ab8601b4aa"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/tests/legacy.rmal",
+      "blob_sha": "30ce4bf3f2849090aacb6edbcd97d60ce361600c"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/tests/recovered_surface.rmal",
+      "blob_sha": "1e663ce496695d4f45553a2161f4f43977afd2ef"
+    },
+    {
+      "path": "examples/corpus/git/redogit/conscience64/play/mmo/DYNAMIC_RMAL_CHARACTERS.rmal",
+      "blob_sha": "0078e73143b3e1a706b28593f0ffab499942554b"
+    },
+    {
+      "path": "examples/corpus/git/redogit/redogit/libraries-of-libraries.rmal",
+      "blob_sha": "9c01e1a2a5273775c6091d4f810d619dbe4bfad7"
+    },
+    {
+      "path": "examples/corpus/git/redogit/Other-Projects-/Decision Field MMORPG/DYNAMIC_RMAL_CHARACTERS.rmal",
+      "blob_sha": "c6b86d1c81479b742134ee08ca9e83b087afcf9d"
+    },
+    {
+      "path": "examples/corpus/git/redogit/Other-Projects-/RMAOS MiniGX/circuits/w114_perturbation.rmal",
+      "blob_sha": "f73de2f53acf70e33967a336e75015ab8601b4aa"
+    },
+    {
+      "path": "examples/corpus/git/redogit/Other-Projects-/docs/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE.rmal",
+      "blob_sha": "ae6147ca1c706374f52dd9675c842d51d4bdc0e6"
+    },
+    {
+      "path": "examples/corpus/git/redogit/Other-Projects-/docs/RMAL_COOPERATIVE_IMPLEMENTATION_PROTOCOL.rmal",
+      "blob_sha": "fb7725c1e22db3c2b8a342687a7ed7fc5f8ffd17"
+    },
+    {
+      "path": "examples/corpus/library/RMAL_UNIVERSE.rmal",
+      "blob_sha": "1f5aea593b54870b27db87ef06b7c32dcfb8eca8"
+    },
+    {
+      "path": "examples/corpus/library/CRACK_ALL_IN_MY_LANGUAGE.rmal",
+      "blob_sha": "af537389db8ea0e25c0fa363e66cb7ce1a25096b"
+    },
+    {
+      "path": "examples/corpus/library/RMALC.rmal",
+      "blob_sha": "a097fdf7a0c9428a08c6f23da0dddff927492ade"
+    },
+    {
+      "path": "examples/corpus/library/FULL_CONTEXT_CRACK_2026-09-18.rmal",
+      "blob_sha": "13a2b719e50427da4440c8220484f4806d0b3a55"
+    },
+    {
+      "path": "examples/corpus/library/HODGE_NEXT.rmal",
+      "blob_sha": "0a20e58b6f3b5da062a249f35cd2972add3ded26"
+    },
+    {
+      "path": "examples/corpus/library/P_VS_NP_NEXT.rmal",
+      "blob_sha": "bcf02b435026f065488388f3e2d5c0e73ba5f59c"
+    },
+    {
+      "path": "examples/corpus/library/REMAINDER_STATUS.rmal",
+      "blob_sha": "457b0273cb237d6dbe6411a85c2a01eb37ec7d81"
+    },
+    {
+      "path": "examples/corpus/library/SURVIVOR_CARRIER_NEXT.rmal",
+      "blob_sha": "def0ffa64b6643217d19e0555746ade7009214a3"
+    },
+    {
+      "path": "examples/corpus/library/OBJECT_CLARITY_INDEX.rmal",
+      "blob_sha": "57929b81c5ac3d315789b45b38767c6d3329df10"
+    },
+    {
+      "path": "examples/corpus/library/OBJECT_CLARITY_ATLAS.rmal",
+      "blob_sha": "faa1a521d31b9eb37e37cbc3db25efb7b1d17661"
+    },
+    {
+      "path": "examples/corpus/inputs/SOURCE_MANIFEST.json",
+      "blob_sha": "16e981f791b67cb30aa6311a5a6ff66fefcb617d"
+    },
+    {
+      "path": "examples/corpus/outputs/RMALC.rmo",
+      "blob_sha": "25c6fb4a8637a9c59b707732ad22fda363a93d1a"
+    },
+    {
+      "path": "examples/corpus/outputs/RMAL_UNIVERSE.rmo",
+      "blob_sha": "993cd0b1151eb4045f8c84f35c86944521dec852"
+    },
+    {
+      "path": "examples/corpus/outputs/RMAL_CONTEXT_CRACK_V2.rmx",
+      "blob_sha": "6bc7e0d34a100655dde686939665d4753b99fa9e"
+    },
+    {
+      "path": "examples/corpus/outputs/RELEASE_MANIFEST.json",
+      "blob_sha": "c366d3f4f8eb84b0a929d10cf8f46eca4b738047"
+    },
+    {
+      "path": "examples/corpus/outputs/VERIFY_RESULTS.json",
+      "blob_sha": "d8ea06f5eb85f5ef11b9c48f6aa4ef2532a55e24"
+    },
+    {
+      "path": "examples/corpus/outputs/CRACK_ALL_INDEX.json",
+      "blob_sha": "e2950b544de0d252a07fbdfc5edb30539f7286bf"
+    }
+  ],
+  "not_retrieved_but_manifest_named": [
+    "examples/meta_mathmini.rmal",
+    "examples/meta_solver_6queens.rmal",
+    "examples/research_profile.rmal",
+    "examples/rma_semantic_rotational_builder_raw.rmal",
+    "examples/rmalc_modules/app.rmal",
+    "examples/rmalc_modules/math.rmal",
+    "examples/simple.rmal",
+    "examples/student_dorm.rmal",
+    "examples/survivor_compile.rmal",
+    "examples/survivorql.rmal",
+    "generated/rmalc/RMA_SRAB_DEBUGGED.rmal"
+  ],
+  "boundary": [
+    "DISCOVERED_IN_MANIFEST != RETRIEVED_FILE",
+    "DUPLICATE_BYTES != DUPLICATE_PROVENANCE",
+    "EXAMPLE != CANONICAL_LANGUAGE_RULE",
+    "OUTPUT != PROOF"
+  ]
+}

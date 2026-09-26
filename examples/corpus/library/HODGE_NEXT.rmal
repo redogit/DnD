@@ -1,0 +1,32 @@
+PROBLEM_FRAME "Hodge" GOAL "advance exact bounded work without evidence transfer" SCOPE "" AUTHORITY "NONE" RESOURCE "bounded"
+PRESERVE provenance rational_hodge_target claim_boundary
+ALLOW representation_change decomposition
+EXCLUDE authority_transfer silent_mutation
+CLAIM_CEILING "OPEN"
+RELEVANT Problem.Hodge KIND "OPEN_PROBLEM" STATUS "OPEN" NAME "Hodge conjecture research branch"
+RELEVANT Result.FermatQuinticCalibration KIND "VERIFIED_BOUNDED_RESULT" STATUS "EXACT_BOUNDED" NAME "Fermat quintic plane-span calibration"
+RELEVANT Section-5C56D0D83BFCA72C2C51 KIND "DOCUMENT_SECTION" STATUS "INDEXED_NOT_ADMITTED" NAME "6.18 Hodge and other open mathematics — SEPARATE"
+RELEVANT Section-92A4A875AD075291464C KIND "DOCUMENT_SECTION" STATUS "INDEXED_NOT_ADMITTED" NAME "6.18 Hodge and other open mathematics — SEPARATE"
+RELEVANT Artifact-17E7C196E0C58AB77F18 KIND "ARTIFACT" STATUS "PRESERVED_SOURCE" NAME "RECURSIVE_SURVIVOR_CARRIER_INTEGRATION_2026-09-13.md"
+RELEVANT Artifact-9EAF9B813E4F5C771F2E KIND "ARTIFACT" STATUS "PRESERVED_SOURCE" NAME "RECURSIVE_SURVIVOR_CARRIER_INTEGRATION_2026-09-13.md"
+RELEVANT Lane.Mathematics KIND "LANE" STATUS "ACTIVE" NAME "Mathematics"
+RELEVANT Language.RMAL KIND "LANGUAGE" STATUS "CURRENT" NAME "Ryan McMillan April Language"
+RELEVANT Result.K5H1Lambda2 KIND "FORMAL_RESULT" STATUS "PROVED_COMBINATORIAL" NAME "H1(K5) equivariant Lambda2(W4)"
+CANDIDATE_OPERATOR DISTINGUISH
+CANDIDATE_OPERATOR GROUND
+CANDIDATE_OPERATOR GENERATE
+CANDIDATE_OPERATOR ROTATE
+CANDIDATE_OPERATOR SPLIT
+CANDIDATE_OPERATOR FIT
+CANDIDATE_OPERATOR SELECT
+CANDIDATE_OPERATOR COUNTERPROBE
+CANDIDATE_OPERATOR VERIFY
+CANDIDATE_OPERATOR REPAIR
+CANDIDATE_OPERATOR RECONSTRUCT
+CANDIDATE_OPERATOR CONTINUE
+COUNTERPROBE "COUNTERPROBE the strongest current interpretation with an independent carrier or representation."
+COUNTERPROBE "VERIFY that any apparent improvement did not export cost, lose provenance, or exceed the claim ceiling."
+COUNTERPROBE "COUNTERPROBE relation strength: RELATED/SIMILAR must not silently become SUPPORTS/ISOMORPHIC."
+NEXT_STEP "VARY one exact geometric/representation degree while holding the rational-Hodge target and provenance fixed; compute the unresolved defect-action/seam and compare its invariant signature before promotion."
+REMAINDER "CLAIM_REMAINS_OPEN"
+REMAINDER "CONTINUE only from an evidence-bearing unresolved distinction."

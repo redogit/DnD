@@ -1,0 +1,34 @@
+# RMALC — Ryan McMillan April Language Compiler
+MODULE rmalc.compiler
+EXPORT compiler_name,compiler_version,compiler_identity
+
+CONST compiler_name = "RMALC"
+CONST compiler_version = "1.0.0"
+CONST compiler_identity = "Ryan McMillan April Language Compiler"
+
+LANGUAGE RMALC FULLNAME "Ryan McMillan April Language Compiler" AUTHOR "Ryan McMillan" PREDECESSOR "RMAL v1.2 Executable Universe" SURFACES canonical,user-native,sexpr BACKENDS object,bytecode,ir-json,python,cpp23,javascript,sql,json,human
+
+CONFIG ReproducibleBuild deterministic=true timestamps=normalized abi_hash=required source_hash=required history=preserve
+PROFILE Release INCLUDE ReproducibleBuild optimization=2 diagnostics=strict unsupported=reject
+PROFILE Debug INCLUDE ReproducibleBuild optimization=0 diagnostics=maximum provenance=retain
+
+ENTITY Compiler.RMALC KIND COMPILER NAME "RMALC" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "RMAL compiler" AUTHORITY INTERNAL PROVENANCE "RMAL v1.2 successor"
+ENTITY Stage.Frontend KIND COMPILER_STAGE NAME "Frontend" STATUS ACTIVE ORIGIN IMPLEMENTED SCOPE "source -> typed RMAL IR" AUTHORITY NONE
+ENTITY Stage.Semantic KIND COMPILER_STAGE NAME "Semantic Analysis" STATUS ACTIVE ORIGIN IMPLEMENTED SCOPE "IR -> typed/effect/authority diagnostics" AUTHORITY NONE
+ENTITY Stage.Optimizer KIND COMPILER_STAGE NAME "Verified Optimizer" STATUS ACTIVE ORIGIN IMPLEMENTED SCOPE "IR -> semantics-preserving IR" AUTHORITY NONE
+ENTITY Stage.Bytecode KIND COMPILER_STAGE NAME "Bytecode Lowering" STATUS ACTIVE ORIGIN IMPLEMENTED SCOPE "IR -> RMALBC1" AUTHORITY NONE
+ENTITY Stage.Object KIND COMPILER_STAGE NAME "Object Emitter" STATUS ACTIVE ORIGIN IMPLEMENTED SCOPE "RMALBC1 -> RMALOBJ1" AUTHORITY NONE
+ENTITY Stage.Linker KIND COMPILER_STAGE NAME "Linker" STATUS ACTIVE ORIGIN IMPLEMENTED SCOPE "RMALOBJ1[] -> RMALEXE1" AUTHORITY NONE
+ENTITY Stage.Runtime KIND COMPILER_STAGE NAME "Bytecode Runtime" STATUS ACTIVE ORIGIN IMPLEMENTED SCOPE "RMALEXE1 -> execution result" AUTHORITY INTERNAL
+
+RELATE Compiler.RMALC AS HAS_STAGE TO Stage.Frontend AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Compiler.RMALC AS HAS_STAGE TO Stage.Semantic AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Compiler.RMALC AS HAS_STAGE TO Stage.Optimizer AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Compiler.RMALC AS HAS_STAGE TO Stage.Bytecode AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Compiler.RMALC AS HAS_STAGE TO Stage.Object AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Compiler.RMALC AS HAS_STAGE TO Stage.Linker AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Compiler.RMALC AS HAS_STAGE TO Stage.Runtime AUTHORITY NONE EVIDENCE_TRANSFER DENY
+
+CLAIM C_RMALC_REPRO STATUS VERIFIED_COMPUTATION TEXT deterministic source object compilation is byte-reproducible for the tested compiler surface
+EVIDENCE E_RMALC_TESTS TYPE EXACT_COMPUTATION LINEAGE RMALC_V1 TEXT compiler regression and reproducibility panel
+BOUNDARY Compiler.RMALC CLAIM_CEILING VERIFIED_COMPUTATION REASON "compiler tests establish bounded implementation behavior, not universal optimization optimality"
