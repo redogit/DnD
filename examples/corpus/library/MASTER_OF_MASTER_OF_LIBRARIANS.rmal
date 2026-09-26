@@ -1,0 +1,22 @@
+# Master Of Master Of Librarians — RMAL Tool Chain v1.0
+MODULE library.master_of_master_of_librarians
+SURFACE canonical
+
+ENTITY Machinery.MasterOfMasterOfLibrarians KIND "LIBRARY_ORCHESTRATOR" NAME "Master Of Master Of Librarians" STATUS "ACTIVE" ORIGIN "USER-CONFIRMED" SCOPE "Library of Libraries" SOURCE "current user declaration + retained Library lineage" AUTHORITY "INTERNAL" PROVENANCE "RMAL Tool Chain v1.0"
+ENTITY Library.LibraryOfLibraries KIND "META_LIBRARY" NAME "Library of Libraries" STATUS "ACTIVE" ORIGIN "USER-CONFIRMED" SCOPE "federated libraries" SOURCE "RMALKDVMLLL Book of Books lineage" AUTHORITY "NONE" PROVENANCE "RMAL Tool Chain v1.0"
+ENTITY Book.BookOfBooks KIND "GENERATIVE_BOOK" NAME "RMALKDVMLLL Book of Books" STATUS "ACTIVE" ORIGIN "USER-CONFIRMED" SCOPE "generative research/build language" SOURCE "library_of_libraries/book_of_books/source" AUTHORITY "NONE" PROVENANCE "RMALKDVMLLL"
+ENTITY Library.LibraryOfPrograms KIND "PROGRAM_LIBRARY" NAME "Library of Programs" STATUS "ACTIVE" ORIGIN "USER-CONFIRMED" SCOPE "compilable RMAL text machinery" SOURCE "library_of_programs" AUTHORITY "NONE" PROVENANCE "RMAL Tool Chain v1.0"
+ENTITY Library.Configurations KIND "CONFIGURATION_LIBRARY" NAME "Configurations and Parameters" STATUS "ACTIVE" ORIGIN "USER-CONFIRMED" SCOPE "reconfigurable execution profiles" SOURCE "configurations/profiles.json" AUTHORITY "NONE" PROVENANCE "RMAL Tool Chain v1.0"
+ENTITY Compiler.RMALC KIND "COMPILER" NAME "Ryan McMillan April Language Compiler" STATUS "ACTIVE" ORIGIN "USER-CONFIRMED" SCOPE "RMAL compilation" SOURCE "src/rmalc" AUTHORITY "INTERNAL" PROVENANCE "RMALC v1.3.0"
+
+RELATE Machinery.MasterOfMasterOfLibrarians AS ROUTES TO Library.LibraryOfLibraries AUTHORITY "INTERNAL" EVIDENCE_TRANSFER "DENY" SCOPE "retrieval + planning" BASIS "human request"
+RELATE Library.LibraryOfLibraries AS CONTAINS TO Book.BookOfBooks AUTHORITY "NONE" EVIDENCE_TRANSFER "DENY" SCOPE "book index" BASIS "Book of Books role"
+RELATE Library.LibraryOfLibraries AS CONTAINS TO Library.LibraryOfPrograms AUTHORITY "NONE" EVIDENCE_TRANSFER "DENY" SCOPE "program text" BASIS "program library manifest"
+RELATE Library.LibraryOfLibraries AS CONTAINS TO Library.Configurations AUTHORITY "NONE" EVIDENCE_TRANSFER "DENY" SCOPE "configuration" BASIS "profile registry"
+RELATE Machinery.MasterOfMasterOfLibrarians AS PROVIDES_TEXT_MACHINERY TO Library.LibraryOfPrograms AUTHORITY "INTERNAL" EVIDENCE_TRANSFER "DENY" SCOPE "request -> program text" BASIS "deterministic capability routing"
+RELATE Machinery.MasterOfMasterOfLibrarians AS RECONFIGURES TO Library.Configurations AUTHORITY "INTERNAL" EVIDENCE_TRANSFER "DENY" SCOPE "profile + explicit parameters" BASIS "declared precedence"
+RELATE Machinery.MasterOfMasterOfLibrarians AS COMPILES_WITH TO Compiler.RMALC AUTHORITY "INTERNAL" EVIDENCE_TRANSFER "DENY" SCOPE "generated RMAL program" BASIS "RMALC compiler"
+
+CLAIM MML_ROLE STATUS VERIFIED_COMPUTATION TEXT "The reference Master Of Master Of Librarians deterministically selects program text and configurations from the local Library of Programs and compiles the rendered RMAL with RMALC."
+EVIDENCE MML_TESTS TYPE EXACT_COMPUTATION LINEAGE RMAL_TOOLCHAIN_V1 TEXT "library routing, configuration, P=NP boundary, rendering, compilation, build-packet, and reproducibility tests"
+BOUNDARY Machinery.MasterOfMasterOfLibrarians CLAIM_CEILING VERIFIED_COMPUTATION REASON "routing and compilation do not make the librarian a truth authority"

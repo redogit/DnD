@@ -1,0 +1,252 @@
+# RMAL CLARITY / DYNAMICITY / SIDE-TO-SIDE EXECUTABLE SUCCESSOR
+# Generated 2026-09-20 from source-backed user research carriers.
+# Core implementation language: RMAL.
+# Claim rule: GENERATE != VERIFY != ADMIT.
+
+MODULE clarity_dynamicity.core
+SURFACE canonical
+EXPORT implementation_status,core_cycle,object_count,relation_count,claim_count,local_habituated,global_habituated,requires_human_clarity,sql_witness_gate,sql_empty_status,rotation_admissible,torsion_homeward_exact,pnp_status,hodge_status,clarity_is_active_obligation
+
+LANGUAGE ClarityDynamicityRMAL SURFACES canonical,user-native,sexpr BACKENDS object,bytecode,ir-json,human
+
+# --- Foundational types ---
+TYPE Locality BASE Value
+TYPE Side BASE Value
+TYPE Channel BASE Value
+TYPE Event BASE Value
+TYPE CausalOrder BASE Value
+TYPE LocalTrace BASE Value
+TYPE LocalMemory BASE Value
+TYPE Clarity BASE Value
+TYPE Ambiguity BASE Value
+TYPE Witness BASE Value
+TYPE Remainder BASE Value
+TYPE ClaimRecord BASE Value
+TYPE CorollaryRecord BASE Value
+TYPE ProofObligation BASE Value
+TYPE TorsionFrame BASE Value
+TYPE RotationCandidate BASE Value
+TYPE HumanClarityDecision BASE Value
+TYPE FireState BASE Value
+
+TRAIT Reconstructible REQUIRE provenance recovery remainder
+TRAIT LocallyScoped REQUIRE locality scope
+TRAIT TraceFirst REQUIRE trace provenance
+TRAIT HumanAdjudicable REQUIRE ambiguity consequence
+TRAIT Counterprobeable REQUIRE falsifier remainder
+
+CLASS LocalSide REQUIRE Reconstructible LocallyScoped HAS observations channels local_trace local_memory
+CLASS LocalConnection REQUIRE Reconstructible LocallyScoped HAS left right channels causal_order consequence remainder
+CLASS ClarityState REQUIRE Reconstructible HumanAdjudicable HAS distinctions ambiguity consequence adjudication
+CLASS ClaimCell REQUIRE Reconstructible Counterprobeable HAS claim status assumptions scope ceiling obligations evidence remainder
+
+# --- Constitutional distinctions ---
+PRESERVE Surface_Semantics_Distinction
+PRESERVE Generate_Verify_Admit_Distinction
+PRESERVE Unknown_Absent_Distinction
+PRESERVE Unresolved_False_Distinction
+PRESERVE Trace_Proof_Distinction
+PRESERVE Related_Supports_Distinction
+PRESERVE SharedMethod_SharedEvidence_Distinction
+PRESERVE Counterprobe_Proof_Distinction
+PRESERVE FiniteVerification_Universality_Distinction
+PRESERVE Current_True_Distinction
+PRESERVE Rotation_Mutation_Distinction
+PRESERVE Pairity_Parity_Distinction
+PRESERVE LocalDelta_GlobalDelta_Distinction
+PRESERVE Clarity_Identity_Distinction
+PRESERVE NoWitness_False_Distinction
+PRESERVE Ash_Ember_Proof_Distinction
+
+ALLOW representation_change
+ALLOW reversible_rotation
+ALLOW local_cooperation
+ALLOW asynchronous_channels
+ALLOW multiplex_channels
+ALLOW bounded_counterprobe
+ALLOW human_clarity_adjudication
+ALLOW local_habituation
+ALLOW homeward_recovery
+
+# --- Active scope correction: clarity, not identity ---
+CONTEXT ActiveOutputObligation invariant="clarity" identity_policy="not_global_invariant" human_gate="required_when_consequential_ambiguity"
+CONTEXT HistoricalIdentityRule scope="older_carriers_only" status="preserved_not_rewritten" note="Older object-identity invariants remain valid only where their source obligations require them."
+CLAIM C_CLARITY_ACTIVE STATUS BOUNDED_CLAIM TEXT "In this successor, output transformations must preserve clarity and reconstructibility; identity is not promoted to a universal invariant."
+
+# --- Side-to-side local cooperation ---
+RELATION SideToSide ALLOW LocalSide LocalSide DENY authority_transfer evidence_transfer
+RELATION LocalCooperation ALLOW LocalConnection LocalSide DENY global_broadcast evidence_transfer
+RELATION Multiplexes ALLOW LocalConnection Channel DENY channel_collapse evidence_transfer
+RELATION CausallyPrecedes ALLOW Event Event DENY global_total_order
+RELATION TraceCarries ALLOW LocalTrace Event DENY truth_promotion
+RELATION MemoryDerivedFrom ALLOW LocalMemory LocalTrace DENY invented_history
+RELATION ClaimDependsOn ALLOW ClaimCell ProofObligation DENY assumption_erasure
+RELATION CorollaryDependsOn ALLOW CorollaryRecord ClaimRecord DENY scope_expansion
+
+CONTEXT LocalityPolicy cooperation="local" topology="side_to_side" distant_effect="explicit_local_hops_only"
+CONTEXT AsyncMultiplexPolicy global_clock="not_required" dependency_sync="only_when_causal_dependency_exists" concurrent_arrivals="preserve_then_reconcile"
+CONTEXT MemoryPolicy default="present_observation_first" add_memory_when="present_observation_cannot_preserve_consequential_distinction" memory_scope="local"
+
+OPERATOR LOOK BIND LocalSide INPUT Locality OUTPUT LocalSide EFFECT READ AUTHORITY NONE PRESERVE provenance distinctions remainder REQUIRE scope
+OPERATOR CONNECT BIND LocalConnection INPUT LocalSide LocalSide OUTPUT LocalConnection EFFECT STATE AUTHORITY NONE PRESERVE provenance distinctions remainder REQUIRE local_relation
+OPERATOR MULTIPLEX BIND LocalConnection INPUT LocalConnection Channel OUTPUT LocalConnection EFFECT STATE AUTHORITY NONE PRESERVE channel_identity provenance remainder REQUIRE locality
+OPERATOR ASYNC_DISPATCH BIND LocalConnection INPUT LocalConnection Event OUTPUT LocalConnection EFFECT STATE AUTHORITY NONE PRESERVE causal_order trace provenance REQUIRE locality
+OPERATOR OBSERVE_CONSEQUENCE BIND ClarityState INPUT LocalConnection OUTPUT ClarityState EFFECT READ AUTHORITY NONE PRESERVE distinctions provenance remainder
+OPERATOR PRESERVE_TRACE BIND LocalTrace INPUT LocalConnection OUTPUT LocalTrace EFFECT STATE AUTHORITY NONE PRESERVE provenance causal_order remainder
+OPERATOR EARN_LOCAL_MEMORY BIND LocalMemory INPUT LocalTrace ClarityState OUTPUT LocalMemory EFFECT STATE AUTHORITY NONE PRESERVE provenance distinctions remainder REQUIRE memory_needed
+OPERATOR HABITUATE_LOCALITY BIND Locality INPUT Locality ClarityState OUTPUT Locality EFFECT STATE AUTHORITY NONE PRESERVE provenance remainder REQUIRE local_delta_zero
+OPERATOR REOPEN_LOCALITY BIND Locality INPUT Locality Event OUTPUT Locality EFFECT STATE AUTHORITY NONE PRESERVE prior_trace provenance REQUIRE consequential_new_event
+OPERATOR HUMAN_CLARITY_GATE BIND HumanClarityDecision INPUT ClarityState OUTPUT HumanClarityDecision EFFECT READ AUTHORITY INTERNAL PRESERVE alternatives provenance remainder REQUIRE consequential_ambiguity
+
+RULE R_LOOK_CONNECT_01 IF "LOOK observes a local surface" THEN "CONNECT only the smallest consequential local relation justified by that observation"
+RULE R_LOOK_CONNECT_02 IF "CONNECT changes a local relation" THEN "the next LOOK observes the consequence of that connection"
+RULE R_LOCAL_01 IF "distant information matters" THEN "carry it through explicit local hops with provenance rather than global broadcast"
+RULE R_ASYNC_01 IF "channels are independent" THEN "do not impose a global synchronization barrier"
+RULE R_ASYNC_02 IF "two events have a causal dependency" THEN "synchronize only the dependent relation"
+RULE R_ASYNC_03 IF "concurrent arrivals conflict" THEN "preserve both traces and route ambiguity to Remainder"
+RULE R_MEMORY_01 IF "present observation preserves every consequential distinction" THEN "do not add richer memory architecture"
+RULE R_MEMORY_02 IF "present observation fails a consequential distinction" THEN "earn the smallest local trace memory sufficient for reconstruction"
+RULE R_HABIT_01 IF "local delta is zero" THEN "stop mutating that locality only"
+RULE R_HABIT_02 IF "another locality remains active" THEN "do not infer global DELTA_ZERO"
+RULE R_HUMAN_01 IF "ambiguity is consequential" THEN "preserve alternatives and require human clarity adjudication"
+RULE R_HUMAN_02 IF "ambiguity is not consequential" THEN "continue without forcing human interruption"
+
+# --- Semantic Rotation / Invariant Preservation ---
+CONTEXT SemanticRotation objective="cheapest_reconstructible_clear_surface" optimization="rotate_representation_not_evidence" rejection="loss_of_provenance_or_ceiling_or_remainder_or_homeward"
+OPERATOR SEMANTIC_ROTATE BIND RotationCandidate INPUT RotationCandidate OUTPUT RotationCandidate EFFECT STATE AUTHORITY NONE PRESERVE clarity provenance claim_ceiling remainder recovery REQUIRE reconstructible
+OPERATOR RECONCILE_ROTATION BIND RotationCandidate INPUT RotationCandidate OUTPUT RotationCandidate EFFECT READ AUTHORITY NONE PRESERVE clarity provenance claim_ceiling remainder
+RULE R_ROTATE_01 IF "a rotated surface is cheaper and reconstructs every protected distinction" THEN "prefer the rotated surface without strengthening evidence"
+RULE R_ROTATE_02 IF "rotation loses provenance, claim ceiling, remainder, or recovery" THEN "reject it"
+RULE R_ROTATE_03 IF "two frames differ" THEN "reconcile frames before semantic comparison"
+
+# --- Torsion output strategy ---
+CONTEXT TorsionOutput carrier="BRL_torsion_style_reversible_output" phase_modulus="128" sector_0_rate="+1" sector_1_rate="-1" sector_2_rate="+3" sector_3_rate="0_fixed" reflection="BBF_coordinate_reflection" compare="reconcile_first" return="Homeward_exact"
+OPERATOR TORSION_ROTATE BIND TorsionFrame INPUT TorsionFrame OUTPUT TorsionFrame EFFECT STATE AUTHORITY NONE PRESERVE clarity provenance path fixed_sector remainder REQUIRE reversible_frame
+OPERATOR BBF_REFLECT BIND TorsionFrame INPUT TorsionFrame OUTPUT TorsionFrame EFFECT STATE AUTHORITY NONE PRESERVE clarity provenance path fixed_sector REQUIRE reversible_frame
+OPERATOR RECONCILE_FRAME BIND TorsionFrame INPUT TorsionFrame OUTPUT TorsionFrame EFFECT READ AUTHORITY NONE PRESERVE clarity provenance source_relation
+OPERATOR HOMEWARD BIND TorsionFrame INPUT TorsionFrame OUTPUT TorsionFrame EFFECT STATE AUTHORITY NONE PRESERVE clarity provenance source_relation trace REQUIRE inverse_path
+RULE R_TORSION_01 IF "two torsion outputs are compared" THEN "reconcile both to a common frame before comparison"
+RULE R_TORSION_02 IF "a torsion view scores better" THEN "do not infer stronger identity, truth, or evidence from the score"
+RULE R_TORSION_03 IF "outward motion completes" THEN "reserve enough path capacity for exact Homeward return"
+
+# --- SQL witness strategy generalized from the P-vs-NP frontier audit ---
+CONTEXT SQLWitnessPolicy mode="conjunctive_witness_selection" empty_result="NO_WITNESS_IN_CURRENT_UNIVERSE" forbidden="empty_intersection_implies_universal_false" negative_evidence="bounded_dataset_only"
+OPERATOR SQL_WITNESS_GATE BIND Witness INPUT ClaimCell OUTPUT Witness EFFECT READ AUTHORITY NONE PRESERVE obligations provenance ceiling remainder REQUIRE explicit_conjunction
+OPERATOR ANTI_JOIN_MISSING_EVIDENCE BIND Remainder INPUT ClaimCell OUTPUT Remainder EFFECT READ AUTHORITY NONE PRESERVE obligations provenance ceiling
+RULE R_SQL_01 IF "a claim requires multiple properties" THEN "admit a witness only when one traceable row satisfies the full conjunction"
+RULE R_SQL_02 IF "the current conjunction returns no row" THEN "return NO_WITNESS_IN_CURRENT_UNIVERSE rather than FALSE"
+RULE R_SQL_03 IF "a witness property comes from another lineage" THEN "do not join it as independent support without an explicit bridge"
+
+# --- FIRE destructive falsification and survivor reconstruction ---
+CONTEXT FIRECycle sequence="OBSERVE->DESCEND->EXPOSE->FUEL->BURN->ASH->EMBER->SURVIVOR->RECONSTITUTE->REOBSERVE->DELTA" ash="negative_evidence" ember="recoverable_lesson_not_proof" survivor="invariant_or_useful_under_burn" reconstitution="do_not_restore_failed_assumptions"
+OPERATOR FIRE_BURN BIND FireState INPUT ClaimCell OUTPUT FireState EFFECT STATE AUTHORITY NONE PRESERVE provenance negative_evidence remainder REQUIRE falsifier
+OPERATOR FIRE_RECONSTITUTE BIND ClaimCell INPUT FireState OUTPUT ClaimCell EFFECT STATE AUTHORITY NONE PRESERVE survivors provenance ash remainder REQUIRE reconstruction
+RULE R_FIRE_01 IF "a burn produces failure" THEN "retain ASH as first-class negative evidence"
+RULE R_FIRE_02 IF "an EMBER survives" THEN "treat it as a recoverable lesson, not proof"
+RULE R_FIRE_03 IF "DELTA is zero locally" THEN "stop mutating that locality until new consequential evidence arrives"
+RULE R_FIRE_04 IF "a representation burns" THEN "do not infer the represented object or claim is false unless the obligation connects them"
+
+# --- Proof / corollary engine ---
+OPERATOR FORM_PROOF_OBLIGATIONS BIND ProofObligation INPUT ClaimCell OUTPUT ProofObligation EFFECT READ AUTHORITY NONE PRESERVE assumptions scope ceiling provenance remainder
+OPERATOR ATTEMPT_PROOF BIND Witness INPUT ClaimCell ProofObligation OUTPUT Witness EFFECT READ AUTHORITY NONE PRESERVE assumptions scope ceiling provenance failures remainder REQUIRE explicit_obligations
+OPERATOR COUNTERPROBE_CLAIM BIND Witness INPUT ClaimCell OUTPUT Witness EFFECT READ AUTHORITY NONE PRESERVE baseline assumptions scope provenance failures remainder
+OPERATOR DERIVE_COROLLARY BIND CorollaryRecord INPUT ClaimRecord Witness OUTPUT CorollaryRecord EFFECT READ AUTHORITY NONE PRESERVE assumptions scope ceiling provenance REQUIRE proved_parent
+OPERATOR ADMIT_CLAIM BIND ClaimRecord INPUT ClaimCell Witness OUTPUT ClaimRecord EFFECT STATE AUTHORITY INTERNAL PRESERVE assumptions scope ceiling provenance failures remainder REQUIRE verified_witness
+OPERATOR ROUTE_REMAINDER BIND Remainder INPUT ClaimCell OUTPUT Remainder EFFECT STATE AUTHORITY NONE PRESERVE provenance assumptions ceiling
+
+RULE R_PROOF_01 IF "a proof attempt lacks an obligation witness" THEN "keep the claim unresolved and expose the missing conjunction"
+RULE R_PROOF_02 IF "a corollary is derived" THEN "inherit the parent assumptions, scope, and claim ceiling"
+RULE R_PROOF_03 IF "several carriers agree" THEN "do not count agreement as independent validation without independent lineage"
+RULE R_PROOF_04 IF "a theorem is open externally" THEN "bounded local evidence cannot silently close it"
+
+# --- Execution pipeline ---
+CONTEXT CorePipeline step_00="LOOK" step_01="LOCAL_ASYNC_MULTIPLEX" step_02="CONNECT" step_03="OBSERVE_CONSEQUENCE" step_04="PRESERVE_TRACE" step_05="SQL_WITNESS_GATE" step_06="COUNTERPROBE_CLAIM" step_07="HUMAN_CLARITY_GATE_if_needed" step_08="SEMANTIC_ROTATE" step_09="TORSION_ROTATE" step_10="RECONCILE_FRAME" step_11="HOMEWARD" step_12="HABITUATE_OR_REOPEN" step_13="ROUTE_REMAINDER"
+
+# --- Executable bounded witnesses ---
+CONST implementation_status = "RMAL_NATIVE_CONTRACT_PLUS_EXECUTABLE_BOUNDED_WITNESSES"
+CONST core_cycle = "LOOK->LOCAL_ASYNC_MULTIPLEX->CONNECT->OBSERVE->TRACE->SQL_WITNESS->COUNTERPROBE->HUMAN_CLARITY_IF_NEEDED->SEMANTIC_ROTATE->TORSION->RECONCILE->HOMEWARD->HABITUATE_OR_REOPEN->REMAINDER"
+CONST object_count = 1794
+CONST relation_count = 1621
+CONST claim_count = 51
+CONST clarity_is_active_obligation = true
+
+# Local habituation is not global completion.
+CONST local_delta = 0
+CONST global_delta = 1
+LET local_habituated = eq(local_delta, 0)
+LET global_habituated = eq(global_delta, 0)
+REQUIRE local_habituated
+REQUIRE not(global_habituated)
+
+# Human clarity only when ambiguity is consequential.
+CONST consequential_ambiguity = true
+CONST human_clarity_adjudicated = false
+LET human_clarity_not_adjudicated = eq(human_clarity_adjudicated, false)
+LET requires_human_clarity = IF consequential_ambiguity THEN human_clarity_not_adjudicated ELSE false
+REQUIRE requires_human_clarity
+
+# SQL-style conjunctive witness: one row must carry the whole requirement set.
+CONST sample_certified_hard = true
+CONST sample_formula_dag_gap = 5
+CONST sample_nontrivial_stabilizer = true
+CONST sample_construction_cost = 8
+CONST sample_polynomial_budget = 10
+LET sql_gap_positive = gt(sample_formula_dag_gap, 0)
+LET sql_cost_bounded = le(sample_construction_cost, sample_polynomial_budget)
+LET sql_left = IF sample_certified_hard THEN sql_gap_positive ELSE false
+LET sql_right = IF sample_nontrivial_stabilizer THEN sql_cost_bounded ELSE false
+LET sql_witness_gate = IF sql_left THEN sql_right ELSE false
+REQUIRE sql_witness_gate
+CONST sql_empty_status = "NO_WITNESS_IN_CURRENT_UNIVERSE"
+
+# Semantic rotation must not buy compactness with semantic/provenance loss.
+CONST rotation_clarity = 1
+CONST rotation_usefulness = 1
+CONST rotation_recoverability = 1
+CONST rotation_semantic_loss = 0
+CONST rotation_provenance_loss = 0
+LET rotation_benefit = mul(mul(rotation_clarity, rotation_usefulness), rotation_recoverability)
+LET rotation_semantic_preserved = eq(rotation_semantic_loss, 0)
+LET rotation_provenance_preserved = eq(rotation_provenance_loss, 0)
+LET rotation_admissible = IF rotation_semantic_preserved THEN rotation_provenance_preserved ELSE false
+REQUIRE rotation_admissible
+
+# Torsion frame arithmetic witness: active sectors +1,-1,+3; fourth fixed.
+CONST torsion_phase = 7
+LET sector_0_shift = mul(torsion_phase, 1)
+LET sector_1_shift = mul(torsion_phase, sub(0,1))
+LET sector_2_shift = mul(torsion_phase, 3)
+CONST sector_3_shift = 0
+LET home_0 = add(sector_0_shift, mul(sector_0_shift, sub(0,1)))
+LET home_1 = add(sector_1_shift, mul(sector_1_shift, sub(0,1)))
+LET home_2 = add(sector_2_shift, mul(sector_2_shift, sub(0,1)))
+LET home_0_zero = eq(home_0,0)
+LET home_1_zero = eq(home_1,0)
+LET home_2_zero = eq(home_2,0)
+LET sector_3_fixed = eq(sector_3_shift,0)
+LET home_left = IF home_0_zero THEN home_1_zero ELSE false
+LET home_right = IF home_2_zero THEN sector_3_fixed ELSE false
+LET torsion_homeward_exact = IF home_left THEN home_right ELSE false
+REQUIRE torsion_homeward_exact
+
+# Open-problem firewalls.
+CONST pnp_status = "OPEN"
+CONST hodge_status = "OPEN"
+REQUIRE eq(pnp_status, "OPEN")
+REQUIRE eq(hodge_status, "OPEN")
+
+VERIFY "Local cooperation stays local unless an explicit hop carries provenance."
+VERIFY "Multiplexed asynchronous channels preserve causal distinctions without requiring a global clock."
+VERIFY "Memory is earned only when richer present observation is insufficient."
+VERIFY "Local DELTA_ZERO does not become global DELTA_ZERO."
+VERIFY "Consequential ambiguity routes to human clarity rather than autonomous promotion."
+VERIFY "Semantic rotation changes representation, not evidence authority."
+VERIFY "Torsion output preserves the fixed sector, path, reconciliation requirement, and Homeward return."
+VERIFY "SQL witness selection requires a single traceable conjunction and empty results remain bounded negative evidence."
+VERIFY "FIRE preserves ASH, EMBER, SURVIVOR, and Remainder without silently restoring failed assumptions."
+VERIFY "P versus NP and the general Hodge conjecture remain OPEN in this successor."
+COUNTERPROBE "Find two locally indistinguishable states that require different human clarity decisions under a consequential future obligation."
+COUNTERPROBE "Find a semantic rotation that appears cheaper but loses provenance, claim ceiling, remainder, or Homeward reconstruction."
+COUNTERPROBE "Find a multiplex ordering whose apparent agreement disappears after causal reconciliation."
+COUNTERPROBE "Find a SQL witness assembled from incompatible lineages rather than one row satisfying the full conjunction."
+CONTINUE

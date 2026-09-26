@@ -1,0 +1,237 @@
+# RMAL LOCAL EVIDENCE WORKFLOW V2 — PLAIN-LANGUAGE EXECUTABLE SUCCESSOR
+# Active labels are literal operational descriptions. Historical metaphor names are provenance aliases only.
+# Core implementation language: RMAL.
+# Claim rule: GENERATE != VERIFY != ADMIT.
+
+MODULE local_evidence.core
+SURFACE canonical
+EXPORT implementation_status,workflow,object_count,relation_count,claim_count,local_stable,global_stable,requires_human_clarity,sql_witness_gate,sql_empty_status,representation_change_admissible,canonical_restore_exact,pnp_status,hodge_status,clarity_is_active_obligation
+
+LANGUAGE LocalEvidenceRMAL SURFACES canonical,user-native,sexpr BACKENDS object,bytecode,ir-json,human
+
+TYPE Locality BASE Value
+TYPE Neighbor BASE Value
+TYPE Channel BASE Value
+TYPE Event BASE Value
+TYPE CausalOrder BASE Value
+TYPE LocalTrace BASE Value
+TYPE LocalMemory BASE Value
+TYPE Clarity BASE Value
+TYPE Ambiguity BASE Value
+TYPE Witness BASE Value
+TYPE UnresolvedItems BASE Value
+TYPE ClaimRecord BASE Value
+TYPE CorollaryRecord BASE Value
+TYPE ProofObligation BASE Value
+TYPE OutputFrame BASE Value
+TYPE RepresentationCandidate BASE Value
+TYPE HumanClarityDecision BASE Value
+TYPE TestState BASE Value
+
+TRAIT Reconstructible REQUIRE provenance recovery unresolved
+TRAIT LocallyScoped REQUIRE locality scope
+TRAIT TraceRequired REQUIRE trace provenance
+TRAIT HumanReviewable REQUIRE ambiguity consequence
+TRAIT Challengeable REQUIRE falsifier unresolved
+
+CLASS LocalObservation REQUIRE Reconstructible LocallyScoped HAS observations channels local_trace local_memory
+CLASS LocalRelation REQUIRE Reconstructible LocallyScoped HAS left right channels causal_order consequence unresolved
+CLASS ClarityState REQUIRE Reconstructible HumanReviewable HAS distinctions ambiguity consequence adjudication
+CLASS ClaimState REQUIRE Reconstructible Challengeable HAS claim status assumptions scope ceiling obligations evidence unresolved
+
+PRESERVE ObservedState_Semantics_Distinction
+PRESERVE Generate_Verify_Admit_Distinction
+PRESERVE Unknown_Absent_Distinction
+PRESERVE Unresolved_False_Distinction
+PRESERVE Trace_Proof_Distinction
+PRESERVE Related_Supports_Distinction
+PRESERVE SharedMethod_SharedEvidence_Distinction
+PRESERVE ChallengeTest_Proof_Distinction
+PRESERVE FiniteVerification_Universality_Distinction
+PRESERVE Current_True_Distinction
+PRESERVE RepresentationChange_Mutation_Distinction
+PRESERVE PairComparison_RequirementMatch_Distinction
+PRESERVE LocalChange_GlobalChange_Distinction
+PRESERVE Clarity_Identity_Distinction
+PRESERVE NoWitness_False_Distinction
+PRESERVE NegativeEvidence_RetainedLesson_Proof_Distinction
+PRESERVE PlainName_HistoricalAlias_Distinction
+
+ALLOW representation_change
+ALLOW reversible_output_transform
+ALLOW local_cooperation
+ALLOW independent_event_timing
+ALLOW multiple_channels
+ALLOW bounded_challenge_test
+ALLOW human_clarity_review
+ALLOW local_stability
+ALLOW canonical_restore
+
+CONTEXT PlainLanguagePolicy active_labels="literal_operational_language" historical_labels="provenance_alias_only" rule="do_not_require_metaphor_to_use_the_system"
+CONTEXT ActiveOutputObligation invariant="clarity" identity_policy="not_global_invariant" human_gate="required_when_consequential_ambiguity"
+CONTEXT HistoricalIdentityRule scope="older_representations_only" status="preserved_not_rewritten" note="Older identity-preservation rules remain valid only where their source obligations require them."
+CLAIM C_CLARITY_ACTIVE STATUS BOUNDED_CLAIM TEXT "In this successor, output changes must preserve clarity and reconstructibility; identity is not a universal invariant."
+
+RELATION LocalNeighborRelation ALLOW LocalObservation LocalObservation DENY authority_transfer evidence_transfer
+RELATION LocalCooperation ALLOW LocalRelation LocalObservation DENY global_broadcast evidence_transfer
+RELATION MultipleChannels ALLOW LocalRelation Channel DENY channel_collapse evidence_transfer
+RELATION CausallyPrecedes ALLOW Event Event DENY global_total_order
+RELATION TraceContains ALLOW LocalTrace Event DENY truth_promotion
+RELATION MemoryDerivedFrom ALLOW LocalMemory LocalTrace DENY invented_history
+RELATION ClaimDependsOn ALLOW ClaimState ProofObligation DENY assumption_erasure
+RELATION CorollaryDependsOn ALLOW CorollaryRecord ClaimRecord DENY scope_expansion
+
+CONTEXT LocalityPolicy cooperation="local" topology="neighbor_relations" distant_effect="explicit_local_hops_only"
+CONTEXT IndependentTimingPolicy global_clock="not_required" dependency_sync="only_when_causal_dependency_exists" concurrent_arrivals="preserve_then_reconcile"
+CONTEXT MemoryPolicy default="present_observation_first" add_memory_when="present_observation_cannot_preserve_consequential_distinction" memory_scope="local"
+
+OPERATOR OBSERVE_LOCAL BIND LocalObservation INPUT Locality OUTPUT LocalObservation EFFECT READ AUTHORITY NONE PRESERVE provenance distinctions unresolved REQUIRE scope
+OPERATOR RECORD_LOCAL_RELATION BIND LocalRelation INPUT LocalObservation LocalObservation OUTPUT LocalRelation EFFECT STATE AUTHORITY NONE PRESERVE provenance distinctions unresolved REQUIRE local_relation
+OPERATOR ADD_CHANNEL BIND LocalRelation INPUT LocalRelation Channel OUTPUT LocalRelation EFFECT STATE AUTHORITY NONE PRESERVE channel_identity provenance unresolved REQUIRE locality
+OPERATOR RECORD_EVENT BIND LocalRelation INPUT LocalRelation Event OUTPUT LocalRelation EFFECT STATE AUTHORITY NONE PRESERVE causal_order trace provenance REQUIRE locality
+OPERATOR OBSERVE_RESULT BIND ClarityState INPUT LocalRelation OUTPUT ClarityState EFFECT READ AUTHORITY NONE PRESERVE distinctions provenance unresolved
+OPERATOR SAVE_TRACE BIND LocalTrace INPUT LocalRelation OUTPUT LocalTrace EFFECT STATE AUTHORITY NONE PRESERVE provenance causal_order unresolved
+OPERATOR ADD_LOCAL_MEMORY_IF_NEEDED BIND LocalMemory INPUT LocalTrace ClarityState OUTPUT LocalMemory EFFECT STATE AUTHORITY NONE PRESERVE provenance distinctions unresolved REQUIRE memory_needed
+OPERATOR MARK_LOCAL_STABLE BIND Locality INPUT Locality ClarityState OUTPUT Locality EFFECT STATE AUTHORITY NONE PRESERVE provenance unresolved REQUIRE local_delta_zero
+OPERATOR REOPEN_LOCAL_PROCESS BIND Locality INPUT Locality Event OUTPUT Locality EFFECT STATE AUTHORITY NONE PRESERVE prior_trace provenance REQUIRE consequential_new_event
+OPERATOR REQUIRE_HUMAN_CLARITY BIND HumanClarityDecision INPUT ClarityState OUTPUT HumanClarityDecision EFFECT READ AUTHORITY INTERNAL PRESERVE alternatives provenance unresolved REQUIRE consequential_ambiguity
+
+RULE R_LOCAL_01 IF "a local observation is made" THEN "record only the smallest consequential local relation justified by that observation"
+RULE R_LOCAL_02 IF "a local relation changes" THEN "observe the consequence before making another change"
+RULE R_LOCAL_03 IF "distant information matters" THEN "carry it through explicit local hops with provenance rather than global broadcast"
+RULE R_TIMING_01 IF "channels are independent" THEN "do not impose a global synchronization barrier"
+RULE R_TIMING_02 IF "two events have a causal dependency" THEN "synchronize only the dependent relation"
+RULE R_TIMING_03 IF "concurrent arrivals conflict" THEN "preserve both traces and record the ambiguity as unresolved"
+RULE R_MEMORY_01 IF "present observation preserves every consequential distinction" THEN "do not add richer memory architecture"
+RULE R_MEMORY_02 IF "present observation loses a consequential distinction" THEN "add the smallest local trace memory sufficient for reconstruction"
+RULE R_STABLE_01 IF "local change is zero" THEN "stop changing that locality only"
+RULE R_STABLE_02 IF "another locality remains active" THEN "do not infer global completion"
+RULE R_HUMAN_01 IF "ambiguity is consequential" THEN "preserve alternatives and require human clarity review"
+RULE R_HUMAN_02 IF "ambiguity is not consequential" THEN "continue without forcing human interruption"
+
+CONTEXT RepresentationChange objective="cheapest_reconstructible_clear_representation" optimization="change_representation_not_evidence" rejection="loss_of_provenance_or_ceiling_or_unresolved_items_or_restore_path"
+OPERATOR CHANGE_REPRESENTATION BIND RepresentationCandidate INPUT RepresentationCandidate OUTPUT RepresentationCandidate EFFECT STATE AUTHORITY NONE PRESERVE clarity provenance claim_ceiling unresolved recovery REQUIRE reconstructible
+OPERATOR NORMALIZE_REPRESENTATION BIND RepresentationCandidate INPUT RepresentationCandidate OUTPUT RepresentationCandidate EFFECT READ AUTHORITY NONE PRESERVE clarity provenance claim_ceiling unresolved
+RULE R_REPR_01 IF "a representation is cheaper and reconstructs every protected distinction" THEN "prefer it without strengthening evidence"
+RULE R_REPR_02 IF "a representation change loses provenance, claim ceiling, unresolved items, or recovery" THEN "reject it"
+RULE R_REPR_03 IF "two output frames differ" THEN "normalize them before semantic comparison"
+
+CONTEXT ReversibleOutputTransform phase_modulus="128" component_0_rate="+1" component_1_rate="-1" component_2_rate="+3" component_3_rate="0_fixed" reflection="coordinate_reflection" compare="normalize_first" return="restore_canonical_state_exact"
+OPERATOR APPLY_OUTPUT_TRANSFORM BIND OutputFrame INPUT OutputFrame OUTPUT OutputFrame EFFECT STATE AUTHORITY NONE PRESERVE clarity provenance path fixed_component unresolved REQUIRE reversible_frame
+OPERATOR REFLECT_OUTPUT_COORDINATES BIND OutputFrame INPUT OutputFrame OUTPUT OutputFrame EFFECT STATE AUTHORITY NONE PRESERVE clarity provenance path fixed_component REQUIRE reversible_frame
+OPERATOR NORMALIZE_OUTPUT_FRAME BIND OutputFrame INPUT OutputFrame OUTPUT OutputFrame EFFECT READ AUTHORITY NONE PRESERVE clarity provenance source_relation
+OPERATOR RESTORE_CANONICAL_STATE BIND OutputFrame INPUT OutputFrame OUTPUT OutputFrame EFFECT STATE AUTHORITY NONE PRESERVE clarity provenance source_relation trace REQUIRE inverse_path
+RULE R_OUTPUT_01 IF "two transformed outputs are compared" THEN "normalize both to a common frame before comparison"
+RULE R_OUTPUT_02 IF "a transformed view scores better" THEN "do not infer stronger identity, truth, or evidence from the score"
+RULE R_OUTPUT_03 IF "an outward transform completes" THEN "reserve enough trace capacity for exact restoration"
+
+CONTEXT SQLWitnessPolicy mode="conjunctive_witness_selection" empty_result="NO_WITNESS_IN_CURRENT_UNIVERSE" forbidden="empty_intersection_implies_universal_false" negative_evidence="bounded_dataset_only"
+OPERATOR SQL_WITNESS_GATE BIND Witness INPUT ClaimState OUTPUT Witness EFFECT READ AUTHORITY NONE PRESERVE obligations provenance ceiling unresolved REQUIRE explicit_conjunction
+OPERATOR LIST_MISSING_EVIDENCE BIND UnresolvedItems INPUT ClaimState OUTPUT UnresolvedItems EFFECT READ AUTHORITY NONE PRESERVE obligations provenance ceiling
+RULE R_SQL_01 IF "a claim requires multiple properties" THEN "accept a witness only when one traceable row satisfies the full conjunction"
+RULE R_SQL_02 IF "the current conjunction returns no row" THEN "return NO_WITNESS_IN_CURRENT_UNIVERSE rather than FALSE"
+RULE R_SQL_03 IF "a witness property comes from another lineage" THEN "do not combine it as independent support without an explicit mapping"
+
+CONTEXT FalsificationRepairCycle sequence="OBSERVE->NARROW->LIST_ASSUMPTIONS->TEST->RECORD_FAILURE_OR_PASS->RETAIN_LESSON->PRESERVE_VALID_RESULTS->REBUILD->RECHECK->MEASURE_CHANGE" negative_result="first_class_negative_evidence" retained_lesson="recoverable_lesson_not_proof" preserved_result="invariant_or_useful_result_that_survived_testing" rebuild="do_not_restore_failed_assumptions"
+OPERATOR TEST_CLAIM BIND TestState INPUT ClaimState OUTPUT TestState EFFECT STATE AUTHORITY NONE PRESERVE provenance negative_evidence unresolved REQUIRE falsifier
+OPERATOR REBUILD_AFTER_TEST BIND ClaimState INPUT TestState OUTPUT ClaimState EFFECT STATE AUTHORITY NONE PRESERVE preserved_results provenance negative_evidence unresolved REQUIRE reconstruction
+RULE R_TEST_01 IF "a test produces a failure" THEN "retain it as first-class negative evidence"
+RULE R_TEST_02 IF "a useful lesson remains after testing" THEN "retain it as a lesson, not proof"
+RULE R_TEST_03 IF "local change is zero" THEN "stop changing that locality until new consequential evidence arrives"
+RULE R_TEST_04 IF "a representation fails" THEN "do not infer the represented object or claim is false unless the obligation connects them"
+
+OPERATOR FORM_PROOF_OBLIGATIONS BIND ProofObligation INPUT ClaimState OUTPUT ProofObligation EFFECT READ AUTHORITY NONE PRESERVE assumptions scope ceiling provenance unresolved
+OPERATOR ATTEMPT_PROOF BIND Witness INPUT ClaimState ProofObligation OUTPUT Witness EFFECT READ AUTHORITY NONE PRESERVE assumptions scope ceiling provenance failures unresolved REQUIRE explicit_obligations
+OPERATOR CHALLENGE_CLAIM BIND Witness INPUT ClaimState OUTPUT Witness EFFECT READ AUTHORITY NONE PRESERVE baseline assumptions scope provenance failures unresolved
+OPERATOR DERIVE_COROLLARY BIND CorollaryRecord INPUT ClaimRecord Witness OUTPUT CorollaryRecord EFFECT READ AUTHORITY NONE PRESERVE assumptions scope ceiling provenance REQUIRE proved_parent
+OPERATOR ADMIT_CLAIM BIND ClaimRecord INPUT ClaimState Witness OUTPUT ClaimRecord EFFECT STATE AUTHORITY INTERNAL PRESERVE assumptions scope ceiling provenance failures unresolved REQUIRE verified_witness
+OPERATOR RECORD_UNRESOLVED_ITEMS BIND UnresolvedItems INPUT ClaimState OUTPUT UnresolvedItems EFFECT STATE AUTHORITY NONE PRESERVE provenance assumptions ceiling
+
+RULE R_PROOF_01 IF "a proof attempt lacks an obligation witness" THEN "keep the claim unresolved and list the missing conjunction"
+RULE R_PROOF_02 IF "a corollary is derived" THEN "inherit the parent assumptions, scope, and claim ceiling"
+RULE R_PROOF_03 IF "several representations agree" THEN "do not count agreement as independent validation without independent lineage"
+RULE R_PROOF_04 IF "a theorem is open externally" THEN "bounded local evidence cannot silently close it"
+
+CONTEXT Workflow step_00="OBSERVE_LOCAL" step_01="RECORD_INDEPENDENT_CHANNEL_EVENTS" step_02="RECORD_LOCAL_RELATION" step_03="OBSERVE_RESULT" step_04="SAVE_TRACE" step_05="SQL_WITNESS_GATE" step_06="CHALLENGE_CLAIM" step_07="REQUIRE_HUMAN_CLARITY_if_needed" step_08="CHANGE_REPRESENTATION" step_09="APPLY_OUTPUT_TRANSFORM" step_10="NORMALIZE_OUTPUT_FRAME" step_11="RESTORE_CANONICAL_STATE" step_12="MARK_LOCAL_STABLE_OR_REOPEN" step_13="RECORD_UNRESOLVED_ITEMS"
+
+CONST implementation_status = "RMAL_NATIVE_PLAIN_LANGUAGE_CONTRACT_PLUS_EXECUTABLE_BOUNDED_WITNESSES"
+CONST workflow = "OBSERVE_LOCAL->RECORD_CHANNEL_EVENTS->RECORD_LOCAL_RELATION->OBSERVE_RESULT->SAVE_TRACE->SQL_WITNESS->CHALLENGE_CLAIM->HUMAN_CLARITY_IF_NEEDED->CHANGE_REPRESENTATION->APPLY_REVERSIBLE_OUTPUT_TRANSFORM->NORMALIZE_OUTPUT_FRAME->RESTORE_CANONICAL_STATE->MARK_LOCAL_STABLE_OR_REOPEN->RECORD_UNRESOLVED_ITEMS"
+CONST object_count = 1794
+CONST relation_count = 1621
+CONST claim_count = 51
+CONST clarity_is_active_obligation = true
+
+CONST local_delta = 0
+CONST global_delta = 1
+LET local_stable = eq(local_delta, 0)
+LET global_stable = eq(global_delta, 0)
+REQUIRE local_stable
+REQUIRE not(global_stable)
+
+CONST consequential_ambiguity = true
+CONST human_clarity_adjudicated = false
+LET human_clarity_not_adjudicated = eq(human_clarity_adjudicated, false)
+LET requires_human_clarity = IF consequential_ambiguity THEN human_clarity_not_adjudicated ELSE false
+REQUIRE requires_human_clarity
+
+CONST sample_certified_hard = true
+CONST sample_formula_dag_gap = 5
+CONST sample_nontrivial_stabilizer = true
+CONST sample_construction_cost = 8
+CONST sample_polynomial_budget = 10
+LET sql_gap_positive = gt(sample_formula_dag_gap, 0)
+LET sql_cost_bounded = le(sample_construction_cost, sample_polynomial_budget)
+LET sql_left = IF sample_certified_hard THEN sql_gap_positive ELSE false
+LET sql_right = IF sample_nontrivial_stabilizer THEN sql_cost_bounded ELSE false
+LET sql_witness_gate = IF sql_left THEN sql_right ELSE false
+REQUIRE sql_witness_gate
+CONST sql_empty_status = "NO_WITNESS_IN_CURRENT_UNIVERSE"
+
+CONST repr_clarity = 1
+CONST repr_usefulness = 1
+CONST repr_recoverability = 1
+CONST repr_semantic_loss = 0
+CONST repr_provenance_loss = 0
+LET repr_benefit = mul(mul(repr_clarity, repr_usefulness), repr_recoverability)
+LET repr_semantic_preserved = eq(repr_semantic_loss, 0)
+LET repr_provenance_preserved = eq(repr_provenance_loss, 0)
+LET representation_change_admissible = IF repr_semantic_preserved THEN repr_provenance_preserved ELSE false
+REQUIRE representation_change_admissible
+
+CONST transform_phase = 7
+LET component_0_shift = mul(transform_phase, 1)
+LET component_1_shift = mul(transform_phase, sub(0,1))
+LET component_2_shift = mul(transform_phase, 3)
+CONST component_3_shift = 0
+LET restore_0 = add(component_0_shift, mul(component_0_shift, sub(0,1)))
+LET restore_1 = add(component_1_shift, mul(component_1_shift, sub(0,1)))
+LET restore_2 = add(component_2_shift, mul(component_2_shift, sub(0,1)))
+LET restore_0_zero = eq(restore_0,0)
+LET restore_1_zero = eq(restore_1,0)
+LET restore_2_zero = eq(restore_2,0)
+LET component_3_fixed = eq(component_3_shift,0)
+LET restore_left = IF restore_0_zero THEN restore_1_zero ELSE false
+LET restore_right = IF restore_2_zero THEN component_3_fixed ELSE false
+LET canonical_restore_exact = IF restore_left THEN restore_right ELSE false
+REQUIRE canonical_restore_exact
+
+CONST pnp_status = "OPEN"
+CONST hodge_status = "OPEN"
+REQUIRE eq(pnp_status, "OPEN")
+REQUIRE eq(hodge_status, "OPEN")
+
+VERIFY "Local cooperation stays local unless an explicit hop carries provenance."
+VERIFY "Multiple independently timed channels preserve causal distinctions without requiring a global clock."
+VERIFY "Memory is added only when present observation is insufficient."
+VERIFY "Local zero change does not become global completion."
+VERIFY "Consequential ambiguity requires human clarity instead of automatic promotion."
+VERIFY "Representation changes do not change evidence authority."
+VERIFY "Reversible output transforms preserve the fixed component, path, normalization requirement, and canonical restoration."
+VERIFY "SQL witness selection requires one traceable conjunction and empty results remain bounded negative evidence."
+VERIFY "Falsification and repair preserve negative evidence, retained lessons, valid results, and unresolved items without restoring failed assumptions."
+VERIFY "P versus NP and the general Hodge conjecture remain OPEN in this successor."
+COUNTERPROBE "Find two locally indistinguishable states that require different human clarity decisions under a consequential future obligation."
+COUNTERPROBE "Find a cheaper representation that loses provenance, claim ceiling, unresolved items, or canonical restoration."
+COUNTERPROBE "Find an event ordering whose apparent agreement disappears after causal normalization."
+COUNTERPROBE "Find a SQL witness assembled from incompatible lineages rather than one row satisfying the full conjunction."
+CONTINUE

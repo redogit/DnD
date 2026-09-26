@@ -1,0 +1,16 @@
+# RMALKDVMLLL Book of Books integrated into RMAL Tool Chain v1.0
+MODULE library.book_of_books_integration
+SURFACE canonical
+
+ENTITY Book.RMALKDVMLLL KIND "BOOK_OF_BOOKS" NAME "Ryan McMillan April Knowledge Decay Virtual Machine Link Layer Language" STATUS "CURRENT_INTEGRATION" ORIGIN "USER-CONFIRMED" SCOPE "Library of Libraries" SOURCE "library_of_libraries/book_of_books/source" AUTHORITY "NONE" PROVENANCE "RMALKDVMLLL retained source"
+ENTITY Library.LibraryOfLibraries KIND "META_LIBRARY" NAME "Library of Libraries" STATUS "ACTIVE" ORIGIN "USER-CONFIRMED" SCOPE "federated semantic/library machinery" SOURCE "RMALKDVMLLL + RMAL lineage" AUTHORITY "NONE" PROVENANCE "RMAL Tool Chain v1.0"
+RELATE Library.LibraryOfLibraries AS INDEXES TO Book.RMALKDVMLLL AUTHORITY "NONE" EVIDENCE_TRANSFER "DENY" SCOPE "generative operators + evidence rules" BASIS "Book of Books role"
+
+CLAIM P_EQ_NP STATUS HYPOTHESIS TEXT "P = NP"
+BOUNDARY P_EQ_NP CLAIM_CEILING OPEN REASON "P versus NP remains open/not established in the retained research corpus; this toolchain permits a conditional P_EQ_NP hypothesis profile but does not promote it to fact."
+
+PRESERVE provenance evidence_boundary source_authority reconstruction failure_history unknowns
+ALLOW semantic_rotation mutation generation fitting counterprobe compilation program_synthesis
+EXCLUDE evidence_transfer_by_adjacency claim_promotion_by_rhetoric hidden_oracle hidden_cost treating_p_eq_np_as_established_fact
+CLAIM_CEILING "BOUNDED_BY_EVIDENCE"
+REMAINDER "P versus NP remains OPEN unless an independently valid proof discharges the full complexity obligations."

@@ -1,33 +1,28 @@
 {
-  "schema": "rmal/example-corpus/v1",
+  "schema": "rmal/example-corpus/v2",
   "generated_at": "2026-09-26",
-  "rule": "Preserve every retrievable .rmal path and associated input/output witness; duplicate content is retained when provenance paths differ.",
+  "discovery": {
+    "library_rmal_enumeration": "files.list recursive extension=rmal returned 38 files",
+    "library_output_enumeration": "files.list recursive extensions rmo/rmx returned 3 + 3 carriers",
+    "github_scope": "all 8 accessible redogit repositories on default branches plus known rmal-cpp-language-v3 branch",
+    "preservation": "duplicate content retained when provenance paths differ"
+  },
   "counts": {
-    "total_entries": 39,
-    "rmal_files": 32,
+    "total_entries": 77,
+    "rmal_files": 66,
     "input_files": 1,
-    "output_files": 6
+    "output_files": 10,
+    "git_rmal_paths": 28,
+    "library_rmal_files": 40
   },
   "entries": [
     {
+      "path": "examples/corpus/git/redogit/conscience64/play/mmo/DYNAMIC_RMAL_CHARACTERS.rmal",
+      "blob_sha": "0078e73143b3e1a706b28593f0ffab499942554b"
+    },
+    {
       "path": "examples/corpus/git/redogit/DnD/examples/hello.rmal",
       "blob_sha": "d2c9bcdefd575e1fb25a80a14d2542fb48818a9f"
-    },
-    {
-      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/Decision Field MMORPG/DYNAMIC_RMAL_CHARACTERS.rmal",
-      "blob_sha": "c6b86d1c81479b742134ee08ca9e83b087afcf9d"
-    },
-    {
-      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/RMAOS MiniGX/circuits/w114_perturbation.rmal",
-      "blob_sha": "f73de2f53acf70e33967a336e75015ab8601b4aa"
-    },
-    {
-      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/docs/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE.rmal",
-      "blob_sha": "ae6147ca1c706374f52dd9675c842d51d4bdc0e6"
-    },
-    {
-      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/docs/RMAL_COOPERATIVE_IMPLEMENTATION_PROTOCOL.rmal",
-      "blob_sha": "fb7725c1e22db3c2b8a342687a7ed7fc5f8ffd17"
     },
     {
       "path": "examples/corpus/git/redogit/DnD/provenance/conscience64/play/mmo/DYNAMIC_RMAL_CHARACTERS.rmal",
@@ -42,6 +37,22 @@
       "blob_sha": "a097fdf7a0c9428a08c6f23da0dddff927492ade"
     },
     {
+      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/Decision Field MMORPG/DYNAMIC_RMAL_CHARACTERS.rmal",
+      "blob_sha": "c6b86d1c81479b742134ee08ca9e83b087afcf9d"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/docs/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE.rmal",
+      "blob_sha": "ae6147ca1c706374f52dd9675c842d51d4bdc0e6"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/docs/RMAL_COOPERATIVE_IMPLEMENTATION_PROTOCOL.rmal",
+      "blob_sha": "fb7725c1e22db3c2b8a342687a7ed7fc5f8ffd17"
+    },
+    {
+      "path": "examples/corpus/git/redogit/DnD/provenance/Other-Projects-/RMAOS MiniGX/circuits/w114_perturbation.rmal",
+      "blob_sha": "f73de2f53acf70e33967a336e75015ab8601b4aa"
+    },
+    {
       "path": "examples/corpus/git/redogit/DnD/provenance/redogit/libraries-of-libraries.rmal",
       "blob_sha": "9c01e1a2a5273775c6091d4f810d619dbe4bfad7"
     },
@@ -50,16 +61,16 @@
       "blob_sha": "c6b86d1c81479b742134ee08ca9e83b087afcf9d"
     },
     {
+      "path": "examples/corpus/git/redogit/DnD/rmal/libraries-of-libraries.rmal",
+      "blob_sha": "9c01e1a2a5273775c6091d4f810d619dbe4bfad7"
+    },
+    {
       "path": "examples/corpus/git/redogit/DnD/rmal/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE.rmal",
       "blob_sha": "ae6147ca1c706374f52dd9675c842d51d4bdc0e6"
     },
     {
       "path": "examples/corpus/git/redogit/DnD/rmal/RMAL_COOPERATIVE_IMPLEMENTATION_PROTOCOL.rmal",
       "blob_sha": "fb7725c1e22db3c2b8a342687a7ed7fc5f8ffd17"
-    },
-    {
-      "path": "examples/corpus/git/redogit/DnD/rmal/libraries-of-libraries.rmal",
-      "blob_sha": "9c01e1a2a5273775c6091d4f810d619dbe4bfad7"
     },
     {
       "path": "examples/corpus/git/redogit/DnD/rmal/w114_perturbation.rmal",
@@ -74,20 +85,32 @@
       "blob_sha": "1e663ce496695d4f45553a2161f4f43977afd2ef"
     },
     {
-      "path": "examples/corpus/git/redogit/conscience64/play/mmo/DYNAMIC_RMAL_CHARACTERS.rmal",
-      "blob_sha": "0078e73143b3e1a706b28593f0ffab499942554b"
+      "path": "examples/corpus/git/redogit/Other-Projects-@rmal-cpp-language-v3/Decision Field MMORPG/DYNAMIC_RMAL_CHARACTERS.rmal",
+      "blob_sha": "c6b86d1c81479b742134ee08ca9e83b087afcf9d"
     },
     {
-      "path": "examples/corpus/git/redogit/redogit/libraries-of-libraries.rmal",
-      "blob_sha": "9c01e1a2a5273775c6091d4f810d619dbe4bfad7"
+      "path": "examples/corpus/git/redogit/Other-Projects-@rmal-cpp-language-v3/docs/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE.rmal",
+      "blob_sha": "ae6147ca1c706374f52dd9675c842d51d4bdc0e6"
+    },
+    {
+      "path": "examples/corpus/git/redogit/Other-Projects-@rmal-cpp-language-v3/docs/RMAL_COOPERATIVE_IMPLEMENTATION_PROTOCOL.rmal",
+      "blob_sha": "fb7725c1e22db3c2b8a342687a7ed7fc5f8ffd17"
+    },
+    {
+      "path": "examples/corpus/git/redogit/Other-Projects-@rmal-cpp-language-v3/RMAL/examples/hello.rmal",
+      "blob_sha": "d2c9bcdefd575e1fb25a80a14d2542fb48818a9f"
+    },
+    {
+      "path": "examples/corpus/git/redogit/Other-Projects-@rmal-cpp-language-v3/RMAL/tests/legacy.rmal",
+      "blob_sha": "30ce4bf3f2849090aacb6edbcd97d60ce361600c"
+    },
+    {
+      "path": "examples/corpus/git/redogit/Other-Projects-@rmal-cpp-language-v3/RMAOS MiniGX/circuits/w114_perturbation.rmal",
+      "blob_sha": "f73de2f53acf70e33967a336e75015ab8601b4aa"
     },
     {
       "path": "examples/corpus/git/redogit/Other-Projects-/Decision Field MMORPG/DYNAMIC_RMAL_CHARACTERS.rmal",
       "blob_sha": "c6b86d1c81479b742134ee08ca9e83b087afcf9d"
-    },
-    {
-      "path": "examples/corpus/git/redogit/Other-Projects-/RMAOS MiniGX/circuits/w114_perturbation.rmal",
-      "blob_sha": "f73de2f53acf70e33967a336e75015ab8601b4aa"
     },
     {
       "path": "examples/corpus/git/redogit/Other-Projects-/docs/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE.rmal",
@@ -98,75 +121,215 @@
       "blob_sha": "fb7725c1e22db3c2b8a342687a7ed7fc5f8ffd17"
     },
     {
-      "path": "examples/corpus/library/RMAL_UNIVERSE.rmal",
-      "blob_sha": "1f5aea593b54870b27db87ef06b7c32dcfb8eca8"
+      "path": "examples/corpus/git/redogit/Other-Projects-/RMAOS MiniGX/circuits/w114_perturbation.rmal",
+      "blob_sha": "f73de2f53acf70e33967a336e75015ab8601b4aa"
     },
     {
-      "path": "examples/corpus/library/CRACK_ALL_IN_MY_LANGUAGE.rmal",
-      "blob_sha": "af537389db8ea0e25c0fa363e66cb7ce1a25096b"
-    },
-    {
-      "path": "examples/corpus/library/RMALC.rmal",
-      "blob_sha": "a097fdf7a0c9428a08c6f23da0dddff927492ade"
-    },
-    {
-      "path": "examples/corpus/library/FULL_CONTEXT_CRACK_2026-09-18.rmal",
-      "blob_sha": "13a2b719e50427da4440c8220484f4806d0b3a55"
-    },
-    {
-      "path": "examples/corpus/library/HODGE_NEXT.rmal",
-      "blob_sha": "0a20e58b6f3b5da062a249f35cd2972add3ded26"
-    },
-    {
-      "path": "examples/corpus/library/P_VS_NP_NEXT.rmal",
-      "blob_sha": "bcf02b435026f065488388f3e2d5c0e73ba5f59c"
-    },
-    {
-      "path": "examples/corpus/library/REMAINDER_STATUS.rmal",
-      "blob_sha": "457b0273cb237d6dbe6411a85c2a01eb37ec7d81"
-    },
-    {
-      "path": "examples/corpus/library/SURVIVOR_CARRIER_NEXT.rmal",
-      "blob_sha": "def0ffa64b6643217d19e0555746ade7009214a3"
-    },
-    {
-      "path": "examples/corpus/library/OBJECT_CLARITY_INDEX.rmal",
-      "blob_sha": "57929b81c5ac3d315789b45b38767c6d3329df10"
-    },
-    {
-      "path": "examples/corpus/library/OBJECT_CLARITY_ATLAS.rmal",
-      "blob_sha": "faa1a521d31b9eb37e37cbc3db25efb7b1d17661"
+      "path": "examples/corpus/git/redogit/redogit/libraries-of-libraries.rmal",
+      "blob_sha": "9c01e1a2a5273775c6091d4f810d619dbe4bfad7"
     },
     {
       "path": "examples/corpus/inputs/SOURCE_MANIFEST.json",
       "blob_sha": "16e981f791b67cb30aa6311a5a6ff66fefcb617d"
     },
     {
-      "path": "examples/corpus/outputs/RMALC.rmo",
-      "blob_sha": "25c6fb4a8637a9c59b707732ad22fda363a93d1a"
+      "path": "examples/corpus/library/adaptive_path_field_hodf_pbom.rmal",
+      "blob_sha": "78952bfd65de25fc1dcf1f3922b388e15d67d1e4"
     },
     {
-      "path": "examples/corpus/outputs/RMAL_UNIVERSE.rmo",
-      "blob_sha": "993cd0b1151eb4045f8c84f35c86944521dec852"
+      "path": "examples/corpus/library/adaptive_path_field.rmal",
+      "blob_sha": "8576d565738a702434834d6bd2fc4be66144845c"
     },
     {
-      "path": "examples/corpus/outputs/RMAL_CONTEXT_CRACK_V2.rmx",
-      "blob_sha": "6bc7e0d34a100655dde686939665d4753b99fa9e"
+      "path": "examples/corpus/library/BOOK_OF_BOOKS_COMPILED.rmal",
+      "blob_sha": "9a8e9f56b41be4220d9ac9958604d56413a1bcb9"
+    },
+    {
+      "path": "examples/corpus/library/BOOK_OF_BOOKS_INTEGRATION.rmal",
+      "blob_sha": "06923044f50e8cb1f1614a45754a7560f853a16d"
+    },
+    {
+      "path": "examples/corpus/library/CLAIMS_COROLLARIES.rmal",
+      "blob_sha": "6d23118ecf8c71f7274c24cb03329fd81f76f16c"
+    },
+    {
+      "path": "examples/corpus/library/CLARITY_DYNAMICITY_CORE.rmal",
+      "blob_sha": "c54f4ad7e74d2b0579299057be47f814bf71e69f"
+    },
+    {
+      "path": "examples/corpus/library/COINED_NAMES.rmal",
+      "blob_sha": "6495273b932280673ff1f47a40a93af813f85602"
+    },
+    {
+      "path": "examples/corpus/library/CONTEXT_CRACK_EXEC.rmal",
+      "blob_sha": "f91755a568dc168b3aa880b41400cc1bb57f6ab2"
+    },
+    {
+      "path": "examples/corpus/library/CORE_REINTERPRETATION.rmal",
+      "blob_sha": "76f143d929d2287108221fa6d65ee57bf98b8670"
+    },
+    {
+      "path": "examples/corpus/library/CRACK_ALL_IN_MY_LANGUAGE.rmal",
+      "blob_sha": "af537389db8ea0e25c0fa363e66cb7ce1a25096b"
+    },
+    {
+      "path": "examples/corpus/library/CRACK_STATUS.rmal",
+      "blob_sha": "b989e4a258715cf83f97923dad991a06da959284"
+    },
+    {
+      "path": "examples/corpus/library/CURRENT_CONTEXT_OVERLAY.rmal",
+      "blob_sha": "eb0d4ae5d767eea8825fa4771d6fe63a516b330a"
+    },
+    {
+      "path": "examples/corpus/library/DEEH.rmal",
+      "blob_sha": "c58512d933c0678ed880a95b3e9a799e9f8b21c3"
+    },
+    {
+      "path": "examples/corpus/library/ECS_SCIENCE_FAST_CRACKER_V1.rmal",
+      "blob_sha": "8f73c944a8bcaee63fd8a1209654ab5f5cf29342"
+    },
+    {
+      "path": "examples/corpus/library/fde_creativity_manifest.rmal",
+      "blob_sha": "34adfc52fb9763ef0dac119ea9a4674d20623def"
+    },
+    {
+      "path": "examples/corpus/library/fde_locality_parity_manifest.rmal",
+      "blob_sha": "7994add49e644f0fb90cb379a0f5961965636997"
+    },
+    {
+      "path": "examples/corpus/library/fde_v1_2_training_manifest.rmal",
+      "blob_sha": "8594f75b7b6d3817f3090f7fc21eb4e2e1f973d3"
+    },
+    {
+      "path": "examples/corpus/library/fractal_native_lab.rmal",
+      "blob_sha": "b4634d09f3044d7f355fdfe9908fd4f30e1d1dbf"
+    },
+    {
+      "path": "examples/corpus/library/FULL_CONTEXT_CRACK_2026-09-18.rmal",
+      "blob_sha": "13a2b719e50427da4440c8220484f4806d0b3a55"
+    },
+    {
+      "path": "examples/corpus/library/GENERATED_PROGRAM.rmal",
+      "blob_sha": "9d8abaf154a728db70745be974cd15f4a90ea3b7"
+    },
+    {
+      "path": "examples/corpus/library/HARD_PROBLEM_CONTINUANCE.rmal",
+      "blob_sha": "64a278c446ca70d3ea37cdb9106f4150733d9f68"
+    },
+    {
+      "path": "examples/corpus/library/HODGE_NEXT.rmal",
+      "blob_sha": "0a20e58b6f3b5da062a249f35cd2972add3ded26"
+    },
+    {
+      "path": "examples/corpus/library/LOCAL_EVIDENCE_CORE.rmal",
+      "blob_sha": "9353802671528b6af8a9faaae168a573caf827dd"
+    },
+    {
+      "path": "examples/corpus/library/MASTER_OF_MASTER_OF_LIBRARIANS.rmal",
+      "blob_sha": "5a713da37cc7f213a35e6b808352a5e6139936b1"
+    },
+    {
+      "path": "examples/corpus/library/MAXMAL_DYNAMIC_FITTER_V1.rmal",
+      "blob_sha": "7d402f890366d57b73d18be166cf357abb48539b"
+    },
+    {
+      "path": "examples/corpus/library/MAXMAL_US_FIRST_BOOK_COMPILED.rmal",
+      "blob_sha": "278966df4ab84a8e56d7ed7e22844884b9e66825"
+    },
+    {
+      "path": "examples/corpus/library/MOK.rmal",
+      "blob_sha": "bc433706bf110954ada69b3da6f0d495c01e8cba"
+    },
+    {
+      "path": "examples/corpus/library/OBJECT_CLARITY_ATLAS.rmal",
+      "blob_sha": "faa1a521d31b9eb37e37cbc3db25efb7b1d17661"
+    },
+    {
+      "path": "examples/corpus/library/OBJECT_CLARITY_INDEX.rmal",
+      "blob_sha": "57929b81c5ac3d315789b45b38767c6d3329df10"
+    },
+    {
+      "path": "examples/corpus/library/online_causal_state_machine_executive.rmal",
+      "blob_sha": "defc9eee6769b494a0034dae2c92a645ed1f0c0a"
+    },
+    {
+      "path": "examples/corpus/library/P_VS_NP_NEXT.rmal",
+      "blob_sha": "bcf02b435026f065488388f3e2d5c0e73ba5f59c"
+    },
+    {
+      "path": "examples/corpus/library/plinq_execution_profile.rmal",
+      "blob_sha": "ac2f15481bdca25a1d2f2f434889965fde3eddd1"
+    },
+    {
+      "path": "examples/corpus/library/REMAINDER_STATUS.rmal",
+      "blob_sha": "457b0273cb237d6dbe6411a85c2a01eb37ec7d81"
+    },
+    {
+      "path": "examples/corpus/library/RMAL_UNIVERSE.rmal",
+      "blob_sha": "1f5aea593b54870b27db87ef06b7c32dcfb8eca8"
+    },
+    {
+      "path": "examples/corpus/library/rmal.rmal",
+      "blob_sha": "d65229373bc4c13d04731e9deb0dff5575f97b16"
+    },
+    {
+      "path": "examples/corpus/library/RMALC.rmal",
+      "blob_sha": "a097fdf7a0c9428a08c6f23da0dddff927492ade"
+    },
+    {
+      "path": "examples/corpus/library/SOII_RMAL_PROFILE.rmal",
+      "blob_sha": "913f3faee95964f1cfae2da433f143e1249bce98"
+    },
+    {
+      "path": "examples/corpus/library/SURVIVOR_CARRIER_NEXT.rmal",
+      "blob_sha": "def0ffa64b6643217d19e0555746ade7009214a3"
+    },
+    {
+      "path": "examples/corpus/outputs/CLARITY_DYNAMICITY.rmx",
+      "blob_sha": "7504715602e377466cbf98324c8ff49d191a55b1"
+    },
+    {
+      "path": "examples/corpus/outputs/CRACK_ALL_INDEX.json",
+      "blob_sha": "e2950b544de0d252a07fbdfc5edb30539f7286bf"
+    },
+    {
+      "path": "examples/corpus/outputs/GENERATED_PROGRAM.rmo",
+      "blob_sha": "da403ca5dec13ad6d23a7702496ee3f243e90eeb"
     },
     {
       "path": "examples/corpus/outputs/RELEASE_MANIFEST.json",
       "blob_sha": "c366d3f4f8eb84b0a929d10cf8f46eca4b738047"
     },
     {
-      "path": "examples/corpus/outputs/VERIFY_RESULTS.json",
-      "blob_sha": "d8ea06f5eb85f5ef11b9c48f6aa4ef2532a55e24"
+      "path": "examples/corpus/outputs/RMAL_CONTEXT_CRACK_V2.rmx",
+      "blob_sha": "6bc7e0d34a100655dde686939665d4753b99fa9e"
     },
     {
-      "path": "examples/corpus/outputs/CRACK_ALL_INDEX.json",
-      "blob_sha": "e2950b544de0d252a07fbdfc5edb30539f7286bf"
+      "path": "examples/corpus/outputs/RMAL_META_SOLVER_DEMO.rmx",
+      "blob_sha": "31ef233899a144ba15fb5ead1c26819a3e30a0b2"
+    },
+    {
+      "path": "examples/corpus/outputs/RMAL_UNIVERSE.json",
+      "blob_sha": "1040febd3731e29bbe2bfd7eb64779b39314b255"
+    },
+    {
+      "path": "examples/corpus/outputs/RMAL_UNIVERSE.rmo",
+      "blob_sha": "993cd0b1151eb4045f8c84f35c86944521dec852"
+    },
+    {
+      "path": "examples/corpus/outputs/RMALC.rmo",
+      "blob_sha": "25c6fb4a8637a9c59b707732ad22fda363a93d1a"
+    },
+    {
+      "path": "examples/corpus/outputs/VERIFY_RESULTS.json",
+      "blob_sha": "d8ea06f5eb85f5ef11b9c48f6aa4ef2532a55e24"
     }
   ],
-  "not_retrieved_but_manifest_named": [
+  "manifest_only_not_retrieved": [
+    "bootstrap/rmal.rmal",
+    "build/rma_srAB_debugged.rmal",
+    "configurations/PROFILES.rmal",
+    "crack_all/CRACK_ALL_IN_MY_LANGUAGE_PASS1.rmal",
     "examples/meta_mathmini.rmal",
     "examples/meta_solver_6queens.rmal",
     "examples/research_profile.rmal",
@@ -177,9 +340,13 @@
     "examples/student_dorm.rmal",
     "examples/survivor_compile.rmal",
     "examples/survivorql.rmal",
-    "generated/rmalc/RMA_SRAB_DEBUGGED.rmal"
+    "generated/rmalc/RMA_SRAB_DEBUGGED.rmal",
+    "generated/srab_current/DEBUGGED_INTENT.rmal",
+    "library_of_programs/LIBRARY_OF_PROGRAMS.rmal",
+    "rmal_meta/meta_solver_lib.rmal",
+    "rmal_meta/meta_solver_policy.rmal"
   ],
-  "boundary": [
+  "boundaries": [
     "DISCOVERED_IN_MANIFEST != RETRIEVED_FILE",
     "DUPLICATE_BYTES != DUPLICATE_PROVENANCE",
     "EXAMPLE != CANONICAL_LANGUAGE_RULE",

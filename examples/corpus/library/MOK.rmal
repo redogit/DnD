@@ -1,0 +1,89 @@
+RMAL::META_OBLIGATION_KERNEL
+{
+    TARGET := RECONSTRUCTIBLE_HUMAN_TASK_EXECUTION;
+
+    LEVELS :=
+    {
+        L10 HUMAN_OBJECTIVE,
+        L9  TASK,
+        L8  OBLIGATION_GRAPH,
+        L7  CAPABILITY_BOM,
+        L6  OPERATIONS,
+        L5  TRANSITIONS,
+        L4  RELATIONS,
+        L3  CARRIERS,
+        L2  DECISIONS,
+        L1  QUANTA
+    };
+
+    QUANTA :=
+    {
+        DISTINGUISH,
+        PRESERVE,
+        MUTATE,
+        COMPOSE,
+        BRANCH,
+        TEST,
+        EMIT
+    };
+
+    INVARIANTS :=
+    {
+        UNKNOWN != FALSE,
+        UNKNOWN != TRUE,
+        INFERRED_VALUE != AGREED_STANDARD,
+        ESSENTIAL_CAPABILITY -> USABLE_CARRIER,
+        REPAIR -> RECHECK_INWARD_AND_OUTWARD,
+        NEW_OBLIGATION -> COMPILE_RECURSIVELY,
+        FAILURE -> FAIL_CLOSED_WITH_PROVENANCE
+    };
+
+    LOOP
+    {
+        inward  := DERIVE_INWARD();
+        outward := DERIVE_OUTWARD();
+
+        obligations += inward.new_obligations;
+        obligations += outward.new_obligations;
+
+        unresolved := REQUIRED - SATISFIED;
+
+        IF unresolved == EMPTY
+            RETURN SOLVED;
+
+        repair := SMALLEST_ADMISSIBLE_MAX_GAIN_REPAIR(unresolved);
+
+        IF repair == NONE
+            RETURN UNRESOLVED_WITH_EXACT_BLOCKERS;
+
+        COMPILE(repair.added_obligations);
+        APPLY(repair);
+        RECORD_TRANSITION();
+    }
+
+    VERIFY_DOWNWARD :=
+        HUMAN_OBJECTIVE
+        -> TASK
+        -> OBLIGATION_GRAPH
+        -> CAPABILITY_BOM
+        -> OPERATIONS
+        -> TRANSITIONS
+        -> RELATIONS
+        -> CARRIERS
+        -> DECISIONS
+        -> QUANTA;
+
+    VERIFY_UPWARD :=
+        QUANTA
+        -> DECISIONS
+        -> CARRIERS
+        -> RELATIONS
+        -> TRANSITIONS
+        -> OPERATIONS
+        -> CAPABILITY_BOM
+        -> OBLIGATION_GRAPH
+        -> TASK
+        -> HUMAN_OBJECTIVE;
+
+    ACCEPT ONLY_IF VERIFY_DOWNWARD AND VERIFY_UPWARD;
+}

@@ -1,0 +1,141 @@
+RMAL_MODULE FDE_V1_CREATIVITY_INTEGRATION_001
+
+AUTHORITY
+{
+    object: FractalDeflectiveDataflowEngine
+    carrier_boundary: "C# is not the goal; Python is not the goal; RMAL is a carrier too."
+    root_invariant: "Object identity is invariant; coordinates are negotiable."
+    maxctx: "INGESTED != ACCEPTED_AS_FACT"
+    claim_ceiling: "V1 witness + creativity integration; not validated general intelligence."
+}
+
+CREATIVE_INTEGRATION
+{
+    purpose:
+        "Integrate the user's creative operator ecology into the Fractal Deflective Dataflow Engine
+         as executable design pressure, not decorative naming."
+
+    lineage:
+        Thought
+        -> ExplicitStructure
+        -> ChosenOrImposedChange
+        -> Expectation
+        -> Observation
+        -> Residual
+        -> SmallestFailingStructure
+        -> OneDegreeImprovement
+        -> Counterprobe
+        -> PreserveEvidenceLineagePrivacyRecoverability
+        -> HelpSomeone
+        -> Homeward
+
+    object:
+        Engine(manifold)(data_lanes)(params)(flow)(features)(ticks)
+
+    roles:
+    {
+        manifold:
+            [Carrier, CompassRose, GeometryEye]
+        data_lanes:
+            [KnowledgeStore, OrbitIndex, LaneField]
+        params:
+            [DecisionField, PlasticityControls]
+        flow:
+            [ReaderCurrent, ExecutionProcess]
+        features:
+            [IngestedSignal, MAXCTXBoundary]
+        ticks:
+            [ExecutionTime, TraceIndex]
+        collisions:
+            [NonlinearMixing, JoltEvidence]
+        residuals:
+            [RepairFuel, KnowledgeDecayAlarm]
+    }
+
+    observer_frame FiveEyes
+    {
+        geometry_eye:
+            "Manifold routes flow and creates locality."
+        data_eye:
+            "Lanes hold feature and memory fields."
+        flow_eye:
+            "Particles are readers/currents, not the data itself."
+        event_eye:
+            "Collisions expose nonlinear mixing and jolt credit."
+        human_eye:
+            "Trace must be understandable, private, recoverable, and useful."
+    }
+
+    side_to_side_carriers:
+    {
+        PythonWitness:
+            role = "minimal executable trace witness"
+            authority = "non-canonical carrier"
+        RMAL:
+            role = "execution/object grammar"
+            authority = "recoverability carrier"
+        JSONRegistry:
+            role = "Master Librarian routing index"
+            authority = "machine-readable concept map"
+        README:
+            role = "CSOL/human-readable reconstruction surface"
+            authority = "orientation carrier"
+    }
+
+    residuals_to_preserve:
+    {
+        carrier_confusion
+        semantic_decay
+        unbounded_ingestion
+        unrecoverable_execution
+        interface_drift
+        future_reconstruction_failure
+        lost_concept_route
+        ungated_decision
+        single_view_overfit
+        confounded_probe
+        failure_erasure
+        accessibility_gap
+        privacy_leak
+        novelty_without_use
+        lost_human_lineage
+    }
+
+
+    local_pattern RMAL_Trace_First_Carrier_Pattern
+    {
+        chain:
+            Object
+            -> Surface
+            -> Carrier
+            -> Trace
+            -> Residual
+            -> Repair
+            -> Reprojection
+
+        binding:
+        {
+            Object = FractalDeflectiveDataflowEngine
+            Surface = [CreativityRegistry, RMALManifest, README]
+            Carrier = [JSON, RMAL, Markdown, PythonTestHarness]
+            Trace = [IntegrationSummary, PytestOutput]
+            Residual = validate_registry.residuals
+            Repair = one_degree_registry_test_manifest_update
+            Reprojection = updated_package_zip
+        }
+
+        invariant:
+            "Object identity is invariant; coordinates are negotiable."
+
+        residual_if_missing:
+            code_first_carrier_drift
+    }
+
+    next_one_degree_probe:
+    {
+        variable = readout_plasticity_coupling
+        fixed = [manifold, lane_encoding, flow_dynamics, collision_mechanics, input_families]
+        change = "label-conditioned attractor sector traces"
+        counterprobe = "same seed without attractor coupling"
+    }
+}

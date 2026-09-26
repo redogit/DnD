@@ -1,0 +1,53 @@
+RMAL_MODULE FDE_V1_1_LOCALITY_PARITY_001
+
+AUTHORITY
+{
+    object: FractalDeflectiveDataflowEngine
+    curried_identity: "Engine(manifold)(data_lanes)(params)(flow)(features)(ticks)"
+    root_invariant: "Object identity is invariant; coordinates are negotiable."
+    carrier_boundary: "Code, RMAL, JSON, Markdown, tests, graphs, and visuals are carriers/surfaces, not the canonical object."
+    claim_ceiling: "V1.1 relation/mixing repair witness only; not general learning, collision utility, fractal superiority, or endogenous operator discovery."
+}
+
+LOCALITY_PARITY
+{
+    definition:
+        "The latest local files, memories, indexes, registries, manifests, tests, residuals, and summaries must reconstruct the same object state without erasing claim ceilings."
+
+    chain:
+        Object -> Surface -> Carrier -> Trace -> Residual -> Repair -> Reprojection
+
+    current_state:
+    {
+        V1 = "runnable lane-locality trace witness only"
+        V1_ATTACK = "confounds exposed: shortcut, blank bias, collision non-utility on easy task"
+        V1_INVASION = "breached by nonlocal relation/parity task"
+        V1_1 = "one-degree explicit RelationMixingReadout + RelationMixingIndex repair"
+    }
+
+    parity_evidence:
+    {
+        quarter_sum_shortcut = 0.22265625
+        relation_mixing_readout = 1.0
+        stale_index_under_lane_permutation = 0.3984375
+        rotated_index_under_lane_permutation = 1.0
+    }
+
+    residuals_preserved:
+    {
+        general_learning_unproven
+        collision_utility_unproven
+        fractal_superiority_unproven
+        jolt_credit_sufficiency_unproven
+        endogenous_operator_discovery_unproven
+        automatic_relation_index_selection_unproven
+    }
+
+    next_one_degree_probe:
+    {
+        variable = relation_index_selection
+        fixed = [V1_1_task_generator, RelationMixingReadout_interface, carrier_boundary, trace_outputs, claim_ceiling]
+        change = "select correct RelationMixingIndex from candidate indexes instead of receiving it directly"
+        counterprobe = "candidate pool includes stale, permuted, random, and partially-correct indexes"
+    }
+}

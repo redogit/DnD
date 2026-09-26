@@ -1,0 +1,240 @@
+# ONLINE CAUSAL STATE-MACHINE EXECUTIVE — RMAL 2.1.2
+# Faithful RMAL translation of the injected runtime template.
+# The byte-model backend remains an injected external dependency.
+
+LANGUAGE OnlineCausalStateMachineExecutiveRMAL SURFACES canonical,user-native BACKENDS object,bytecode,ir-json,human
+MODULE online_causal_state_machine_executive
+DOMAIN byte-level-causal-inference
+
+# ---------------------------------------------------------------------------
+# AUTHORITY / OBLIGATION / CLAIM BOUNDARY
+# ---------------------------------------------------------------------------
+CONTEXT SYSTEM_PURPOSE role="online_causal_byte_stream_execution"
+CONTEXT RMAL_TOOLCHAIN_INVARIANT role="CURRENT_EXECUTABLE_AUTHORITY" version="2.1.2"
+CONTEXT MODEL_BINDING_AUTHORITY role="INJECTED_EXTERNAL_DEPENDENCY" status="SUPPLIED_NOT_REVERIFIED"
+CONTEXT RUNTIME_OBLIGATION role="INGEST_PATCH_BOUND_EMIT_AND_HALT"
+
+PRESERVE ObjectIdentity
+PRESERVE QueryIdentity
+PRESERVE ByteOrder
+PRESERVE CausalPrefix
+PRESERVE UTF8CharacterIntegrity
+PRESERVE BackendBoundary
+PRESERVE OutputSchemaBoundary
+PRESERVE Provenance
+PRESERVE FailureHistory
+PRESERVE UnresolvedRemainder
+
+PRESERVE GENERATE != VERIFY
+PRESERVE VERIFY != ADMIT
+PRESERVE INJECTED_PARAMETER != VERIFIED_MODEL_FACT
+PRESERVE BACKEND_ADAPTER != MODEL_IMPLEMENTATION
+
+# ---------------------------------------------------------------------------
+# [INTERFACE: HARDWARE_PARAMETERS]
+# These values reproduce the supplied concrete template exactly.
+# Their correspondence to a production checkpoint is not established here.
+# ---------------------------------------------------------------------------
+CONTEXT HardwareParameters
+    architecture="Byte Latent Transformer (BLT), Local Encoder-Latent Transformer-Local Decoder"
+    identifier="facebook/blt-7b"
+    native_unit="unsigned_8_bit_byte"
+    tracking_mechanism="next_byte_entropy_dynamic_patching_with_cross_attention"
+    state_bound_bytes=8192
+    latency_chunk_bytes=8
+    stop_sequence_hex="02"
+    state_delimiter_hex="00"
+    authority="INJECTED_EXTERNAL"
+    verification="NOT_REVERIFIED_BY_THIS_PROGRAM"
+
+CONST STATE_BOUND_BYTES = 8192
+CONST LATENCY_CHUNK_BYTES = 8
+CONST STOP_BYTE = 2
+CONST STATE_DELIMITER_BYTE = 0
+
+REQUIRE STATE_BOUND_BYTES > 0
+REQUIRE LATENCY_CHUNK_BYTES > 0
+REQUIRE STOP_BYTE >= 0
+REQUIRE STOP_BYTE <= 255
+REQUIRE STATE_DELIMITER_BYTE >= 0
+REQUIRE STATE_DELIMITER_BYTE <= 255
+
+# ---------------------------------------------------------------------------
+# TYPES / DEPENDENCY REGISTRY
+# ---------------------------------------------------------------------------
+TYPE Byte BASE UInt32
+TYPE ByteCount BASE UInt32
+TYPE ByteStream BASE Value
+TYPE ByteChunk BASE Value
+TYPE UTF8Character BASE Value
+TYPE UTF8AlignedChunk BASE Value
+TYPE CausalPrefix BASE Value
+TYPE Patch BASE Value
+TYPE PatchBoundary BASE Value
+TYPE LatentState BASE Value
+TYPE KVCache BASE Value
+TYPE OutputByte BASE UInt32
+TYPE OutputSchema BASE Value
+TYPE OutputReceipt BASE Value
+TYPE BackendState BASE Value
+TYPE ExecutionState BASE Value
+TYPE ExecutionTrace BASE Value
+TYPE TraceStep BASE Value
+TYPE RuntimeFailure BASE Value
+TYPE Residual BASE Value
+
+CONTEXT RuntimeInputStream slot="{{ SYSTEM_ORCHESTRATOR_PAYLOAD_SLOT }}" authority="SYSTEM_ORCHESTRATOR"
+CONTEXT OutputConstraints slot="{{ SYSTEM_ORCHESTRATOR_SCHEMA_SLOT }}" authority="SYSTEM_ORCHESTRATOR"
+CONTEXT ByteLatentBackend role="EXTERNAL_MODEL_ADAPTER" authority="EXTERNAL" implementation="REQUIRED_AT_RUNTIME"
+
+RELATION StreamContains ALLOW ByteStream Byte DENY evidence_transfer
+RELATION ChunkContains ALLOW ByteChunk Byte UTF8Character DENY authority_transfer
+RELATION PrefixPrecedes ALLOW CausalPrefix Byte DENY reorder
+RELATION PatchCompressesTo ALLOW Patch LatentState DENY semantic_promotion
+RELATION BackendOwns ALLOW BackendState KVCache LatentState DENY authority_transfer
+RELATION TraceExplains ALLOW ExecutionTrace TraceStep OutputReceipt DENY proof_promotion
+
+# ---------------------------------------------------------------------------
+# EXECUTIVE STATES
+# ---------------------------------------------------------------------------
+CONTEXT StateIngest name="INGEST_BYTE_STREAM" ordinal=0
+CONTEXT StateEvaluate name="EVALUATE_DYNAMIC_COMPRESSION" ordinal=1
+CONTEXT StateBound name="ENFORCE_CAUSAL_BOUNDS" ordinal=2
+CONTEXT StateEmit name="EMIT_STREAM_PIPELINE" ordinal=3
+CONTEXT StateHalted name="HALTED" ordinal=4 terminal=true
+
+LET ExecutiveLifecycle =
+    INGEST_BYTE_STREAM
+    -> EVALUATE_DYNAMIC_COMPRESSION
+    -> ENFORCE_CAUSAL_BOUNDS
+    -> EMIT_STREAM_PIPELINE
+    -> INGEST_BYTE_STREAM
+
+LET StopLifecycle =
+    EMIT_STREAM_PIPELINE
+    -> HALTED
+
+RULE S01 IF "STOP_BYTE is emitted" THEN "transition immediately to HALTED and emit no stop byte"
+RULE S02 IF "state is HALTED" THEN "reject all later ingest, execute, and emit requests"
+RULE S03 IF "input terminates inside a UTF-8 character" THEN "fail explicitly and preserve the unmatched bytes"
+RULE S04 IF "a chunk boundary would split a UTF-8 character" THEN "move the complete character to the next chunk"
+RULE S05 IF "the backend exceeds STATE_BOUND_BYTES after pruning" THEN "fail explicitly; do not silently continue"
+RULE S06 IF "an output byte violates OutputConstraints" THEN "reject it and record the exact violation"
+RULE S07 IF "a state delimiter is ingested" THEN "finalize the open patch after ingesting the delimiter"
+RULE S08 IF "a dynamic patch boundary is declared" THEN "finalize the old patch before ingesting the boundary byte"
+RULE S09 IF "the backend ends with a partial stop candidate" THEN "emit the nonmatching candidate bytes through OutputConstraints"
+RULE S10 IF "runtime metadata names a model" THEN "do not infer that the named model is present or production-ready"
+
+# ---------------------------------------------------------------------------
+# EXTERNAL BACKEND INTERFACE
+# ---------------------------------------------------------------------------
+OPERATOR BackendBeginsNewPatch BIND PatchBoundary INPUT BackendState CausalPrefix Byte OUTPUT PatchBoundary EFFECT READ AUTHORITY EXTERNAL PRESERVE byte_order causal_prefix backend_boundary
+OPERATOR BackendIngestByte BIND BackendState INPUT BackendState Byte OUTPUT BackendState EFFECT state AUTHORITY EXTERNAL PRESERVE byte_order causal_prefix
+OPERATOR BackendFinalizePatch BIND LatentState INPUT BackendState Patch OUTPUT LatentState EFFECT compress AUTHORITY EXTERNAL PRESERVE patch_identity byte_order provenance
+OPERATOR BackendKVCacheSize BIND ByteCount INPUT BackendState OUTPUT ByteCount EFFECT READ AUTHORITY EXTERNAL PRESERVE measurement_contract
+OPERATOR BackendPruneKVCache BIND BackendState INPUT BackendState ByteCount OUTPUT BackendState EFFECT state AUTHORITY EXTERNAL PRESERVE causal_order backend_boundary
+OPERATOR BackendDecodeNextByte BIND OutputByte INPUT BackendState CausalPrefix LatentState OUTPUT OutputByte EFFECT execute AUTHORITY EXTERNAL PRESERVE causality byte_order
+
+# ---------------------------------------------------------------------------
+# STATE 1 — INGEST_BYTE_STREAM
+# ---------------------------------------------------------------------------
+OPERATOR AppendInputBytes BIND ByteStream INPUT ByteStream RuntimeInputStream OUTPUT ByteStream EFFECT state AUTHORITY INTERNAL PRESERVE byte_order exact_input provenance
+OPERATOR MeasureUTF8Width BIND ByteCount INPUT Byte OUTPUT ByteCount EFFECT PURE AUTHORITY INTERNAL PRESERVE exact_input
+OPERATOR ValidateUTF8Character BIND UTF8Character INPUT ByteStream ByteCount OUTPUT UTF8Character EFFECT verify AUTHORITY INTERNAL PRESERVE exact_bytes byte_order
+OPERATOR FormUTF8AlignedChunk BIND UTF8AlignedChunk INPUT ByteStream ByteCount OUTPUT UTF8AlignedChunk EFFECT representation AUTHORITY INTERNAL PRESERVE byte_order character_integrity remainder
+OPERATOR PreservePendingSuffix BIND ByteStream INPUT ByteStream UTF8AlignedChunk OUTPUT ByteStream EFFECT state AUTHORITY INTERNAL PRESERVE byte_order exact_bytes
+
+REQUIRE "every accepted UTF-8 leading byte has width 1, 2, 3, or 4"
+REQUIRE "every continuation byte matches binary prefix 10"
+REQUIRE "UTF8AlignedChunk.byte_count <= LATENCY_CHUNK_BYTES"
+REQUIRE "no UTF8Character crosses an emitted chunk boundary"
+
+# ---------------------------------------------------------------------------
+# STATE 2 — EVALUATE_DYNAMIC_COMPRESSION
+# ---------------------------------------------------------------------------
+OPERATOR EvaluatePatchBoundary BIND PatchBoundary INPUT BackendState CausalPrefix Patch Byte OUTPUT PatchBoundary EFFECT analyze AUTHORITY EXTERNAL PRESERVE causal_prefix byte_order backend_boundary
+OPERATOR OpenPatch BIND Patch INPUT Byte OUTPUT Patch EFFECT state AUTHORITY INTERNAL PRESERVE exact_byte byte_order
+OPERATOR AppendPatchByte BIND Patch INPUT Patch Byte OUTPUT Patch EFFECT state AUTHORITY INTERNAL PRESERVE patch_identity byte_order
+OPERATOR FinalizePatch BIND LatentState INPUT BackendState Patch OUTPUT LatentState EFFECT compress AUTHORITY EXTERNAL PRESERVE patch_identity byte_order provenance
+OPERATOR AppendCausalPrefix BIND CausalPrefix INPUT CausalPrefix Byte OUTPUT CausalPrefix EFFECT state AUTHORITY INTERNAL PRESERVE causal_order
+
+LET DynamicBoundary =
+    BackendBeginsNewPatch
+    OR current_patch_byte_count >= LATENCY_CHUNK_BYTES
+
+REQUIRE "finalize old patch before appending a byte that begins a new patch"
+REQUIRE "append every accepted input byte exactly once to CausalPrefix"
+REQUIRE "STATE_DELIMITER_BYTE finalizes the patch containing that delimiter"
+
+# ---------------------------------------------------------------------------
+# STATE 3 — ENFORCE_CAUSAL_BOUNDS
+# ---------------------------------------------------------------------------
+OPERATOR MeasurePrefixBytes BIND ByteCount INPUT CausalPrefix OUTPUT ByteCount EFFECT PURE AUTHORITY INTERNAL PRESERVE measurement_contract
+OPERATOR DropOldestPrefixByte BIND CausalPrefix INPUT CausalPrefix OUTPUT CausalPrefix EFFECT state AUTHORITY INTERNAL PRESERVE order retained_suffix
+OPERATOR EnforcePrefixBound BIND CausalPrefix INPUT CausalPrefix ByteCount OUTPUT CausalPrefix EFFECT state AUTHORITY INTERNAL PRESERVE newest_suffix causal_order
+OPERATOR EnforceBackendBound BIND BackendState INPUT BackendState ByteCount OUTPUT BackendState EFFECT state AUTHORITY EXTERNAL PRESERVE causal_order backend_boundary
+OPERATOR VerifyBackendBound BIND OutputReceipt INPUT BackendState ByteCount OUTPUT OutputReceipt EFFECT verify AUTHORITY INTERNAL PRESERVE measurement_contract exact_limit
+
+REQUIRE "CausalPrefix.byte_count <= STATE_BOUND_BYTES AFTER EnforcePrefixBound"
+REQUIRE "BackendKVCacheSize <= STATE_BOUND_BYTES AFTER EnforceBackendBound"
+
+# ---------------------------------------------------------------------------
+# STATE 4 — EMIT_STREAM_PIPELINE
+# ---------------------------------------------------------------------------
+OPERATOR DecodeCausalByte BIND OutputByte INPUT BackendState CausalPrefix LatentState OUTPUT OutputByte EFFECT execute AUTHORITY EXTERNAL PRESERVE causal_prefix backend_boundary
+OPERATOR AccumulateStopCandidate BIND ByteStream INPUT ByteStream OutputByte OUTPUT ByteStream EFFECT state AUTHORITY INTERNAL PRESERVE byte_order
+OPERATOR MatchStopSequence BIND OutputReceipt INPUT ByteStream OUTPUT OutputReceipt EFFECT verify AUTHORITY INTERNAL PRESERVE exact_bytes
+OPERATOR ValidateOutputByte BIND OutputReceipt INPUT OutputByte OutputSchema OUTPUT OutputReceipt EFFECT verify AUTHORITY SYSTEM_ORCHESTRATOR PRESERVE schema_identity exact_byte
+OPERATOR EmitOutputByte BIND OutputReceipt INPUT OutputByte OutputReceipt OUTPUT OutputReceipt EFFECT WRITE AUTHORITY SYSTEM_ORCHESTRATOR PRESERVE byte_order schema_identity
+OPERATOR HaltExecutive BIND ExecutionState INPUT ExecutionState OutputReceipt OUTPUT ExecutionState EFFECT state AUTHORITY INTERNAL PRESERVE trace final_prefix backend_state
+
+LET StopDecision =
+    IF decoded_byte = STOP_BYTE
+    THEN HALTED
+    ELSE VALIDATE_AND_EMIT
+
+REQUIRE "STOP_BYTE is consumed as control and is not sent to EmitOutputByte"
+REQUIRE "all non-control output bytes pass ValidateOutputByte before EmitOutputByte"
+REQUIRE "each decode step is derived from BackendState plus the immediate CausalPrefix"
+
+# ---------------------------------------------------------------------------
+# TRACE-FIRST EXECUTION
+# ---------------------------------------------------------------------------
+OPERATOR StartExecutionTrace BIND ExecutionTrace INPUT RuntimeInputStream HardwareParameters OUTPUT ExecutionTrace EFFECT state AUTHORITY INTERNAL PRESERVE exact_parameters input_identity provenance
+OPERATOR RecordStateTransition BIND ExecutionTrace INPUT ExecutionTrace ExecutionState ExecutionState OUTPUT ExecutionTrace EFFECT state AUTHORITY INTERNAL PRESERVE chronology exact_states
+OPERATOR RecordTraceStep BIND ExecutionTrace INPUT ExecutionTrace TraceStep OUTPUT ExecutionTrace EFFECT state AUTHORITY INTERNAL PRESERVE chronology exact_input exact_output residuals
+OPERATOR RecordFailure BIND RuntimeFailure INPUT ExecutionTrace Residual OUTPUT RuntimeFailure EFFECT state AUTHORITY INTERNAL PRESERVE exact_context recoverable_state provenance
+OPERATOR EmitRuntimeReceipt BIND OutputReceipt INPUT ExecutionTrace BackendState OutputConstraints OUTPUT OutputReceipt EFFECT state AUTHORITY INTERNAL PRESERVE claim_ceiling provenance remainder
+
+PRESERVE INPUT_BYTE_ORDER = PREFIX_BYTE_ORDER
+PRESERVE OUTPUT_BYTE_ORDER = DECODE_BYTE_ORDER_MINUS_CONTROL_BYTES
+PRESERVE HALTED -> NO_FURTHER_MUTATION
+PRESERVE STATE_BOUND_BYTES_APPLIES_TO_PREFIX_AND_BACKEND_CACHE
+
+# ---------------------------------------------------------------------------
+# EXECUTION PLAN
+# ---------------------------------------------------------------------------
+EXECUTE AppendInputBytes USING RuntimeInputStream
+EXECUTE FormUTF8AlignedChunk USING LATENCY_CHUNK_BYTES
+EXECUTE EvaluatePatchBoundary, BackendIngestByte, AppendCausalPrefix USING ByteLatentBackend
+EXECUTE EnforcePrefixBound, EnforceBackendBound USING STATE_BOUND_BYTES
+EXECUTE DecodeCausalByte, MatchStopSequence, ValidateOutputByte, EmitOutputByte USING OutputConstraints
+VERIFY UTF8CharacterIntegrity, ByteOrder, CausalPrefix, BackendBound, OutputSchemaBoundary, StopLifecycle
+
+CLAIM TemplateTranslation STATUS BOUNDED_CLAIM TEXT "This RMAL source preserves the interfaces, state transitions, causal byte order, UTF-8 chunk alignment, dynamic patch boundary, bounded state, schema-checked emission, and stop-control behavior declared by the supplied template."
+COUNTERPROBE "Inject a four-byte UTF-8 character beginning at chunk byte 7; no emitted chunk may contain only part of that character."
+COUNTERPROBE "Make BackendPruneKVCache leave 8193 bytes; execution must fail rather than emit another byte."
+COUNTERPROBE "Decode STOP_BYTE followed by a printable byte; the executive must halt before the printable byte is decoded or emitted."
+COUNTERPROBE "Reject one ordinary byte in OutputConstraints; the exact byte must not be emitted and the violation must remain traceable."
+
+UNRESOLVED concrete_ByteLatentBackend_implementation
+UNRESOLVED exact_production_checkpoint_identity
+UNRESOLVED production_verified_state_bound_bytes
+UNRESOLVED production_verified_latency_chunk_bytes
+UNRESOLVED model_native_stop_and_delimiter_vectors
+UNRESOLVED canonical_RMALC_2_1_2_compile_of_this_exact_source_not_executed_in_current_workspace
+
+CLAIM_CEILING "The source is a faithful RMAL interface and state-machine specification. It does not implement BLT inference, establish that facebook/blt-7b exists, or verify that the injected numeric and control-byte bindings are native parameters of a production model."
+
+END = ExecutionTrace + BackendState + OutputReceipt + RuntimeFailure + Remainder
+CONTINUE

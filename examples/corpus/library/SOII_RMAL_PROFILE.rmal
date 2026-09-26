@@ -1,0 +1,49 @@
+# SOII v0.1 — RMAL-facing contract
+
+LANGUAGE SOII_RMAL SURFACES canonical,user-native BACKENDS object,bytecode,ir-json,human
+
+TYPE SOIIPacket BASE Value
+TYPE SOIIEndpoint BASE Value
+TYPE SOIISemanticLedger BASE Value
+TYPE SOIITransition BASE Value
+TYPE SOIIWitness BASE Value
+TYPE SOIIResult BASE Value
+
+TRAIT SOIIReconstructible REQUIRE provenance remainder evidence
+TRAIT SOIIWitnessed REQUIRE witness scope
+
+PRESERVE RMAL_SOL_Distinction
+PRESERVE Surface_Semantics_Distinction
+PRESERVE Input_Identity
+PRESERVE Evidence_NoSilentStrengthening
+PRESERVE Failure_NoSilentDeletion
+PRESERVE Remainder_NoSilentDeletion
+PRESERVE Authority_ExplicitTransfer
+PRESERVE Provenance_Lineage
+
+CONTEXT SOII role="shared_operational_interleaved_interlingua" version="0.1" truth_authority="none"
+CONTEXT SOII_RMAL_Profile producer="RMAL" peer="SOL" evidence_transfer="deny" authority_transfer="explicit"
+
+RELATION SOIIHandoff ALLOW SOIIPacket SOIIPacket DENY evidence_transfer authority_transfer
+RELATION SOIIWitnesses ALLOW SOIIWitness SOIITransition DENY truth_promotion
+RELATION SOIICarries ALLOW SOIIPacket SOIISemanticLedger DENY semantic_collapse
+
+OPERATOR SOIIEncodeRMAL BIND SOIIPacket INPUT SOIISemanticLedger OUTPUT SOIIPacket EFFECT representation AUTHORITY none PRESERVE provenance evidence remainder failures authority
+OPERATOR SOIIDecodeToRMAL BIND SOIISemanticLedger INPUT SOIIPacket OUTPUT SOIISemanticLedger EFFECT representation AUTHORITY none PRESERVE provenance evidence remainder failures authority
+OPERATOR SOIIVerifyTransition BIND SOIITransition INPUT SOIIPacket SOIIPacket OUTPUT SOIIResult EFFECT verify AUTHORITY none PRESERVE provenance failures remainder evidence authority
+OPERATOR SOIIResolveRemainder BIND SOIITransition INPUT SOIIPacket SOIIWitness OUTPUT SOIIPacket EFFECT repair AUTHORITY none PRESERVE provenance resolution_witness
+OPERATOR SOIITransferAuthority BIND SOIITransition INPUT SOIIPacket SOIIWitness OUTPUT SOIIPacket EFFECT route AUTHORITY user PRESERVE provenance transfer_witness
+OPERATOR SOIIHandoffToSOL BIND SOIIPacket INPUT SOIIPacket OUTPUT SOIIPacket EFFECT route AUTHORITY none PRESERVE provenance evidence remainder failures authority
+
+RULE SOII_R01 IF "surface changes from RMAL to SOL" THEN "preserve the typed semantic ledger"
+RULE SOII_R02 IF "existing evidence changes" THEN "require an explicit evidence-change witness"
+RULE SOII_R03 IF "a failure would disappear" THEN "reject the transition"
+RULE SOII_R04 IF "a remainder item disappears" THEN "require an explicit resolution witness"
+RULE SOII_R05 IF "authority changes" THEN "require explicit authority-transfer witness"
+RULE SOII_R06 IF "the frozen input changes" THEN "reject the transition and start a new input lineage"
+RULE SOII_R07 IF "two surfaces map to one packet" THEN "do not infer global semantic equivalence"
+RULE SOII_R08 IF "the next producer is not the previous consumer" THEN "reject the interleave"
+
+CLAIM SOII_C01 STATUS BOUNDED_CLAIM TEXT "SOII carries a typed operational ledger between RMAL and SOL without granting either surface automatic truth or evidence authority."
+COUNTERPROBE "Can a packet silently promote evidence, erase failure, erase remainder, or transfer authority?"
+VERIFY "SOII preserves input, evidence lineage, failure lineage, unresolved remainder, provenance and explicit authority boundaries."

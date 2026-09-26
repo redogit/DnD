@@ -1,0 +1,197 @@
+# FRACTAL NATIVE LAB — RMAL 2.1.2 SEMANTIC SOURCE
+# Native-local application; web is a detachable instrument panel.
+# Base authority: RMAL / RMALC 2.1.2.
+# Query execution overlay: RMAL LINQ milestone candidate; AUTHORITY NONE.
+# Provider: native-local-provider/0.2.
+
+LANGUAGE FractalNativeLabRMAL SURFACES canonical,user-native BACKENDS native-local,rmalbc1,human
+
+# ---------------------------------------------------------------------------
+# AUTHORITY / PURPOSE / TARGET
+# ---------------------------------------------------------------------------
+CONTEXT SYSTEM_PURPOSE role="local_first_generative_rule_learning"
+CONTEXT RMAL_TOOLCHAIN_INVARIANT role="CURRENT_EXECUTABLE_AUTHORITY" version="2.1.2"
+CONTEXT TARGET_ROOT role="FRACTAL_NATIVE_LAB" scope="learn_preserve_combine_reuse_generative_rules"
+
+PRESERVE ObjectIdentity
+PRESERVE QueryIdentity
+PRESERVE Provenance
+PRESERVE Chronology
+PRESERVE FailureHistory
+PRESERVE EvidenceAuthorityBoundary
+PRESERVE Privacy
+PRESERVE Reconstructibility
+PRESERVE UnresolvedRemainder
+
+RULE R01 IF "an object is loaded" THEN "do not promote it to truth by retrieval"
+RULE R02 IF "a rule executes" THEN "do not promote execution to verification"
+RULE R03 IF "a rule verifies in a bounded burn" THEN "do not promote it beyond that scope"
+RULE R04 IF "two rules compose" THEN "do not admit a failed constituent"
+RULE R05 IF "execution coordinates change" THEN "preserve immutable QueryPlan identity and all declared invariants"
+RULE R06 IF "execution-coordinate safety is uncertain" THEN "reject or downgrade the optimization; do not guess"
+RULE R07 IF "evidence changes" THEN "add a successor/evidence event; do not rewrite predecessor history"
+RULE R08 IF "words or labels change" THEN "do not treat mutable wording as mutable evidence"
+
+# ---------------------------------------------------------------------------
+# OBJECTS / CARRIERS
+# ---------------------------------------------------------------------------
+TYPE RuleAtom BASE Value
+TYPE RuleObject BASE Value
+TYPE RuleContract BASE Value
+TYPE Genome BASE Value
+TYPE Context BASE Value
+TYPE Observation BASE Value
+TYPE QueryPlan BASE Value
+TYPE ExecutionTrace BASE Value
+TYPE EvidenceReceipt BASE Value
+TYPE Residual BASE Value
+
+CONTEXT LocalRuleStore carrier="rules.frule" schema="FRULE2" authority="LOCAL_PROJECT_OBJECT_AUTHORITY"
+CONTEXT CurrentBurnPlan carrier="burn.qplan" schema="QPLAN1" authority="LOCAL_PROJECT_QUERY_AUTHORITY"
+CONTEXT EvidenceStore carrier="evidence/*.json + evidence/index.ndjson" authority="APPEND_ONLY_LOCAL_EVIDENCE"
+CONTEXT NativeProvider name="fractal-native-provider/0.2" effect="READ_ONLY during burn; FILE only at evidence commit"
+CONTEXT WebPanel role="VIEW_CONTROL_ADAPTER" authority="NONE" transport="127.0.0.1"
+
+PRESERVE RuleObject != Status
+PRESERVE RuleStatus = Projection(EvidenceReceiptSet, CurrentAdmissionPolicy)
+PRESERVE PersistedRuleObject = RuntimeRuleAuthority
+PRESERVE BrowserState != ScientificAuthority
+PRESERVE Randomization != Learning
+PRESERVE GENERATE != VERIFY != ADMIT
+PRESERVE HABIT != TRUTH
+PRESERVE LEARNING_NOTE != CLAIM_PROMOTION
+PRESERVE REUSE != BYPASS_VERIFICATION
+PRESERVE DISTILLATION != EVIDENCE_LOSS
+
+# ---------------------------------------------------------------------------
+# OPERATORS
+# ---------------------------------------------------------------------------
+OPERATOR LoadRules BIND LocalRuleStore INPUT LocalRuleStore OUTPUT RuleObject EFFECT READ AUTHORITY INTERNAL PRESERVE provenance chronology predecessor
+OPERATOR LoadQueryPlan BIND CurrentBurnPlan INPUT CurrentBurnPlan OUTPUT QueryPlan EFFECT READ AUTHORITY INTERNAL PRESERVE query_identity authority provenance evidence_boundary privacy
+OPERATOR GenerateFractal BIND Genome INPUT Genome OUTPUT Observation EFFECT PURE AUTHORITY none PRESERVE provenance
+OPERATOR ApplyRule BIND RuleObject INPUT Genome RuleObject OUTPUT Genome EFFECT PURE AUTHORITY none PRESERVE rule_identity predecessor provenance
+OPERATOR MakeHeldOutContext BIND Context INPUT Genome UInt32 OUTPUT Context EFFECT PURE AUTHORITY none PRESERVE frozen_seed source_identity
+OPERATOR Measure BIND Observation INPUT Genome OUTPUT Observation EFFECT PURE AUTHORITY none PRESERVE metric_version
+OPERATOR EvaluateRuleCase BIND RuleContract INPUT RuleObject Context OUTPUT Observation EFFECT PURE AUTHORITY none PRESERVE rule_identity context_identity thresholds
+OPERATOR EvaluateCompositionCase BIND RuleContract INPUT RuleObject RuleObject Context OUTPUT Observation EFFECT PURE AUTHORITY none PRESERVE constituent_identity ordering
+OPERATOR DeriveEvidenceState BIND EvidenceReceipt INPUT EvidenceReceiptSet OUTPUT EvidenceReceipt EFFECT analyze AUTHORITY INTERNAL PRESERVE native_evidence_state claim_ceiling
+OPERATOR CommitEvidence BIND EvidenceStore INPUT EvidenceReceipt OUTPUT EvidenceReceipt EFFECT FILE AUTHORITY WRITE PRESERVE exact_inputs exact_outputs provenance query_identity build_identity
+
+# ---------------------------------------------------------------------------
+# RMAL LINQ / PLINQ EXECUTION PROFILE
+# Query identity is invariant; execution coordinates are negotiable.
+# ---------------------------------------------------------------------------
+CONTEXT QueryExecutionPolicy mode="ENABLE_WHEN_VALID" authority="NONE"
+CONTEXT QueryExecutionOptOuts values="NO_PARALLEL,NO_ASYNC,NO_REORDER,FORCE_SEQUENTIAL,NO_CACHE"
+
+ALLOW scan_index_substitution WHERE QueryIdentity AND SourceRevision AND Ordering AND Effects AND Authority AND Provenance AND EvidenceBoundary AND Privacy PRESERVED
+ALLOW sync_async_substitution WHERE QueryIdentity AND ResultOrder AND CleanupObligation AND Effects AND Authority AND Provenance AND EvidenceBoundary AND Privacy PRESERVED
+ALLOW sequential_parallel_substitution WHERE source_snapshot="FROZEN" AND effects="READ_ONLY" AND deterministic_order_barrier="REQUIRED"
+ALLOW direct_cache_substitution WHERE cache_key="QueryPlanDigest+SourceRevisionID+Authority+EvidenceBoundary+ProviderSemanticsVersion" AND result_integrity="REVERIFY"
+ALLOW interpreted_specialized_substitution WHERE semantics AND QueryIdentity AND Authority AND Provenance PRESERVED
+
+DENY parallel_mutable_source
+DENY parallel_shared_mutable_worker_state
+DENY cache_reuse_on_source_revision_change
+DENY cache_reuse_on_authority_change
+DENY cache_reuse_on_evidence_boundary_change
+DENY cache_reuse_on_provider_semantics_change
+DENY cache_reuse_on_integrity_failure
+DENY reorder_without_explicit_query_permission
+
+# Native provider 0.2 capability state.
+LET NativeProviderCapabilities = {
+    parallel_frozen_readonly = IMPLEMENTED_VERIFIED_BOUNDED,
+    deterministic_order_barrier = IMPLEMENTED_VERIFIED_BOUNDED,
+    direct_memory_cache = IMPLEMENTED_VERIFIED_BOUNDED,
+    persisted_rule_authority = IMPLEMENTED_VERIFIED_BOUNDED,
+    atomic_receipt_replace = IMPLEMENTED_VERIFIED_BOUNDED,
+    async_source_provider = CANDIDATE_NOT_IMPLEMENTED,
+    vectorized_execution = CANDIDATE_NOT_IMPLEMENTED,
+    standardized_columnar_carrier = CANDIDATE_NOT_IMPLEMENTED,
+    portable_cross_provider_queryplan = CANDIDATE_NOT_IMPLEMENTED
+}
+
+# ---------------------------------------------------------------------------
+# CURRENT BURN
+# The actual RuleObject bytes and seeds are loaded from local carriers.
+# ---------------------------------------------------------------------------
+LET Rules = Select * from LocalRuleStore
+LET Plan = Select * from CurrentBurnPlan
+LET RuleA = Select rule from Rules where rule.id = Plan.rule_ids[0]
+LET RuleB = Select rule from Rules where rule.id = Plan.rule_ids[1]
+LET FrozenSource = default_genome()
+LET FrozenSeeds = Plan.seeds
+
+# Logical QueryPlan. Physical execution is selected automatically when valid.
+LET BurnRows = Select EvaluateRuleCase(RuleA, MakeHeldOutContext(FrozenSource, seed))
+               from FrozenSeeds
+               order by seed asc
+
+LET BurnRowsB = Select EvaluateRuleCase(RuleB, MakeHeldOutContext(FrozenSource, seed))
+                from FrozenSeeds
+                order by seed asc
+
+LET CompositionRows = Select EvaluateCompositionCase(RuleA, RuleB, MakeHeldOutContext(FrozenSource, seed))
+                      from FrozenSeeds
+                      order by seed asc
+
+REQUIRE Plan.declared_effects = READ_ONLY BEFORE parallel_execution
+REQUIRE deterministic_order_barrier AFTER parallel_execution
+REQUIRE exact_QueryPlan_digest BEFORE compare_execution_coordinates
+REQUIRE SourceRevisionID BEFORE cache_lookup
+REQUIRE result_digest_reverified BEFORE cache_admission
+
+# ---------------------------------------------------------------------------
+# LIFECYCLE — current RMAL 2.1.2 lifecycle, one authority path
+# ---------------------------------------------------------------------------
+LET FractalLifecycle =
+    VISUALIZE
+    -> EXECUTE
+    -> VERIFY
+    -> HABITUATE
+    -> LEARN
+    -> TEACH
+    -> BUILD
+    -> DISTILL
+    -> RECONSTRUCT
+
+VISUALIZE WebPanel FROM Observation
+EXECUTE BurnRows, BurnRowsB, CompositionRows USING NativeProvider
+VERIFY exact_inputs, frozen_seed_set, serialization_replay, transfer, composition, execution_coordinate_invariants
+HABITUATE only_verified_reusable_execution_patterns
+LEARN candidate_rule_plus_validity_region_plus_counterexamples
+TEACH reconstructible_rule_contracts
+BUILD successors_without_rewriting_predecessors
+DISTILL smallest_rule_set_preserving_current_obligations
+RECONSTRUCT from RuleObject + QueryPlan + EvidenceReceipt + BuildIdentity
+
+# ---------------------------------------------------------------------------
+# FIRE projection for this project only
+# ---------------------------------------------------------------------------
+LET BURN = VERIFY + COUNTERPROBE
+LET ASH = failed_rule_or_failed_context WITH exact_counterexample, trace, provenance
+LET EMBER = candidate_relation_surviving_some_burns
+LET SURVIVOR = VERIFIED_WITHIN_SCOPE
+PRESERVE ASH != DISCARDED
+PRESERVE EMBER != PROOF
+PRESERVE SURVIVOR != UNIVERSAL
+
+# ---------------------------------------------------------------------------
+# CURRENT EVIDENCE / REMAINDER
+# ---------------------------------------------------------------------------
+CLAIM CurrentCarrierParity STATUS BOUNDED_CLAIM TEXT "The migrated current burn has a preserved bounded signature under the native provider when exact persisted inputs match the migrated baseline."
+COUNTERPROBE "Change the persisted RuleObject while preserving source code; execution and object UOID must change."
+VERIFY "Cold-load persisted rule authority; sequential/parallel result identity; direct/cache result identity; corrupt carrier rejection."
+
+UNRESOLVED canonical_RMALC_2_1_2_compile_of_this_exact_source_not_executed_in_current_build_environment
+UNRESOLVED native_async_source_provider
+UNRESOLVED vectorized_physical_execution
+UNRESOLVED standardized_columnar_carrier
+UNRESOLVED cross_process_cache_serialization
+UNRESOLVED universal_rule_learning
+
+CLAIM_CEILING "This program specifies the Fractal Native Lab under current RMAL 2.1.2 semantics with the RMAL LINQ milestone as a non-authoritative execution overlay. Native-provider tests establish only their named bounded invariants; they do not promote the LINQ candidate, prove universal rule learning, or establish cross-platform bit-identical floating-point behavior."
+
+END = RuleObjects + QueryPlan + ExecutionTrace + EvidenceReceipts + Remainder + RecoveryHandle
+CONTINUE

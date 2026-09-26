@@ -1,0 +1,22 @@
+TYPE WholeNumber BASE Int WHERE value >= 0
+TYPE PositiveInt BASE Int WHERE value > 0
+TRAIT ProvenanceAware REQUIRE provenance
+TRAIT Verified REQUIRE verified
+CLASS Carrier REQUIRE payload provenance HAS ProvenanceAware
+CLASS VerifiedCarrier REQUIRE payload provenance verified HAS ProvenanceAware Verified
+RELATION Similar ALLOW hypothesis_generation DENY evidence_transfer
+RELATION Isomorphic ALLOW invariant_transfer DENY authority_transfer
+RELATION References ALLOW retrieval DENY evidence_transfer
+OPERATOR add BIND core.add INPUT Any Any OUTPUT Any EFFECT PURE AUTHORITY NONE PRESERVE value_semantics
+OPERATOR mul BIND core.mul INPUT Any Any OUTPUT Any EFFECT PURE AUTHORITY NONE PRESERVE value_semantics
+OPERATOR eq BIND core.eq INPUT Any Any OUTPUT Bool EFFECT PURE AUTHORITY NONE PRESERVE type_distinction
+CONFIG Research evidence=strict unknown=retain provenance=required
+PROFILE UnknownHunt INCLUDE Research breadth=high counterprobe=high pareidolia=required
+PROFILE Exact INCLUDE Research approximation=forbidden
+CONTEXT Bootstrap target=RMAL goal=self_describe authority=NONE
+CLAIM C_RAW STATUS PROVED_FORMAL TEXT RAW_SURFACE_NEQ_SEMANTIC_IR
+EVIDENCE E_RAW TYPE FORMAL_PROOF LINEAGE language_spec TEXT constitutional_distinction
+RULE R_ISO_DIM IF Isomorphic THEN SameDimension
+CONFIG Identity canonical_name=RMAL full_name="Ryan McMillan April Language" author="Ryan McMillan"
+PROFILE HardProblem INCLUDE Research breadth=max depth=max counterprobe=max unknown=retain planner=pareto optimizer=meta
+LANGUAGE RMAL FULLNAME "Ryan McMillan April Language" AUTHOR "Ryan McMillan" PREDECESSOR "Musilanguage Meta v1" SURFACES canonical,user-native,sexpr,sql,functional,json BACKENDS python,cpp,javascript,sql,json,human

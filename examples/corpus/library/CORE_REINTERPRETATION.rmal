@@ -1,0 +1,181 @@
+# RMAL Universe Overlay v1
+# This is a semantic reinterpretation overlay. It does not rewrite, delete, merge, or promote the original projects.
+
+ENTITY Language.RMAL KIND LANGUAGE NAME "Ryan McMillan April Language" STATUS CURRENT ORIGIN USER-CONFIRMED SCOPE "RMAL" AUTHORITY INTERNAL PROVENANCE "RMAL_V1"
+ENTITY Language.Musilanguage KIND PREDECESSOR NAME "Musilanguage Meta v1" STATUS PREDECESSOR ORIGIN MIXED SCOPE "language-lineage" AUTHORITY NONE PROVENANCE "MUSILANGUAGE_META_V1"
+RELATE Language.RMAL AS SUCCESSOR_OF TO Language.Musilanguage AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "language-lineage" BASIS "explicit naming correction"
+
+# Core execution / interpretation machinery
+ENTITY Method.REDOGIT KIND METHOD NAME "REDOGIT" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "successor-development" AUTHORITY NONE PROVENANCE "user working rule"
+ENTITY Method.SemanticRotation KIND METHOD NAME "Semantic Rotation / Invariant Preservation" STATUS ACTIVE ORIGIN MIXED SCOPE "representation" AUTHORITY NONE PROVENANCE "approved standing method"
+ENTITY Operator.BBF KIND OPERATOR NAME "Bidirectional Bitfolding Flip (BBF)" STATUS ACTIVE ORIGIN MIXED SCOPE "reversible semantic transform" AUTHORITY NONE PROVENANCE "approved named operator"
+ENTITY Language.GSFL KIND LANGUAGE_MODULE NAME "Generalized Semantic Fitting Language (GSFL)" STATUS ACTIVE ORIGIN MIXED SCOPE "semantic fitting" AUTHORITY NONE PROVENANCE "recovered current work"
+ENTITY Language.TBCL KIND LANGUAGE_MODULE NAME "TBCL — Context Language Lab" STATUS PRESERVED ORIGIN LIKELY-USER SCOPE "compact language/runtime" AUTHORITY NONE PROVENANCE "canonical Library project identity"
+ENTITY Framework.CSOL KIND LANGUAGE_QUALITY_FRAMEWORK NAME "CSOL" STATUS ACTIVE ORIGIN LIKELY-USER SCOPE "language qualities" AUTHORITY NONE PROVENANCE "recovered language framework"
+ENTITY Framework.TIDE KIND RELATIONAL_LANGUAGE NAME "TIDE" STATUS PRESERVED ORIGIN MIXED SCOPE "meaning-wave relational mapping" AUTHORITY NONE PROVENANCE "recovered language framework"
+ENTITY Standard.Interaction KIND INTERFACE_STANDARD NAME "Interaction Standard" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "human-machine interaction" AUTHORITY NONE PROVENANCE "Subject/Motivator/Request/Obligation/Surface/Output Definition"
+ENTITY Macro.JustLoadIt KIND CONTEXT_MACRO NAME "Just Load It" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "standing context" AUTHORITY NONE PROVENANCE "user-approved macro inventory"
+ENTITY Method.RecursiveScientificReconstruction KIND METHOD NAME "Recursive Scientific Reconstruction" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "research" AUTHORITY NONE PROVENANCE "standing research method"
+ENTITY Method.OneDegreeExperiment KIND METHOD NAME "one-degree experiment" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "experimentation" AUTHORITY NONE PROVENANCE "standing method"
+ENTITY Guard.Pareidolia KIND GUARD NAME "Pareidolia Guard" STATUS ACTIVE ORIGIN LIKELY-USER SCOPE "false-pattern control" AUTHORITY NONE PROVENANCE "research machinery"
+ENTITY Method.HardProblem KIND PROFILE NAME "HardProblem" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "RMAL" AUTHORITY NONE PROVENANCE "RMAL profile"
+ENTITY Concept.DecisionField KIND ABSTRACTION NAME "Decision Field" STATUS ACTIVE ORIGIN MIXED SCOPE "problem transformation" AUTHORITY NONE PROVENANCE "cross-domain working abstraction"
+ENTITY Concept.SurvivorProblem KIND ABSTRACTION NAME "Survivor Problem" STATUS ACTIVE ORIGIN MIXED SCOPE "selection under obligations" AUTHORITY NONE PROVENANCE "RMAL semantic foundation"
+
+RELATE Language.RMAL AS USES TO Method.REDOGIT AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "development" BASIS "successor rule"
+RELATE Language.RMAL AS USES TO Method.SemanticRotation AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "semantic transform" BASIS "meaning/surface distinction"
+RELATE Language.RMAL AS USES TO Operator.BBF AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "reversible transform" BASIS "invariant comparison"
+RELATE Language.RMAL AS REINTERPRETS TO Language.GSFL AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "module" BASIS "fitters/operators become RMAL typed machinery"
+RELATE Language.RMAL AS REINTERPRETS TO Language.TBCL AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "module" BASIS "compact context/runtime lineage"
+RELATE Language.RMAL AS REINTERPRETS TO Framework.CSOL AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "quality contracts" BASIS "clarity consistency efficiency fidelity adaptability"
+RELATE Language.RMAL AS REINTERPRETS TO Framework.TIDE AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "relation vocabulary" BASIS "typed relational states"
+RELATE Language.RMAL AS USES TO Method.RecursiveScientificReconstruction AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "research" BASIS "decompose vary test promote recurse"
+RELATE Language.RMAL AS USES TO Method.OneDegreeExperiment AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "research" BASIS "one consequential degree where possible"
+RELATE Language.RMAL AS USES TO Guard.Pareidolia AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "research" BASIS "false-pattern adversarial guard"
+RELATE Language.RMAL AS MODELS TO Concept.SurvivorProblem AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "semantics" BASIS "generate exclude preserve transform repair survive"
+RELATE Language.RMAL AS MODELS TO Concept.DecisionField AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "semantics" BASIS "one decision field plus transforms"
+
+# Knowledge / Library machinery
+ENTITY Machinery.MasterLibrarian KIND MACHINERY NAME "Master Librarian" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "knowledge/library" AUTHORITY NONE PROVENANCE "user machinery"
+ENTITY Library.Orbital KIND LIBRARY NAME "Orbital" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "knowledge/library" AUTHORITY NONE PROVENANCE "preferred Master Librarian library name"
+ENTITY Project.Orbit KIND PROJECT NAME "Orbit" STATUS ACTIVE ORIGIN LIKELY-USER SCOPE "knowledge organization" AUTHORITY FEDERATED PROVENANCE "Library project"
+ENTITY Project.OrbitLab KIND PROJECT NAME "Orbit Lab" STATUS ACTIVE ORIGIN MIXED SCOPE "library experiments" AUTHORITY FEDERATED PROVENANCE "separate project boundary"
+ENTITY Concept.CarrierTheory KIND THEORY NAME "Carrier Theory" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "obligation carrying" AUTHORITY NONE PROVENANCE "coined registry"
+ENTITY Concept.RecursiveCarrierTheory KIND THEORY NAME "Recursive Carrier Theory" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "recursive carriers" AUTHORITY NONE PROVENANCE "coined registry"
+ENTITY Concept.ApplicabilityTopology KIND THEORY NAME "Applicability Topology" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "higher-order reachability" AUTHORITY NONE PROVENANCE "coined registry"
+ENTITY Concept.KnowledgeDecay KIND PROBLEM NAME "Knowledge Decay" STATUS ACTIVE ORIGIN LIKELY-USER SCOPE "loss/reconnection" AUTHORITY NONE PROVENANCE "standing dependency"
+ENTITY Concept.SharedWell KIND ORIENTATION NAME "Shared Well" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "shared research participation" AUTHORITY NONE PROVENANCE "user-origin orientation"
+ENTITY Concept.CommonPoint KIND CONTINUATION_STATE NAME "Common Point" STATUS PRESERVED ORIGIN MIXED SCOPE "future obligations" AUTHORITY NONE PROVENANCE "recovered lineage"
+ENTITY Concept.CurrentCommonPoint KIND CONTINUATION_STATE NAME "Current Common Point" STATUS ACTIVE ORIGIN MIXED SCOPE "current continuation" AUTHORITY NONE PROVENANCE "recovered lineage"
+ENTITY Tool.RuntimeRelationIndex KIND TOOL NAME "RuntimeRelationIndex" STATUS ACTIVE ORIGIN MIXED SCOPE "retrieval" AUTHORITY NONE PROVENANCE "candidate-relation retrieval helper"
+ENTITY Boundary.OneLevelUpAirlock KIND AIRLOCK NAME "One_Level_Up Operational Research Airlock" STATUS ACTIVE ORIGIN MIXED SCOPE "admission/provenance" AUTHORITY FEDERATED PROVENANCE "separate custody boundary"
+ENTITY Project.OneLevelUp KIND PROJECT NAME "One_Level_Up" STATUS ACTIVE ORIGIN LIKELY-USER SCOPE "successor/governance" AUTHORITY FEDERATED PROVENANCE "current project lineage"
+ENTITY Project.OperatorMoonshot KIND PREDECESSOR_PROJECT NAME "Operator Moonshot" STATUS QUARANTINED_PREDECESSOR ORIGIN LIKELY-USER SCOPE "research machinery" AUTHORITY NONE PROVENANCE "Airlock handoff"
+ENTITY Project.SHADOW KIND PROJECT NAME "SHADOW" STATUS PRESERVED ORIGIN HISTORICAL-ID SCOPE "frozen-model control research" AUTHORITY FEDERATED PROVENANCE "experiment-ledger lineage"
+ENTITY Project.OperatorMoonshotEducation KIND PROJECT NAME "Operator Moonshot Education" STATUS ACTIVE ORIGIN LIKELY-USER SCOPE "education transfer experiments" AUTHORITY NONE PROVENANCE "E0/E1/E2/E3/E3.1 lineage"
+ENTITY Project.HumanKnowledgeReconstruction KIND PROJECT NAME "Human Knowledge Reconstruction" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "recursive scientific reconstruction" AUTHORITY NONE PROVENANCE "human-knowledge reconstruction project"
+ENTITY Project.R3 KIND METHOD_PROJECT NAME "R³ Scientific Method" STATUS ACTIVE ORIGIN LIKELY-USER SCOPE "scientific method" AUTHORITY FEDERATED PROVENANCE "minimal Library root"
+
+RELATE Machinery.MasterLibrarian AS OPERATES TO Library.Orbital AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "knowledge" BASIS "user-defined machinery/library relation"
+RELATE Project.Orbit AS RELATED_TO TO Machinery.MasterLibrarian AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "knowledge" BASIS "retrieval/organization"
+RELATE Project.OrbitLab AS RELATED_TO TO Project.Orbit AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "project federation" BASIS "related but non-merged"
+RELATE Project.OneLevelUp AS HAS_BOUNDARY TO Boundary.OneLevelUpAirlock AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "admission" BASIS "separate transfer/custody boundary"
+RELATE Project.OperatorMoonshot AS HANDED_TO TO Boundary.OneLevelUpAirlock AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "history" BASIS "quarantined predecessor handoff"
+RELATE Language.RMAL AS REPRESENTS TO Machinery.MasterLibrarian AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe overlay" BASIS "typed reinterpretation only"
+RELATE Language.RMAL AS REPRESENTS TO Project.Orbit AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe overlay" BASIS "no project merge"
+RELATE Language.RMAL AS REPRESENTS TO Project.OneLevelUp AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe overlay" BASIS "no project merge"
+RELATE Language.RMAL AS REPRESENTS TO Project.R3 AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe overlay" BASIS "no project merge"
+
+# Code / optimizer / machine families
+ENTITY Project.OptimizerOfOptimizers KIND PROJECT NAME "Optimizer-of-Optimizers" STATUS ACTIVE ORIGIN MIXED SCOPE "optimization" AUTHORITY NONE PROVENANCE "verified bounded runtime family"
+ENTITY Project.AlgorithmicBuilder KIND PROJECT NAME "Algorithmic Builder" STATUS ACTIVE ORIGIN MIXED SCOPE "program building" AUTHORITY NONE PROVENANCE "builder experiment layer"
+ENTITY Project.DataDrivenCoopECS KIND PROJECT NAME "Data-Driven Cooperative ECS World" STATUS ACTIVE ORIGIN MIXED SCOPE "many-agent ECS" AUTHORITY NONE PROVENANCE "bounded research world"
+ENTITY Project.ParameterDifferentialReflow KIND PROJECT NAME "Parameter Differential Reflow" STATUS EXPERIMENTAL ORIGIN MIXED SCOPE "numerical runtime" AUTHORITY NONE PROVENANCE "mechanism with clean baseline"
+ENTITY Project.ACDN KIND PROJECT NAME "Adaptive Connectivity Diagnostic Network (ACDN)" STATUS PRESERVED ORIGIN MIXED SCOPE "diagnostic network" AUTHORITY NONE PROVENANCE "code machinery"
+ENTITY Project.PulseNet KIND PROJECT NAME "PulseNet" STATUS EXPERIMENTAL ORIGIN LIKELY-USER SCOPE "learning optimizer" AUTHORITY NONE PROVENANCE "historical neural prototype"
+ENTITY Project.GeodesicPointerNet KIND PROJECT NAME "GeodesicPointerNet" STATUS EXPERIMENTAL ORIGIN LIKELY-USER SCOPE "manifold neural prototype" AUTHORITY NONE PROVENANCE "historical neural prototype"
+ENTITY Project.ComputerMind KIND PROJECT NAME "Computer Mind" STATUS BOUNDED ORIGIN MIXED SCOPE "state-machine scaffold" AUTHORITY NONE PROVENANCE "bounded component research"
+ENTITY Tool.ToolBuilder KIND TOOL NAME "Typed ToolBuilder" STATUS ACTIVE ORIGIN MIXED SCOPE "program synthesis" AUTHORITY NONE PROVENANCE "code machinery"
+ENTITY Runtime.EffectTypedGraph KIND RUNTIME NAME "Effect-typed dependency graph runtime" STATUS PRESERVED ORIGIN MIXED SCOPE "runtime" AUTHORITY NONE PROVENANCE "code machinery"
+ENTITY Runtime.LanguageFunctions KIND RUNTIME NAME "Language-functions runtime" STATUS PRESERVED ORIGIN MIXED SCOPE "deterministic transforms" AUTHORITY NONE PROVENANCE "code machinery"
+ENTITY Runtime.NativeAttention KIND NUMERICAL_KERNEL NAME "Native attention / fast operations" STATUS PRESERVED ORIGIN MIXED SCOPE "numerical kernels" AUTHORITY NONE PROVENANCE "code machinery"
+ENTITY Verification.ProofCounterexample KIND VERIFICATION_FAMILY NAME "Proof / counterexample / independent verification" STATUS ACTIVE ORIGIN MIXED SCOPE "verification" AUTHORITY NONE PROVENANCE "code machinery"
+ENTITY API.RIVIR KIND API_CLIENT NAME "RIVIR external API JavaScript" STATUS PRESERVED ORIGIN USER-SUPPLIED SCOPE "external API" AUTHORITY NONE PROVENANCE "versioned package family"
+ENTITY Runtime.FractalBackbone KIND VISUAL_COMPUTE NAME "Fractal backbone C/JS/WASM/WebGL" STATUS PRESERVED ORIGIN MIXED SCOPE "browser compute" AUTHORITY NONE PROVENANCE "historical code machinery"
+ENTITY Project.PerceptronRedesign KIND PROJECT NAME "Perceptron redesign" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "learning" AUTHORITY NONE PROVENANCE "adaptive margins plus classic comparison"
+
+RELATE Project.OptimizerOfOptimizers AS USES TO Project.AlgorithmicBuilder AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "optimization" BASIS "Builder proposals under verified optimizer control"
+RELATE Project.OptimizerOfOptimizers AS ORCHESTRATED_BY TO Project.DataDrivenCoopECS AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "bounded runtime" BASIS "ECS substrate"
+RELATE Language.RMAL AS INTEGRATES_PATTERN_FROM TO Project.OptimizerOfOptimizers AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "meta-optimizer" BASIS "verified optimizer combinations"
+RELATE Language.RMAL AS REPRESENTS TO Project.ParameterDifferentialReflow AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe overlay" BASIS "no result promotion"
+RELATE Language.RMAL AS REPRESENTS TO Project.PerceptronRedesign AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe overlay" BASIS "research state retained"
+RELATE Language.RMAL AS USES TO Verification.ProofCounterexample AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "verification" BASIS "independent checking pattern"
+
+# Vision / geometry / observer machinery
+ENTITY Framework.VISION KIND ARCHITECTURE NAME "VISION" STATUS ACTIVE ORIGIN MIXED SCOPE "math desktop pixel accessibility learning evidence render" AUTHORITY NONE PROVENANCE "vision umbrella"
+ENTITY Theory.EyeOfStorm KIND THEORY NAME "The Eye of the Storm Compass Rose Theory" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "vision/geometry" AUTHORITY NONE PROVENANCE "user theory"
+ENTITY Method.FiveEyes KIND OBSERVER_SCAFFOLD NAME "Five Eyes" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "4D affine observer" AUTHORITY NONE PROVENANCE "4-simplex-like scaffold"
+ENTITY Instrument.Seers KIND OBSERVER NAME "Seers" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "bounded observers" AUTHORITY NONE PROVENANCE "observer naming"
+ENTITY Project.Explorer4D KIND PROJECT NAME "4D Explorer" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "vision/geometry" AUTHORITY NONE PROVENANCE "theoretical explorer"
+ENTITY Project.Codec4D KIND PROJECT NAME "4D Codec" STATUS ACTIVE ORIGIN LIKELY-USER SCOPE "identity/compression/inversion" AUTHORITY NONE PROVENANCE "observer recovery line"
+ENTITY Theory.CrossCarrierField KIND THEORY NAME "Cross-Carrier Field / Transform Wave" STATUS ACTIVE ORIGIN LIKELY-USER SCOPE "carrier transforms" AUTHORITY NONE PROVENANCE "cross-carrier family"
+ENTITY Project.CurvatureFoldSignatureMind KIND PROJECT NAME "Curvature-Fold Signature Mind" STATUS BOUNDED ORIGIN ASSISTANT-LABEL SCOPE "signature recognition" AUTHORITY NONE PROVENANCE "local verified reference baseline"
+ENTITY Accessibility.NObserver KIND ACCESSIBILITY_ARCHITECTURE NAME "N-Observer Accessibility Field" STATUS ACTIVE ORIGIN ASSISTANT-LABEL SCOPE "Windows magnifier/accessibility" AUTHORITY NONE PROVENANCE "formalized observer architecture"
+ENTITY Surface.VVVV KIND PRESENTATION_SURFACE NAME "vvvv decision experience" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "graphics/circuit experience" AUTHORITY NONE PROVENANCE "presentation only"
+
+RELATE Framework.VISION AS GROUPS TO Theory.EyeOfStorm AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "vision" BASIS "theory component"
+RELATE Theory.EyeOfStorm AS USES TO Method.FiveEyes AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "4D observer" BASIS "affinely independent observer scaffold"
+RELATE Project.Explorer4D AS USES TO Instrument.Seers AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "observer tools" BASIS "bounded observation"
+RELATE Project.Explorer4D AS RELATED_TO TO Project.Codec4D AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "geometry" BASIS "observer/compression relation"
+RELATE Language.RMAL AS REPRESENTS TO Framework.VISION AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe overlay" BASIS "typed reinterpretation"
+RELATE Surface.VVVV AS PRESENTS TO Project.DataDrivenCoopECS AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "visualization" BASIS "presentation does not own state authority"
+
+# Math / hard-problem branches
+ENTITY Problem.Hodge KIND OPEN_PROBLEM NAME "Hodge conjecture research branch" STATUS OPEN ORIGIN EXTERNAL-PROBLEM SCOPE "mathematics" AUTHORITY NONE PROVENANCE "project research branch"
+ENTITY Problem.PvsNP KIND OPEN_PROBLEM NAME "P versus NP research branch" STATUS OPEN ORIGIN EXTERNAL-PROBLEM SCOPE "complexity" AUTHORITY NONE PROVENANCE "project research branch"
+ENTITY Object.SurvivorCarrier KIND TASK_LOCAL_INTERFACE NAME "Survivor Carrier" STATUS ACTIVE ORIGIN MIXED SCOPE "constraint/search" AUTHORITY NONE PROVENANCE "recursive survivor integration"
+ENTITY Result.FermatQuinticCalibration KIND VERIFIED_BOUNDED_RESULT NAME "Fermat quintic plane-span calibration" STATUS EXACT_BOUNDED ORIGIN MIXED SCOPE "Hodge" AUTHORITY NONE PROVENANCE "1875 planes span rational Hodge dimension 401"
+ENTITY Result.K5H1Lambda2 KIND FORMAL_RESULT NAME "H1(K5) equivariant Lambda2(W4)" STATUS PROVED_COMBINATORIAL ORIGIN MIXED SCOPE "combinatorics" AUTHORITY NONE PROVENANCE "exact S5-equivariant combinatorial theorem"
+ENTITY Result.T7Quotient KIND VERIFIED_BOUNDED_RESULT NAME "t=7 quotient / square-pyramid finite target" STATUS EXACT_FINITE ORIGIN MIXED SCOPE "P vs NP finite lab" AUTHORITY NONE PROVENANCE "finite Boolean computation"
+ENTITY Result.CoordinateCodec KIND VERIFIED_BOUNDED_RESULT NAME "Float64 Coordinate Codec" STATUS EXACT_FINITE ORIGIN MIXED SCOPE "carrier reconstruction" AUTHORITY NONE PROVENANCE "exact binary64 reconstruction test"
+ENTITY Project.DecisionFieldOperatorLab KIND PROJECT NAME "Decision Field Operator Lab" STATUS ACTIVE ORIGIN MIXED SCOPE "finite operator space" AUTHORITY NONE PROVENANCE "research lab"
+
+RELATE Problem.PvsNP AS USES_LAB TO Object.SurvivorCarrier AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "complexity research" BASIS "task-local survivor relation"
+RELATE Problem.Hodge AS HAS_CALIBRATION TO Result.FermatQuinticCalibration AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "Hodge" BASIS "exact finite calibration only"
+RELATE Problem.Hodge AS RELATED_TO TO Result.K5H1Lambda2 AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "candidate combinatorial bridge" BASIS "actual Hodge defect module not identified"
+RELATE Problem.PvsNP AS HAS_FINITE_RESULT TO Result.T7Quotient AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "finite lab" BASIS "no asymptotic transfer"
+RELATE Theory.EyeOfStorm AS RELATED_TO TO Result.CoordinateCodec AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "observer/carrier" BASIS "reconstruction carrier relation"
+RELATE Language.RMAL AS REPRESENTS TO Problem.Hodge AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "hard problems" BASIS "representation does not solve"
+RELATE Language.RMAL AS REPRESENTS TO Problem.PvsNP AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "hard problems" BASIS "representation does not solve"
+
+BOUNDARY Problem.Hodge CLAIM_CEILING OPEN REASON "Hodge conjecture not proved by this corpus" SCOPE "general conjecture" STATUS ACTIVE
+BOUNDARY Problem.PvsNP CLAIM_CEILING OPEN REASON "P versus NP not resolved by finite/decomposition work" SCOPE "general complexity" STATUS ACTIVE
+BOUNDARY Result.FermatQuinticCalibration CLAIM_CEILING EXACT_BOUNDED REASON "Fermat quintic calibration only; no general Hodge proof" SCOPE "X5 Fermat quintic fourfold" STATUS ACTIVE
+BOUNDARY Result.K5H1Lambda2 CLAIM_CEILING PROVED_COMBINATORIAL REASON "exact for combinatorial K5 nerve model; not actual Hodge defect quotient" SCOPE "S5 combinatorics" STATUS ACTIVE
+BOUNDARY Result.T7Quotient CLAIM_CEILING EXACT_FINITE REASON "finite 4-variable/quotient witness; no asymptotic complexity theorem" SCOPE "bounded Boolean lab" STATUS ACTIVE
+BOUNDARY Project.OperatorMoonshot CLAIM_CEILING HISTORICAL_QUARANTINED REASON "predecessor evidence may be inspected but is not inherited authority" SCOPE "Airlock" STATUS ACTIVE
+
+# Application / human-facing projects
+ENTITY Project.Conscience64 KIND PROJECT NAME "Conscience64" STATUS ACTIVE ORIGIN LIKELY-USER SCOPE "research/runtime/world" AUTHORITY FEDERATED PROVENANCE "primary research runtime"
+ENTITY Project.RedWilds KIND PROJECT NAME "Red Wilds" STATUS ACTIVE ORIGIN USER-CONFIRMED SCOPE "MMORPG/world" AUTHORITY NONE PROVENANCE "game/visual project"
+ENTITY Project.DreamToAction KIND PROJECT NAME "Dream to Action" STATUS ACTIVE ORIGIN MIXED SCOPE "person-directed planning" AUTHORITY NONE PROVENANCE "local-first prototype"
+ENTITY Project.PursuitOfHappiness KIND PROJECT NAME "Pursuit of Happiness — IRPO" STATUS PRESERVED ORIGIN LIKELY-USER SCOPE "human-direction application" AUTHORITY NONE PROVENANCE "project lineage"
+ENTITY Project.CoAnimate KIND PROJECT NAME "Co-Animate" STATUS PRESERVED ORIGIN LIKELY-USER SCOPE "children collaborative creativity" AUTHORITY NONE PROVENANCE "project lineage"
+ENTITY Project.AmericanDream KIND PROJECT NAME "American Way / American Dream project" STATUS PRESERVED ORIGIN USER-CONFIRMED SCOPE "human/app" AUTHORITY NONE PROVENANCE "project direction"
+ENTITY Project.PoolCleaner KIND ENGINEERING_CONCEPT NAME "Low-attention pool cleaner" STATUS DESIGN_NOT_VALIDATED ORIGIN USER-CONFIRMED SCOPE "pool/water" AUTHORITY NONE PROVENANCE "design concept"
+ENTITY Project.HydrovoltaicPod KIND ENGINEERING_CONCEPT NAME "Hydrovoltaic Power & Water Pod" STATUS CONCEPTUAL ORIGIN ASSISTANT-LABEL SCOPE "water/power" AUTHORITY NONE PROVENANCE "assistant product label over user design thread"
+
+RELATE Project.Conscience64 AS HOSTS TO Project.RedWilds AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "world/runtime" BASIS "game project collaboration"
+RELATE Language.RMAL AS REPRESENTS TO Project.Conscience64 AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe overlay" BASIS "federated representation"
+RELATE Language.RMAL AS REPRESENTS TO Project.DreamToAction AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe overlay" BASIS "no ownership transfer"
+RELATE Language.RMAL AS REPRESENTS TO Project.PoolCleaner AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe overlay" BASIS "design state retained"
+BOUNDARY Project.PoolCleaner CLAIM_CEILING DESIGN_NOT_VALIDATED REASON "no measured physical pool-cleaning validation retained" SCOPE "physical effectiveness" STATUS ACTIVE
+BOUNDARY Project.HydrovoltaicPod CLAIM_CEILING CONCEPTUAL REASON "prototype estimates are design targets, not validated field performance" SCOPE "MVP" STATUS ACTIVE
+
+# Ten federated interpretation lanes: indexing only, not authority.
+ENTITY Lane.HumanDirection KIND LANE NAME "Human direction" STATUS ACTIVE ORIGIN MIXED AUTHORITY NONE
+ENTITY Lane.HistoryProvenance KIND LANE NAME "History / provenance" STATUS ACTIVE ORIGIN MIXED AUTHORITY NONE
+ENTITY Lane.LanguageKnowledge KIND LANE NAME "Language / knowledge" STATUS ACTIVE ORIGIN MIXED AUTHORITY NONE
+ENTITY Lane.GeometryCarriers KIND LANE NAME "Geometry / carriers" STATUS ACTIVE ORIGIN MIXED AUTHORITY NONE
+ENTITY Lane.CodingRepair KIND LANE NAME "Coding / repair" STATUS ACTIVE ORIGIN MIXED AUTHORITY NONE
+ENTITY Lane.MindsAgents KIND LANE NAME "Minds / agents" STATUS ACTIVE ORIGIN MIXED AUTHORITY NONE
+ENTITY Lane.Mathematics KIND LANE NAME "Mathematics" STATUS ACTIVE ORIGIN MIXED AUTHORITY NONE
+ENTITY Lane.ScienceEngineering KIND LANE NAME "Science / engineering" STATUS ACTIVE ORIGIN MIXED AUTHORITY NONE
+ENTITY Lane.AccessibilityEducation KIND LANE NAME "Accessibility / education" STATUS ACTIVE ORIGIN MIXED AUTHORITY NONE
+ENTITY Lane.GamesArt KIND LANE NAME "Games / worlds / art" STATUS ACTIVE ORIGIN MIXED AUTHORITY NONE
+
+RELATE Project.DreamToAction AS INDEXED_IN TO Lane.HumanDirection AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Method.REDOGIT AS INDEXED_IN TO Lane.HistoryProvenance AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Language.RMAL AS INDEXED_IN TO Lane.LanguageKnowledge AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Theory.EyeOfStorm AS INDEXED_IN TO Lane.GeometryCarriers AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Project.AlgorithmicBuilder AS INDEXED_IN TO Lane.CodingRepair AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Project.DataDrivenCoopECS AS INDEXED_IN TO Lane.MindsAgents AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Problem.Hodge AS INDEXED_IN TO Lane.Mathematics AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Project.PoolCleaner AS INDEXED_IN TO Lane.ScienceEngineering AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Accessibility.NObserver AS INDEXED_IN TO Lane.AccessibilityEducation AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Project.RedWilds AS INDEXED_IN TO Lane.GamesArt AUTHORITY NONE EVIDENCE_TRANSFER DENY
+
+# Global reinterpretation boundaries
+ENTITY Boundary.GlobalCompleteness KIND BOUNDARY_OBJECT NAME "Global completeness" STATUS UNRESOLVED ORIGIN MIXED SCOPE "all conversations/library" AUTHORITY NONE PROVENANCE "source-bound recovery boundary"
+BOUNDARY Boundary.GlobalCompleteness CLAIM_CEILING SOURCE_BOUND REASON "no complete account-wide original-conversation archive is claimed; missing/unindexed material remains appendable" SCOPE "RMAL universe overlay" STATUS ACTIVE
+RELATE Language.RMAL AS HAS_BOUNDARY TO Boundary.GlobalCompleteness AUTHORITY NONE EVIDENCE_TRANSFER DENY SCOPE "universe" BASIS "coverage honesty"

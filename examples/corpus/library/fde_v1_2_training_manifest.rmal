@@ -1,0 +1,28 @@
+RMAL_MODULE FDE_V1_2_RELATION_INDEX_TRAINING
+
+AUTHORITY {
+    object: FractalDeflectiveDataflowEngine
+    canonical_identity: "Engine(manifold)(data_lanes)(params)(flow)(features)(ticks)"
+    carrier_boundary: "Python/JSON/Markdown/tests are witness carriers, not the object."
+    root_invariant: "Object identity is invariant; coordinates are negotiable."
+    locality_parity: "Relation identity survives coordinate rotation only if the semantic relation index rotates or is relearned."
+}
+
+ONE_DEGREE_STEP relation_index_selection {
+    fixed: [synthetic_nonlocal_parity_family, lane_quarters, candidate_pair_pool, claim_ceiling]
+    changed: [relation_index_selection_from_candidates]
+    counterprobes: [quarter_sum_shortcut, lane_rotation, seed_sweep, noise_sweep, all_pairs_softmax]
+}
+
+CLAIM_CEILING {
+    claimed: "Relation-index selection works on this bounded synthetic family."
+    not_claimed: [general_learning, collision_utility, jolt_credit_sufficiency, fractal_superiority, full_endogenous_operator_discovery]
+}
+
+RESIDUALS_REMAINING {
+    automatic_relation_index_generation_beyond_candidate_pool: OPEN
+    collision_utility: OPEN
+    jolt_credit_sufficiency: OPEN
+    fractal_manifold_advantage: OPEN
+    transfer_to_non_synthetic_data: OPEN
+}

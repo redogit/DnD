@@ -1,0 +1,16 @@
+# RMAL Tool Chain v2 — evidence-derived closure state
+MODULE generated.toolchain_v2.crack_status
+SURFACE canonical
+CLAIM P_VS_NP_CURRENT STATUS OPEN TEXT "P versus NP remains open/not established in retained evidence."
+CLAIM REPEATED_CUMULATIVE_SELF_EXPANSION STATUS UNRESOLVED TEXT "Retained Central Research Ledger: repeated cumulative self-expansion is NOT ESTABLISHED."
+CLAIM DOMAIN_INDEPENDENT_ACQUISITION STATUS UNRESOLVED TEXT "Retained Central Research Ledger: domain-independent acquisition is NOT ESTABLISHED."
+CLAIM SELF_IMPROVING_ACQUISITION STATUS UNRESOLVED TEXT "Retained Central Research Ledger: self-improving acquisition is NOT TESTED."
+CLAIM EVIDENCE_DRIVEN_LIBRARY STATUS VERIFIED_COMPUTATION TEXT "The v2 librarian routes exact retained evidence into bounded program planning while preserving source claim ceilings and capability gaps."
+CLAIM BOOK_OF_BOOKS_REGISTRY STATUS VERIFIED_COMPUTATION TEXT "RMALKDVMLLL operator/evidence vocabulary is deterministically compiled into an RMAL registry."
+CLAIM DECLARATIVE_COMPILER_PARITY STATUS VERIFIED_COMPUTATION TEXT "Compiler targets, opcodes, optimizer passes, semantic checks and frontend surfaces have compilable RMAL parity registries."
+BOUNDARY P_VS_NP_CURRENT CLAIM_CEILING OPEN REASON "Open mathematics requires a complete valid proof/counterproof, not toolchain configuration."
+BOUNDARY EVIDENCE_DRIVEN_LIBRARY CLAIM_CEILING VERIFIED_COMPUTATION REASON "Routing evidence correctly does not establish the domain claims being routed."
+PRESERVE provenance source_hash claim_boundary negative_evidence unresolved_remainder
+EXCLUDE evidence_transfer_by_adjacency requested_capability_as_provided claim_promotion_without_proof
+REMAINDER "FULL_SELF_HOSTING_REQUIRES_RMAL_DEFINED_PASSES_TO_DRIVE_COMPILATION_NOT_JUST_DESCRIBE_TABLES"
+REMAINDER "OPEN_MATHEMATICS_REQUIRES_NEW_PROOF_OR_COUNTEREXAMPLE_EVIDENCE"

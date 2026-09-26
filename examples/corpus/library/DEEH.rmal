@@ -1,0 +1,60 @@
+# DEEH v0.1 — Dynamic Epistemic Event Horizon
+LANGUAGE DEEH SURFACES canonical,user-native BACKENDS object,bytecode,ir-json,human
+
+TYPE EventHorizonState BASE Value
+TYPE RawSubject BASE Value
+TYPE KnownStructure BASE Value
+TYPE GeometryCarrier BASE Value
+TYPE TopologyCarrier BASE Value
+TYPE OtherCarrier BASE Value
+TYPE HorizonWitness BASE Value
+TYPE Remainder BASE Value
+TYPE ECSFrontier BASE Value
+
+PRESERVE RawSubjectIdentity
+PRESERVE Provenance
+PRESERVE EvidenceClaimCeiling
+PRESERVE FailureHistory
+PRESERVE ContradictionHistory
+PRESERVE UnresolvedRemainder
+PRESERVE GeometryTopologyDistinction
+PRESERVE SharedMethodEvidenceDistinction
+PRESERVE HorizonMovementWitness
+
+CONTEXT DEEH role="pre-carrier epistemic extraction" version="0.1.0" authority="none"
+CONTEXT DEEH_SOII seam="decision_field.event_horizon" schema_change="none"
+CONTEXT DEEH_ECS relation="remainder_to_frontier" evidence_transfer="deny"
+
+RELATION DEEHCarries ALLOW EventHorizonState KnownStructure DENY truth_promotion
+RELATION DEEHProjectsGeometry ALLOW EventHorizonState GeometryCarrier DENY carrier_exhaustiveness
+RELATION DEEHProjectsTopology ALLOW EventHorizonState TopologyCarrier DENY carrier_exhaustiveness
+RELATION DEEHProjectsOther ALLOW EventHorizonState OtherCarrier DENY carrier_exhaustiveness
+RELATION DEEHFeedsECS ALLOW Remainder ECSFrontier DENY cross_domain_evidence_transfer
+
+OPERATOR HorizonIngest BIND EventHorizonState INPUT RawSubject OUTPUT EventHorizonState EFFECT observe AUTHORITY none PRESERVE raw_hash provenance
+OPERATOR HorizonObserve BIND EventHorizonState INPUT EventHorizonState OUTPUT EventHorizonState EFFECT observe AUTHORITY none PRESERVE raw_hash provenance
+OPERATOR HorizonExtract BIND KnownStructure INPUT EventHorizonState OUTPUT KnownStructure EFFECT analyze AUTHORITY none PRESERVE evidence claim_ceiling
+OPERATOR HorizonClassify BIND KnownStructure INPUT KnownStructure OUTPUT KnownStructure EFFECT representation AUTHORITY none PRESERVE provenance
+OPERATOR HorizonRotate BIND KnownStructure INPUT KnownStructure OUTPUT KnownStructure EFFECT representation AUTHORITY none PRESERVE invariants provenance
+OPERATOR HorizonCounterprobe BIND HorizonWitness INPUT KnownStructure OUTPUT HorizonWitness EFFECT verify AUTHORITY none PRESERVE failures contradictions
+OPERATOR HorizonCloseKnown BIND EventHorizonState INPUT EventHorizonState OUTPUT EventHorizonState EFFECT analyze AUTHORITY none PRESERVE failures remainder evidence
+OPERATOR HorizonComputeRemainder BIND Remainder INPUT EventHorizonState OUTPUT Remainder EFFECT analyze AUTHORITY none PRESERVE provenance failures
+OPERATOR HorizonSelectProbe BIND HorizonWitness INPUT Remainder OUTPUT HorizonWitness EFFECT route AUTHORITY none PRESERVE cost independence discrimination
+OPERATOR HorizonMove BIND EventHorizonState INPUT EventHorizonState HorizonWitness OUTPUT EventHorizonState EFFECT repair AUTHORITY none PRESERVE closure_history provenance
+OPERATOR HorizonToECS BIND ECSFrontier INPUT Remainder OUTPUT ECSFrontier EFFECT route AUTHORITY none PRESERVE claim_ceiling provenance
+OPERATOR HorizonRollback BIND EventHorizonState INPUT EventHorizonState OUTPUT EventHorizonState EFFECT repair AUTHORITY none PRESERVE history provenance
+
+RULE DEEH_R01 IF "raw subject is ingested" THEN "freeze raw identity before interpretation"
+RULE DEEH_R02 IF "structure has no evidence witness" THEN "do not promote it into known"
+RULE DEEH_R03 IF "geometry fit fails" THEN "retain topology and other-carrier possibilities"
+RULE DEEH_R04 IF "topology fit fails" THEN "retain geometry and other-carrier possibilities"
+RULE DEEH_R05 IF "geometry and topology both fail" THEN "open candidate new carrier instead of forcing a fit"
+RULE DEEH_R06 IF "current closure reaches fixed point" THEN "label remainder relative to current operator set"
+RULE DEEH_R07 IF "horizon would move" THEN "require explicit evidence witness and preserve closure event"
+RULE DEEH_R08 IF "ECS is invoked" THEN "route consequential remainder rather than overwrite raw subject"
+RULE DEEH_R09 IF "Dynamic Fitter reorganizes state" THEN "forbid silent horizon movement or evidence promotion"
+RULE DEEH_R10 IF "two carriers preserve the same invariant" THEN "do not infer shared evidence authority"
+
+CLAIM DEEH_C01 STATUS BOUNDED_CLAIM TEXT "DEEH is a pre-carrier evidence-bounded closure and moving-frontier layer that exposes known structure before geometry/topology commitment and routes only the consequential remainder to ECS."
+COUNTERPROBE "Find a consequential distinction destroyed by closure, a horizon movement without witness, or a carrier-fit failure incorrectly treated as absence of structure."
+VERIFY "RAW != KNOWN != UNKNOWN; NO_GEOMETRIC_FIT != NO_STRUCTURE; HORIZON_MOVEMENT requires witness."

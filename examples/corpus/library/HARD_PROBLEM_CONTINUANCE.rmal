@@ -1,0 +1,18 @@
+# RMAL Hard Problem Continuance v1.2
+# Executable meaning is implemented by rmal.problem_engine; this file is the RMAL-native semantic declaration.
+ENTITY Protocol.HardProblemContinuance KIND METHOD NAME "RMAL Hard Problem Continuance" STATUS ACTIVE ORIGIN MIXED SCOPE "problem continuation" AUTHORITY NONE PROVENANCE "RMAL_V1_2_EXECUTABLE_UNIVERSE"
+ATTRIBUTE Protocol.HardProblemContinuance KEY phase_1 VALUE "DISTINGUISH"
+ATTRIBUTE Protocol.HardProblemContinuance KEY phase_2 VALUE "GROUND"
+ATTRIBUTE Protocol.HardProblemContinuance KEY phase_3 VALUE "GENERATE"
+ATTRIBUTE Protocol.HardProblemContinuance KEY phase_4 VALUE "ROTATE"
+ATTRIBUTE Protocol.HardProblemContinuance KEY phase_5 VALUE "FIT"
+ATTRIBUTE Protocol.HardProblemContinuance KEY phase_6 VALUE "COUNTERPROBE"
+ATTRIBUTE Protocol.HardProblemContinuance KEY phase_7 VALUE "VERIFY"
+ATTRIBUTE Protocol.HardProblemContinuance KEY phase_8 VALUE "RECONSTRUCT"
+ATTRIBUTE Protocol.HardProblemContinuance KEY phase_9 VALUE "ADMIT"
+ATTRIBUTE Protocol.HardProblemContinuance KEY phase_10 VALUE "CONTINUE_FROM_REMAINDER"
+ATTRIBUTE Protocol.HardProblemContinuance KEY invariant_1 VALUE "PLAN != SOLUTION"
+ATTRIBUTE Protocol.HardProblemContinuance KEY invariant_2 VALUE "RETRIEVAL != EVIDENCE_TRANSFER"
+ATTRIBUTE Protocol.HardProblemContinuance KEY invariant_3 VALUE "FIT != TRUTH"
+ATTRIBUTE Protocol.HardProblemContinuance KEY invariant_4 VALUE "UNKNOWN != ABSENT"
+ATTRIBUTE Protocol.HardProblemContinuance KEY invariant_5 VALUE "ONE_DEGREE means one consequential independently varied degree where possible"

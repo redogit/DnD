@@ -1,0 +1,243 @@
+# ADAPTIVE CONCENTRIC PATH FIELD — RMAL 2.1.2
+# Transpiled from the concentric 3D adaptive binary path-builder concept.
+# Base authority: RMAL / RMALC 2.1.2.
+# Query overlay: RMAL LINQ milestone candidate, AUTHORITY NONE.
+# SIMD lowering: capability-gated candidate; no false AVX2/AVX-512 implementation claim.
+
+LANGUAGE AdaptiveConcentricPathFieldRMAL SURFACES canonical,user-native BACKENDS object,bytecode,ir-json,human
+MODULE adaptive_concentric_path_field
+DOMAIN decision-fields
+
+# ---------------------------------------------------------------------------
+# AUTHORITY / OBLIGATION / TARGET
+# ---------------------------------------------------------------------------
+CONTEXT SYSTEM_PURPOSE role="search_problem_solvability_and_search_complexity"
+CONTEXT RMAL_TOOLCHAIN_INVARIANT role="CURRENT_EXECUTABLE_AUTHORITY" version="2.1.2"
+CONTEXT TARGET_ROOT role="ADAPTIVE_ALGORITHMIC_PATH_BUILDER" scope="binary_path_search_with_reconstructible_complexity_observation"
+CONTEXT EXECUTION_MODEL geometry="concentric_3d_fields_around_processing_core" flow="inward_outward_and_around_center"
+
+PRESERVE ObjectIdentity
+PRESERVE QueryIdentity
+PRESERVE PathIdentity
+PRESERVE ProblemSemantics
+PRESERVE ConstraintScope
+PRESERVE Provenance
+PRESERVE Chronology
+PRESERVE FailureHistory
+PRESERVE EvidenceAuthorityBoundary
+PRESERVE Reconstructibility
+PRESERVE UnresolvedRemainder
+PRESERVE Privacy
+PRESERVE Clarity
+
+# Hard evidence / execution boundaries.
+RULE B01 IF "a path is generated" THEN "do not promote generation to verification"
+RULE B02 IF "a branch executes successfully" THEN "do not promote execution to admission"
+RULE B03 IF "a runtime restriction is observed" THEN "record it as an observed constraint until its scope is verified"
+RULE B04 IF "two representations have a small XOR distance" THEN "do not infer semantic similarity unless the encoding contract supports that inference"
+RULE B05 IF "execution coordinates change" THEN "preserve query identity, path identity, problem semantics, authority, provenance, and evidence boundary"
+RULE B06 IF "parallel or vector execution is unavailable" THEN "fall back without changing logical query semantics"
+RULE B07 IF "two paths reach the same canonical logical state" THEN "merge state work while preserving both path provenances"
+RULE B08 IF "a search budget is exhausted" THEN "return unresolved or bounded result; do not report optimality or impossibility"
+RULE B09 IF "a failed branch yields a reusable conflict" THEN "retain the failure and its scope as negative evidence"
+RULE B10 IF "a representation transform fails its invariant check" THEN "reject that transform without rejecting the underlying problem object"
+
+# ---------------------------------------------------------------------------
+# CONCENTRIC 3D OPERATIONAL LAYERS
+# ---------------------------------------------------------------------------
+TYPE CoreState BASE Value
+TYPE PathState BASE Value
+TYPE PathBit BASE Value
+TYPE PathNode BASE Value
+TYPE ProblemState BASE Value
+TYPE WorkingState BASE Value
+TYPE TransformState BASE Value
+TYPE RouteState BASE Value
+TYPE BoundaryState BASE Value
+TYPE Constraint BASE Value
+TYPE ConstraintSet BASE Value
+TYPE CandidateSet BASE Value
+TYPE SearchFrontier BASE Value
+TYPE CanonicalState BASE Value
+TYPE ComplexityVector BASE Value
+TYPE ResistanceMap BASE Value
+TYPE QueryPlan BASE Value
+TYPE ExecutionTrace BASE Value
+TYPE TraceStep BASE Value
+TYPE SearchOutcome BASE Value
+TYPE EvidenceReceipt BASE Value
+TYPE Residual BASE Value
+TYPE RecoveryHandle BASE Value
+
+CONTEXT Core radius_order=0 role="adaptive_binary_state_and_path_generator" authority="EXECUTION_ONLY"
+CONTEXT Layer1 radius_order=1 geometry="concentric_3d_shell" role="representation_transform_and_boolean_path_orientation"
+CONTEXT Layer2 radius_order=2 geometry="concentric_3d_shell" role="working_state_and_search_frontier"
+CONTEXT Layer3 radius_order=3 geometry="concentric_3d_shell" role="routing_topology_merge_backtrack_and_return"
+CONTEXT Layer4 radius_order=4 geometry="concentric_3d_boundary" role="external_constraints_and_bounded_outputs_only"
+
+RELATION Surrounds ALLOW BoundaryState RouteState WorkingState TransformState CoreState DENY authority_transfer
+RELATION PathTransitionsTo ALLOW PathNode PathNode DENY evidence_transfer
+RELATION PathRepresents ALLOW PathState ProblemState DENY semantic_promotion
+RELATION RepresentationOf ALLOW TransformState ProblemState DENY object_replacement
+RELATION RouteLocates ALLOW RouteState PathNode CanonicalState DENY truth_promotion
+RELATION ConstraintAppliesTo ALLOW Constraint ProblemState PathState DENY scope_widening
+RELATION TraceExplains ALLOW ExecutionTrace PathState SearchOutcome DENY proof_promotion
+RELATION ResidualRepairs ALLOW Residual TransformState RouteState CoreState DENY evidence_transfer
+
+# ---------------------------------------------------------------------------
+# CORE — ADAPTIVE ALGORITHMIC PATH BUILDER
+# ---------------------------------------------------------------------------
+OPERATOR EnumerateDecisions BIND ProblemState INPUT ProblemState ConstraintSet OUTPUT CandidateSet EFFECT analyze AUTHORITY none PRESERVE problem_semantics provenance constraint_scope
+OPERATOR ScoreDecision BIND ComplexityVector INPUT CandidateSet ProblemState ConstraintSet ExecutionTrace OUTPUT ComplexityVector EFFECT analyze AUTHORITY none PRESERVE problem_semantics provenance claim_ceiling
+OPERATOR SelectDecision BIND PathBit INPUT CandidateSet ComplexityVector OUTPUT PathBit EFFECT route AUTHORITY none PRESERVE path_identity problem_semantics provenance
+OPERATOR AppendPathBit BIND PathState INPUT PathState PathBit OUTPUT PathState EFFECT state AUTHORITY none PRESERVE parent_path decision_semantics provenance
+OPERATOR BranchPath BIND SearchFrontier INPUT PathState CandidateSet OUTPUT SearchFrontier EFFECT route AUTHORITY none PRESERVE branch_addresses parentage provenance
+OPERATOR ObserveBranch BIND TraceStep INPUT PathState ProblemState ConstraintSet OUTPUT TraceStep EFFECT observe AUTHORITY none PRESERVE exact_inputs path_identity provenance
+OPERATOR IntegrateObservation BIND CoreState INPUT CoreState TraceStep OUTPUT CoreState EFFECT state AUTHORITY none PRESERVE path_identity evidence_boundary failure_history
+OPERATOR ChooseNextProbe BIND PathBit INPUT CoreState SearchFrontier ComplexityVector OUTPUT PathBit EFFECT route AUTHORITY none PRESERVE query_identity path_identity provenance
+
+# ---------------------------------------------------------------------------
+# LAYER 1 — REPRESENTATION TRANSFORMATION / ROTATION
+# ---------------------------------------------------------------------------
+OPERATOR TransformRepresentation BIND TransformState INPUT ProblemState ConstraintSet OUTPUT TransformState EFFECT representation AUTHORITY none PRESERVE object_identity problem_semantics path_identity provenance
+OPERATOR RotateCoordinates BIND TransformState INPUT TransformState OUTPUT TransformState EFFECT representation AUTHORITY none PRESERVE object_identity problem_semantics path_identity provenance
+OPERATOR PermuteCoordinates BIND TransformState INPUT TransformState OUTPUT TransformState EFFECT representation AUTHORITY none PRESERVE object_identity problem_semantics path_identity provenance
+OPERATOR BooleanXorDelta BIND Residual INPUT TransformState TransformState OUTPUT Residual EFFECT analyze AUTHORITY none PRESERVE source_identity target_identity provenance
+OPERATOR CompareTransformInvariants BIND EvidenceReceipt INPUT ProblemState TransformState OUTPUT EvidenceReceipt EFFECT verify AUTHORITY none PRESERVE invariant_set provenance claim_ceiling
+
+# ---------------------------------------------------------------------------
+# LAYER 2 — WORKING STATE / SEARCH FRONTIER
+# ---------------------------------------------------------------------------
+OPERATOR MaterializeWorkingState BIND WorkingState INPUT ProblemState TransformState OUTPUT WorkingState EFFECT state AUTHORITY none PRESERVE object_identity problem_semantics path_identity provenance
+OPERATOR ApplyConstraintMask BIND WorkingState INPUT WorkingState ConstraintSet OUTPUT WorkingState EFFECT analyze AUTHORITY none PRESERVE constraint_scope object_identity provenance
+OPERATOR SplitFrontier BIND SearchFrontier INPUT WorkingState PathBit OUTPUT SearchFrontier EFFECT route AUTHORITY none PRESERVE parentage path_identity provenance
+OPERATOR MeasureFrontier BIND ComplexityVector INPUT SearchFrontier OUTPUT ComplexityVector EFFECT analyze AUTHORITY none PRESERVE measurement_contract provenance
+
+# ---------------------------------------------------------------------------
+# LAYER 3 — ROUTING / SEARCH TOPOLOGY
+# ---------------------------------------------------------------------------
+OPERATOR CanonicalizeState BIND CanonicalState INPUT WorkingState OUTPUT CanonicalState EFFECT representation AUTHORITY none PRESERVE problem_semantics provenance
+OPERATOR RoutePath BIND RouteState INPUT SearchFrontier PathState CanonicalState OUTPUT RouteState EFFECT route AUTHORITY none PRESERVE path_identity topology provenance
+OPERATOR MergeEquivalentState BIND RouteState INPUT RouteState CanonicalState OUTPUT RouteState EFFECT compress AUTHORITY none PRESERVE alternate_path_provenance failure_history evidence_boundary
+OPERATOR BacktrackPath BIND RouteState INPUT RouteState PathState OUTPUT RouteState EFFECT route AUTHORITY none PRESERVE path_history provenance
+OPERATOR ReconstructPath BIND PathState INPUT RouteState CanonicalState OUTPUT PathState EFFECT reconstruction AUTHORITY none PRESERVE decision_semantics path_history provenance
+
+# ---------------------------------------------------------------------------
+# LAYER 4 — CONSTRAINT / OUTPUT BOUNDARY
+# ---------------------------------------------------------------------------
+OPERATOR AdmitDeclaredConstraint BIND Constraint INPUT Constraint OUTPUT Constraint EFFECT state AUTHORITY INTERNAL PRESERVE source scope provenance
+OPERATOR RecordDerivedConstraint BIND Constraint INPUT ConstraintSet EvidenceReceipt OUTPUT Constraint EFFECT analyze AUTHORITY none PRESERVE derivation scope provenance
+OPERATOR RecordObservedConstraint BIND Constraint INPUT TraceStep OUTPUT Constraint EFFECT observe AUTHORITY none PRESERVE observation scope provenance
+OPERATOR ValidateLearnedConstraint BIND EvidenceReceipt INPUT Constraint ExecutionTrace OUTPUT EvidenceReceipt EFFECT verify AUTHORITY none PRESERVE scope counterexamples provenance claim_ceiling
+OPERATOR EmitBoundedOutcome BIND SearchOutcome INPUT RouteState CoreState ConstraintSet ComplexityVector EvidenceReceipt OUTPUT SearchOutcome EFFECT state AUTHORITY INTERNAL PRESERVE claim_ceiling provenance remainder
+
+# ---------------------------------------------------------------------------
+# CONSTRAINT LATTICE
+# ---------------------------------------------------------------------------
+CONTEXT ConstraintDeclared status="EXTERNAL_DECLARED" scope="explicit"
+CONTEXT ConstraintDerived status="DERIVED" scope="derivation_bound"
+CONTEXT ConstraintObserved status="OBSERVED_NOT_PROVED" scope="observation_bound"
+CONTEXT ConstraintLearned status="VERIFIED_WITHIN_SCOPE" scope="validated_scope_only"
+CONTEXT ConstraintTemporary status="BRANCH_LOCAL_ASSUMPTION" scope="path_local"
+
+PRESERVE ObservedConstraint != ProvedConstraint
+PRESERVE LearnedConstraint != UniversalConstraint
+PRESERVE BranchLocalConstraint != GlobalConstraint
+
+# ---------------------------------------------------------------------------
+# COMPLEXITY / RESISTANCE MAP
+# ---------------------------------------------------------------------------
+OPERATOR MeasureVisitedStates BIND ComplexityVector INPUT ExecutionTrace OUTPUT ComplexityVector EFFECT analyze AUTHORITY none PRESERVE measurement_contract provenance
+OPERATOR MeasureBranching BIND ComplexityVector INPUT ExecutionTrace OUTPUT ComplexityVector EFFECT analyze AUTHORITY none PRESERVE measurement_contract provenance
+OPERATOR MeasureDepth BIND ComplexityVector INPUT PathState OUTPUT ComplexityVector EFFECT analyze AUTHORITY none PRESERVE path_identity provenance
+OPERATOR MeasureBacktracks BIND ComplexityVector INPUT ExecutionTrace OUTPUT ComplexityVector EFFECT analyze AUTHORITY none PRESERVE measurement_contract provenance
+OPERATOR MeasurePruning BIND ComplexityVector INPUT ExecutionTrace ConstraintSet OUTPUT ComplexityVector EFFECT analyze AUTHORITY none PRESERVE constraint_scope provenance
+OPERATOR MeasureTransformCost BIND ComplexityVector INPUT ExecutionTrace OUTPUT ComplexityVector EFFECT analyze AUTHORITY none PRESERVE execution_coordinates provenance
+OPERATOR BuildResistanceMap BIND ResistanceMap INPUT ExecutionTrace ComplexityVector SearchFrontier OUTPUT ResistanceMap EFFECT analyze AUTHORITY none PRESERVE path_identity topology provenance remainder
+
+PRESERVE EmpiricalSearchComplexity != ComplexityClassProof
+PRESERVE RuntimeMeasurement != AsymptoticProof
+PRESERVE SearchSuccess != GeneralSolvabilityProof
+PRESERVE SearchFailure != UnsolvabilityProof
+
+# ---------------------------------------------------------------------------
+# QUERY / PARALLEL / SIMD EXECUTION COORDINATES
+# ---------------------------------------------------------------------------
+CONTEXT QueryExecutionPolicy mode="ENABLE_WHEN_SEMANTICALLY_VALID" authority="NONE"
+CONTEXT RMALLINQ status="CANDIDATE_OVERLAY_NONAUTHORITATIVE" base="RMALC_2_1_2"
+CONTEXT SIMDScalar status="IMPLEMENTED_BASELINE" width_bits=1
+CONTEXT SIMDAVX2 status="CANDIDATE_BACKEND" width_bits=256
+CONTEXT SIMDAVX512 status="CANDIDATE_BACKEND" width_bits=512
+
+ALLOW sequential_parallel_substitution
+ALLOW scan_index_substitution
+ALLOW sync_async_substitution
+ALLOW scalar_vector_substitution
+
+RULE X01 IF "parallel execution changes result order where order is semantically visible" THEN "reject parallel substitution"
+RULE X02 IF "SIMD carrier cannot preserve exact logical operation" THEN "fall back to scalar execution"
+RULE X03 IF "AVX2 or AVX512 capability is absent" THEN "do not emit or execute unsupported instructions"
+RULE X04 IF "a vector backend is added" THEN "require scalar versus vector differential parity before admission"
+RULE X05 IF "XOR is used as a delta" THEN "retain the encoding contract needed to interpret the changed bits"
+
+PRESERVE QueryIdentityInvariant
+PRESERVE ExecutionCoordinatesNegotiable
+PRESERVE ScalarResult = VectorResult
+PRESERVE GENERATE != VERIFY != ADMIT
+PRESERVE TRACE != PROOF
+PRESERVE RELATION != EVIDENCE_TRANSFER
+
+# ---------------------------------------------------------------------------
+# TRACE-FIRST EXECUTION MEMORY
+# SPACE -> STEP* -> TRACE -> OUTCOME -> CHECK -> GRAPH -> COUNTER -> RESIDUAL -> REPAIR
+# ---------------------------------------------------------------------------
+OPERATOR StartExecutionSpace BIND ExecutionTrace INPUT ProblemState ConstraintSet OUTPUT ExecutionTrace EFFECT state AUTHORITY none PRESERVE query_identity path_identity provenance
+OPERATOR RecordTraceStep BIND ExecutionTrace INPUT ExecutionTrace TraceStep OUTPUT ExecutionTrace EFFECT state AUTHORITY none PRESERVE chronology path_identity choices metadata residuals
+OPERATOR RecordOutcome BIND SearchOutcome INPUT ExecutionTrace CoreState RouteState OUTPUT SearchOutcome EFFECT state AUTHORITY none PRESERVE trace_pointer claim_ceiling provenance
+OPERATOR CheckOutcome BIND EvidenceReceipt INPUT SearchOutcome ExecutionTrace OUTPUT EvidenceReceipt EFFECT verify AUTHORITY none PRESERVE claim_ceiling provenance
+OPERATOR BuildProvenanceGraph BIND RouteState INPUT ExecutionTrace OUTPUT RouteState EFFECT reconstruction AUTHORITY none PRESERVE alternate_paths chronology provenance
+OPERATOR DefineCounterprobe BIND Constraint INPUT SearchOutcome Residual OUTPUT Constraint EFFECT analyze AUTHORITY none PRESERVE target_scope provenance
+OPERATOR RecordResidual BIND Residual INPUT SearchOutcome EvidenceReceipt OUTPUT Residual EFFECT state AUTHORITY none PRESERVE expectation observation context provenance
+OPERATOR RepairSmallestFailure BIND CoreState INPUT CoreState Residual OUTPUT CoreState EFFECT repair AUTHORITY none PRESERVE unaffected_invariants failure_history provenance
+
+# ---------------------------------------------------------------------------
+# META-PATH: SEARCH HOW TO SEARCH WITHOUT UNBOUNDED SELF-OPTIMIZATION
+# ---------------------------------------------------------------------------
+CONTEXT MetaSearch max_meta_depth=1 budget_policy="META_COST_LT_REMAINING_PROBLEM_COST"
+TYPE StrategyPath BASE Value
+OPERATOR ProposeSearchStrategy BIND StrategyPath INPUT CoreState ResistanceMap OUTPUT StrategyPath EFFECT analyze AUTHORITY none PRESERVE target_problem claim_ceiling provenance
+OPERATOR SelectSearchStrategy BIND StrategyPath INPUT StrategyPath ComplexityVector OUTPUT StrategyPath EFFECT route AUTHORITY none PRESERVE target_problem claim_ceiling provenance
+OPERATOR ExecuteSelectedStrategy BIND CoreState INPUT StrategyPath CoreState OUTPUT CoreState EFFECT execute AUTHORITY none PRESERVE problem_semantics path_identity provenance
+
+RULE M01 IF "meta search reaches its configured depth or cost bound" THEN "stop meta expansion and return to problem search"
+RULE M02 IF "a strategy improves one observed case" THEN "record bounded utility; do not call it universally optimal"
+
+# ---------------------------------------------------------------------------
+# EXECUTABLE CORE WITNESS — ONLY IMPLEMENTED PRIMITIVES
+# This tiny witness proves the source travels through the current compiler/VM;
+# it does not claim the full research architecture is already implemented.
+# ---------------------------------------------------------------------------
+CONST root_depth = 0
+CONST branch_0 = false
+CONST branch_1 = true
+LET bool_xor_witness = ne(branch_0, branch_1)
+LET next_depth = add(root_depth, 1)
+LET second_depth = add(next_depth, 1)
+LET next_depth_ok = eq(next_depth, 1)
+LET second_depth_ok = eq(second_depth, 2)
+LET path_depth_monotonic = IF next_depth_ok THEN second_depth_ok ELSE false
+LET representation_changed = bool_xor_witness
+LET object_semantics_preserved = true
+LET transform_changed_ok = eq(representation_changed, true)
+LET transform_semantics_ok = eq(object_semantics_preserved, true)
+LET admissible_transform_witness = IF transform_changed_ok THEN transform_semantics_ok ELSE false
+REQUIRE bool_xor_witness
+REQUIRE path_depth_monotonic
+REQUIRE admissible_transform_witness
+
+CLAIM ExecutableCoreWitness STATUS BOUNDED_CLAIM TEXT "The current RMAL 2.1.2 compiler can execute the bounded Boolean/path-depth witness in this source using implemented core primitives."
+COUNTERPROBE "Flip branch_1 to false; the XOR-as-Boolean-difference witness must fail its REQUIRE rather than silently pass."
+VERIFY "Compile O0/O3, link, run, audit, and compare the resulting bounded witness behavior."
+CLAIM_CEILING "This artifact specifies an adaptive concentric binary path-search architecture and contains a bounded executable compiler witness. It does not claim a complete solver, a complexity-class result, universal learning, or implemented AVX2/AVX-512 lowering."
+REMAINDER "Implement canonical path/state carriers, constraint-learning semantics, resistance-map runtime, and scalar-versus-SIMD differential backend before promoting those components from specification to executable implementation."
+CONTINUE

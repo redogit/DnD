@@ -1,0 +1,119 @@
+# CRACK ALL IN MY LANGUAGE — Pass 2 current-context overlay
+MODULE crack_all.context_v2
+IMPORT crack_all.naming_universe
+IMPORT library.master_of_master_of_librarians
+IMPORT library.book_of_books_integration
+IMPORT library.programs
+IMPORT library.configurations
+EXPORT context_version,context_kernel_name
+SURFACE canonical
+
+CONST context_version = "2.0.0"
+CONST context_kernel_name = "RMAL Full-Context Decision-Field Kernel"
+
+ENTITY ContextCrack.Root KIND CONTEXT_CRACK NAME "RMAL Full-Context Decision-Field Kernel" STATUS ACTIVE ORIGIN "CURRENT-INTEGRATION" SCOPE "conversation + recovered Library corpus" SOURCE "Pass1 + RMAL Tool Chain v1.0 + Decision-Field Meta-Solver + PolyMeta design" AUTHORITY NONE PROVENANCE "successor overlay; predecessor preserved"
+ENTITY Kernel.Field KIND CONTEXT_KERNEL NAME "Decision Field Kernel" STATUS ACTIVE ORIGIN "CURRENT-INTEGRATION" SCOPE "full-context reduction" AUTHORITY NONE PROVENANCE "declared five-kernel basis"
+ATTRIBUTE Kernel.Field KEY meaning VALUE "Subject/context/state/obligations/invariants/decisions/constraints/bounds/resource accounting."
+RELATE ContextCrack.Root AS HAS_KERNEL TO Kernel.Field AUTHORITY NONE EVIDENCE_TRANSFER DENY
+ENTITY Kernel.Rotation KIND CONTEXT_KERNEL NAME "Semantic Rotation Kernel" STATUS ACTIVE ORIGIN "CURRENT-INTEGRATION" SCOPE "full-context reduction" AUTHORITY NONE PROVENANCE "declared five-kernel basis"
+ATTRIBUTE Kernel.Rotation KEY meaning VALUE "Surfaces/carriers/observers/frames/semantic rotations/fitters/BBF/GSFL/reversible and lossy transforms."
+RELATE ContextCrack.Root AS HAS_KERNEL TO Kernel.Rotation AUTHORITY NONE EVIDENCE_TRANSFER DENY
+ENTITY Kernel.Evidence KIND CONTEXT_KERNEL NAME "Evidence Admission Kernel" STATUS ACTIVE ORIGIN "CURRENT-INTEGRATION" SCOPE "full-context reduction" AUTHORITY NONE PROVENANCE "declared five-kernel basis"
+ATTRIBUTE Kernel.Evidence KEY meaning VALUE "Verification/counterprobe/evidence classification/claim ceilings/admission plus ethical, privacy, safety and accessibility guards."
+RELATE ContextCrack.Root AS HAS_KERNEL TO Kernel.Evidence AUTHORITY NONE EVIDENCE_TRANSFER DENY
+ENTITY Kernel.Lineage KIND CONTEXT_KERNEL NAME "Lineage Reconstruction Kernel" STATUS ACTIVE ORIGIN "CURRENT-INTEGRATION" SCOPE "full-context reduction" AUTHORITY NONE PROVENANCE "declared five-kernel basis"
+ATTRIBUTE Kernel.Lineage KEY meaning VALUE "Provenance/history/failures/Knowledge Decay/reconstruction/Library of Libraries/Master Librarian routing."
+RELATE ContextCrack.Root AS HAS_KERNEL TO Kernel.Lineage AUTHORITY NONE EVIDENCE_TRANSFER DENY
+ENTITY Kernel.Execution KIND CONTEXT_KERNEL NAME "Execution Search Kernel" STATUS ACTIVE ORIGIN "CURRENT-INTEGRATION" SCOPE "full-context reduction" AUTHORITY NONE PROVENANCE "declared five-kernel basis"
+ATTRIBUTE Kernel.Execution KEY meaning VALUE "Generation/search/one-degree experiments/solver/meta-solver/POLYMETA/build/compile/link/run/debug."
+RELATE ContextCrack.Root AS HAS_KERNEL TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+
+ATTRIBUTE ContextCrack.Root KEY EXECUTION_LAW VALUE "RETRIEVE -> FORMULATE_FIELD -> GENERATE -> ROTATE_AND_FIT -> CONSTRAIN_AND_ACCOUNT_COST -> SOLVE_OR_META_SOLVE -> COUNTERPROBE -> VERIFY -> ADMIT_WITH_CEILING -> BUILD_COMPILE_LINK_RUN -> ARCHIVE_AND_RECONSTRUCT -> CONTINUE_OR_REMAINDER"
+ATTRIBUTE ContextCrack.Root KEY COMPRESSION_LAW VALUE "compress only when every required distinction remains reconstructible"
+ATTRIBUTE ContextCrack.Root KEY DECISION_FIELD VALUE "state + context + obligations + invariants + decisions + transforms + evidence + authority + history + bounds + unresolved remainder"
+
+ENTITY Current.MetaSolver KIND META_SOLVER NAME "Meta-Solver" STATUS ACTIVE ORIGIN "ASSISTANT-LABEL" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.MetaSolver KEY meaning VALUE "Selects/constructs solver plans for a declared decision field; no authority amplification."
+ENTITY Current.ConstraintSystemSynthesizer KIND PROBLEM_FORMULATOR NAME "Constraint-System Synthesizer" STATUS ACTIVE ORIGIN "ASSISTANT-LABEL" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.ConstraintSystemSynthesizer KEY meaning VALUE "Constructs a constraint system from a bounded problem formulation."
+ENTITY Current.DecisionFieldCompiler KIND PROBLEM_FORMULATOR NAME "Decision-Field Compiler" STATUS ACTIVE ORIGIN "ASSISTANT-LABEL" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.DecisionFieldCompiler KEY meaning VALUE "Determines/formulates the consequential distinction field before solver selection."
+ENTITY Current.POLYMETA KIND HIGHER_ORDER_OPERATOR NAME "POLYMETA" STATUS ACTIVE ORIGIN "ASSISTANT-LABEL" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.POLYMETA KEY meaning VALUE "Typed bounded higher-order lifting over solver, optimizer and program machinery; authority is preserved, not increased."
+ENTITY Current.RMALSIR2 KIND SEMANTIC_IR NAME "RMAL-SIR2" STATUS ACTIVE ORIGIN "ASSISTANT-LABEL" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.RMALSIR2 KEY meaning VALUE "Proposed successor typed semantic IR carrying obligations, invariants, evidence and proof metadata."
+ENTITY Current.SpecContract KIND FIRST_USE_CONTRACT NAME "SpecContract" STATUS ACTIVE ORIGIN "ASSISTANT-LABEL" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.SpecContract KEY meaning VALUE "Immutable first-use gate: TARGET/GOAL/SCOPE/DIRECTION/PRESERVE/ALLOW/PRIORITY/SUCCESS/FAILURE/EVIDENCE/OUTPUT/RESOURCE_BOUNDS."
+ENTITY Current.ProofCertificate KIND PROOF_ARTIFACT NAME "ProofCertificate" STATUS ACTIVE ORIGIN "ASSISTANT-LABEL" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.ProofCertificate KEY meaning VALUE "Machine-checkable proof metadata used for bounded formal admission."
+ENTITY Current.ProofAwareLinker KIND LINKER NAME "Proof-aware linker" STATUS ACTIVE ORIGIN "ASSISTANT-LABEL" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.ProofAwareLinker KEY meaning VALUE "Rejects incompatible contracts, missing proof dependencies and claim-ceiling escalation."
+ENTITY Current.SemanticDebugger KIND DEBUGGER NAME "Semantic debugger" STATUS ACTIVE ORIGIN "ASSISTANT-LABEL" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.SemanticDebugger KEY meaning VALUE "Traces source, transforms, obligations, solver choices, proofs, provenance and runtime outcomes."
+ENTITY Current.EyeOfStorm KIND OBSERVER_LENS NAME "Eye of the Storm Compass Rose" STATUS ACTIVE ORIGIN "USER-CONFIRMED" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.EyeOfStorm KEY meaning VALUE "Five-eye/quadrocloptic observer/lens scaffold for 4D-oriented reconstruction experiments; no universal reconstruction claim."
+ENTITY Current.SemanticRotation KIND TRANSFORM_OPERATOR NAME "Semantic Rotation" STATUS ACTIVE ORIGIN "USER-CONFIRMED" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.SemanticRotation KEY meaning VALUE "Representation change intended to preserve declared invariants; rotation is distinct from mutation."
+ENTITY Current.OneDegree KIND EXPERIMENT_PROTOCOL NAME "One-degree experiment" STATUS ACTIVE ORIGIN "USER-CONFIRMED" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.OneDegree KEY meaning VALUE "Exactly one independently fluctuating experimental degree of freedom per observation where practicable; interactions added only when necessary."
+ENTITY Current.RippingManyArmsOff KIND ACTIVE_GAME_PROJECT NAME "Ripping Many Arms Off" STATUS ACTIVE ORIGIN "USER-CONFIRMED" SCOPE "current context" AUTHORITY NONE PROVENANCE "2026-09-18 current integration"
+ATTRIBUTE Current.RippingManyArmsOff KEY meaning VALUE "Sole active game branch in current approval state; historical game branches remain provenance only."
+
+RELATE Current.ConstraintSystemSynthesizer AS FORMULATES TO Name-26FFE474FCA7EF815BC0 AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.MetaSolver AS SELECTS_PLANS_FOR TO Name-26FFE474FCA7EF815BC0 AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.DecisionFieldCompiler AS FORMULATES_BEFORE_SOLVING TO Name-26FFE474FCA7EF815BC0 AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.POLYMETA AS LIFTS TO Current.MetaSolver AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.POLYMETA AS LIFTS TO Current.ProofAwareLinker AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.POLYMETA AS LIFTS TO Current.SemanticDebugger AUTHORITY NONE EVIDENCE_TRANSFER DENY
+BOUNDARY Current.POLYMETA CLAIM_CEILING BOUNDED_BY_EVIDENCE REASON "higher-order lifting does not grant new authority or bypass proof obligations"
+BOUNDARY Current.RMALSIR2 CLAIM_CEILING DESIGN_SPEC REASON "proposed successor IR until implementation parity and proof-carrying acceptance criteria are met"
+BOUNDARY Current.EyeOfStorm CLAIM_CEILING RESEARCH_SCAFFOLD REASON "five-eye/quadrocloptic lens is a reconstruction/search scaffold, not a proof of arbitrary 4D reconstruction"
+BOUNDARY Current.RippingManyArmsOff CLAIM_CEILING ACTIVE_PROJECT_ONLY REASON "game-project status carries no scientific evidence authority"
+
+ATTRIBUTE Current.RippingManyArmsOff KEY historical_predecessor VALUE "Red Wilds — retained only as predecessor provenance"
+RELATE Name-14A36E88F67638439203 AS HISTORICAL_GAME_PREDECESSOR TO Current.RippingManyArmsOff AUTHORITY NONE EVIDENCE_TRANSFER DENY
+BOUNDARY Name-14A36E88F67638439203 CLAIM_CEILING HISTORICAL_PROVENANCE REASON "retained as historical corpus provenance; not the current active game branch"
+RELATE Name-3E1EB518E1A0FBE80CD0 AS PROCESSED_BY TO Kernel.Field AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-AA0D71FA2D8BE01D8078 AS PROCESSED_BY TO Kernel.Lineage AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-9CE5D56A08D8AC0D5617 AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-26FFE474FCA7EF815BC0 AS PROCESSED_BY TO Kernel.Field AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-CB660D3EAF8CFA7987DD AS PROCESSED_BY TO Kernel.Rotation AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-D4E7F9FEB672D5851259 AS PROCESSED_BY TO Kernel.Rotation AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-BF6EE397AFD41F980D1F AS PROCESSED_BY TO Kernel.Lineage AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-23DEF402C9D22F9BAD4A AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-29AC7E56B3B4654F5246 AS PROCESSED_BY TO Kernel.Lineage AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-129425158CF3F3113740 AS PROCESSED_BY TO Kernel.Lineage AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-63257ADA83BE8EAF186E AS PROCESSED_BY TO Kernel.Rotation AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-D8B0F1DE2500842EDC7E AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-85422B5D48421AB1452B AS PROCESSED_BY TO Kernel.Rotation AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-BF99C8E495D72889A174 AS PROCESSED_BY TO Kernel.Rotation AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-EAAB48547F688D18DC48 AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-7BC88034F6EC9DDE3370 AS PROCESSED_BY TO Kernel.Field AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-E771828FAA625B59E71C AS PROCESSED_BY TO Kernel.Field AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-B0E5ADB483BAEB7F6B99 AS PROCESSED_BY TO Kernel.Lineage AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-F77A1EE1942615C38291 AS PROCESSED_BY TO Kernel.Lineage AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-8E221999425487482855 AS PROCESSED_BY TO Kernel.Lineage AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-292DAFCD5027D98A3318 AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.MetaSolver AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.ConstraintSystemSynthesizer AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.DecisionFieldCompiler AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.POLYMETA AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.RMALSIR2 AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.ProofCertificate AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.ProofAwareLinker AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.SemanticDebugger AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.EyeOfStorm AS PROCESSED_BY TO Kernel.Rotation AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.SemanticRotation AS PROCESSED_BY TO Kernel.Rotation AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Current.OneDegree AS PROCESSED_BY TO Kernel.Execution AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-3F8905BD38C1AFC63115 AS CURRENT_XREF_RESOLVES_TO TO Current.EyeOfStorm AUTHORITY NONE EVIDENCE_TRANSFER DENY
+RELATE Name-1A9EB9F306F0B6248FBD AS CURRENT_XREF_RESOLVES_TO TO Current.EyeOfStorm AUTHORITY NONE EVIDENCE_TRANSFER DENY
+
+CLAIM ContextCrack.C1 STATUS VERIFIED_COMPUTATION TEXT "Pass 1 naming universe compiles under RMALC 1.3 without modifying its recovered records."
+CLAIM ContextCrack.C2 STATUS DECLARED TEXT "the five kernels are a processing basis, not semantic identity classes for the projects they route."
+CLAIM ContextCrack.C3 STATUS DECLARED TEXT "one-machine composition preserves project distinctions, evidence ceilings, lineage and unresolved remainder."
+BOUNDARY ContextCrack.Root CLAIM_CEILING BOUNDED_CONTEXT_INTEGRATION REASON "this integration compresses the declared recovered/current context; it does not prove semantic completeness over all past or future human knowledge"
+
+PRESERVE identity distinctions obligations invariants provenance history failures unknowns unresolved_remainder claim_ceilings
+ALLOW retrieve formulate generate rotate fit constrain solve meta_solve polymeta counterprobe verify admit build compile link run debug reconstruct continue
+EXCLUDE silent_identity_merge silent_evidence_transfer authority_amplification hidden_oracle hidden_cost finite_to_universal_promotion p_eq_np_claim_promotion
+REMAINDER "Unrecovered conversations, unresolved xrefs, unimplemented RMAL-SIR2/POLYMETA proof machinery, and open mathematical claims remain explicit remainder."

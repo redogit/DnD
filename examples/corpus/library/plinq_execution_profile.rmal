@@ -1,0 +1,32 @@
+# RMAL LINQ MILESTONE CANDIDATE — FRACTAL PROVIDER PROFILE
+# AUTHORITY NONE. It changes execution coordinates, not query meaning.
+
+CONTEXT PLINQProfile query_identity="INVARIANT" execution_coordinates="NEGOTIABLE" default="ENABLE_WHEN_VALID"
+PRESERVE ordering_obligation
+PRESERVE declared_effects
+PRESERVE authority
+PRESERVE provenance
+PRESERVE evidence_boundary
+PRESERVE privacy
+PRESERVE source_revision
+PRESERVE recoverability
+
+LET ParallelGate = REQUIRE source_snapshot="FROZEN" AND declared_effects="READ_ONLY" AND shared_mutable_worker_state="NONE"
+LET ParallelPlan = FROZEN_SOURCE_SNAPSHOT -> EVALUATE_BOUNDED_PARALLEL -> DETERMINISTIC_ORDER_BARRIER -> EMIT
+LET SequentialPlan = FROZEN_SOURCE_SNAPSHOT -> EVALUATE_SEQUENTIAL -> DETERMINISTIC_ORDER_BARRIER -> EMIT
+
+LET CacheKey = HASH(QueryPlanDigest, SourceRevisionID, Authority, EvidenceBoundary, ProviderSemanticsVersion, RuleObjectUOIDs)
+LET CacheGate = REQUIRE exact_key_match AND result_digest_reverified
+
+RULE P01 IF ParallelGate fails THEN FORCE_SEQUENTIAL
+RULE P02 IF final ordering cannot be reconstructed THEN NO_PARALLEL
+RULE P03 IF cache authority/provenance/integrity cannot be reconstructed THEN NO_CACHE
+RULE P04 IF user declares NO_PARALLEL THEN sequential
+RULE P05 IF user declares FORCE_SEQUENTIAL THEN sequential
+RULE P06 IF user declares NO_REORDER THEN reject any physical strategy requiring observable reorder
+RULE P07 IF async provider is unavailable THEN reject async substitution without changing QueryPlan identity
+
+UNRESOLVED native_async_source_provider
+UNRESOLVED vectorized_execution
+UNRESOLVED columnar_carrier
+UNRESOLVED portable_cross_provider_queryplan

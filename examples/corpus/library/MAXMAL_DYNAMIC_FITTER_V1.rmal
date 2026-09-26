@@ -1,0 +1,370 @@
+# MAXMAL / US_FIRST / BOOK-OF-KEYS — CANONICAL RMAL COMPILATION UNIT
+# Target: documented RMAL canonical declaration/control surface.
+# Meta-behavior is carried by typed OPERATOR and RULE contracts.
+
+LANGUAGE MAXMAL_RMAL SURFACES canonical,user-native,sexpr BACKENDS object,bytecode,ir-json,human
+
+# ---------------------------------------------------------------------------
+# 0. FOUNDATIONAL TYPES
+# ---------------------------------------------------------------------------
+
+TYPE Problem BASE Value
+TYPE ProblemSet BASE Value
+TYPE Decision BASE Value
+TYPE DecisionField BASE Value
+TYPE Method BASE Value
+TYPE Maxim BASE Value
+TYPE MaximDelta BASE Value
+TYPE AttackLedger BASE Value
+TYPE RepairSet BASE Value
+TYPE ParetoFront BASE Value
+TYPE BookKey BASE Value
+TYPE EvidencePacket BASE Value
+TYPE Remainder BASE Value
+TYPE HodgePage BASE Value
+TYPE HodgeKey BASE Value
+
+TRAIT Reconstructible REQUIRE provenance evidence remainder
+TRAIT Scoped REQUIRE domain scope
+TRAIT Counterprobed REQUIRE falsifier
+TRAIT KeyAdmissible REQUIRE provenance scope reconstruction
+
+CLASS ResearchKey REQUIRE Reconstructible Scoped Counterprobed HAS protected_questions discarded_distinctions
+CLASS MaximKey REQUIRE Reconstructible Scoped Counterprobed HAS role applicability counterexamples
+CLASS HodgeResearchKey REQUIRE Reconstructible Scoped HAS coefficient dimension codimension primitive_state
+
+# ---------------------------------------------------------------------------
+# 1. CONSTITUTIONAL DISTINCTIONS
+# ---------------------------------------------------------------------------
+
+PRESERVE User_Assistant_Distinction
+PRESERVE Median_Average_Distinction
+PRESERVE Surface_Semantics_Distinction
+PRESERVE Parse_Truth_Distinction
+PRESERVE Generate_Verify_Admit_Distinction
+PRESERVE Fit_Truth_Distinction
+PRESERVE Counterprobed_Proved_Distinction
+PRESERVE FiniteVerification_Universality_Distinction
+PRESERVE ToolSuccess_Truth_Distinction
+PRESERVE ToolFailure_False_Distinction
+PRESERVE Memory_Evidence_Distinction
+PRESERVE Agreement_Evidence_Distinction
+PRESERVE SameNumber_SameMeaning_Distinction
+PRESERVE Unknown_Absent_Distinction
+PRESERVE Unresolved_False_Distinction
+PRESERVE BudgetExhausted_Optimal_Distinction
+PRESERVE Linked_Proved_Distinction
+PRESERVE Trace_Proof_Distinction
+PRESERVE Rotation_Mutation_Distinction
+PRESERVE Current_History_Distinction
+
+ALLOW representation_change
+ALLOW reversible_rotation
+ALLOW query_scoped_equivalence
+ALLOW bounded_counterprobe
+
+RULE R_DIST_01 IF "User and Assistant are compared" THEN "preserve their distinct identities and roles"
+RULE R_DIST_02 IF "a median is computed" THEN "treat it as a shared kernel rather than an average"
+RULE R_DIST_03 IF "a parser accepts a surface" THEN "do not infer truth from parsing"
+RULE R_DIST_04 IF "a candidate is generated" THEN "verification and admission remain separate"
+RULE R_DIST_05 IF "a finite panel passes" THEN "retain the finite claim ceiling"
+RULE R_DIST_06 IF "a tool fails" THEN "do not convert failure into false"
+RULE R_DIST_07 IF "two values are numerically equal" THEN "check semantic type and derivation before merging"
+
+# ---------------------------------------------------------------------------
+# 2. USER / ASSISTANT MEDIAN
+# ---------------------------------------------------------------------------
+
+CONTEXT UserMethod role="exploratory" counterprobe="self_attack" perturbation="smallest_interpretable_change" continuation="remainder"
+CONTEXT AssistantMethod role="boundary_discipline" evidence="typed" verification="explicit" continuation="remainder"
+CONTEXT SharedMedian role="shared_operational_kernel" authority="none" evidence_transfer="deny"
+
+RELATION SharedKernel ALLOW UserMethod AssistantMethod DENY authority_transfer evidence_transfer
+RELATION StructuralTransfer ALLOW Method Method DENY evidence_transfer
+RELATION EvidenceTransfer DENY UserMethod AssistantMethod
+
+CLAIM C_MEDIAN STATUS BOUNDED_CLAIM TEXT "The median is the shared operational kernel, not an average and not a truth authority."
+RULE R_MEDIAN_01 IF "a useful asymmetry is erased" THEN "restore the asymmetry and keep only the shared kernel"
+RULE R_MEDIAN_02 IF "user and assistant agree" THEN "do not strengthen evidence solely from agreement"
+
+# ---------------------------------------------------------------------------
+# 3. BOOK OF KEYS
+# ---------------------------------------------------------------------------
+
+CONTEXT BookOfKeys role="navigation_and_reconstruction" unit="reusable_key" truth_authority="none"
+RELATION BookContains ALLOW BookKey ResearchKey DENY evidence_transfer
+RELATION KeyOpens ALLOW BookKey Problem DENY authority_transfer
+
+CLAIM C_BOOK STATUS BOUNDED_CLAIM TEXT "The Book stores reusable reconstructing keys rather than merely accumulating answers."
+RULE R_BOOK_01 IF "a candidate key cannot reconstruct its protected distinctions" THEN "demote it to a witness"
+RULE R_BOOK_02 IF "a candidate key solves only one page and opens no reusable navigation" THEN "archive it as a page witness"
+RULE R_BOOK_03 IF "future protected questions distinguish discarded state" THEN "reject the lossy merge and restore the distinction"
+
+# ---------------------------------------------------------------------------
+# 4. US_FIRST COMMAND CONTRACT
+# ---------------------------------------------------------------------------
+
+CONTEXT CommandAliases us_first="/US_FIRST" yes_yes="contextual_US_FIRST" crush_it="contextual_US_FIRST"
+CONFIG US_FIRST_Default capture_raw=true attack_interpretation=true attack_boundary=true attack_assumptions=true counterprobe=true preserve_failures=true preserve_unknowns=true evidence_transfer=deny
+PROFILE US_FIRST_Strict INCLUDE US_FIRST_Default attack_depth="bounded" admission="verified_within_scope" cross_domain_evidence="deny"
+
+OPERATOR US_FIRST BIND DecisionField INPUT Problem OUTPUT DecisionField EFFECT analyze AUTHORITY user PRESERVE raw_input provenance failures unknowns remainder REQUIRE scope
+OPERATOR FreezeInput BIND Problem INPUT Problem OUTPUT Problem EFFECT custody AUTHORITY user PRESERVE raw_input provenance
+OPERATOR Distinguish BIND DecisionField INPUT Problem OUTPUT DecisionField EFFECT analyze AUTHORITY none PRESERVE provenance
+OPERATOR FormulateField BIND DecisionField INPUT Problem OUTPUT DecisionField EFFECT analyze AUTHORITY none PRESERVE raw_input provenance
+OPERATOR RotateField BIND DecisionField INPUT DecisionField OUTPUT DecisionField EFFECT representation AUTHORITY none PRESERVE invariants provenance
+OPERATOR CounterprobeField BIND DecisionField INPUT DecisionField OUTPUT AttackLedger EFFECT verify AUTHORITY none PRESERVE baseline provenance failures
+OPERATOR SplitAlias BIND DecisionField INPUT DecisionField OUTPUT DecisionField EFFECT repair AUTHORITY none PRESERVE distinctions provenance
+OPERATOR MergeEquivalent BIND DecisionField INPUT DecisionField OUTPUT DecisionField EFFECT repair AUTHORITY none PRESERVE witnesses provenance REQUIRE query_scope
+OPERATOR ExtractKey BIND BookKey INPUT DecisionField OUTPUT BookKey EFFECT reconstruct AUTHORITY none PRESERVE provenance evidence remainder REQUIRE reconstruction
+OPERATOR RouteRemainder BIND Remainder INPUT DecisionField OUTPUT Remainder EFFECT route AUTHORITY none PRESERVE provenance unknowns
+
+RULE R_US_00 IF "input arrives" THEN "freeze the raw surface with provenance before interpretation"
+RULE R_US_01 IF "multiple consequential interpretations survive" THEN "split the alias and preserve every survivor"
+RULE R_US_02 IF "the problem boundary changes the conclusion" THEN "expand the field minimally and record the boundary failure"
+RULE R_US_03 IF "a probe is cheap but insufficiently discriminating" THEN "select the cheapest sufficiently discriminating independent probe"
+RULE R_US_04 IF "one independent degree does not exist" THEN "change the smallest independently interpretable coupled block and record the coupling"
+RULE R_US_05 IF "a hypothesis survives a counterprobe" THEN "promote only to the evidence status justified by that declared probe"
+RULE R_US_06 IF "an equivalence is proved only for one question family" THEN "keep the equivalence local to that question family"
+RULE R_US_07 IF "a tool succeeds" THEN "treat the output as tool evidence rather than automatic truth"
+RULE R_US_08 IF "a tool fails" THEN "preserve failure without converting it to false"
+RULE R_US_09 IF "memory conflicts with current explicit input" THEN "current explicit input governs the current task while provenance preserves the conflict"
+RULE R_US_10 IF "self attack exposes no new consequential distinction" THEN "stop meta recursion and preserve the unresolved meta remainder"
+RULE R_US_11 IF "discovery exposes an orthogonal region" THEN "allow the decision field to expand before later reduction"
+RULE R_US_12 IF "cross domain structure transfers" THEN "deny evidence transfer unless an explicit bridge independently warrants it"
+
+CLAIM C_US_FIRST STATUS COUNTERPROBED TEXT "US_FIRST captures, distinguishes, attacks, verifies, preserves failures, extracts a reconstructing key, and continues from the remainder."
+COUNTERPROBE "Can two states merged by US_FIRST be distinguished by a protected current or future question?"
+VERIFY "US_FIRST preserves raw input, provenance, failures, unknowns, query-scoped equivalence and remainder."
+
+# ---------------------------------------------------------------------------
+# 5. BOOLEAN DECISION FIELD
+# ---------------------------------------------------------------------------
+
+CONTEXT BooleanDecisionField value_domain="false,true" hard_facts="mandatory" soft_constraints="non_truth_authority" unresolved="preserve"
+RELATION DecisionDependsOn ALLOW Decision Decision DENY authority_transfer
+RELATION ConstraintAppliesTo ALLOW Maxim DecisionField DENY evidence_transfer
+
+OPERATOR Booleanize BIND DecisionField INPUT ProblemSet OUTPUT DecisionField EFFECT analyze AUTHORITY none PRESERVE facts provenance
+OPERATOR ResolveDecision BIND DecisionField INPUT DecisionField Decision OUTPUT DecisionField EFFECT solve AUTHORITY none PRESERVE provenance witnesses
+OPERATOR ProveIrrelevant BIND DecisionField INPUT DecisionField Decision OUTPUT DecisionField EFFECT solve AUTHORITY none PRESERVE proof_witness provenance
+OPERATOR ExposeDependency BIND DecisionField INPUT DecisionField Decision OUTPUT DecisionField EFFECT analyze AUTHORITY none PRESERVE provenance
+OPERATOR ReplaceWithStatistic BIND DecisionField INPUT DecisionField OUTPUT DecisionField EFFECT compress AUTHORITY none PRESERVE protected_questions provenance REQUIRE sufficiency
+
+RULE R_DF_01 IF "a distinction is unresolved" THEN "do not coerce it to false"
+RULE R_DF_02 IF "a distinction is removable only under one obligation" THEN "remove it only under that active obligation"
+RULE R_DF_03 IF "compression exports consequential reconstruction cost" THEN "do not call the compression superior by size alone"
+
+# ---------------------------------------------------------------------------
+# 6. MAXIMS
+# ---------------------------------------------------------------------------
+
+CONTEXT Maxim_PreserveMeaning role="HARD_INVARIANT" scope="semantic_transform"
+CONTEXT Maxim_PreserveProvenance role="HARD_INVARIANT" scope="all_consequential_work"
+CONTEXT Maxim_PreserveReconstructibility role="HARD_INVARIANT" scope="book_keys"
+CONTEXT Maxim_HumanAgency role="PROTECTIVE_CONSTRAINT" scope="human_choices"
+CONTEXT Maxim_Privacy role="PROTECTIVE_CONSTRAINT" scope="personal_information"
+CONTEXT Maxim_Accessibility role="PROTECTIVE_CONSTRAINT" scope="human_interfaces"
+CONTEXT Maxim_Reversibility role="SOFT_CONSTRAINT" scope="change_selection"
+CONTEXT Maxim_MinimizeHiddenCost role="SOFT_CONSTRAINT" scope="optimization"
+CONTEXT Maxim_ExposeUncertainty role="HARD_INVARIANT" scope="claims"
+CONTEXT Maxim_SeekCounterexamples role="GENERATOR" scope="research"
+CONTEXT Maxim_PreserveFailures role="HARD_INVARIANT" scope="research"
+CONTEXT Maxim_Reproducibility role="PRIORITY" scope="evidence"
+CONTEXT Maxim_Simplicity role="PREFERENCE" scope="equal_evidence"
+CONTEXT Maxim_NoPopularityTruth role="HARD_INVARIANT" scope="knowledge"
+
+RELATION MaximConstrains ALLOW Maxim DecisionField DENY evidence_transfer
+RELATION MaximGenerates ALLOW Maxim DecisionField DENY evidence_transfer
+RELATION MaximPrioritizes ALLOW Maxim DecisionField DENY truth_promotion
+
+RULE R_MAXIM_00 IF "a maxim is frequent" THEN "do not infer truth from frequency"
+RULE R_MAXIM_01 IF "a maxim is a priority" THEN "change search order without changing truth"
+RULE R_MAXIM_02 IF "a maxim is a preference" THEN "do not silently promote it to a hard constraint"
+RULE R_MAXIM_03 IF "a fact is externally constrained" THEN "maxims may steer responses and tradeoffs but may not rewrite the fact"
+RULE R_MAXIM_04 IF "normative maxims conflict" THEN "preserve the conflict and return a Pareto frontier rather than inventing one universal scalar objective"
+
+# ---------------------------------------------------------------------------
+# 7. MAXIM DERIVATIVE
+# ---------------------------------------------------------------------------
+
+OPERATOR ToggleMaxim BIND DecisionField INPUT DecisionField Maxim OUTPUT DecisionField EFFECT experiment AUTHORITY none PRESERVE facts provenance REQUIRE applicability
+OPERATOR MaximDerivative BIND MaximDelta INPUT DecisionField Maxim OUTPUT MaximDelta EFFECT analyze AUTHORITY none PRESERVE facts provenance witnesses REQUIRE applicability
+OPERATOR MaximInteraction BIND MaximDelta INPUT DecisionField Maxim Maxim OUTPUT MaximDelta EFFECT analyze AUTHORITY none PRESERVE facts provenance witnesses REQUIRE applicability
+OPERATOR MaximGradient BIND MaximDelta INPUT DecisionField OUTPUT MaximDelta EFFECT analyze AUTHORITY none PRESERVE facts provenance
+
+CLAIM C_MAXIM_DERIVATIVE STATUS BOUNDED_CLAIM TEXT "A maxim derivative is the discrete change in the declared survivor field caused by toggling that maxim under fixed scope and facts."
+RULE R_DERIV_01 IF "a first derivative is zero" THEN "do not conclude the maxim is globally irrelevant"
+RULE R_DERIV_02 IF "two maxims interact" THEN "record the interaction instead of assigning the effect to either maxim alone"
+RULE R_DERIV_03 IF "the scope or hard facts change" THEN "recompute the derivative rather than reusing the prior value"
+
+# ---------------------------------------------------------------------------
+# 8. MAXIMAL ATTACK
+# ---------------------------------------------------------------------------
+
+CONFIG MaximalAttack_Default attack_decisions=true attack_constraints=true attack_maxims=true attack_equivalence=true attack_compression=true attack_boundary=true attack_success=true attack_failure=true
+OPERATOR MaximalAttack BIND AttackLedger INPUT DecisionField OUTPUT AttackLedger EFFECT verify AUTHORITY none PRESERVE baseline provenance failures unknowns remainder REQUIRE resource_bound
+
+RULE R_ATTACK_01 IF "a decision can be flipped within scope" THEN "observe the consequence and restore the baseline"
+RULE R_ATTACK_02 IF "a hard constraint can be removed, negated or weakened for testing" THEN "record the resulting field delta without silently changing authority"
+RULE R_ATTACK_03 IF "success is found" THEN "attack boundary, inverse, degenerate, adversarial and counterexample cases before admission"
+RULE R_ATTACK_04 IF "failure is found" THEN "extract the exact failure boundary, violated invariant, hidden dependency and surviving structure"
+RULE R_ATTACK_05 IF "maximal attack reaches the resource bound" THEN "preserve the exact unresolved remainder and do not call the result optimal"
+
+CLAIM C_MAXIMAL_ATTACK STATUS BOUNDED_CLAIM TEXT "Maximal means exposing every consequential attack reachable within the declared resource boundary, not applying every possible maxim maximally."
+
+# ---------------------------------------------------------------------------
+# 9. MAXMAL REPAIR
+# ---------------------------------------------------------------------------
+
+OPERATOR FindConflictKernel BIND RepairSet INPUT AttackLedger OUTPUT RepairSet EFFECT analyze AUTHORITY none PRESERVE provenance witnesses
+OPERATOR MinimalRepair BIND RepairSet INPUT DecisionField RepairSet OUTPUT RepairSet EFFECT repair AUTHORITY none PRESERVE hard_facts protected_constraints provenance REQUIRE authority
+OPERATOR ParetoRepair BIND ParetoFront INPUT RepairSet OUTPUT ParetoFront EFFECT optimize AUTHORITY user PRESERVE alternatives provenance remainder
+OPERATOR MAXMAL BIND ParetoFront INPUT ProblemSet OUTPUT ParetoFront EFFECT solve AUTHORITY user PRESERVE facts provenance failures unknowns remainder REQUIRE scope
+
+RULE R_REPAIR_01 IF "the survivor set is empty" THEN "search for a minimal contradictory kernel before declaring the parent problem impossible"
+RULE R_REPAIR_02 IF "multiple minimal repairs survive" THEN "return the Pareto set unless human authority selects among normative tradeoffs"
+RULE R_REPAIR_03 IF "repair would alter a protected hard fact" THEN "reject the repair"
+RULE R_REPAIR_04 IF "repair would alter an authorized protective constraint" THEN "require explicit authority change"
+RULE R_REPAIR_05 IF "a repaired result depends on an unresolved edge" THEN "the downstream result inherits that unresolved dependency"
+
+CLAIM C_MAXMAL STATUS COUNTERPROBED TEXT "MAXMAL combines Boolean DecisionFields, maxim derivatives, maximal attack, minimal conflict repair, Pareto preservation and Book-key extraction without treating maxims as automatic truths."
+
+# ---------------------------------------------------------------------------
+# 10. DATA-DRIVEN MAXIM LEARNING
+# ---------------------------------------------------------------------------
+
+OPERATOR LearnMaximStats BIND Maxim INPUT ProblemSet Maxim OUTPUT Maxim EFFECT analyze AUTHORITY none PRESERVE provenance counterexamples domain_failures
+OPERATOR PromoteMaxim BIND Maxim INPUT Maxim OUTPUT Maxim EFFECT classify AUTHORITY user PRESERVE provenance counterexamples REQUIRE cross_domain_counterprobe
+
+RULE R_LEARN_01 IF "a maxim succeeds historically" THEN "record support without promoting it to universal truth"
+RULE R_LEARN_02 IF "a maxim fails by domain" THEN "narrow applicability and preserve the counterexample"
+RULE R_LEARN_03 IF "a candidate maxim survives cross domain attacks" THEN "promote only to a broader candidate maxim"
+RULE R_LEARN_04 IF "measurement optimization hides an unmeasured remainder" THEN "record Goodhart risk and reopen the field"
+
+# ---------------------------------------------------------------------------
+# 11. BOOK ADMISSION
+# ---------------------------------------------------------------------------
+
+OPERATOR AdmitBookKey BIND BookKey INPUT BookKey OUTPUT BookKey EFFECT admit AUTHORITY user PRESERVE provenance evidence remainder REQUIRE reconstruction
+RULE R_ADMIT_01 IF "a key preserves protected questions and reconstructs consequential distinctions" THEN "it may be admitted within its declared scope"
+RULE R_ADMIT_02 IF "a key gains authority only from compression, transport, linking or repetition" THEN "reject the authority upgrade"
+RULE R_ADMIT_03 IF "a key is imported into a new domain" THEN "transfer structure only by default and deny evidence transfer"
+
+# ---------------------------------------------------------------------------
+# 12. HODGE ADAPTER / BLANK-PAGE LAB
+# ---------------------------------------------------------------------------
+
+CONTEXT HodgeTarget coefficient="Q" variety="smooth_projective_complex" general_status="open" first_general_frontier="complex_fourfold_codimension_two"
+CONTEXT HodgePageSchema zones="geometry,verified_seam,hodge_topology" vertical="value,residual,witness,variation,obstruction"
+PROFILE Hodge_Strict INCLUDE US_FIRST_Strict domain="Hodge" evidence_transfer="deny" promotion="external_validation_required"
+
+OPERATOR HodgeBlankPage BIND HodgePage INPUT Problem OUTPUT HodgePage EFFECT analyze AUTHORITY none PRESERVE geometry topology seam provenance witnesses remainder
+OPERATOR HodgeRemoveSolvedRegion BIND DecisionField INPUT DecisionField HodgeKey OUTPUT DecisionField EFFECT solve AUTHORITY none PRESERVE proof_witness provenance REQUIRE theorem_scope
+OPERATOR HodgePrimitiveResidual BIND DecisionField INPUT DecisionField OUTPUT DecisionField EFFECT analyze AUTHORITY none PRESERVE rationality primitive_state provenance
+OPERATOR HodgeOrbitKey BIND HodgeKey INPUT HodgePage OUTPUT HodgeKey EFFECT compress AUTHORITY none PRESERVE internal_conjugate_structure provenance REQUIRE query_scope
+OPERATOR HodgeCycleWitness BIND EvidencePacket INPUT HodgePage OUTPUT EvidencePacket EFFECT verify AUTHORITY none PRESERVE cycle_class provenance REQUIRE independent_bridge
+
+CLAIM C_HODGE_OPEN STATUS UNRESOLVED TEXT "The general rational Hodge conjecture remains open."
+CLAIM C_HODGE_BOOK_METHOD STATUS BOUNDED_CLAIM TEXT "Hodge work proceeds by theorem-backed removal of solved regions while preserving witnesses and the exact primitive rational remainder."
+RULE R_HODGE_01 IF "a region is solved by a theorem within exact scope" THEN "remove that decision region and retain the theorem witness"
+RULE R_HODGE_02 IF "a first order seam closes" THEN "retain witness data and continue to higher order rather than erasing the row beneath it"
+RULE R_HODGE_03 IF "Galois orbit members differ under a protected diagnostic" THEN "keep the orbit as one rational object while preserving its internal conjugate profile"
+RULE R_HODGE_04 IF "a numerical dimension difference compares semantically different spaces" THEN "preserve the semantic type and do not interpret the subtraction as a cycle deficit"
+
+# ---------------------------------------------------------------------------
+# 13. EXECUTION ORDER
+# ---------------------------------------------------------------------------
+
+CONTEXT CanonicalPipeline step_00="FreezeInput" step_01="US_FIRST" step_02="Booleanize" step_03="MaximGradient" step_04="MaximalAttack" step_05="FindConflictKernel" step_06="MinimalRepair" step_07="ParetoRepair" step_08="ExtractKey" step_09="AdmitBookKey" step_10="RouteRemainder"
+
+RULE R_PIPE_00 IF "a new input arrives" THEN "run the capture and micro attack before domain specialization"
+RULE R_PIPE_01 IF "the input is consequential" THEN "escalate to full US_FIRST and MAXMAL"
+RULE R_PIPE_02 IF "a domain adapter exists" THEN "apply it after shared method boundaries are established"
+RULE R_PIPE_03 IF "no consequential distinction remains" THEN "stop and preserve the reconstruction packet"
+RULE R_PIPE_04 IF "a newly exposed region matters" THEN "route it alongside the unresolved remainder"
+
+# ---------------------------------------------------------------------------
+# 14. FINAL CLAIM CEILINGS
+# ---------------------------------------------------------------------------
+
+CLAIM C_COMPILE_UNIT STATUS BOUNDED_CLAIM TEXT "This file is the canonical declarative compilation unit for the agreed US_FIRST, median, Book-of-Keys and MAXMAL method."
+CLAIM C_NOT_TRUTH STATUS BOUNDED_CLAIM TEXT "Compilation, linking, execution, repetition and agreement do not by themselves establish scientific or mathematical truth."
+EVIDENCE E_CURRENT_THREAD TYPE SOURCE_RECONSTRUCTION LINEAGE CURRENT_CONVERSATION TEXT "US_FIRST, median, maximal attack, MAXMAL and Book-of-Keys were developed and counterprobed in the current conversation."
+EVIDENCE E_RMAL_SPEC TYPE EXTERNAL_SPEC LINEAGE RMAL_TOOLCHAIN_2_1_1 TEXT "Canonical declaration forms are constrained to the current documented RMAL surface."
+
+VERIFY "Preserve constitutional distinctions."
+VERIFY "Preserve evidence and authority boundaries."
+VERIFY "Preserve query-scoped equivalence."
+VERIFY "Preserve failures, unknowns and unresolved remainder."
+COUNTERPROBE "Find a protected question that distinguishes any states this compilation merges."
+CONTINUE
+
+
+# ---------------------------------------------------------------------------
+# 15. DYNAMIC ADAPTIVE FITTER — SMALLEST RECONSTRUCTIBLE FIT CELL
+# ---------------------------------------------------------------------------
+
+TYPE FitCell BASE Value
+TYPE FitGraph BASE Value
+TYPE FitEvent BASE Value
+TYPE FitPlan BASE Value
+TYPE FitSnapshot BASE Value
+
+TRAIT SelfReorganizing REQUIRE provenance reconstruction rollback
+CLASS AdaptiveFitCell REQUIRE Reconstructible Scoped HAS decisions dependencies local_constraints local_remainder
+CLASS AdaptiveFitGraph REQUIRE Reconstructible Scoped HAS cells edges lineage
+
+CONTEXT DynamicFitter role="event_driven_self_reorganizer" smallest_unit="FitCell" truth_authority="none" evidence_transfer="deny"
+CONTEXT FitCellObjective primary="smallest_reconstructible_active_structure" secondary="low_cost_high_discrimination" forbidden="smallest_node_count_at_any_cost"
+CONFIG DynamicFitter_Default split_threshold="0.35" merge_threshold="0.10" interaction_threshold="0.25" hysteresis="0.05" cooldown_steps="2" max_cell_size="32" transaction="propose_verify_commit"
+PROFILE DynamicFitter_Strict INCLUDE DynamicFitter_Default rollback="required" evidence_transfer="deny" oscillation_guard="required" unknowns="preserve"
+
+RELATION FitCellContains ALLOW FitCell Decision DENY evidence_transfer
+RELATION FitCellDependsOn ALLOW FitCell FitCell DENY authority_transfer evidence_transfer
+RELATION FitCellDerivedFrom ALLOW FitCell FitCell DENY evidence_transfer
+RELATION FitGraphCarries ALLOW FitGraph FitCell DENY authority_transfer
+
+OPERATOR BuildFitCell BIND FitCell INPUT DecisionField OUTPUT FitCell EFFECT fit AUTHORITY none PRESERVE provenance evidence remainder REQUIRE scope
+OPERATOR ObserveFitGraph BIND FitSnapshot INPUT FitGraph DecisionField OUTPUT FitSnapshot EFFECT observe AUTHORITY none PRESERVE provenance evidence remainder
+OPERATOR ProposeFitReorganization BIND FitPlan INPUT FitGraph FitSnapshot OUTPUT FitPlan EFFECT plan AUTHORITY none PRESERVE baseline provenance evidence remainder
+OPERATOR VerifyFitReorganization BIND FitPlan INPUT FitPlan FitGraph DecisionField OUTPUT FitPlan EFFECT verify AUTHORITY none PRESERVE baseline provenance evidence remainder REQUIRE reconstruction
+OPERATOR CommitFitReorganization BIND FitGraph INPUT FitGraph FitPlan OUTPUT FitGraph EFFECT repair AUTHORITY none PRESERVE facts evidence provenance remainder REQUIRE verified_plan
+OPERATOR RollbackFitReorganization BIND FitGraph INPUT FitGraph FitPlan OUTPUT FitGraph EFFECT repair AUTHORITY none PRESERVE baseline provenance evidence remainder
+OPERATOR SplitFitCell BIND FitGraph INPUT FitGraph FitCell OUTPUT FitGraph EFFECT reorganize AUTHORITY none PRESERVE decisions evidence provenance remainder REQUIRE discriminating_split
+OPERATOR MergeFitCells BIND FitGraph INPUT FitGraph FitCell FitCell OUTPUT FitGraph EFFECT reorganize AUTHORITY none PRESERVE protected_questions evidence provenance REQUIRE query_scoped_equivalence
+OPERATOR RotateFitCell BIND FitGraph INPUT FitGraph FitCell OUTPUT FitGraph EFFECT representation AUTHORITY none PRESERVE invariants evidence provenance REQUIRE reconstruction
+OPERATOR RelinkFitGraph BIND FitGraph INPUT FitGraph FitSnapshot OUTPUT FitGraph EFFECT reorganize AUTHORITY none PRESERVE cells evidence provenance
+OPERATOR CompactFitGraph BIND FitGraph INPUT FitGraph OUTPUT FitGraph EFFECT compress AUTHORITY none PRESERVE protected_questions evidence provenance remainder REQUIRE reconstruction
+OPERATOR StabilizeFitGraph BIND FitGraph INPUT FitGraph OUTPUT FitGraph EFFECT govern AUTHORITY none PRESERVE cells provenance remainder
+OPERATOR DynamicFitterStep BIND FitGraph INPUT FitGraph DecisionField OUTPUT FitGraph EFFECT fit AUTHORITY none PRESERVE facts evidence provenance failures unknowns remainder REQUIRE resource_bound
+
+RULE R_FIT_00 IF "a DecisionField delta arrives" THEN "observe the affected FitCells before reorganizing"
+RULE R_FIT_01 IF "one FitCell contains internally distinguishable decision clusters" THEN "split only along the smallest independently reconstructible boundary"
+RULE R_FIT_02 IF "two FitCells are query-scoped equivalent and merging lowers cost without losing protected questions" THEN "merge them with an equivalence witness"
+RULE R_FIT_03 IF "cross-cell interaction exceeds the active interaction threshold" THEN "relink the cells before increasing inference inside either cell"
+RULE R_FIT_04 IF "a representation rotates while invariants reconstruct" THEN "rotate the cell without promoting evidence"
+RULE R_FIT_05 IF "a proposed reorganization changes facts, evidence strength or authority" THEN "reject the plan and rollback"
+RULE R_FIT_06 IF "reorganization oscillates across the hysteresis band" THEN "freeze the affected topology until new consequential evidence arrives"
+RULE R_FIT_07 IF "the active graph grows beyond the resource bound" THEN "compact only by verified sufficient statistics and preserve the discarded distinctions"
+RULE R_FIT_08 IF "a current probe cannot observe the hidden distinction" THEN "add or route to a genuinely new observation cell rather than infer harder from the same channel"
+RULE R_FIT_09 IF "the query family changes" THEN "recompute local equivalence and reopen previously merged cells when required"
+RULE R_FIT_10 IF "external evidence changes" THEN "invalidate only the dependent FitCells and preserve unaffected cells"
+RULE R_FIT_11 IF "a FitCell becomes idle but remains reconstructively useful" THEN "archive or cold-store it rather than delete its lineage"
+RULE R_FIT_12 IF "the resource budget tightens" THEN "reduce reorganization frequency before weakening semantic invariants"
+RULE R_FIT_13 IF "the resource budget expands" THEN "reopen only cells with unresolved remainder or known hidden coupling"
+RULE R_FIT_14 IF "no reorganization improves discrimination, reconstruction or cost" THEN "retain the current graph and continue observing"
+
+CLAIM C_DYNAMIC_FITTER STATUS COUNTERPROBED TEXT "The dynamic fitter reorganizes its own FitCell graph in response to DecisionField deltas while facts, evidence authority, provenance and reconstruction remain invariant."
+CLAIM C_FITCELL STATUS BOUNDED_CLAIM TEXT "FitCell is the smallest independently useful adaptive unit only relative to the active protected questions, not a universal atomic ontology."
+COUNTERPROBE "Can two DecisionFields with identical current observations require different fitter reorganizations under a protected future question?"
+COUNTERPROBE "Can split and merge rules oscillate without new evidence?"
+VERIFY "Every committed fitter topology has a rollback path and reconstructs protected distinctions."
+VERIFY "Fitter reorganization never strengthens evidence or modifies external facts."
+
+CONTEXT DynamicFitterPipeline step_00="ObserveFitGraph" step_01="ProposeFitReorganization" step_02="VerifyFitReorganization" step_03="CommitFitReorganization" step_04="RollbackFitReorganization_if_failed" step_05="StabilizeFitGraph"
+RULE R_FIT_PIPE_00 IF "US_FIRST exposes a new consequential distinction" THEN "send the delta to DynamicFitterStep"
+RULE R_FIT_PIPE_01 IF "MAXMAL exposes a conflict kernel" THEN "split or relink only the cells touched by that kernel"
+RULE R_FIT_PIPE_02 IF "MAXMAL repairs a field" THEN "recompute only the dependent fitter subgraph"
+RULE R_FIT_PIPE_03 IF "a Book key is admitted" THEN "permit cold compaction of cells fully reconstructible from that key"
+RULE R_FIT_PIPE_04 IF "a new blank page opens" THEN "instantiate the minimum FitCells needed by its active distinctions"

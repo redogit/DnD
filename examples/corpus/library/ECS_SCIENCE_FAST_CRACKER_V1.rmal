@@ -1,0 +1,37 @@
+# ECS SCIENCE FAST PROBLEM CRACKER v1
+LANGUAGE ECS_SCIENCE_FAST_CRACKER SURFACES canonical,user-native BACKENDS object,bytecode,ir-json,human
+
+TYPE ECSEntity BASE Value
+TYPE ECSComponent BASE Value
+TYPE ECSProbe BASE Value
+TYPE ECSResult BASE Value
+TYPE ECSFrontier BASE Value
+
+PRESERVE Provenance
+PRESERVE FailureHistory
+PRESERVE UnresolvedRemainder
+PRESERVE EvidenceAuthorityBoundary
+PRESERVE CurrentHistoricalBoundary
+PRESERVE CrossDomainEvidenceSeparation
+
+OPERATOR ECSObserve BIND ECSFrontier INPUT ECSEntity OUTPUT ECSFrontier EFFECT observe AUTHORITY none PRESERVE provenance
+OPERATOR ECSDistinguish BIND ECSFrontier INPUT ECSFrontier OUTPUT ECSFrontier EFFECT analyze AUTHORITY none PRESERVE provenance
+OPERATOR ECSQuotientLocal BIND ECSFrontier INPUT ECSFrontier OUTPUT ECSFrontier EFFECT representation AUTHORITY none PRESERVE query_scope evidence_boundaries
+OPERATOR ECSMeasureSplit BIND ECSProbe INPUT ECSFrontier OUTPUT ECSProbe EFFECT analyze AUTHORITY none PRESERVE cost claim_ceiling
+OPERATOR ECSSelectProbe BIND ECSProbe INPUT ECSFrontier OUTPUT ECSProbe EFFECT route AUTHORITY none PRESERVE cost independence discrimination
+OPERATOR ECSActuate BIND ECSResult INPUT ECSProbe OUTPUT ECSResult EFFECT execute AUTHORITY none PRESERVE provenance
+OPERATOR ECSVerify BIND ECSResult INPUT ECSResult OUTPUT ECSResult EFFECT verify AUTHORITY none PRESERVE claim_ceiling
+OPERATOR ECSEliminateOrSplit BIND ECSFrontier INPUT ECSResult OUTPUT ECSFrontier EFFECT repair AUTHORITY none PRESERVE failures remainder
+OPERATOR ECSRepeat BIND ECSFrontier INPUT ECSFrontier OUTPUT ECSFrontier EFFECT route AUTHORITY none PRESERVE lineage
+
+RULE ECS_R01 IF "a source is ingested" THEN "do not promote it to accepted fact without verification"
+RULE ECS_R02 IF "two domains use the same method" THEN "do not transfer evidence between them"
+RULE ECS_R03 IF "a probe is cheap but weak" THEN "prefer the cheapest sufficiently discriminating independent probe"
+RULE ECS_R04 IF "a failure occurs" THEN "retain it as evidence about the method or boundary"
+RULE ECS_R05 IF "coverage is missing" THEN "record explicit remainder instead of inferring absence"
+RULE ECS_R06 IF "finite execution passes" THEN "do not infer universality"
+RULE ECS_R07 IF "a quotient is formed" THEN "scope equivalence to the active question"
+
+CLAIM ECS_C01 STATUS BOUNDED_CLAIM TEXT "The fast cracker is an evidence-first ECS routing method for reducing an active DecisionField by cheap discriminating probes while preserving failures, provenance and remainder."
+COUNTERPROBE "Does the selected probe actually split live alternatives after full cost is charged?"
+VERIFY "No cross-domain evidence transfer, silent failure deletion, or universal claim from finite evidence."
