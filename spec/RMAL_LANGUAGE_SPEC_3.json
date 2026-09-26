@@ -1,13 +1,17 @@
 {
-  "schema": "rmal/language-contract/v3",
+  "schema": "rmal/language-contract/v3.1",
   "language": {
     "name": "RMAL",
     "full_name": "Ryan McMillan April Language",
-    "implementation": "C++20"
+    "implementation": "ISO C23",
+    "version": "3.1.0"
   },
   "compiler": {
     "name": "RMALC",
-    "full_name": "Ryan McMillan April Language Compiler"
+    "full_name": "Ryan McMillan April Language Compiler",
+    "version": "3.1.0",
+    "implementation_language": "ISO C23",
+    "primary_native_target": "Windows x64 / Clang / C23"
   },
   "stages": {
     "current": [
@@ -16,6 +20,7 @@
       "AST",
       "RMALBC1-lowering",
       "VM",
+      "manifest",
       "trace",
       "audit"
     ],
@@ -162,5 +167,18 @@
     "TRACE != PROOF",
     "HISTORY != CURRENT_AUTHORITY",
     "CURRENT_SYNTHESIS != RETROACTIVE_NAMING"
+  ],
+  "semantic_repairs": {
+    "const_immutability": "enforced",
+    "state_set_distinction": "enforced",
+    "typed_equality": "enforced",
+    "source_locations": "bytecode/directive/trace"
+  },
+  "predecessors": [
+    {
+      "implementation": "C++20",
+      "path": "history/cpp20",
+      "status": "preserved"
+    }
   ]
 }
