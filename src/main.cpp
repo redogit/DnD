@@ -13,7 +13,7 @@ static std::string readall(const std::string& p){
 int main(int argc,char** argv){
   try {
     if(argc<2){
-      std::cerr<<"rmalc <check|compile|run|audit|trace|selfcheck|language-spec|version> [file]\n";
+      std::cerr<<"rmalc <check|compile|manifest|run|audit|trace|selfcheck|language-spec|version> [file]\n";
       return 2;
     }
     std::string cmd=argv[1];
@@ -62,6 +62,7 @@ int main(int argc,char** argv){
       return 0;
     }
     if(cmd=="compile"){ std::cout<<rmal::disassemble(bc); return 0; }
+    if(cmd=="manifest"){ std::cout<<rmal::manifest(bc); return 0; }
     if(cmd=="audit"){ std::cout<<rmal::audit(p,bc); return 0; }
     if(cmd=="run"||cmd=="trace"){
       rmal::VM vm; vm.run(bc,cmd=="trace");
