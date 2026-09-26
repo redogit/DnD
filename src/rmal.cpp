@@ -118,12 +118,13 @@ Stmt Parser::statement(){
     ++i_; auto n=expect(TokenKind::Identifier,"name").lexeme; expect(TokenKind::Assign,"=");
     auto e=expression(); accept(TokenKind::Semicolon); Stmt s; s.kind=Stmt::Kind::Const; s.name=n; s.expr=e; return s;
   }
-  if(kw(peek(),"let")){
+  if(kw(peek(),"let")||kw(peek(),"LET")||kw(peek(),"STATE")||kw(peek(),"SET")){
     ++i_; auto n=expect(TokenKind::Identifier,"name").lexeme; expect(TokenKind::Assign,"=");
     auto e=expression(); accept(TokenKind::Semicolon); Stmt s; s.kind=Stmt::Kind::Let; s.name=n; s.expr=e; return s;
   }
   if(kw(peek(),"print")){ ++i_; auto e=expression(); accept(TokenKind::Semicolon); Stmt s; s.kind=Stmt::Kind::Print; s.expr=e; return s; }
-  if(kw(peek(),"assert")){ ++i_; auto e=expression(); accept(TokenKind::Semicolon); Stmt s; s.kind=Stmt::Kind::Assert; s.expr=e; return s; }
+  if(kw(peek(),"assert")||kw(peek(),"ASSERT")||kw(peek(),"REQUIRE")){ ++i_; auto e=expression(); accept(TokenKind::Semicolon); Stmt s; s.kind=Stmt::Kind::Assert; s.expr=e; return s; }
+  if(kw(peek(),"STOP")){ ++i_; accept(TokenKind::Semicolon); Stmt s; s.kind=Stmt::Kind::Stop; return s; }
   if(kw(peek(),"return")){ ++i_; auto e=expression(); accept(TokenKind::Semicolon); Stmt s; s.kind=Stmt::Kind::Return; s.expr=e; return s; }
   if(kw(peek(),"if")){
     ++i_; auto e=expression(); auto b=block(); std::vector<Stmt> eb;
@@ -146,8 +147,13 @@ Stmt Parser::statement(){
   }
 
   static const char* directives[]={
-    "EXPORT","CONTEXT","RELATION","PRESERVE","ALLOW","DENY","CLAIM","EVIDENCE",
-    "COUNTERPROBE","VERIFY","CONTINUE","OBLIGATION","INVARIANT","REMAINDER","SURFACE","TRACE"
+    "EXPORT","IMPORT","EXTERN","SURFACE","TARGET",
+    "TYPE","TRAIT","CLASS","RELATION","RELATE","OPERATOR","CONFIG","PROFILE","CONTEXT",
+    "CLAIM","EVIDENCE","RULE","LANGUAGE","ENTITY","ATTRIBUTE","BOUNDARY",
+    "PRESERVE","ALLOW","DENY","FORBID","OBLIGATION","INVARIANT","REMAINDER",
+    "COUNTERPROBE","VERIFY","CONTINUE","TRACE",
+    "FIND","PATH","LENS","SURVIVE","TAKE","GOAL","SCOPE","BOUND",
+    "GENERATE","FIT","CONSTRAIN","MUTATE","ROTATE","COMPOSE","CLASSIFY","BUILD","ARCHIVE","REPEAT"
   };
   if(peek().kind==TokenKind::Identifier){
     for(auto d:directives) if(peek().lexeme==d){
@@ -251,6 +257,8 @@ void Compiler::emit_stmt(const Stmt& s,std::vector<Instruction>& o){
       emit_expr(s.expr,o); o.push_back({Op::Print}); break;
     case Stmt::Kind::Assert:
       emit_expr(s.expr,o); o.push_back({Op::Assert}); break;
+    case Stmt::Kind::Stop:
+      o.push_back({Op::Halt}); break;
     case Stmt::Kind::ExprStmt:
       emit_expr(s.expr,o); o.push_back({Op::Pop}); break;
     case Stmt::Kind::Return:
@@ -410,6 +418,12 @@ const two = 2;
 fn fact(n) { if n <= 1 { return 1; } else { return n * fact(n - 1); } }
 assert fact(5) == 120;
 assert two + 3 * 4 == 14;
+STATE counter = 1;
+SET counter = counter + 1;
+REQUIRE counter == 2;
+TYPE Example STATUS ACTIVE
+ENTITY SelfCheck.Entity KIND TEST STATUS ACTIVE
+RELATE SelfCheck.Entity AS VALIDATES TO Compiler.RMALC AUTHORITY NONE EVIDENCE_TRANSFER DENY
 CONTEXT SelfCheck authority=LOCAL evidence_transfer=DENY
 VERIFY "parser compiler vm";
 CONTINUE;
