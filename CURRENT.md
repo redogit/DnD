@@ -1,27 +1,34 @@
-# CURRENT — RMAL Native C++ Formalization
+# CURRENT — RMAL 3.1 / RMALC 3.1 C23
 
 **Date:** 2026-09-26
 
-## Current verified implementation head
+## Current implementation authority
 
-`b9c07ac3fe8d15828dedf190d740565fb9be1baf`
+The current implementation is **ISO C23**, with Windows x64 + Clang as a first-class target.
 
-GitHub Actions run `36207543711` completed successfully.
+```text
+RMAL source
+ -> lexer
+ -> parser
+ -> AST
+ -> RMALBC1
+ -> VM
+ -> manifest / trace / audit
+```
 
-Verified at that head:
+The C++20 implementation is a preserved predecessor under `history/cpp20/`.
 
-- C++20 configure/build;
-- native self-check;
-- `rmalc language-spec --format json`;
-- legacy syntax check;
-- recovered-surface compatibility check;
-- preserved historical `RMALC.rmal` parser check;
-- example execution;
-- compiled directive manifest;
-- audit;
-- CTest.
+## Current semantic improvements over the C++20 predecessor
 
-## Current canonical executable surface
+- `CONST` is enforced as immutable at runtime.
+- `STATE` declaration and `SET` mutation are distinct operations.
+- `SET` rejects undefined bindings.
+- equality is typed: `1 != "1"` and `true != 1`.
+- source line/column coordinates are carried into bytecode and traces.
+- directive records preserve source position.
+- manifest output is available as text or JSON.
+
+## Current executable surface
 
 ```text
 MODULE
@@ -39,25 +46,40 @@ REQUIRE
 STOP
 ```
 
-## Current canonical parsed-carrier surface
-
-Declarative, evidence, relation, configuration, query, and RMALKDVMLLL-adjacent forms are accepted as structured directive carriers where listed in `spec/RMAL_LANGUAGE_SPEC_3.md`.
+Recovered declarative and RMALKDVMLLL-adjacent forms remain parsed carrier metadata unless separately implemented.
 
 `PARSED_CARRIER_CURRENT != EXECUTABLE_CURRENT`
 
-## Current pipeline
+## Native build targets
 
-```text
-RMAL source
- -> lexer
- -> parser
- -> AST
- -> RMALBC1
- -> VM
- -> trace / audit
+### Windows
+
+```powershell
+.\scripts\build-windows-c23.ps1
 ```
 
-Compiled declarative directives are retained in bytecode metadata and exposed through `rmalc manifest`.
+Uses Clang, CMake, and Ninja.
+
+### Portable / Linux
+
+```bash
+cmake -S . -B build -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel
+ctest --test-dir build --output-on-failure
+```
+
+## Verification state
+
+Local strict C23 verification has passed with:
+
+```text
+clang -std=c23 -Wall -Wextra -Wpedantic -Werror
+7 / 7 CTest gates PASS
+```
+
+Repository-level Windows and Linux CI is defined in `.github/workflows/rmal-c23.yml`.
+
+The current head is not considered **Windows-verified** until the exact-head `windows-latest` job succeeds.
 
 ## Formal target
 
@@ -72,21 +94,10 @@ semantic object
  -> RMALEXE1
 ```
 
-The unimplemented target stages remain explicit.
-
-## Next implementation frontier
-
-1. source-location/provenance-bearing directive records;
-2. typed semantic-object IR;
-3. lexical locals and true `CONST` immutability;
-4. typed equality;
-5. typed evidence/claim/context/relationship records;
-6. RMAL-TFEML trace objects;
-7. deterministic RMAL-SIR2 serialization;
-8. RMALOBJ1 object emitter and linker boundary.
-
 ## Claim ceiling
 
-`NATIVE_CPP_BUILD_AND_CURRENT_COMPATIBILITY_SURFACE_VERIFIED`
+Until exact-head CI succeeds:
 
-Not universal correctness. Not full 2.1.x parity. Not scientific validation.
+`NATIVE_C23_LOCAL_STRICT_BUILD_VERIFIED_WINDOWS_CI_PENDING`
+
+Not universal compiler correctness. Not full 2.1.x parity. Not scientific validation.
