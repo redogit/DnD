@@ -14,6 +14,7 @@ on:
       - "README.md"
       - "README_COMPILER.md"
       - "CURRENT.md"
+      - "evidence/**"
       - "docs/RMAL_C23_WINDOWS.md"
       - ".github/workflows/rmal-c23.yml"
   pull_request:
@@ -29,6 +30,7 @@ on:
       - "README.md"
       - "README_COMPILER.md"
       - "CURRENT.md"
+      - "evidence/**"
       - "docs/RMAL_C23_WINDOWS.md"
       - ".github/workflows/rmal-c23.yml"
 

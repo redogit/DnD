@@ -42,6 +42,18 @@ or:
 scripts\build-windows-c23.bat
 ```
 
+Build and package the Windows x64 SDK:
+
+```powershell
+.\scripts\package-windows-c23.ps1
+```
+
+Output:
+
+```text
+dist/RMAL-3.1.0-windows-x64-c23.zip
+```
+
 Portable CMake build:
 
 ```bash

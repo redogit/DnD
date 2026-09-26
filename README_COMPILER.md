@@ -43,8 +43,22 @@ rmalc audit file.rmal
 
 ## Windows
 
+Build and verify:
+
 ```powershell
 .\scripts\build-windows-c23.ps1
+```
+
+Build, stage, verify, and package:
+
+```powershell
+.\scripts\package-windows-c23.ps1
+```
+
+Package:
+
+```text
+dist/RMAL-3.1.0-windows-x64-c23.zip
 ```
 
 ## Semantic guarantees currently implemented

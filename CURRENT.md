@@ -72,21 +72,31 @@ ctest --test-dir build --output-on-failure
 
 Native C23 has passed both local strict verification and GitHub Actions on Linux and Windows.
 
-Exact implementation witness:
+Exact implementation + packaging witness:
 
 ```text
 verified source head:
-b6b9c6819b13017efdeac0047d4ef366b067449a
+a58fb0de292f1dd3fb7abf4660e96822ad270fab
 
 workflow:
 RMAL C23 Toolchain
-run 36231758598
+run 36244043491
 
-Linux / Clang / C23:  PASS
-Windows x64 / Clang / C23: PASS
+Linux / Clang / C23:            PASS
+Windows x64 / Clang / C23:      PASS
+Windows staged install:         PASS
+Windows staged rmalc.exe smoke: PASS
+Windows ZIP package:            PASS
+Windows artifact upload:        PASS
 ```
 
-The Windows witness used Clang 20.1.8 targeting `x86_64-pc-windows-msvc` on Windows Server 2025. Configure, compile, RMALC self-check, language-spec introspection, recovered-surface checking, historical RMALC carrier checking, example execution, manifest generation, and the CTest semantic regression suite all passed.
+Published workflow artifact:
+
+```text
+name: RMAL-3.1.0-windows-x64-c23
+artifact id: 10906986534
+size: 640713 bytes
+```
 
 Evidence: `evidence/RMAL_C23_WINDOWS_VALIDATION_2026-09-26.json`.
 
