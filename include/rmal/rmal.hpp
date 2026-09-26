@@ -22,7 +22,7 @@ struct Expr {
 };
 
 struct Stmt {
-  enum class Kind { Const, Let, Print, Assert, ExprStmt, Block, If, While, Return, Function, Directive } kind;
+  enum class Kind { Const, Let, Print, Assert, Stop, ExprStmt, Block, If, While, Return, Function, Directive } kind;
   std::string name; Expr expr{}; std::vector<Stmt> body; std::vector<Stmt> else_body;
   std::vector<std::string> params; std::string directive_payload;
 };
