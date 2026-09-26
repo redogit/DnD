@@ -13,10 +13,40 @@ static std::string readall(const std::string& p){
 int main(int argc,char** argv){
   try {
     if(argc<2){
-      std::cerr<<"rmalc <check|compile|run|audit|trace|selfcheck> [file]\n";
+      std::cerr<<"rmalc <check|compile|run|audit|trace|selfcheck|language-spec|version> [file]\n";
       return 2;
     }
     std::string cmd=argv[1];
+    if(cmd=="version"){
+      std::cout<<"RMALC 3.0-dev (C++20)\n";
+      return 0;
+    }
+    if(cmd=="language-spec"){
+      std::string format="summary";
+      if(argc>=4 && std::string(argv[2])=="--format") format=argv[3];
+      if(format=="json"){
+        std::cout<<R"JSON({
+  "schema":"rmal/language-contract/v3",
+  "language":"RMAL",
+  "full_name":"Ryan McMillan April Language",
+  "compiler":"RMALC",
+  "implementation":"C++20",
+  "current_pipeline":["lexer","parser","AST","RMALBC1","VM","trace","audit"],
+  "status_classes":["EXECUTABLE_CURRENT","PARSED_CARRIER_CURRENT","SPECIFIED_TARGET","HISTORICAL_OR_RECOVERED"],
+  "boundaries":["SURFACE != SEMANTICS","PARSE != TRUTH","PARSED != EXECUTED","GENERATE != VERIFY != ADMIT","COMPILED != SCIENTIFICALLY_VALID","TRACE != PROOF"]
+})JSON"<<"\n";
+      } else {
+        std::cout
+          <<"RMAL — Ryan McMillan April Language\n"
+          <<"RMALC — Ryan McMillan April Language Compiler\n"
+          <<"implementation: C++20\n"
+          <<"current: source -> lexer -> parser -> AST -> RMALBC1 -> VM -> trace/audit\n"
+          <<"target: semantic object -> RMAL IR -> RMAL-SIR2 -> RMALKDVMLLL -> RMALBC1 -> RMALOBJ1 -> RMALEXE1\n"
+          <<"classes: EXECUTABLE_CURRENT | PARSED_CARRIER_CURRENT | SPECIFIED_TARGET | HISTORICAL_OR_RECOVERED\n"
+          <<"boundary: PARSED != EXECUTED; COMPILED != SCIENTIFICALLY_VALID; TRACE != PROOF\n";
+      }
+      return 0;
+    }
     if(cmd=="selfcheck"){
       std::string report;
       bool ok=rmal::selfcheck(&report);
