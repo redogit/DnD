@@ -264,6 +264,7 @@ void Compiler::emit_stmt(const Stmt& s,std::vector<Instruction>& o){
     case Stmt::Kind::Return:
       emit_expr(s.expr,o); o.push_back({Op::Ret}); break;
     case Stmt::Kind::Directive:
+      bc_.directives.push_back({s.name,s.directive_payload});
       o.push_back({Op::Directive,(std::int64_t)constant(s.name+" "+s.directive_payload)}); break;
     case Stmt::Kind::If: {
       emit_expr(s.expr,o);
@@ -400,6 +401,15 @@ std::string disassemble(const Bytecode& bc){
   return s.str();
 }
 
+std::string manifest(const Bytecode& bc){
+  std::ostringstream s;
+  s<<"RMAL-MANIFEST module="<<bc.module<<"\n";
+  s<<"functions="<<bc.functions.size()<<"\n";
+  s<<"directives="<<bc.directives.size()<<"\n";
+  for(const auto& d:bc.directives) s<<"directive "<<d.name<<" :: "<<d.payload<<"\n";
+  return s.str();
+}
+
 std::string audit(const Program& p,const Bytecode& bc){
   std::ostringstream s;
   s<<"AUDIT PASS\n";
@@ -407,6 +417,7 @@ std::string audit(const Program& p,const Bytecode& bc){
   s<<"statements="<<p.statements.size()<<"\n";
   s<<"bytecode="<<bc.main.size()<<"\n";
   s<<"functions="<<bc.functions.size()<<"\n";
+  s<<"directives="<<bc.directives.size()<<"\n";
   s<<"AUDIT_PASS != SEMANTIC_TRUTH\n";
   return s.str();
 }
