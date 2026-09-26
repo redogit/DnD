@@ -43,6 +43,8 @@ jobs:
         run: build/rmalc check provenance/library/RMALC.rmal
       - name: Execute example
         run: build/rmalc run examples/hello.rmal
+      - name: Manifest recovered surface
+        run: build/rmalc manifest tests/recovered_surface.rmal
       - name: Audit recovered surface
         run: build/rmalc audit tests/recovered_surface.rmal
       - name: CTest
