@@ -1,12 +1,12 @@
 MODULE hello;
-const greeting = "RMAL";
+CONST greeting = "RMAL C23";
 fn fib(n) {
   if n <= 1 { return n; }
   return fib(n - 1) + fib(n - 2);
 }
-print greeting + " 3";
+print greeting;
 print fib(10);
-assert fib(10) == 55;
+REQUIRE fib(10) == 55;
 CONTEXT Demo authority=LOCAL evidence_transfer=DENY
-VERIFY "execution is deterministic for this program";
+VERIFY "native C23 execution";
 CONTINUE;
