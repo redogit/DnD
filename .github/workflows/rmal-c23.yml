@@ -11,6 +11,10 @@ on:
       - "examples/**"
       - "scripts/**"
       - "provenance/library/RMALC.rmal"
+      - "README.md"
+      - "README_COMPILER.md"
+      - "CURRENT.md"
+      - "docs/RMAL_C23_WINDOWS.md"
       - ".github/workflows/rmal-c23.yml"
   pull_request:
     paths:
@@ -22,6 +26,10 @@ on:
       - "examples/**"
       - "scripts/**"
       - "provenance/library/RMALC.rmal"
+      - "README.md"
+      - "README_COMPILER.md"
+      - "CURRENT.md"
+      - "docs/RMAL_C23_WINDOWS.md"
       - ".github/workflows/rmal-c23.yml"
 
 jobs:
