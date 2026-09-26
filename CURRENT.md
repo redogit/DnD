@@ -70,16 +70,25 @@ ctest --test-dir build --output-on-failure
 
 ## Verification state
 
-Local strict C23 verification has passed with:
+Native C23 has passed both local strict verification and GitHub Actions on Linux and Windows.
+
+Exact implementation witness:
 
 ```text
-clang -std=c23 -Wall -Wextra -Wpedantic -Werror
-7 / 7 CTest gates PASS
+verified source head:
+b6b9c6819b13017efdeac0047d4ef366b067449a
+
+workflow:
+RMAL C23 Toolchain
+run 36231758598
+
+Linux / Clang / C23:  PASS
+Windows x64 / Clang / C23: PASS
 ```
 
-Repository-level Windows and Linux CI is defined in `.github/workflows/rmal-c23.yml`.
+The Windows witness used Clang 20.1.8 targeting `x86_64-pc-windows-msvc` on Windows Server 2025. Configure, compile, RMALC self-check, language-spec introspection, recovered-surface checking, historical RMALC carrier checking, example execution, manifest generation, and the CTest semantic regression suite all passed.
 
-The current head is not considered **Windows-verified** until the exact-head `windows-latest` job succeeds.
+Evidence: `evidence/RMAL_C23_WINDOWS_VALIDATION_2026-09-26.json`.
 
 ## Formal target
 
@@ -98,6 +107,6 @@ semantic object
 
 Until exact-head CI succeeds:
 
-`NATIVE_C23_LOCAL_STRICT_BUILD_VERIFIED_WINDOWS_CI_PENDING`
+`NATIVE_C23_WINDOWS_AND_LINUX_EXACT_HEAD_VERIFIED`
 
 Not universal compiler correctness. Not full 2.1.x parity. Not scientific validation.
