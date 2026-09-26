@@ -1,36 +1,65 @@
-# RMAL 3 — C++20 Language Toolchain
+# RMALC 3.1 — Native ISO C23 Compiler
 
-RMAL is a programming language implementation in C++20.
+RMALC is the native compiler/runtime toolchain for **RMAL — Ryan McMillan April Language**.
 
-Pipeline:
-
-`source -> lexer -> parser -> AST -> compiler -> RMALBC1 bytecode -> VM -> trace/audit`
-
-The native language keeps the established RMAL declarative carriers (`CONTEXT`, `RELATION`, `PRESERVE`, `CLAIM`, `EVIDENCE`, `VERIFY`, etc.) while adding executable programming constructs: constants and variables, functions and recursion, conditionals, loops, arithmetic, strings, booleans, assertions and printing.
-
-## Build
-
-```bash
-cmake -S RMAL -B RMAL/build
-cmake --build RMAL/build --config Release
-ctest --test-dir RMAL/build --output-on-failure
-```
-
-## CLI
+## Current implementation
 
 ```text
+Implementation language: ISO C23
+Primary target: Windows x64
+Primary compiler: Clang
+Build: CMake + Ninja
+```
+
+The former C++20 implementation is preserved under `history/cpp20/`.
+
+## Pipeline
+
+```text
+source
+ -> lexer
+ -> parser
+ -> AST
+ -> RMALBC1
+ -> VM
+ -> manifest
+ -> trace
+ -> audit
+```
+
+## Commands
+
+```text
+rmalc version
+rmalc language-spec --format json
+rmalc selfcheck
 rmalc check file.rmal
 rmalc compile file.rmal
+rmalc manifest file.rmal --json
 rmalc run file.rmal
 rmalc trace file.rmal
 rmalc audit file.rmal
-rmalc selfcheck
 ```
 
-The implementation is dependency-light: C++20 standard library only.
+## Windows
 
-## Evidence boundary
+```powershell
+.\scripts\build-windows-c23.ps1
+```
 
-`PARSE != VALIDATE != EXECUTE != EVIDENCE != ADMIT`
+## Semantic guarantees currently implemented
 
-Successful compiler execution establishes compiler/runtime behavior only. It does not promote scientific, historical, legal, or other domain claims carried by RMAL source.
+- immutable `CONST`;
+- explicit `STATE` and `SET`;
+- type-sensitive equality;
+- source-coordinate-bearing bytecode/directives/traces;
+- deterministic parser/compiler behavior for tested inputs;
+- fail-closed runtime errors for invalid mutation, type use, division/modulo by zero, undefined names, and arity mismatch.
+
+## Boundary
+
+```text
+COMPILED != SCIENTIFICALLY_VALID
+TRACE != PROOF
+FINITE_VERIFICATION != UNIVERSALITY
+```
