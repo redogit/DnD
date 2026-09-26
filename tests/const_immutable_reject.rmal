@@ -1,0 +1,3 @@
+MODULE const_immutable_reject;
+CONST fixed = 1;
+SET fixed = 2;
