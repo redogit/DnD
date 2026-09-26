@@ -2,11 +2,25 @@ name: RMAL C++ Toolchain
 on:
   push:
     paths:
-      - "RMAL/**"
+      - "CMakeLists.txt"
+      - "include/**"
+      - "src/**"
+      - "spec/**"
+      - "tests/**"
+      - "examples/**"
+      - "rmal/**"
+      - "provenance/library/RMALC.rmal"
       - ".github/workflows/rmal-cpp.yml"
   pull_request:
     paths:
-      - "RMAL/**"
+      - "CMakeLists.txt"
+      - "include/**"
+      - "src/**"
+      - "spec/**"
+      - "tests/**"
+      - "examples/**"
+      - "rmal/**"
+      - "provenance/library/RMALC.rmal"
       - ".github/workflows/rmal-cpp.yml"
 jobs:
   build:
@@ -14,14 +28,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Configure
-        run: cmake -S RMAL -B RMAL/build -DCMAKE_BUILD_TYPE=Release
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
       - name: Build
-        run: cmake --build RMAL/build --parallel
-      - name: Self-check
-        run: RMAL/build/rmalc selfcheck
+        run: cmake --build build --parallel
+      - name: Native self-check
+        run: build/rmalc selfcheck
       - name: Legacy syntax check
-        run: RMAL/build/rmalc check RMAL/tests/legacy.rmal
+        run: build/rmalc check tests/legacy.rmal
+      - name: Recovered surface check
+        run: build/rmalc check tests/recovered_surface.rmal
+      - name: Historical RMALC carrier check
+        run: build/rmalc check provenance/library/RMALC.rmal
       - name: Execute example
-        run: RMAL/build/rmalc run RMAL/examples/hello.rmal
+        run: build/rmalc run examples/hello.rmal
+      - name: Audit recovered surface
+        run: build/rmalc audit tests/recovered_surface.rmal
       - name: CTest
-        run: ctest --test-dir RMAL/build --output-on-failure
+        run: ctest --test-dir build --output-on-failure
