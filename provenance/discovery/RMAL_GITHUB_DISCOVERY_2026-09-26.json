@@ -1,0 +1,684 @@
+{
+  "generated_at": "2026-09-26",
+  "scope": "redogit GitHub search",
+  "queries": {
+    "RMAL": [
+      {
+        "path": "RMAL_TFEML.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/RMAL_TFEML.md"
+      },
+      {
+        "path": "RMAL_PNP_LIVE_DESIGN_2026-09-25.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/RMAL_PNP_LIVE_DESIGN_2026-09-25.md"
+      },
+      {
+        "path": "play/mmo/DYNAMIC_RMAL_CHARACTERS.rmal",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo/DYNAMIC_RMAL_CHARACTERS.rmal"
+      },
+      {
+        "path": "libraries-of-libraries.rmal",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/libraries-of-libraries.rmal"
+      },
+      {
+        "path": "RMAL_RESEARCH_ORIENTATION_2026-09-25.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/RMAL_RESEARCH_ORIENTATION_2026-09-25.md"
+      },
+      {
+        "path": "LIBRARIES_OF_LIBRARIES_RMAL_BUILD_2026-09-19.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/LIBRARIES_OF_LIBRARIES_RMAL_BUILD_2026-09-19.md"
+      },
+      {
+        "path": "WORK_INDEX.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/WORK_INDEX.md"
+      },
+      {
+        "path": "play/mmo/RMAO_WORLD_CANON.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo/RMAO_WORLD_CANON.md"
+      },
+      {
+        "path": "RECENT_WORK_2026-09-25.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/RECENT_WORK_2026-09-25.md"
+      },
+      {
+        "path": "research/cooperative-field/LOCATIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/LOCATIONS.md"
+      },
+      {
+        "path": "research/cooperative-field/COMPANIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/COMPANIONS.md"
+      },
+      {
+        "path": "research/cooperative-field/CURRENT_PLAN.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/CURRENT_PLAN.md"
+      },
+      {
+        "path": "research/cooperative-field/NAME_LINEAGE.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/NAME_LINEAGE.md"
+      },
+      {
+        "path": "tools/check_cooperative_field.mjs",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/tools/check_cooperative_field.mjs"
+      },
+      {
+        "path": "research/cooperative-field/STANDING_RULES.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/STANDING_RULES.md"
+      },
+      {
+        "path": "docs/index.html",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/docs/index.html"
+      },
+      {
+        "path": "research/cooperative-field/EVIDENCE_LEDGER.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/EVIDENCE_LEDGER.md"
+      },
+      {
+        "path": "README.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/README.md"
+      },
+      {
+        "path": "GITHUB_CONVERGENCE_PLAN_2026-09-18.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/GITHUB_CONVERGENCE_PLAN_2026-09-18.md"
+      },
+      {
+        "path": "README.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/README.md"
+      },
+      {
+        "path": "research/cooperative-field/MEMORY_INTEGRATION.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/MEMORY_INTEGRATION.md"
+      },
+      {
+        "path": "GITHUB_CONVERGENCE_RESULT_2026-09-18.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/GITHUB_CONVERGENCE_RESULT_2026-09-18.md"
+      },
+      {
+        "path": "research/bridges/libraries-of-libraries/README.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/bridges/libraries-of-libraries/README.md"
+      },
+      {
+        "path": "docs/recent-work.html",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/docs/recent-work.html"
+      },
+      {
+        "path": "docs/live-design.html",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/docs/live-design.html"
+      },
+      {
+        "path": "BIDIRECTIONAL_HANDOFF_PROTOCOL_2026-09-20.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/BIDIRECTIONAL_HANDOFF_PROTOCOL_2026-09-20.md"
+      },
+      {
+        "path": "docs/condensed-wisdom.html",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/docs/condensed-wisdom.html"
+      },
+      {
+        "path": "LIBRARIES_OF_LIBRARIES_GIT_LINEAGE_2026-09-19.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/LIBRARIES_OF_LIBRARIES_GIT_LINEAGE_2026-09-19.md"
+      },
+      {
+        "path": "COOPERATIVE_IMPLEMENTATION_PROTOCOL_2026-09-19.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/COOPERATIVE_IMPLEMENTATION_PROTOCOL_2026-09-19.md"
+      },
+      {
+        "path": "research/projects/orbit-library.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/projects/orbit-library.md"
+      },
+      {
+        "path": "ALGORITHMIC_CONDENSED_WISDOM_ANALYSIS_2026-09-25.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/ALGORITHMIC_CONDENSED_WISDOM_ANALYSIS_2026-09-25.md"
+      },
+      {
+        "path": "ALL_DIRECTIONAL_RELATIONAL_FIELD_2026-09-20.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/ALL_DIRECTIONAL_RELATIONAL_FIELD_2026-09-20.md"
+      },
+      {
+        "path": "research/hodge/CONSCIENCE64_COOPERATION.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/hodge/CONSCIENCE64_COOPERATION.md"
+      },
+      {
+        "path": "docs/about.html",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/docs/about.html"
+      },
+      {
+        "path": "public-testbed/site/s1-models/index.html",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/public-testbed/site/s1-models/index.html"
+      },
+      {
+        "path": "docs/superpowers/specs/2026-09-19-interlingua-linguistics-agreement-system-design.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/docs/superpowers/specs/2026-09-19-interlingua-linguistics-agreement-system-design.md"
+      },
+      {
+        "path": "index.html",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/index.html"
+      },
+      {
+        "path": "research/federation/s1-models/index.html",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/federation/s1-models/index.html"
+      },
+      {
+        "path": "play/mmo/rmao-world-contract.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo/rmao-world-contract.json"
+      },
+      {
+        "path": "PNP_SIGNED_BINARY_CLUSTER_CARRIER_2026-09-25.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/PNP_SIGNED_BINARY_CLUSTER_CARRIER_2026-09-25.md"
+      },
+      {
+        "path": "research/federation/s1-models.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/federation/s1-models.json"
+      },
+      {
+        "path": "BIDIRECTIONAL_HANDOFF_PROTOCOL_2026-09-20.json",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/BIDIRECTIONAL_HANDOFF_PROTOCOL_2026-09-20.json"
+      },
+      {
+        "path": "research/cooperative-field/MANIFEST.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/MANIFEST.json"
+      },
+      {
+        "path": "COOPERATIVE_IMPLEMENTATION_PROVENANCE_2026-09-19.json",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/COOPERATIVE_IMPLEMENTATION_PROVENANCE_2026-09-19.json"
+      },
+      {
+        "path": "infra/internal-dns/README.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/infra/internal-dns/README.md"
+      },
+      {
+        "path": "REDOGIT.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/REDOGIT.md"
+      },
+      {
+        "path": "research/hodge/HODGE_COMPASS_API.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/hodge/HODGE_COMPASS_API.md"
+      },
+      {
+        "path": "BODY_OF_WORK.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/BODY_OF_WORK.md"
+      },
+      {
+        "path": "API.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/API.md"
+      },
+      {
+        "path": "play/mmo/REALITY_CANON.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo/REALITY_CANON.md"
+      },
+      {
+        "path": "tools/hypothesis-algorithm-builder.mjs",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/tools/hypothesis-algorithm-builder.mjs"
+      },
+      {
+        "path": "GOAL_TOPOLOGY_2026-09-15.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/GOAL_TOPOLOGY_2026-09-15.md"
+      },
+      {
+        "path": "research/hodge/coset_star_split_search.py",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/hodge/coset_star_split_search.py"
+      },
+      {
+        "path": "play/README.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/README.md"
+      },
+      {
+        "path": "RESEARCH_PRODUCTION.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/RESEARCH_PRODUCTION.md"
+      },
+      {
+        "path": "research/hodge/TWO_PAIR_COSET_OBSTRUCTION.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/hodge/TWO_PAIR_COSET_OBSTRUCTION.md"
+      },
+      {
+        "path": "coordinate-space/index.html",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/coordinate-space/index.html"
+      },
+      {
+        "path": "DECISION_FIELD_CORE_2026-09-17.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/DECISION_FIELD_CORE_2026-09-17.md"
+      },
+      {
+        "path": "FEDERATED_WORK_INDEX.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/FEDERATED_WORK_INDEX.md"
+      },
+      {
+        "path": "redogit.json",
+        "url": "https://github.com/redogit/MauiBrickBreak/blob/116938f9fe0f6c29a7cb8be50693e9f8aaf56daa/redogit.json"
+      },
+      {
+        "path": "play/mmo-world/varieties.mjs",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo-world/varieties.mjs"
+      },
+      {
+        "path": "ACTIVE_PROJECTS.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/ACTIVE_PROJECTS.md"
+      },
+      {
+        "path": "ACTIVE_FEDERATION.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/ACTIVE_FEDERATION.md"
+      },
+      {
+        "path": "Resources/Styles/Styles.xaml",
+        "url": "https://github.com/redogit/MauiBrickBreak/blob/116938f9fe0f6c29a7cb8be50693e9f8aaf56daa/Resources/Styles/Styles.xaml"
+      },
+      {
+        "path": "RESEARCH_PRODUCTION_FEDERATION.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/RESEARCH_PRODUCTION_FEDERATION.md"
+      },
+      {
+        "path": "research/updates/2026-09-13-human-expression-s1024.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/updates/2026-09-13-human-expression-s1024.md"
+      },
+      {
+        "path": "docs/superpowers/specs/2026-09-14-hypothesis-algorithm-builder-design.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/docs/superpowers/specs/2026-09-14-hypothesis-algorithm-builder-design.md"
+      },
+      {
+        "path": "DECISION_FIELD_THREAD_SYNTHESIS_2026-09-17.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/DECISION_FIELD_THREAD_SYNTHESIS_2026-09-17.md"
+      },
+      {
+        "path": "play/mmo/RELEASE_PLAN_2026-11-15.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo/RELEASE_PLAN_2026-11-15.md"
+      },
+      {
+        "path": "tools/redogit_selfcheck.py",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/tools/redogit_selfcheck.py"
+      },
+      {
+        "path": "tools/redogit.py",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/tools/redogit.py"
+      },
+      {
+        "path": "docs/superpowers/specs/2026-09-14-context-horizon-13dpp-design.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/docs/superpowers/specs/2026-09-14-context-horizon-13dpp-design.md"
+      },
+      {
+        "path": "HISTORY_PLAYGROUND_10_STEP_CHECKIN.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/HISTORY_PLAYGROUND_10_STEP_CHECKIN.md"
+      },
+      {
+        "path": "HISTORY_PLAYGROUND_CHECKIN_STATUS.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/HISTORY_PLAYGROUND_CHECKIN_STATUS.md"
+      },
+      {
+        "path": "coordinate-space/completion_browser_checks.py",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/coordinate-space/completion_browser_checks.py"
+      },
+      {
+        "path": "docs/superpowers/plans/2026-09-14-context-horizon-13dpp.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/docs/superpowers/plans/2026-09-14-context-horizon-13dpp.md"
+      },
+      {
+        "path": "play/mmo-world/redline/verify-redline.mjs",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo-world/redline/verify-redline.mjs"
+      },
+      {
+        "path": "docs/superpowers/plans/2026-09-14-living-world-alpha-0-1A.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/docs/superpowers/plans/2026-09-14-living-world-alpha-0-1A.md"
+      },
+      {
+        "path": "docs/superpowers/specs/2026-09-14-renderer-society-design.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/docs/superpowers/specs/2026-09-14-renderer-society-design.md"
+      },
+      {
+        "path": "research-production.html",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/research-production.html"
+      },
+      {
+        "path": "play/mmo-world/redline/materials.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo-world/redline/materials.json"
+      },
+      {
+        "path": "redogit.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/redogit.json"
+      },
+      {
+        "path": "redogit.json",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/redogit.json"
+      },
+      {
+        "path": "research/cross-carrier/2026-09-13/internal-update/global_search/legacy/black_hole_ai_conscience_ecs/ARCHITECTURE.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cross-carrier/2026-09-13/internal-update/global_search/legacy/black_hole_ai_conscience_ecs/ARCHITECTURE.md"
+      },
+      {
+        "path": "research-production.json",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/research-production.json"
+      },
+      {
+        "path": "REDOGIT.schema.json",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/REDOGIT.schema.json"
+      },
+      {
+        "path": "research/hodge/README.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/hodge/README.md"
+      },
+      {
+        "path": "research-production-map.json",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/research-production-map.json"
+      },
+      {
+        "path": "image-society/prompts/role-prompts.v1.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/image-society/prompts/role-prompts.v1.json"
+      },
+      {
+        "path": "knowledge/ledger.py",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/knowledge/ledger.py"
+      },
+      {
+        "path": "knowledge/packet.py",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/knowledge/packet.py"
+      },
+      {
+        "path": "research/hodge/EVEN_WALL_STAR_SPLIT_COSET_SEARCH_RESULT.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/hodge/EVEN_WALL_STAR_SPLIT_COSET_SEARCH_RESULT.json"
+      },
+      {
+        "path": "knowledge/handoff.py",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/knowledge/handoff.py"
+      },
+      {
+        "path": "space-lens-memory.js",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/space-lens-memory.js"
+      },
+      {
+        "path": "coordinate-space/UPDATE_v1_2.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/coordinate-space/UPDATE_v1_2.md"
+      },
+      {
+        "path": "space-lens-image-gen.js",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/space-lens-image-gen.js"
+      },
+      {
+        "path": "IMAGE_GENERATION.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/IMAGE_GENERATION.md"
+      },
+      {
+        "path": "tools/HYPOTHESIS_ALGORITHM_BUILDER.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/tools/HYPOTHESIS_ALGORITHM_BUILDER.md"
+      },
+      {
+        "path": "image-society/artifacts.mjs",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/image-society/artifacts.mjs"
+      },
+      {
+        "path": "image-society/canonical.mjs",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/image-society/canonical.mjs"
+      }
+    ],
+    "RMALKDVMLLL": [
+      {
+        "path": "RMAL_TFEML.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/RMAL_TFEML.md"
+      },
+      {
+        "path": "README.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/README.md"
+      },
+      {
+        "path": "research/cooperative-field/NAME_LINEAGE.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/NAME_LINEAGE.md"
+      },
+      {
+        "path": "tools/check_cooperative_field.mjs",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/tools/check_cooperative_field.mjs"
+      },
+      {
+        "path": "research/cooperative-field/CURRENT_PLAN.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/CURRENT_PLAN.md"
+      },
+      {
+        "path": "GITHUB_CONVERGENCE_PLAN_2026-09-18.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/GITHUB_CONVERGENCE_PLAN_2026-09-18.md"
+      },
+      {
+        "path": "research/cooperative-field/STANDING_RULES.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/STANDING_RULES.md"
+      },
+      {
+        "path": "research/cooperative-field/COMPANIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/COMPANIONS.md"
+      }
+    ],
+    "RMALC": [
+      {
+        "path": "research/cooperative-field/EVIDENCE_LEDGER.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/EVIDENCE_LEDGER.md"
+      },
+      {
+        "path": "research/cooperative-field/CURRENT_PLAN.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/CURRENT_PLAN.md"
+      },
+      {
+        "path": "WORK_INDEX.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/WORK_INDEX.md"
+      },
+      {
+        "path": "research/cooperative-field/LOCATIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/LOCATIONS.md"
+      },
+      {
+        "path": "README.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/README.md"
+      },
+      {
+        "path": "research/cooperative-field/NAME_LINEAGE.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/NAME_LINEAGE.md"
+      },
+      {
+        "path": "tools/check_cooperative_field.mjs",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/tools/check_cooperative_field.mjs"
+      },
+      {
+        "path": "research/cooperative-field/COMPANIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/COMPANIONS.md"
+      },
+      {
+        "path": "BIDIRECTIONAL_HANDOFF_PROTOCOL_2026-09-20.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/BIDIRECTIONAL_HANDOFF_PROTOCOL_2026-09-20.md"
+      },
+      {
+        "path": "libraries-of-libraries.rmal",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/libraries-of-libraries.rmal"
+      },
+      {
+        "path": "LIBRARIES_OF_LIBRARIES_RMAL_BUILD_2026-09-19.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/LIBRARIES_OF_LIBRARIES_RMAL_BUILD_2026-09-19.md"
+      },
+      {
+        "path": "research/cooperative-field/STANDING_RULES.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/STANDING_RULES.md"
+      },
+      {
+        "path": "LIBRARIES_OF_LIBRARIES_GIT_LINEAGE_2026-09-19.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/LIBRARIES_OF_LIBRARIES_GIT_LINEAGE_2026-09-19.md"
+      },
+      {
+        "path": "BIDIRECTIONAL_HANDOFF_PROTOCOL_2026-09-20.json",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/BIDIRECTIONAL_HANDOFF_PROTOCOL_2026-09-20.json"
+      }
+    ],
+    "RMAL-SIR2": [
+      {
+        "path": "research/cooperative-field/NAME_LINEAGE.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/NAME_LINEAGE.md"
+      },
+      {
+        "path": "research/cooperative-field/COMPANIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/COMPANIONS.md"
+      }
+    ],
+    "RMALBC1": [
+      {
+        "path": "research/cooperative-field/NAME_LINEAGE.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/NAME_LINEAGE.md"
+      },
+      {
+        "path": "research/cooperative-field/COMPANIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/COMPANIONS.md"
+      }
+    ],
+    "RMALOBJ1": [
+      {
+        "path": "research/cooperative-field/NAME_LINEAGE.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/NAME_LINEAGE.md"
+      },
+      {
+        "path": "research/cooperative-field/COMPANIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/COMPANIONS.md"
+      }
+    ],
+    "RMALEXE1": [
+      {
+        "path": "research/cooperative-field/NAME_LINEAGE.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/NAME_LINEAGE.md"
+      },
+      {
+        "path": "research/cooperative-field/COMPANIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/COMPANIONS.md"
+      }
+    ],
+    "Dynamic RMAL": [
+      {
+        "path": "play/mmo/DYNAMIC_RMAL_CHARACTERS.rmal",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo/DYNAMIC_RMAL_CHARACTERS.rmal"
+      },
+      {
+        "path": "play/mmo/RMAO_WORLD_CANON.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo/RMAO_WORLD_CANON.md"
+      },
+      {
+        "path": "research/cooperative-field/COMPANIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/COMPANIONS.md"
+      },
+      {
+        "path": "research/cooperative-field/CURRENT_PLAN.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/CURRENT_PLAN.md"
+      },
+      {
+        "path": "research/cooperative-field/NAME_LINEAGE.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/NAME_LINEAGE.md"
+      },
+      {
+        "path": "README.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/README.md"
+      },
+      {
+        "path": "GITHUB_CONVERGENCE_PLAN_2026-09-18.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/GITHUB_CONVERGENCE_PLAN_2026-09-18.md"
+      },
+      {
+        "path": "GITHUB_CONVERGENCE_RESULT_2026-09-18.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/GITHUB_CONVERGENCE_RESULT_2026-09-18.md"
+      },
+      {
+        "path": "play/mmo/rmao-world-contract.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo/rmao-world-contract.json"
+      },
+      {
+        "path": "research/cooperative-field/LOCATIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/LOCATIONS.md"
+      },
+      {
+        "path": "infra/internal-dns/README.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/infra/internal-dns/README.md"
+      },
+      {
+        "path": "PNP_SIGNED_BINARY_CLUSTER_CARRIER_2026-09-25.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/PNP_SIGNED_BINARY_CLUSTER_CARRIER_2026-09-25.md"
+      },
+      {
+        "path": "DECISION_FIELD_CORE_2026-09-17.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/DECISION_FIELD_CORE_2026-09-17.md"
+      },
+      {
+        "path": "DECISION_FIELD_THREAD_SYNTHESIS_2026-09-17.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/DECISION_FIELD_THREAD_SYNTHESIS_2026-09-17.md"
+      },
+      {
+        "path": "play/mmo/test-rmao.mjs",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/play/mmo/test-rmao.mjs"
+      }
+    ],
+    "RMAPL": [
+      {
+        "path": "WORK_INDEX.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/WORK_INDEX.md"
+      },
+      {
+        "path": "research/cooperative-field/LOCATIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/LOCATIONS.md"
+      },
+      {
+        "path": "research/hodge/CONSCIENCE64_COOPERATION.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/hodge/CONSCIENCE64_COOPERATION.md"
+      },
+      {
+        "path": "tools/check_cooperative_field.mjs",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/tools/check_cooperative_field.mjs"
+      },
+      {
+        "path": "research/cooperative-field/EVIDENCE_LEDGER.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/EVIDENCE_LEDGER.md"
+      },
+      {
+        "path": "GITHUB_CONVERGENCE_PLAN_2026-09-18.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/GITHUB_CONVERGENCE_PLAN_2026-09-18.md"
+      },
+      {
+        "path": "research/cooperative-field/CURRENT_PLAN.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/CURRENT_PLAN.md"
+      },
+      {
+        "path": "ALL_DIRECTIONAL_RELATIONAL_FIELD_2026-09-20.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/ALL_DIRECTIONAL_RELATIONAL_FIELD_2026-09-20.md"
+      },
+      {
+        "path": "README.md",
+        "url": "https://github.com/redogit/redogit/blob/2ee9125e91d36bb417d0f99981fc4c32620eb3a2/README.md"
+      },
+      {
+        "path": "research/cooperative-field/NAME_LINEAGE.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/NAME_LINEAGE.md"
+      },
+      {
+        "path": "research/cooperative-field/STANDING_RULES.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/STANDING_RULES.md"
+      },
+      {
+        "path": "research/cooperative-field/COMPANIONS.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/cooperative-field/COMPANIONS.md"
+      },
+      {
+        "path": "public-testbed/site/carrier-surface/index.html",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/public-testbed/site/carrier-surface/index.html"
+      },
+      {
+        "path": "research/radar/CONVERSATION_WIDE_RADAR_LOCALITY_PARITY_2026-09-20.md",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/radar/CONVERSATION_WIDE_RADAR_LOCALITY_PARITY_2026-09-20.md"
+      },
+      {
+        "path": "research/carrier-surface/index.html",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/carrier-surface/index.html"
+      },
+      {
+        "path": "public-testbed/site/s1-models/index.html",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/public-testbed/site/s1-models/index.html"
+      },
+      {
+        "path": "research/federation/s1-models/index.html",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/federation/s1-models/index.html"
+      },
+      {
+        "path": "research/carrier-surface.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/carrier-surface.json"
+      },
+      {
+        "path": "research/federation/s1-models.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/federation/s1-models.json"
+      },
+      {
+        "path": "research/radar/conversation_radar_pointer_2026-09-20.json",
+        "url": "https://github.com/redogit/conscience64/blob/61a011fadb89d7172dd968dfb9a2d95a4dbb69db/research/radar/conversation_radar_pointer_2026-09-20.json"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "redogit/cooperative-implementation-provenance/v1",
+  "date": "2026-09-19",
+  "design_authority": "Ryan McMillan",
+  "coimplementation": {
+    "relation": "HUMAN_AI_COIMPLEMENTATION",
+    "collaborators": [
+      "Ryan McMillan",
+      "ChatGPT/OpenAI tooling"
+    ],
+    "authority_note": "Implementation assistance does not transfer design, repository, or scientific authority.",
+    "acceptance_gate": "Ryan McMillan direction, constraints, corrections, and acceptance decisions"
+  },
+  "root_goal": "Increase humanity's practical freedom to understand, preserve, question, create, cooperate, recover, and act on what matters—while keeping knowledge reconstructible, evidence honest, systems accessible, privacy protected, agency intact, and the future open to correction and change.",
+  "cooperation_law": "REFERENCE -> PROPOSAL -> HANDOFF -> TARGET_DECISION -> TARGET_LOCAL_SUCCESSOR",
+  "cross_write_default": "DENY",
+  "evidence_transfer_default": "DENY",
+  "predecessor_policy": "SUCCESSOR != REWRITTEN_PREDECESSOR",
+  "publication_boundary": "PUBLICLY_VISIBLE != PUBLICATION_APPROVED != COMMERCIALLY_LICENSED",
+  "language_carrier": "redogit/Other-Projects-/docs/RMAL_COOPERATIVE_IMPLEMENTATION_PROTOCOL.rmal"
+}

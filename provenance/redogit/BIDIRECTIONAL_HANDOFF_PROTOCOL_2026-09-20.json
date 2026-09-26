@@ -1,0 +1,121 @@
+{
+  "schema": "redogit/bidirectional-handoff-pairity/v1",
+  "date": "2026-09-20",
+  "authority": "COORDINATION_CONTRACT_ONLY",
+  "directions": [
+    "A_TO_B",
+    "B_TO_A"
+  ],
+  "flow": {
+    "request": [
+      "REFERENCE",
+      "PROPOSAL",
+      "HANDOFF"
+    ],
+    "target": [
+      "TARGET_DECISION",
+      "TARGET_LOCAL_SUCCESSOR"
+    ],
+    "response": [
+      "RESPONSE",
+      "RETURN_TO_REQUESTER"
+    ]
+  },
+  "request_fields": [
+    "handoff_id",
+    "from",
+    "to",
+    "subject_uid",
+    "goal",
+    "obligation",
+    "request_class",
+    "requested_action",
+    "source_refs",
+    "evidence_refs",
+    "privacy",
+    "claim_ceiling",
+    "unresolved",
+    "way_back"
+  ],
+  "response_fields": [
+    "response_id",
+    "in_reply_to",
+    "from",
+    "to",
+    "status",
+    "decision_reason",
+    "successor_refs",
+    "evidence_refs",
+    "unresolved",
+    "privacy",
+    "claim_ceiling",
+    "way_back"
+  ],
+  "statuses": [
+    "ACCEPTED",
+    "REJECTED",
+    "NEEDS_EVIDENCE",
+    "UNRESOLVED"
+  ],
+  "cross_write_default": "DENY",
+  "evidence_transfer_default": "DENY",
+  "target_local_successor_required": true,
+  "privacy_rule": "MONOTONIC_UNLESS_INDEPENDENTLY_REGROUNDED_BY_TARGET",
+  "counterproposal_rule": "NEW_HANDOFF_ID",
+  "boundaries": [
+    "REQUEST != COMMAND",
+    "RESPONSE != AUTHORITY_TRANSFER",
+    "ACCEPTED != VERIFIED",
+    "REJECTED != FAILURE",
+    "NEEDS_EVIDENCE != REJECTED",
+    "UNRESOLVED != FALSE",
+    "REFERENCE != EVIDENCE_TRANSFER",
+    "PRIVATE SOURCE MUST NOT PROPAGATE",
+    "AUTHORIZED READ != PUBLICATION PERMISSION"
+  ],
+  "current_adapters": {
+    "redogit/conscience64": {
+      "inbound": "VERIFIED_BOUNDED_PRIVATE_METHOD_HANDOFF",
+      "outbound": "VERIFIED_BOUNDED_PRIVATE_METHOD_STRUCTURED_RESPONSE_RUNTIME",
+      "evidence_anchor": "1cbf372207674070332b455c8851ee7993d6cf81",
+      "outward_privacy_anchor": "deba0e9b19ef1fe106ba6dea1323eb0896dd5010",
+      "response_runtime_anchor": "ee740af81d95533c907a65166564e661807c50eb",
+      "request_class": "PRIVATE_METHOD_HANDOFF",
+      "request_identity": "KNOWLEDGE_PACKET_UOID",
+      "response_schema": "conscience64.handoff-response/v1",
+      "response_endpoints": [
+        "POST /v1/handoff-response",
+        "GET /v1/handoff-response/<response_id>"
+      ],
+      "structured_response_packet_runtime": true,
+      "generic_response_packet_runtime": false,
+      "adapter_path": "research/bridges/libraries-of-libraries/BIDIRECTIONAL_HANDOFF_ADAPTER_2026-09-20.json",
+      "adapter_declaration_anchor": "731b6040d6b342cea423d402ec2fb6c1e5ad59a9"
+    },
+    "redogit/Other-Projects-": {
+      "inbound": "RMAL_HANDOFF_AND_TARGET_ACCEPTANCE_SYNTAX_IMPLEMENTED",
+      "outbound": "RMAL_STRUCTURED_RESPONSE_CARRIER_CONTROLLED_SURFACE_VERIFIED",
+      "evidence_anchor": "f93f056a33d5fad0f29b763a0d49c6b79eb18d49",
+      "adapter_path": "BIDIRECTIONAL_HANDOFF_ADAPTER_2026-09-20.json",
+      "adapter_declaration_anchor": "8de91a93347aaff1ff039a4899fd56eec6689da3",
+      "current_adapter_anchor": "ab562daf0b2df085b97d5d0cc1696a9b4cf505d2",
+      "response_carrier": "docs/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE.rmal",
+      "response_carrier_merge_anchor": "8f2d4e433d4b1bff3ec6eb0cc6a054b4c5bce284",
+      "response_carrier_evidence": "evidence/RMAL_BIDIRECTIONAL_HANDOFF_RESPONSE_2026-09-20.json",
+      "controlled_surface_check": "PASS",
+      "validation_run_id": 35505020623,
+      "validated_head_sha": "cb3d9ef7523caa22a49bfddbaf7caf3dd776af92",
+      "rmalc_revalidated": false,
+      "structured_response_packet_runtime": false,
+      "generic_response_packet_runtime": false,
+      "adapter_declaration_role": "HISTORICAL_INITIAL_DECLARATION",
+      "claim_ceiling": "OTHER_PROJECTS_AUTHORED_RESPONSE_CARRIER_CONTROLLED_SURFACE_ONLY_NO_FRESH_RMALC_OR_RUNTIME"
+    },
+    "redogit/redogit": {
+      "inbound": "COORDINATION_REFERENCE_AND_REVIEW",
+      "outbound": "COORDINATION_REFERENCE_AND_REVIEW",
+      "evidence_anchor": "a5ed5a4dac556fe718af358dd9a2b11266a88857"
+    }
+  },
+  "claim_ceiling": "BIDIRECTIONAL_COORDINATION_CONTRACT_WITH_ASYMMETRIC_LOCAL_IMPLEMENTATION"
+}
