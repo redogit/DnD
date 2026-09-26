@@ -4,8 +4,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+static FILE *open_binary_read(const char *path) {
+#if defined(_WIN32)
+    FILE *f = NULL;
+    if (fopen_s(&f, path, "rb") != 0) return NULL;
+    return f;
+#else
+    return fopen(path, "rb");
+#endif
+}
+
 static char *read_file(const char *path) {
-    FILE *f = fopen(path, "rb");
+    FILE *f = open_binary_read(path);
     if (!f) return NULL;
     if (fseek(f, 0, SEEK_END) != 0) { fclose(f); return NULL; }
     long n = ftell(f);
