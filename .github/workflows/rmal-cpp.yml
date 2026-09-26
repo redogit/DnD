@@ -33,6 +33,8 @@ jobs:
         run: cmake --build build --parallel
       - name: Native self-check
         run: build/rmalc selfcheck
+      - name: Language spec introspection
+        run: build/rmalc language-spec --format json
       - name: Legacy syntax check
         run: build/rmalc check tests/legacy.rmal
       - name: Recovered surface check
