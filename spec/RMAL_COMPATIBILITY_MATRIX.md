@@ -1,6 +1,6 @@
 # RMAL Compatibility Matrix
 
-| Surface | Recovered status | C++ parser | VM semantics | Current classification |
+| Surface | Recovered status | C23 parser | VM semantics | Current classification |
 |---|---|---:|---:|---|
 | `CONST` | 2.1.x implemented | yes | yes | EXECUTABLE_CURRENT |
 | `LET` / `let` | 2.1.x implemented | yes | yes | EXECUTABLE_CURRENT |
@@ -22,7 +22,7 @@
 | S-expression frontend | predecessor architecture | no | no | SPECIFIED_TARGET |
 | external backends | predecessor architecture | no | no | SPECIFIED_TARGET |
 
-## Known semantic simplifications in current native compiler
+## Known semantic simplifications in current native C23 compiler
 
 - `CONST` is not yet runtime-enforced as immutable.
 - `STATE` and `SET` currently lower to the same global store mechanism.
@@ -33,3 +33,15 @@
 - current trace records opcode execution, not full RMAL-TFEML trace objects.
 
 These are explicit implementation debts, not hidden equivalences.
+
+
+## RMAL 3.1 C23 delta
+
+| Behavior | C++20 predecessor | C23 current |
+|---|---|---|
+| CONST immutability | not enforced | enforced |
+| STATE vs SET | same store path | distinct declaration/mutation |
+| SET undefined binding | implicit create possible | rejected |
+| Equality | rendered-value comparison | typed comparison |
+| Source coordinates | limited | bytecode/directive/trace |
+| Windows target | not exact-head verified | CI-gated with Clang/C23 |
