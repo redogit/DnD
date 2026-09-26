@@ -56,11 +56,13 @@ enum class Op : std::uint8_t { PushConst, Load, Store, Add, Sub, Mul, Div, Mod, 
 
 struct Instruction { Op op; std::int64_t a=0; std::int64_t b=0; };
 struct Function { std::string name; std::vector<std::string> params; std::vector<Instruction> code; };
+struct DirectiveRecord { std::string name; std::string payload; };
 struct Bytecode {
   std::string module;
   std::vector<Value> constants;
   std::vector<std::string> names;
   std::vector<Function> functions;
+  std::vector<DirectiveRecord> directives;
   std::vector<Instruction> main;
 };
 
@@ -90,6 +92,7 @@ private:
 Program parse_source(const std::string&);
 Bytecode compile_source(const std::string&);
 std::string disassemble(const Bytecode&);
+std::string manifest(const Bytecode&);
 std::string audit(const Program&,const Bytecode&);
 bool selfcheck(std::string* report=nullptr);
 
