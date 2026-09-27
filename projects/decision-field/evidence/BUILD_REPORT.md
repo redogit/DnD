@@ -67,7 +67,7 @@ decision_field_component_analysis_tests    PASS
 Current standalone component header SHA-256:
 
 ```text
-d30b1500aedb4a60f83661171f11b03c0ef7bde2f12d5b32c4eeba92d6ab1ef3
+027a3bf6f948c2c4db158b5d16d5fc5ebdcc82232c22f4c48ff1106706cc6819
 ```
 
 
@@ -87,8 +87,40 @@ Verified file hashes:
 
 ```text
 component_analysis.hpp
-d30b1500aedb4a60f83661171f11b03c0ef7bde2f12d5b32c4eeba92d6ab1ef3
+027a3bf6f948c2c4db158b5d16d5fc5ebdcc82232c22f4c48ff1106706cc6819
 
 component_analysis_tests.cpp
-585f62e239274311e72e37a2846db0e3f2e490644b516bea343fb9d562f0334b
+be366386c6fec404c97c63e746c81f80e36feeac64e8a69df9c7d4b12239752e
+```
+
+
+## Review-discovered core-collapse counterexample
+
+A review counterexample was added after the initial implementation.
+
+Two retained components had representatives with the same first coordinate, but one non-representative retained member differed on that coordinate. The original representative-only join incorrectly admitted the coordinate into the simpler core.
+
+Expected RED:
+
+```text
+CHECK failed: !result.simpler_core.stable_parameters[0].has_value()
+```
+
+Repair:
+
+```text
+join representatives only
+-> join every retained member of every retained primary component
+```
+
+Post-repair full local suite:
+
+```text
+4/4 PASS
+```
+
+Post-repair standalone GitHub slice:
+
+```text
+1/1 PASS
 ```
