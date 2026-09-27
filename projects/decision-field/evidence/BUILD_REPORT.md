@@ -49,3 +49,23 @@ decision_field_component_analysis_tests    Passed
 This verifies the current executable C++ carrier and its test assertions.
 
 It does not establish that the current scoring function is universally optimal, that the basis is complete for every domain, or that component analysis solves an external research problem.
+
+
+## Standalone decoupling recheck
+
+The component-analysis header was then decoupled from the predecessor engine header so the new GitHub slice can build independently. The full local predecessor + component suite was rerun after this change:
+
+```text
+decision_field_tests                       PASS
+decision_field_self_opposite               PASS
+decision_field_triadic_self_attack         PASS
+decision_field_component_analysis_tests    PASS
+
+100% tests passed, 0 tests failed out of 4
+```
+
+Current standalone component header SHA-256:
+
+```text
+d30b1500aedb4a60f83661171f11b03c0ef7bde2f12d5b32c4eeba92d6ab1ef3
+```
