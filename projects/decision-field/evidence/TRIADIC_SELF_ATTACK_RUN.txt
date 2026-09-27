@@ -1,0 +1,58 @@
+TRIADIC SELF-ATTACK
+  pole A vs pole B disagreements: 10
+  pole A challenges midpoint omissions: 10
+  pole B challenges midpoint omissions: 10
+  midpoint rejects unsupported A-only claims: 10
+  midpoint rejects unsupported B-only claims: 10
+  midpoint hard commitments: 6
+
+FIRST COMPLETE SURFACE
+  id: triad-surface:w1:L1:R2:M3
+  discovered wave: 1
+  discovered state depth: 2
+  representative directions: 16/16
+  mean polar imbalance: 0.000000
+  radial departure mean/min/max: 0.306996/0.285714/0.323810
+  definitions:
+    - mandatory obligations validate on every representative
+    - every one of the 16 first-ring directions contributes a representative
+    - left/right polar affinity is balanced within the configured tolerance
+    - representatives lie a non-zero validated distance away from the midpoint
+    - the surface was admitted only after completing the entire directional wave
+  directional executions to first surface: 192
+
+NEXT-AREA SURFACE
+  id: triad-surface:w3:L1:R2:M3
+  discovered wave: 3
+  discovered state depth: 4
+  representative directions: 16/16
+  mean polar imbalance: 0.000000
+  radial departure mean/min/max: 0.460319/0.451915/0.467541
+  definitions:
+    - mandatory obligations validate on every representative
+    - every one of the 16 first-ring directions contributes a representative
+    - left/right polar affinity is balanced within the configured tolerance
+    - representatives lie a non-zero validated distance away from the midpoint
+    - the surface was admitted only after completing the entire directional wave
+  inherited radial lower bound: 0.323810
+  directional executions to next surface: 30144
+  surface-varying definitions: 10
+    - adaptive-convergence-cohorts
+    - adaptive-directional-scheduling
+    - baseline-16x12
+    - content-addressed-memoization
+    - cooperative-concessions
+    - distributed-execution
+    - dual-reversal-levels
+    - four-round-scoped-fixes
+    - mirror-first-reexpression
+    - preserve-deep-excursions
+  surface definitions re-project to same obligated core: true
+  retained states: 30381
+
+INTERPRETATION
+  The third branch is adversarial to both poles by refusing unsupported pole-only commitments.
+  Both poles attack the third branch by independently reintroducing the distinctions it omitted.
+  A surface is admitted only when a full directional wave contains balanced, obligated-valid states in all 16 directions.
+  The first surface becomes a definition of where the next search must begin; no semantic recursion depth is predeclared.
+  In this self-domain, the farther surface is real but re-projects to the same six-invariant obligated core, so the current model exposes a self-similar boundary rather than a new invariant dimension.
