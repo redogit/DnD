@@ -69,3 +69,26 @@ Current standalone component header SHA-256:
 ```text
 d30b1500aedb4a60f83661171f11b03c0ef7bde2f12d5b32c4eeba92d6ab1ef3
 ```
+
+
+## Exact standalone GitHub-slice witness
+
+A clean temporary tree containing only the branch's standalone files was configured and built:
+
+```text
+CMake configure: PASS
+C++23 compile:   PASS
+decision_field_component_analysis_tests: PASS
+
+100% tests passed, 0 failed out of 1
+```
+
+Verified file hashes:
+
+```text
+component_analysis.hpp
+d30b1500aedb4a60f83661171f11b03c0ef7bde2f12d5b32c4eeba92d6ab1ef3
+
+component_analysis_tests.cpp
+585f62e239274311e72e37a2846db0e3f2e490644b516bea343fb9d562f0334b
+```
