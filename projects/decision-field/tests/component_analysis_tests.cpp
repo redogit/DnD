@@ -110,9 +110,46 @@ static void test_component_of_component_analysis_preserves_substructure() {
     CHECK(found_child);
 }
 
+
+static void test_simpler_core_checks_all_retained_component_members_not_only_representatives() {
+    ComponentFrame frame;
+    frame.core = {0.0, 0.0};
+    frame.observations = {
+        ComponentObservation{20, {1.0,  6.0}, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0},
+        ComponentObservation{21, {2.0,  5.0}, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0},
+        ComponentObservation{22, {1.0, -6.0}, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0}
+    };
+
+    const auto basis = make_directional_basis(
+        2,
+        std::vector<double>{1.0, 0.0},
+        std::vector<double>{0.0, 1.0},
+        {});
+
+    AnalysisConfig config;
+    config.max_primary_components = 2;
+    config.max_recursive_depth = 0;
+    config.core_tolerance = 1e-9;
+
+    const auto result = analyze(frame, basis, config);
+
+    CHECK(result.primary_components.size() == 2);
+    CHECK(!result.simpler_core.stable_parameters[0].has_value());
+    bool saw_x_residual = false;
+    for (const auto& residual : result.simpler_core.residual_dimensions) {
+        if (residual.dimension == 0) {
+            saw_x_residual = true;
+            CHECK(approx(residual.minimum, 1.0));
+            CHECK(approx(residual.maximum, 2.0));
+        }
+    }
+    CHECK(saw_x_residual);
+}
+
 int main() {
     test_basis_covers_directional_relational_and_parametric_views();
     test_analysis_joins_only_stable_primary_structure_into_simpler_core();
     test_component_of_component_analysis_preserves_substructure();
+    test_simpler_core_checks_all_retained_component_members_not_only_representatives();
     std::cout << "all component-analysis tests passed\n";
 }
