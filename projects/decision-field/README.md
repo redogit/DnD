@@ -6,7 +6,7 @@ This folder preserves and develops the Decision Field work without changing the 
 
 ## Current object
 
-A distributed, recoverable decision/search system that:
+The project lineage is a distributed, recoverable decision/search system that:
 
 - preserves immutable lineage and obligation-relative distinctions;
 - uses pure, replay-stable, reversible transforms;
@@ -16,6 +16,12 @@ A distributed, recoverable decision/search system that:
 - allows scoped cohort fixes, concessions and synchronization;
 - attacks its own design using lawful-opposite and triadic adversarial tests;
 - now adds directional/parametric primary component-of-component analysis to reduce explored structure into a simpler core without deleting residual differences.
+
+## Repository source boundary
+
+The current **browsable executable source** added by this branch is the standalone directional component-analysis slice. The previously verified v0.3 Decision Field engine is retained here through exact source hashes, run reports, and strategic-input lineage rather than being silently reconstructed from partial text.
+
+`BROWSABLE CURRENT SLICE != COMPLETE PREDECESSOR SOURCE TREE`
 
 ## New analysis layer
 
@@ -69,6 +75,7 @@ This subproject is C++23 and intentionally isolated from the root C23 build.
 cmake -S projects/decision-field -B build/decision-field -DCMAKE_BUILD_TYPE=Release
 cmake --build build/decision-field --parallel
 ctest --test-dir build/decision-field --output-on-failure
+# current GitHub slice: decision_field_component_analysis_tests
 ```
 
 ## Read order
