@@ -86,11 +86,11 @@
 - Test: `projects/decision-field/tests/component_analysis_tests.cpp`
 
 **Interfaces:**
-- Consumes: representative observations from retained primary components.
+- Consumes: all retained member observations from retained primary components; representatives remain explanatory/routing summaries only.
 - Produces: `SimplerCore{stable_parameters,residual_dimensions}`.
 
 - [x] **Step 1: Test one stable coordinate plus two varying coordinates**
-- [x] **Step 2: Admit a coordinate only when representative range <= `core_tolerance`**
+- [x] **Step 2: Admit a coordinate only when the range across all retained members <= `core_tolerance`**
 - [x] **Step 3: Preserve every non-stable coordinate as `CoreResidualDimension{dimension,minimum,maximum}`**
 - [x] **Step 4: Verify no varying coordinate disappears**
 
