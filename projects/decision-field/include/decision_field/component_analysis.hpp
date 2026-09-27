@@ -1,6 +1,6 @@
 #pragma once
 
-#include "decision_field/decision_field.hpp"
+#include <cstdint>
 
 #include <algorithm>
 #include <cmath>
@@ -15,6 +15,8 @@
 #include <vector>
 
 namespace df::component {
+
+using ComponentStateId = std::uint64_t;
 
 enum class AxisKind {
     Horizontal,
@@ -37,7 +39,7 @@ struct BasisDirection {
 };
 
 struct ComponentObservation {
-    StateId state_id{};
+    ComponentStateId state_id{};
     std::vector<double> values;
     double obligation_progress{};
     double information_gain{};
