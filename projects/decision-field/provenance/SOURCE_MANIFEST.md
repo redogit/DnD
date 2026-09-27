@@ -36,10 +36,10 @@ bfc6f6bc808d348a5892d4d30938486c128d8b13611e0a4bdb31aaebb966c2d5
 
 ```text
 include/decision_field/component_analysis.hpp
-d30b1500aedb4a60f83661171f11b03c0ef7bde2f12d5b32c4eeba92d6ab1ef3
+027a3bf6f948c2c4db158b5d16d5fc5ebdcc82232c22f4c48ff1106706cc6819
 
 tests/component_analysis_tests.cpp
-585f62e239274311e72e37a2846db0e3f2e490644b516bea343fb9d562f0334b
+be366386c6fec404c97c63e746c81f80e36feeac64e8a69df9c7d4b12239752e
 ```
 
 ## Predecessor report hashes
