@@ -1,101 +1,56 @@
-# CURRENT — Decision Field directional component analysis
+# CURRENT — Decision Field v0.5: recoverable core replay
 
-**Date:** 2026-09-27
-**Status:** executable local slice verified before repository import
+Date: 2026-09-27.
+Predecessor Git checkpoint: `4282676da043cca93b1622532d94ae419d9795ab`.
 
-## Preserved predecessor
-
-The preserved predecessor lineage is the v0.3 Decision Field prototype developed through:
+## Executable continuation
 
 ```text
-quartet
--> lawful mirror
--> overlap
--> shared center
--> 16 x 12 baseline field
--> self-opposite test
--> triadic pole/pole/midpoint attack
--> unknown-distance surface discovery
+actual v0.3 16 x 12 baseline
+-> frozen ComponentFrame + source references + uncollapsed metrics
+-> signed component analysis
+-> common-coordinate summary + exact per-row overrides
+-> independent numeric-projection decoding
+-> obligation replay
+-> KEEP | REPAIR | UNRESOLVED
 ```
 
-The predecessor remains identifiable through exact source hashes, evidence reports, and the source manifest. The current GitHub branch intentionally exposes the new component-analysis code as a standalone buildable slice instead of pretending that a partial reconstruction is the full v0.3 source tree.
+A discovered triadic surface is now capturable as a scoped `SurfaceObject` carrying its definition, poles, representative IDs, all explored waves, source references, validation results and declared criteria. It can be analyzed under a declared lateral/normal frame and provide a next-region bound.
 
-## New slice
+## Measured local results
 
-Added `include/decision_field/component_analysis.hpp`.
+- Actual predecessor baseline: 192 projected observations.
+- Stance projection: 6 shared coordinates, 10 variable coordinates.
+- Exact reconstructed projections: 192/192; all six declared mandatory checks pass in this fixture.
+- Numeric storage entries: 3,072 source coordinate values versus 1,926 core/override values. Metadata and original graph storage are excluded from this count.
+- Surface capture: nearest 192 records; farther 30,144 records; all waves preserved, not only the 16 representatives.
+- Synthetic positive/negative fixture: 96 negative checks preserved across 192 rows. KEEP means fidelity, not that every instance succeeds.
 
-Implemented:
+The six invariants are specified by the self-architecture fixture, not discovered as universal laws.
 
-- signed horizontal directions: left/right;
-- signed vertical directions: up/down;
-- four planar diagonal directions;
-- explicit lateral +/- basis;
-- explicit orthogonal +/- basis;
-- arbitrary named parametric +/- axes;
-- obligation/evidence/cost weighted directional projection;
-- primary component grouping;
-- recursive component-of-component decomposition;
-- simpler-core joining across all retained members of retained primary components;
-- residual preservation for every non-stable dimension.
+## Fresh verification
 
-## Meaning of primary
+| Configuration | Result |
+|---|---|
+| GCC 14.2 Debug, recovered predecessor included | 9/9 CTest targets passed |
+| GCC 14.2 Release, warnings as errors | 9/9 passed |
+| Clang 17 Debug, AddressSanitizer + UndefinedBehaviorSanitizer | 9/9 passed |
 
-`PRIMARY` means highest current obligation-relevant explanatory component under the declared scoring inputs.
+The Git-only standalone slice has four test targets. The complete nine-target run requires the exact recovered v0.3 source dependency. See `scripts/recover_predecessor.py` and the verification report. GitHub Actions results, when available, are separate from these local results.
 
-It does **not** mean highest covariance variance by definition.
+## Repairs in this continuation
 
-## Current scoring carrier
+1. Primary ranking no longer determines preservation scope: unselected and zero-scoring observations participate in common-core calculation.
+2. Finite observed anchors replace overflow-prone averaging of equal large values.
+3. Recovery rejects lost coordinates, malformed ranges and unsupported shared-coordinate claims.
+4. Missing, unstable or unknown oracle results cannot silently become KEEP.
+5. Surface capture rejects partial waves, duplicated representatives and mismatched qualification counts.
 
-For an observation and a positive signed basis direction:
+## Remaining boundaries
 
-```text
-quality =
-    obligation_progress
-  + information_gain
-  + evidence_strength
-  - residual_cost
-  - recovery_cost
-  - decay_risk
-
-component_score =
-    positive_projection * max(0, quality)
-```
-
-This is a first executable carrier, not the final universal scoring law.
-
-## Core join
-
-All retained members of retained primary components are compared coordinate-by-coordinate; representative states are not sufficient for a stability claim.
-
-If the observed range is within the declared tolerance, the coordinate is admitted into the simpler core.
-
-Otherwise it is preserved as a residual dimension with minimum/maximum extent.
-
-## Verification
-
-Fresh local verification before import:
-
-```text
-decision_field_tests                       PASS
-decision_field_self_opposite               PASS
-decision_field_triadic_self_attack         PASS
-decision_field_component_analysis_tests    PASS
-
-4 / 4 PASS
-```
-
-See `evidence/BUILD_REPORT.md`.
-
-## Next development boundary
-
-Connect the component analyzer directly to:
-
-1. the 192 baseline probe records;
-2. discovered `SurfaceDefinition` objects;
-3. synchronization-driven cohort reconfiguration;
-4. first-class SurfaceDefinition input/output;
-5. RMAL carriers once the semantics are independently stable.
-
-```text
-CURRENT EXECUTABLE SLICE != FINAL COMPONENT THEORY
-```
+- Exact reconstruction here means the declared numeric projection; it does not claim to reconstruct every field of an arbitrary native Object.
+- Runtime source graphs remain the authority for native values and lineage. Durable graph serialization is not implemented by this slice.
+- Lateral/normal vectors are declared and checked under the supplied Euclidean numeric metric; this does not establish a differentiable manifold.
+- Structural operations in the predecessor remain callback-based, not unified first-class transforms.
+- The predecessor's whole-wave triadic expansion is bounded by resource guards, not a polynomial-time search guarantee.
+- RMAL carrier promotion and dynamic cohort scheduling remain future tasks; root RMAL/RMALC C23 files are unchanged.

@@ -1,0 +1,122 @@
+
+===== core_coverage_RED.txt =====
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  !r.simpler_core.stable_parameters[0]
+
+===== numeric_input_RED.txt =====
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  rejected
+
+===== replay_integrity_RED.txt =====
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  replay_core(f,p,oracle).disposition==Disposition::Repair
+
+===== finite_mean_RED.txt =====
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  std::isfinite(bounded.simpler_core.stable_parameters[0].value())
+
+===== gcc_debug_CTEST.txt =====
+Internal ctest changing into directory: /mnt/data/df_onward/build-debug
+Test project /mnt/data/df_onward/build-debug
+    Start 1: decision_field_component_analysis_tests
+1/9 Test #1: decision_field_component_analysis_tests ...   Passed    0.00 sec
+    Start 2: decision_field_core_coverage_tests
+2/9 Test #2: decision_field_core_coverage_tests ........   Passed    0.00 sec
+    Start 3: decision_field_bridge_tests
+3/9 Test #3: decision_field_bridge_tests ...............   Passed    0.02 sec
+    Start 4: decision_field_replay_integrity_tests
+4/9 Test #4: decision_field_replay_integrity_tests .....   Passed    0.01 sec
+    Start 5: decision_field_predecessor_bridge_tests
+5/9 Test #5: decision_field_predecessor_bridge_tests ...   Passed    0.01 sec
+    Start 6: decision_field_surface_bridge_tests
+6/9 Test #6: decision_field_surface_bridge_tests .......   Passed    1.81 sec
+    Start 7: decision_field_tests
+7/9 Test #7: decision_field_tests ......................   Passed    0.04 sec
+    Start 8: decision_field_self_opposite
+8/9 Test #8: decision_field_self_opposite ..............   Passed    0.06 sec
+    Start 9: decision_field_triadic_self_attack
+9/9 Test #9: decision_field_triadic_self_attack ........   Passed    0.40 sec
+
+100% tests passed, 0 tests failed out of 9
+
+Total Test time (real) =   2.36 sec
+
+===== gcc_release_CTEST.txt =====
+Internal ctest changing into directory: /mnt/data/df_onward/build-release
+Test project /mnt/data/df_onward/build-release
+    Start 1: decision_field_component_analysis_tests
+1/9 Test #1: decision_field_component_analysis_tests ...   Passed    0.01 sec
+    Start 2: decision_field_core_coverage_tests
+2/9 Test #2: decision_field_core_coverage_tests ........   Passed    0.00 sec
+    Start 3: decision_field_bridge_tests
+3/9 Test #3: decision_field_bridge_tests ...............   Passed    0.00 sec
+    Start 4: decision_field_replay_integrity_tests
+4/9 Test #4: decision_field_replay_integrity_tests .....   Passed    0.00 sec
+    Start 5: decision_field_predecessor_bridge_tests
+5/9 Test #5: decision_field_predecessor_bridge_tests ...   Passed    0.00 sec
+    Start 6: decision_field_surface_bridge_tests
+6/9 Test #6: decision_field_surface_bridge_tests .......   Passed    0.23 sec
+    Start 7: decision_field_tests
+7/9 Test #7: decision_field_tests ......................   Passed    0.00 sec
+    Start 8: decision_field_self_opposite
+8/9 Test #8: decision_field_self_opposite ..............   Passed    0.01 sec
+    Start 9: decision_field_triadic_self_attack
+9/9 Test #9: decision_field_triadic_self_attack ........   Passed    0.15 sec
+
+100% tests passed, 0 tests failed out of 9
+
+Total Test time (real) =   0.42 sec
+
+===== clang_sanitized_CTEST.txt =====
+Internal ctest changing into directory: /mnt/data/df_onward/build-sanitize
+Test project /mnt/data/df_onward/build-sanitize
+    Start 1: decision_field_component_analysis_tests
+1/9 Test #1: decision_field_component_analysis_tests ...   Passed    0.02 sec
+    Start 2: decision_field_core_coverage_tests
+2/9 Test #2: decision_field_core_coverage_tests ........   Passed    0.01 sec
+    Start 3: decision_field_bridge_tests
+3/9 Test #3: decision_field_bridge_tests ...............   Passed    0.06 sec
+    Start 4: decision_field_replay_integrity_tests
+4/9 Test #4: decision_field_replay_integrity_tests .....   Passed    0.01 sec
+    Start 5: decision_field_predecessor_bridge_tests
+5/9 Test #5: decision_field_predecessor_bridge_tests ...   Passed    0.04 sec
+    Start 6: decision_field_surface_bridge_tests
+6/9 Test #6: decision_field_surface_bridge_tests .......   Passed    3.95 sec
+    Start 7: decision_field_tests
+7/9 Test #7: decision_field_tests ......................   Passed    0.05 sec
+    Start 8: decision_field_self_opposite
+8/9 Test #8: decision_field_self_opposite ..............   Passed    0.12 sec
+    Start 9: decision_field_triadic_self_attack
+9/9 Test #9: decision_field_triadic_self_attack ........   Passed    1.66 sec
+
+100% tests passed, 0 tests failed out of 9
+
+Total Test time (real) =   5.93 sec
+
+===== standalone_CTEST.txt =====
+Internal ctest changing into directory: /mnt/data/df_onward/build-standalone
+Test project /mnt/data/df_onward/build-standalone
+    Start 1: decision_field_component_analysis_tests
+1/4 Test #1: decision_field_component_analysis_tests ...   Passed    0.00 sec
+    Start 2: decision_field_core_coverage_tests
+2/4 Test #2: decision_field_core_coverage_tests ........   Passed    0.01 sec
+    Start 3: decision_field_bridge_tests
+3/4 Test #3: decision_field_bridge_tests ...............   Passed    0.01 sec
+    Start 4: decision_field_replay_integrity_tests
+4/4 Test #4: decision_field_replay_integrity_tests .....   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   0.03 sec
+
+===== predecessor_bridge_RUN.txt =====
+actual v0.3 baseline -> component frame -> independently decoded packet -> obligation replay
+source observations=192 stable=6 residual_dimensions=10 exact_replayed=192 raw_numeric_entries=3072 packet_numeric_entries=1926
+
+===== surface_GREEN.txt =====
+surface objects: nearest=192 records, farther=30144 records, 16 representatives; full-wave checks passed
+
+===== recovery_checks.txt =====
+wrong archive hash: rejected
+existing destination: rejected without mutation
+all 13 original source/report files: exact SHA-256 match

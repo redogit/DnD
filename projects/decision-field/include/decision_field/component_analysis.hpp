@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -231,8 +232,7 @@ inline SimplerCore join_retained_members(const ComponentFrame& frame,
     for (std::size_t dimension = 0; dimension < frame.core.size(); ++dimension) {
         double minimum = std::numeric_limits<double>::infinity();
         double maximum = -std::numeric_limits<double>::infinity();
-        double sum = 0.0;
-        std::size_t count = 0;
+        std::optional<double> anchor;
         for (std::size_t index = 0; index < frame.observations.size(); ++index) {
             if (!retained[index]) continue;
             const auto& values = frame.observations[index].values;
@@ -240,11 +240,11 @@ inline SimplerCore join_retained_members(const ComponentFrame& frame,
             const double value = values[dimension];
             minimum = std::min(minimum, value);
             maximum = std::max(maximum, value);
-            sum += value;
-            ++count;
+            if (!anchor) anchor = value;
         }
         if (maximum - minimum <= tolerance) {
-            core.stable_parameters[dimension] = sum / static_cast<double>(count);
+            // An observed anchor avoids overflow and inventing a new value.
+            core.stable_parameters[dimension] = anchor;
         } else {
             core.residual_dimensions.push_back({dimension, minimum, maximum});
         }
@@ -321,12 +321,42 @@ inline AnalysisResult analyze(const ComponentFrame& frame,
     if (basis.empty()) throw std::invalid_argument("component analysis requires a basis");
     if (config.max_primary_components == 0) throw std::invalid_argument("max_primary_components must be non-zero");
 
+    if (!std::isfinite(config.core_tolerance) || config.core_tolerance < 0.0)
+        throw std::invalid_argument("core tolerance must be finite and non-negative");
+    if (config.minimum_members_for_recursion == 0)
+        throw std::invalid_argument("recursion member threshold must be non-zero");
+    const auto finite = [](std::span<const double> xs) {
+        return std::all_of(xs.begin(), xs.end(), [](double x) { return std::isfinite(x); });
+    };
+    if (!finite(frame.core)) throw std::invalid_argument("non-finite core coordinate");
+    std::unordered_set<ComponentStateId> states;
+    for (const auto& o : frame.observations) {
+        const double metrics[]{o.obligation_progress, o.information_gain, o.evidence_strength,
+                               o.residual_cost, o.recovery_cost, o.decay_risk};
+        if (o.values.size() != frame.core.size() || !finite(o.values) || !finite(metrics))
+            throw std::invalid_argument("invalid observation coordinates or metrics");
+        if (o.state_id == 0 || !states.insert(o.state_id).second)
+            throw std::invalid_argument("observation identities must be nonzero and unique");
+    }
+    std::unordered_set<std::string> names;
+    for (const auto& b : basis) {
+        const double n = detail::norm(b.unit_direction);
+        if (b.id.empty() || !names.insert(b.id).second ||
+            b.unit_direction.size() != frame.core.size() || !finite(b.unit_direction) ||
+            !std::isfinite(n) || std::abs(n - 1.0) > 1e-9)
+            throw std::invalid_argument("basis must have unique names and finite unit directions");
+    }
+
     std::vector<std::size_t> indices(frame.observations.size());
     for (std::size_t i = 0; i < indices.size(); ++i) indices[i] = i;
 
     AnalysisResult result;
     result.primary_components = detail::build_level(frame, basis, config, indices, 0, {});
-    result.simpler_core = detail::join_retained_members(frame, result.primary_components, config.core_tolerance);
+    // Ranking limits execution attention; it never reduces the preservation scope.
+    ComponentNode complete_frame;
+    complete_frame.member_observation_indices = indices;
+    result.simpler_core = detail::join_retained_members(
+        frame, std::span<const ComponentNode>(&complete_frame, 1), config.core_tolerance);
     return result;
 }
 
