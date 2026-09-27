@@ -208,21 +208,33 @@ inline std::vector<ComponentNode> build_level(
     return nodes;
 }
 
-inline SimplerCore join_representatives(const ComponentFrame& frame,
-                                        std::span<const ComponentNode> components,
-                                        double tolerance) {
+inline SimplerCore join_retained_members(const ComponentFrame& frame,
+                                         std::span<const ComponentNode> components,
+                                         double tolerance) {
     SimplerCore core;
     core.stable_parameters.resize(frame.core.size());
     if (components.empty()) return core;
+
+    std::vector<bool> retained(frame.observations.size(), false);
+    std::size_t retained_count = 0;
+    for (const auto& component : components) {
+        for (const auto index : component.member_observation_indices) {
+            if (index >= frame.observations.size()) throw std::out_of_range("component member index out of range");
+            if (!retained[index]) {
+                retained[index] = true;
+                ++retained_count;
+            }
+        }
+    }
+    if (retained_count == 0) return core;
 
     for (std::size_t dimension = 0; dimension < frame.core.size(); ++dimension) {
         double minimum = std::numeric_limits<double>::infinity();
         double maximum = -std::numeric_limits<double>::infinity();
         double sum = 0.0;
         std::size_t count = 0;
-        for (const auto& component : components) {
-            const auto index = component.representative_observation_index;
-            if (index >= frame.observations.size()) throw std::out_of_range("representative index out of range");
+        for (std::size_t index = 0; index < frame.observations.size(); ++index) {
+            if (!retained[index]) continue;
             const auto& values = frame.observations[index].values;
             if (values.size() != frame.core.size()) throw std::invalid_argument("observation dimensionality mismatch");
             const double value = values[dimension];
@@ -314,7 +326,7 @@ inline AnalysisResult analyze(const ComponentFrame& frame,
 
     AnalysisResult result;
     result.primary_components = detail::build_level(frame, basis, config, indices, 0, {});
-    result.simpler_core = detail::join_representatives(frame, result.primary_components, config.core_tolerance);
+    result.simpler_core = detail::join_retained_members(frame, result.primary_components, config.core_tolerance);
     return result;
 }
 
