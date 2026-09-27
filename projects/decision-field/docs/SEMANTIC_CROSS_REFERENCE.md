@@ -28,7 +28,7 @@ explore from a synchronized core
 | Parametric | vary one declared independent degree | OneDegreeExperiment / signed one-degree rule | arbitrary named +/- parameter basis |
 | Primary component | most useful current directional explanation | Decision Field obligation-relative choice | aggregate obligation/evidence-weighted score |
 | Component of component | inspect internal structure of an already useful direction | recursive survivor/frontier and nested execution spaces | recursively reanalyze members while excluding parent basis |
-| Simpler core | common structure that can be retained without losing required distinctions | MaxInterleave common consequential structure; cooperative shared core | stable representative coordinates |
+| Simpler core | common structure that can be retained without losing required distinctions | MaxInterleave common consequential structure; cooperative shared core | coordinates stable across all retained component members |
 | Residual | difference that cannot yet be collapsed | Trace-First residual / Knowledge Decay / WayBack | dimension + observed min/max |
 | Reprojection | use a validated result as the next object/surface | Object -> Surface -> Carrier -> Trace -> Residual -> Repair -> Reprojection | planned SurfaceDefinition/component adapter |
 | Synchronization | branches share fixes and compare retained differences | bounded outward synchronization / cooperative implementation | next adapter layer |
@@ -71,7 +71,7 @@ This asks which distinctions are actually present inside the explored region.
 ### Upward / reconstruction
 
 ```text
-representative components
+retained component members
 -> compare coordinates
 -> stable shared coordinates
 -> residual dimensions
