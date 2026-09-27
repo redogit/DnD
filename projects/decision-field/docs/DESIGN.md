@@ -110,13 +110,13 @@ This prevents repeatedly rediscovering the same parent direction.
 
 ## Join to simpler core
 
-Take the representative state of each retained primary component.
+Take every retained member state of every retained primary component. Representatives remain useful for explanation/routing, but they are insufficient to prove a coordinate is stable.
 
 For each parameter dimension:
 
 ```text
-if max(value) - min(value) <= tolerance:
-    admit mean(value) as stable core coordinate
+if max(value across all retained members) - min(value across all retained members) <= tolerance:
+    admit mean(value across all retained members) as stable core coordinate
 else:
     preserve {dimension, min, max} as residual
 ```
