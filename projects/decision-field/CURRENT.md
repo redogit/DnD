@@ -35,7 +35,7 @@ Implemented:
 - obligation/evidence/cost weighted directional projection;
 - primary component grouping;
 - recursive component-of-component decomposition;
-- simpler-core joining from representative primary components;
+- simpler-core joining across all retained members of retained primary components;
 - residual preservation for every non-stable dimension.
 
 ## Meaning of primary
@@ -65,7 +65,7 @@ This is a first executable carrier, not the final universal scoring law.
 
 ## Core join
 
-Representative components are compared coordinate-by-coordinate.
+All retained members of retained primary components are compared coordinate-by-coordinate; representative states are not sufficient for a stability claim.
 
 If the observed range is within the declared tolerance, the coordinate is admitted into the simpler core.
 
