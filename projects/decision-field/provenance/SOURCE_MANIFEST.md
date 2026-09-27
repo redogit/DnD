@@ -36,7 +36,7 @@ bfc6f6bc808d348a5892d4d30938486c128d8b13611e0a4bdb31aaebb966c2d5
 
 ```text
 include/decision_field/component_analysis.hpp
-c23667676bde0599fda294565716935a48f6a9fbfe550811515638b071b2552f
+d30b1500aedb4a60f83661171f11b03c0ef7bde2f12d5b32c4eeba92d6ab1ef3
 
 tests/component_analysis_tests.cpp
 585f62e239274311e72e37a2846db0e3f2e490644b516bea343fb9d562f0334b
@@ -65,4 +65,14 @@ SOURCE != INTERPRETATION
 IMPLEMENTATION != PROOF
 RELATED != SUPPORTS
 SUCCESSOR != REWRITTEN_PREDECESSOR
+```
+
+
+## Repository import boundary
+
+The browsable GitHub slice introduced by this branch contains the new standalone component-analysis implementation and tests plus the predecessor evidence/reports. The full v0.3 prototype source remains identified by the hashes above and by its verified generated package lineage; it is not silently reconstructed or rewritten in this import.
+
+```text
+PARTIAL SOURCE IMPORT != LOST PREDECESSOR
+HASHED PREDECESSOR != BROWSABLE CURRENT SOURCE
 ```
