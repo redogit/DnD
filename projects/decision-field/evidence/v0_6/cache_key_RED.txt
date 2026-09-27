@@ -1,0 +1,14 @@
+Internal ctest changing into directory: /mnt/data/df_v06_base/.worktrees/native-state/build-debug
+Test project /mnt/data/df_v06_base/.worktrees/native-state/build-debug
+    Start 7: decision_field_native_snapshot_tests
+1/1 Test #7: decision_field_native_snapshot_tests ...Subprocess aborted***Exception:   0.01 sec
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  threw
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.02 sec
+
+The following tests FAILED:
+	  7 - decision_field_native_snapshot_tests (Subprocess aborted)

@@ -1,73 +1,71 @@
-# Decision Field
+# Decision Field v0.6 — native engine persistence
 
-Obligation-relative exploration, directional component analysis and recoverable core replay.
+This project extends the recoverable Decision Field inside `redogit/DnD` without changing
+root RMAL/RMALC C23 authority. v0.5 connects exploration to component/core/surface replay.
+v0.6 persists the engine-owned native data graph and restores it in another process.
 
-The root `redogit/DnD` RMAL/RMALC C23 toolchain remains unchanged. This project is an isolated C++23 research implementation.
-
-## Current path
-
-```text
-192 baseline records
--> explicit projection and metric policy
--> component analysis
--> shared coordinates + exact row-specific residual values
--> decode without original inputs
--> replay frozen obligations
-```
-
-A triadic `SurfaceDefinition` can also become a scoped `SurfaceObject`. Its 16 representatives index the observations; they do not replace the complete branch history.
-
-Read `CURRENT.md`, `docs/RECOVERABLE_CORE_REPLAY.md`, and `evidence/v0_5/VERIFICATION.md` for the exact implemented scope.
-
-## Build the standalone Git slice
-
-```sh
-cmake -S projects/decision-field -B build/decision-field -DCMAKE_BUILD_TYPE=Release
-cmake --build build/decision-field --parallel 2
-ctest --test-dir build/decision-field -C Release --output-on-failure
-```
-
-This runs four test targets when the optional predecessor source is absent. The configuration prints that boundary explicitly.
-
-## Reproduce the actual v0.3 integration
-
-The original conversation archive is `decision_field_prototype_v0_3_triadic.zip`:
+## Current execution
 
 ```text
-SHA-256 91a25de44269e6f54d45c5744b38af09eef2daf25b8fedbdab79ca0b4a018292
+actual v0.3 engine -> synchronized snapshot -> canonical DFNAT001 archive
+-> create-only POSIX file -> independent process -> checked native reconstruction
+-> explicit callback rebinding -> memoization / dependency / ID-preserving continuation
 ```
 
-Recover it without replacing another version:
+The snapshot includes full native values, all state links, depths and provenance, transform
+edges and recovery receipts, successful and failed invocation records, cache indexes,
+obligations, counters, dependency indexes, scoped fixes, concessions and residual notes.
+
+The concrete SelfState codec preserves stance, orientation and marker sets. Other domains
+must provide an explicit exact native codec. This is not a dump of pointers/object memory.
+
+## Build the complete source bundle
+
+Requirements: C++23 compiler, CMake >= 3.25, Python 3, OpenSSL >= 3 development library.
+Native durable-file tests are enabled on POSIX; Windows file I/O is not implemented.
 
 ```sh
-python projects/decision-field/scripts/recover_predecessor.py /path/to/decision_field_prototype_v0_3_triadic.zip
+cmake -S projects/decision-field -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel 2
+ctest --test-dir build --output-on-failure
 ```
 
-Then reconfigure/build/test using the commands above. CMake discovers `predecessor/v0_3/`, adds its three original tests, and adds two actual-engine integration tests: nine targets in total.
+Linux with the exact predecessor source enables 13 tests. The original source is unchanged;
+`scripts/prepare_native_engine.py` verifies its SHA-256 and generates a snapshot-capable
+successor header only for the native targets. Older tests still use the exact original.
 
-An existing verified source directory can instead be supplied with:
+## Git-only recovery
 
-```sh
-cmake -S projects/decision-field -B build/decision-field -DDF_PREDECESSOR_SOURCE=/path/to/decision_field_v0_3_package
-```
+The repository contains the new implementations, tests and reconstruction instructions.
+The companion bundle includes the original 13-file predecessor. For a Git-only checkout,
+use `scripts/recover_predecessor.py` with the exact original v0.3 archive. Without it,
+CMake explicitly enables only the four standalone v0.5 component/bridge tests.
+Use `-DDF_ENABLE_NATIVE_PERSISTENCE=OFF` to run the nine predecessor/bridge tests without
+requiring OpenSSL. That configuration does not test persistence.
 
-The companion v0.5 source bundle includes the recovered predecessor. The repository does not pretend that the earlier source-hash manifest alone contains those bytes.
+## Files to read
 
-## Sources and instructions
+- `CURRENT.md`: observed state and boundaries.
+- `docs/NATIVE_PERSISTENCE.md`: checkpoint specification.
+- `docs/plans/2026-09-27-native-persistence.md`: implementation plan.
+- `evidence/v0_6/VERIFICATION.md`: fresh commands and results.
+- `evidence/v0_6/REVIEW.md`: defect, counterprobe and remaining limits.
+- `evidence/CONVERSATION_STRATEGIC_INPUTS.md`: original user direction.
+- `instructions/OPERATING_PROTOCOL.md`: previously accepted design rules.
 
-- `instructions/OPERATING_PROTOCOL.md`: accepted user-directed design rules.
-- `evidence/CONVERSATION_STRATEGIC_INPUTS.md`: original strategic inputs.
-- `docs/DEFINITIONS.md` and `docs/SEMANTIC_CROSS_REFERENCE.md`: earlier definitions and meaning-based relations.
-- `docs/RECOVERABLE_CORE_REPLAY.md`: v0.5 contract; supersedes earlier representative-only or selected-member-only core descriptions.
-- `provenance/SOURCE_MANIFEST.md`: preserved predecessor claims/hashes.
-- `evidence/v0_5/`: fresh tests, negative results, recovery provenance and review.
+## Boundaries
 
-## Evidence boundaries
+Capture is quiescent, not a concurrent process snapshot. Policy/callback code and result
+objects owned outside the engine are not serialized. A matching external policy, codec
+and transform registry must be supplied at restore. SHA-256 is integrity relative to a
+trusted digest, not authentication, encryption or scientific admission. An altered archive
+with a recomputed checksum can still describe a structurally valid different state.
+
+No state is discarded because it failed, became stale or recursed deeply.
 
 ```text
-RANKING != PRESERVATION_PERMISSION
-NUMERIC_PROJECTION_RECOVERY != NATIVE_OBJECT_RECOVERY
-KEEP_REPLAY != EVERY_INSTANCE_SUCCEEDS
-SAMPLED_SURFACE != GLOBAL_MANIFOLD_PROOF
-GENERATE != VERIFY != ADMIT
+SIMPLER CORE != ERASED DIFFERENCES
+CHECKPOINT RESTORED != CLAIM PROVEN
+METHOD TRANSFER != EVIDENCE TRANSFER
+SUCCESSOR != REWRITTEN PREDECESSOR
 ```
