@@ -5,7 +5,7 @@
 
 ## Preserved predecessor
 
-The imported source includes the v0.3 Decision Field prototype developed through:
+The preserved predecessor lineage is the v0.3 Decision Field prototype developed through:
 
 ```text
 quartet
@@ -18,7 +18,7 @@ quartet
 -> unknown-distance surface discovery
 ```
 
-The predecessor remains recoverable through the evidence reports and source manifest.
+The predecessor remains identifiable through exact source hashes, evidence reports, and the source manifest. The current GitHub branch intentionally exposes the new component-analysis code as a standalone buildable slice instead of pretending that a partial reconstruction is the full v0.3 source tree.
 
 ## New slice
 
