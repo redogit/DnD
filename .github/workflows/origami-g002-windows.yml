@@ -2,6 +2,8 @@ name: Origami G002 Windows Runtime Probe
 
 on:
   push:
+    branches:
+      - master
     paths:
       - "projects/origami-g002/**"
       - ".github/workflows/origami-g002-windows.yml"
@@ -17,6 +19,7 @@ permissions:
 env:
   VERIFY_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
   ZIG_VERSION: "0.14.1"
+  PYTHONUTF8: "1"
   ZIG_WINDOWS_SHA256: "554f5378228923ffd558eac35e21af020c73789d87afeabf4bfd16f2e6feed2c"
 
 jobs:
