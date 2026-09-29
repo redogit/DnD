@@ -1,0 +1,14 @@
+MODULE MirrorHomeward
+# Host explicitly supplies FunctionObjects 1 (lawful) and 2 (counterprobe).
+# Source occurrence 1 belongs to this fixture; these are not global IDs.
+let first = AnyFunctor("mirror", 1, 1);
+assert AnyFunctor("status", 1, first) == "SUCCEEDED";
+let reflected = AnyFunctor("output", 1, first);
+assert AnyFunctor("mirror", 1, 1) == first;
+let second = AnyFunctor("mirror", 1, reflected);
+assert AnyFunctor("status", 1, second) == "SUCCEEDED";
+let rejected = AnyFunctor("mirror", 2, 1);
+assert AnyFunctor("status", 2, rejected) == "REJECTED";
+# Homeward returns the exact recovered value to the host and its digest to RMAL.
+# A digest is not a replacement for the recovered value.
+let recovered_digest = AnyFunctor("homeward", 1, first);

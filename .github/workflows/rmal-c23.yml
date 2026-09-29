@@ -10,6 +10,7 @@ on:
       - "tests/**"
       - "examples/**"
       - "scripts/**"
+      - "projects/decision-field/**"
       - "provenance/library/RMALC.rmal"
       - "README.md"
       - "README_COMPILER.md"
@@ -26,6 +27,7 @@ on:
       - "tests/**"
       - "examples/**"
       - "scripts/**"
+      - "projects/decision-field/**"
       - "provenance/library/RMALC.rmal"
       - "README.md"
       - "README_COMPILER.md"
@@ -34,19 +36,30 @@ on:
       - "docs/RMAL_C23_WINDOWS.md"
       - ".github/workflows/rmal-c23.yml"
 
+permissions:
+  contents: read
+
+env:
+  VERIFY_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
 jobs:
   linux-clang-c23:
     name: Linux / Clang / C23
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.VERIFY_SHA }}
+          persist-credentials: false
+      - name: Verify source identity
+        run: test "$(git rev-parse HEAD)" = "$VERIFY_SHA"
       - name: Toolchain
         run: |
           clang --version
           cmake --version
           ninja --version
       - name: Configure
-        run: cmake -S . -B build/linux-c23 -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=Release
+        run: cmake -S . -B build/linux-c23 -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release
       - name: Build
         run: cmake --build build/linux-c23 --parallel
       - name: Version
@@ -65,12 +78,38 @@ jobs:
         run: build/linux-c23/rmalc manifest tests/recovered_surface.rmal --json
       - name: Tests
         run: ctest --test-dir build/linux-c23 --output-on-failure
+      - name: Verify locally tested Mirror source identities
+        run: python3 projects/decision-field/scripts/check_mirror_manifest.py
+      - name: Retain exact integration sources
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/rmal-source"
+          git archive --format=zip --output="$RUNNER_TEMP/rmal-source/rmal-native-source.zip" "$VERIFY_SHA" CMakeLists.txt include/rmal src tests examples/hello.rmal spec README.md README_COMPILER.md CURRENT.md scripts projects/decision-field
+          printf '%s\n' "$VERIFY_SHA" > "$RUNNER_TEMP/rmal-source/SOURCE_REVISION.txt"
+          sha256sum "$RUNNER_TEMP/rmal-source/rmal-native-source.zip" > "$RUNNER_TEMP/rmal-source/SHA256SUMS.txt"
+      - name: Upload private reproduction source
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: RMAL-native-source
+          path: ${{ runner.temp }}/rmal-source/
+          if-no-files-found: error
+          retention-days: 14
 
   windows-clang-c23:
     name: Windows x64 / Clang / C23
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.VERIFY_SHA }}
+          persist-credentials: false
+      - name: Verify source identity
+        shell: pwsh
+        run: |
+          if ((git rev-parse HEAD).Trim() -ne $env:VERIFY_SHA) { throw "source revision mismatch" }
       - name: Toolchain
         shell: pwsh
         run: |
@@ -80,7 +119,7 @@ jobs:
           ninja --version
       - name: Configure
         shell: pwsh
-        run: cmake -S . -B build/windows-c23 -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=Release
+        run: cmake -S . -B build/windows-c23 -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release
       - name: Build
         shell: pwsh
         run: cmake --build build/windows-c23 --parallel

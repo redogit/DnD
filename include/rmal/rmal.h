@@ -1,7 +1,7 @@
 #ifndef RMAL_RMAL_H
 #define RMAL_RMAL_H
 
-#if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 202311L
+#if !defined(__cplusplus) && (!defined(__STDC_VERSION__) || __STDC_VERSION__ < 202311L)
 #error RMALC 3.1 requires ISO C23 or newer
 #endif
 
@@ -45,6 +45,10 @@ typedef struct {
     char message[512];
 } RmalStatus;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 const char *rmal_version(void);
 const char *rmal_language_name(void);
 const char *rmal_compiler_name(void);
@@ -60,6 +64,13 @@ char *rmal_manifest(const RmalBytecode *bytecode, bool json);
 char *rmal_audit(const RmalProgram *program, const RmalBytecode *bytecode);
 char *rmal_language_spec(bool json);
 
+/* Explicit host capability ABI; no functions are bound by default. */
+#define RMAL_NATIVE_API_VERSION 1
+typedef RmalStatus (*RmalNativeFunction)(void *context, const RmalValue *arguments,
+                                        size_t count, RmalValue *result);
+RmalStatus rmal_vm_bind_native(RmalVm *vm, const char *name, size_t arity,
+                               RmalNativeFunction callback, void *context);
+
 RmalVm *rmal_vm_create(void);
 void rmal_vm_free(RmalVm *vm);
 RmalStatus rmal_vm_run(RmalVm *vm, const RmalBytecode *bytecode, bool trace, RmalValue *result);
@@ -70,5 +81,9 @@ void rmal_value_free(RmalValue *value);
 char *rmal_value_render(const RmalValue *value);
 
 bool rmal_selfcheck(char **report);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif

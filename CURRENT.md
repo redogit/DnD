@@ -120,3 +120,20 @@ Until exact-head CI succeeds:
 `NATIVE_C23_WINDOWS_AND_LINUX_EXACT_HEAD_VERIFIED`
 
 Not universal compiler correctness. Not full 2.1.x parity. Not scientific validation.
+
+
+## September 29 continuation — explicit native host / Mirror bridge
+
+PR #3 extends the VM with opt-in native callback bindings and a C-compatible API
+for C++ consumers. No function is bound by default; script shadowing, reentry,
+duplicate bindings and invalid argument shapes are rejected.
+
+`projects/decision-field/` now supplies one immutable FunctionObject / AnyFunctor
+Mirror adapter, executed from RMAL rather than treated as directive metadata.
+Its separate native checkpoint/restart verification and limitations are recorded
+in `projects/decision-field/evidence/v0_7/VERIFICATION.md`.
+
+Root compiler/ABI CI and the full native integration suite are separate evidence
+scopes. The full native suite requires the exact original v0.3 source; the supplied
+companion bundle includes it. No Windows durable checkpoint implementation or
+universal AnyFunctor/compiler proof is implied.

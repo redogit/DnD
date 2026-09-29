@@ -68,9 +68,7 @@ static bool stack_push(Stack*s,RmalValue v){if(s->count==s->cap){size_t nc=GROW_
 static bool stack_pop(Stack*s,RmalValue*out){if(!s->count)return false;*out=s->data[--s->count];return true;}
 static void stack_free(Stack*s){for(size_t i=0;i<s->count;i++)rmal_value_free(&s->data[i]);free(s->data);*s=(Stack){0};}
 
-struct RmalVm {Env globals;RmalTraceEvent*trace;size_t trace_count,trace_cap;};
-RmalVm*rmal_vm_create(void){return calloc(1,sizeof(RmalVm));}
-void rmal_vm_free(RmalVm*v){if(!v)return;env_free(&v->globals);for(size_t i=0;i<v->trace_count;i++)free(v->trace[i].detail);free(v->trace);free(v);}
+#include "native_vm.inc"
 size_t rmal_vm_trace_count(const RmalVm*v){return v?v->trace_count:0;}
 const RmalTraceEvent*rmal_vm_trace_at(const RmalVm*v,size_t i){return v&&i<v->trace_count?&v->trace[i]:NULL;}
 static const char*op_name(Op op){static const char*n[]={"PUSH","LOAD","DEFINE","STORE","ADD","SUB","MUL","DIV","MOD","NEG","NOT","EQ","NE","LT","LE","GT","GE","AND","OR","PRINT","ASSERT","POP","JUMP","JFALSE","CALL","RET","HALT","DIRECTIVE"};return n[(int)op];}
@@ -95,7 +93,47 @@ static RmalStatus exec_code(RmalVm*vm,const RmalBytecode*b,const InsVec*code,Env
         if(in.op==OP_DIRECTIVE)continue;
         if(in.op==OP_HALT){*result=stack.count?stack.data[stack.count-1]:value_nil();if(stack.count)stack.count--;goto done;}
         if(in.op==OP_RET){*result=stack.count?stack.data[stack.count-1]:value_nil();if(stack.count)stack.count--;goto done;}
-        if(in.op==OP_CALL){size_t argc=(size_t)in.b;RmalValue*args=calloc(argc,sizeof*args);if(argc&&!args)goto oom;for(size_t i=argc;i-->0;)if(!stack_pop(&stack,&args[i])){set_status(&st,false,in.line,in.column,"stack underflow in call");free(args);goto done;}Function*f=find_func(b,b->names[in.a]);if(!f){set_status(&st,false,in.line,in.column,"undefined function: %s",b->names[in.a]);for(size_t i=0;i<argc;i++)rmal_value_free(&args[i]);free(args);goto done;}if(argc!=f->param_count){set_status(&st,false,in.line,in.column,"arity mismatch calling %s",f->name);for(size_t i=0;i<argc;i++)rmal_value_free(&args[i]);free(args);goto done;}Env call_env={0};for(size_t i=0;i<argc;i++){env_define(&call_env,f->params[i],args[i],BIND_LET);rmal_value_free(&args[i]);}free(args);RmalValue rv=value_nil();RmalStatus cs=exec_code(vm,b,&f->code,&call_env,f,&rv,tracing);env_free(&call_env);if(!cs.ok){st=cs;rmal_value_free(&rv);goto done;}if(!stack_push(&stack,rv)){rmal_value_free(&rv);goto oom;}rmal_value_free(&rv);continue;}
+        if(in.op==OP_CALL){
+            size_t argc=(size_t)in.b;RmalValue *args=calloc(argc,sizeof *args);
+            if(argc&&!args)goto oom;
+            for(size_t i=argc;i-->0;)if(!stack_pop(&stack,&args[i])){
+                set_status(&st,false,in.line,in.column,"stack underflow in call");
+                for(size_t j=i+1;j<argc;j++)rmal_value_free(&args[j]);
+                free(args);goto done;
+            }
+            const char *name=b->names[in.a];Function *f=find_func(b,name);
+            NativeBinding *native=find_native(vm,name);RmalValue rv=value_nil();
+            RmalStatus cs={.ok=false};
+            if(native){
+                if(f){set_status(&cs,false,in.line,in.column,"native function shadowed: %s",name);}
+                else if(argc!=native->arity){set_status(&cs,false,in.line,in.column,"native arity mismatch: %s",name);}
+                else{
+                    if(tracing)trace_add(vm,pc,in,name);
+                    cs=native->callback(native->context,args,argc,&rv);
+                    if(!cs.ok){cs.line=in.line;cs.column=in.column;}
+                }
+                for(size_t i=0;i<argc;i++)rmal_value_free(&args[i]);free(args);
+            }else if(!f){
+                set_status(&cs,false,in.line,in.column,"undefined function: %s",name);
+                for(size_t i=0;i<argc;i++)rmal_value_free(&args[i]);free(args);
+            }else if(argc!=f->param_count){
+                set_status(&cs,false,in.line,in.column,"arity mismatch calling %s",name);
+                for(size_t i=0;i<argc;i++)rmal_value_free(&args[i]);free(args);
+            }else{
+                Env call_env={0};bool bound=true;
+                for(size_t i=0;i<argc;i++){
+                    if(!env_define(&call_env,f->params[i],args[i],BIND_LET))bound=false;
+                    rmal_value_free(&args[i]);
+                }
+                free(args);
+                if(bound)cs=exec_code(vm,b,&f->code,&call_env,f,&rv,tracing);
+                else set_status(&cs,false,in.line,in.column,"function argument binding failed");
+                env_free(&call_env);
+            }
+            if(!cs.ok){st=cs;rmal_value_free(&rv);goto done;}
+            if(!stack_push(&stack,rv)){rmal_value_free(&rv);goto oom;}
+            rmal_value_free(&rv);continue;
+        }
         if(in.op==OP_NEG||in.op==OP_NOT){if(!stack_pop(&stack,&a)){set_status(&st,false,in.line,in.column,"stack underflow");goto done;}if(in.op==OP_NEG){int64_t x;if(!require_int(&a,&x,&st,in.line,in.column)){rmal_value_free(&a);goto done;}r=value_int(-x);}else r=value_bool(!value_truthy(&a));rmal_value_free(&a);if(!stack_push(&stack,r)){rmal_value_free(&r);goto oom;}rmal_value_free(&r);continue;}
         if(!stack_pop(&stack,&bb)||!stack_pop(&stack,&a)){set_status(&st,false,in.line,in.column,"stack underflow");rmal_value_free(&a);rmal_value_free(&bb);goto done;}
         if(in.op==OP_EQ||in.op==OP_NE){bool q=value_equal(&a,&bb);r=value_bool(in.op==OP_EQ?q:!q);}
@@ -110,7 +148,18 @@ oom:set_status(&st,false,0,0,"out of memory during execution");
 done:stack_free(&stack);return st;
 }
 
-RmalStatus rmal_vm_run(RmalVm*vm,const RmalBytecode*b,bool trace,RmalValue*result){for(size_t i=0;i<vm->trace_count;i++)free(vm->trace[i].detail);vm->trace_count=0;env_free(&vm->globals);RmalValue r=value_nil();RmalStatus st=exec_code(vm,b,&b->main_code,NULL,NULL,&r,trace);if(result)*result=r;else rmal_value_free(&r);return st;}
+RmalStatus rmal_vm_run(RmalVm *vm,const RmalBytecode *b,bool trace,RmalValue *result){
+    RmalStatus st={.ok=false};
+    if(!vm||!b){set_status(&st,false,0,0,"invalid VM or bytecode");return st;}
+    if(vm->running){set_status(&st,false,0,0,"VM reentry denied");return st;}
+    for(size_t i=0;i<vm->native_count;i++)if(find_func(b,vm->native[i].name)){
+        set_status(&st,false,0,0,"native function shadowed: %s",vm->native[i].name);return st;
+    }
+    for(size_t i=0;i<vm->trace_count;i++)free(vm->trace[i].detail);
+    vm->trace_count=0;env_free(&vm->globals);RmalValue r=value_nil();
+    vm->running=true;st=exec_code(vm,b,&b->main_code,NULL,NULL,&r,trace);vm->running=false;
+    if(result)*result=r;else rmal_value_free(&r);return st;
+}
 
 typedef struct {char*data;size_t len,cap;} Str;
 static bool str_appendf(Str*s,const char*fmt,...){va_list ap;va_start(ap,fmt);va_list aq;va_copy(aq,ap);int n=vsnprintf(NULL,0,fmt,aq);va_end(aq);if(n<0){va_end(ap);return false;}size_t need=s->len+(size_t)n+1;if(need>s->cap){size_t nc=s->cap? s->cap:256;while(nc<need)nc*=2;char*p=realloc(s->data,nc);if(!p){va_end(ap);return false;}s->data=p;s->cap=nc;}vsnprintf(s->data+s->len,s->cap-s->len,fmt,ap);s->len+=(size_t)n;va_end(ap);return true;}

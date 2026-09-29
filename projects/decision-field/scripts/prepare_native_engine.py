@@ -16,7 +16,7 @@ def prepare(source: Path, output: Path) -> None:
     if text.count(before) != 1 or text.count(private) != 1:
         raise ValueError('snapshot API insertion anchors are not unique')
     text = text.replace(before, '#include "decision_field/detail/checkpoint_types.inc"\n\n' + before)
-    text = text.replace(private, '#include "decision_field/detail/checkpoint_methods.inc"\n\n' + private)
+    text = text.replace(private, '#include "decision_field/detail/checkpoint_methods.inc"\n#include "decision_field/detail/function_accessors.inc"\n\n' + private)
     output = output / 'decision_field'
     output.mkdir(parents=True, exist_ok=True)
     (output / 'decision_field.hpp').write_bytes(text.encode('utf-8'))
