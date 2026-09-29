@@ -110,45 +110,75 @@ jobs:
             throw "build/windows/origami.exe was not produced"
           }
 
-      - name: Centering sampler
+      - name: Execute all bounded Windows probes
         run: |
-          $out = & python tests/centering.py --binary build/windows/origami.exe 2>&1
-          $code = $LASTEXITCODE
-          $out | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/centering.txt"
-          $out
-          if ($code -ne 0) { exit $code }
+          $probes = @(
+            @{ Name = "centering"; Args = @("tests/centering.py", "--binary", "build/windows/origami.exe") },
+            @{ Name = "centering-run"; Args = @("tests/centering_run.py", "--binary", "build/windows/origami.exe") },
+            @{ Name = "homeward"; Args = @("tests/homeward.py", "--binary", "build/windows/origami.exe") },
+            @{ Name = "parity"; Args = @("tests/parity.py", "--binary", "build/windows/origami.exe") },
+            @{ Name = "host"; Args = @("native/test_host.py", "build/windows/origami.exe") }
+          )
+          $results = [ordered]@{}
+          $failures = 0
+          foreach ($probe in $probes) {
+            Write-Host "::group::$($probe.Name)"
+            $out = & python @($probe.Args) 2>&1
+            $code = $LASTEXITCODE
+            $out | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/$($probe.Name).txt"
+            $out
+            Write-Host "::endgroup::"
+            $results[$probe.Name] = $code
+            if ($code -ne 0) { $failures += 1 }
+          }
+          $results | ConvertTo-Json | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/probe-status.json"
+          Get-Content "$env:RUNNER_TEMP/probe-status.json"
+          if ($failures -ne 0) { throw "$failures bounded Windows probe(s) failed" }
 
-      - name: Centering runner
+      - name: Diagnose centering boundary on probe failure
+        if: failure()
         run: |
-          $out = & python tests/centering_run.py --binary build/windows/origami.exe 2>&1
-          $code = $LASTEXITCODE
-          $out | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/centering-run.txt"
-          $out
-          if ($code -ne 0) { exit $code }
+          if (-not (Test-Path "build/windows/origami.exe")) {
+            Write-Host "No runtime binary; centering diagnostic not applicable."
+            exit 0
+          }
+          @'
+          import json
+          import math
+          import subprocess
 
-      - name: Homeward
-        run: |
-          $out = & python tests/homeward.py --binary build/windows/origami.exe 2>&1
-          $code = $LASTEXITCODE
-          $out | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/homeward.txt"
-          $out
-          if ($code -ne 0) { exit $code }
-
-      - name: Reference parity
-        run: |
-          $out = & python tests/parity.py --binary build/windows/origami.exe 2>&1
-          $code = $LASTEXITCODE
-          $out | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/parity.txt"
-          $out
-          if ($code -ne 0) { exit $code }
-
-      - name: Native host contract
-        run: |
-          $out = & python native/test_host.py build/windows/origami.exe 2>&1
-          $code = $LASTEXITCODE
-          $out | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/host.txt"
-          $out
-          if ($code -ne 0) { exit $code }
+          exe = "build/windows/origami.exe"
+          request = {
+              "schema": "origami-centering-input-v1",
+              "q": 0.5,
+              "channels": [
+                  {"name": "😀" * 128, "points": [[0, -1e100], [1, 1e100]]}
+                  for _ in range(6)
+              ],
+              "paths": [
+                  {"name": "x" * 256, "points": [[0, -1e100, 1e100], [1, 1e100, -1e100]]}
+                  for _ in range(4)
+              ],
+              "core": [[-1e100, 1e100], [0, -0.0]],
+          }
+          r = subprocess.run(
+              [exe, "centre", "-"],
+              input=json.dumps(request, ensure_ascii=True, separators=(",", ":")),
+              text=True, capture_output=True, timeout=30
+          )
+          diagnostic = {"returncode": r.returncode, "stderr": r.stderr}
+          if r.stdout:
+              out = json.loads(r.stdout)
+              actual = out["channels"][0]
+              expected = -1e100 + 0.5 * (1e100 - (-1e100))
+              diagnostic.update({
+                  "channel0Amplitude": actual["amplitude"],
+                  "expectedRMALFormulaAmplitude": expected,
+                  "channel0NameMatches": actual["name"] == request["channels"][0]["name"],
+                  "channel0NameUtf16Units": len(actual["name"].encode("utf-16-le")) // 2,
+              })
+          print(json.dumps(diagnostic, ensure_ascii=True, indent=2))
+          '@ | python -
 
       - name: Retain exact-head runtime receipt
         if: always()
@@ -156,7 +186,7 @@ jobs:
           $evidence = Join-Path $env:RUNNER_TEMP "origami-g002-windows-evidence"
           New-Item -ItemType Directory -Force -Path $evidence | Out-Null
 
-          foreach ($name in @("centering.txt", "centering-run.txt", "homeward.txt", "parity.txt", "host.txt")) {
+          foreach ($name in @("centering.txt", "centering-run.txt", "homeward.txt", "parity.txt", "host.txt", "probe-status.json")) {
             $source = Join-Path $env:RUNNER_TEMP $name
             if (Test-Path $source) { Copy-Item $source $evidence }
           }
@@ -183,6 +213,9 @@ jobs:
             binaryPath = "projects/origami-g002/build/windows/origami.exe"
             binarySHA256 = $binaryHash
             probes = @("centering", "centering-run", "homeward", "parity", "host")
+            probeExitCodes = if (Test-Path (Join-Path $env:RUNNER_TEMP "probe-status.json")) {
+              Get-Content (Join-Path $env:RUNNER_TEMP "probe-status.json") -Raw | ConvertFrom-Json
+            } else { $null }
             scope = "Exact-head Windows runtime probe of imported Origami G002 1.3.0 using Zig 0.14.1."
             claimBoundary = "This probe does not establish Windows durability, dynamic-path generation, or a physical torsional transform/inverse law."
           }
