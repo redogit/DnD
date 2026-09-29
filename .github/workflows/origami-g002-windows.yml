@@ -1,0 +1,235 @@
+name: Origami G002 Windows Runtime Probe
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "projects/origami-g002/**"
+      - ".github/workflows/origami-g002-windows.yml"
+  pull_request:
+    paths:
+      - "projects/origami-g002/**"
+      - ".github/workflows/origami-g002-windows.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  VERIFY_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+  ZIG_VERSION: "0.14.1"
+  PYTHONUTF8: "1"
+  ZIG_WINDOWS_SHA256: "554f5378228923ffd558eac35e21af020c73789d87afeabf4bfd16f2e6feed2c"
+
+jobs:
+  windows-runtime:
+    name: Windows x64 / Zig 0.14.1 / Origami 1.3.0
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: projects/origami-g002
+
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.VERIFY_SHA }}
+          persist-credentials: false
+
+      - name: Verify Git source identity
+        run: |
+          $head = (git rev-parse HEAD).Trim()
+          if ($head -ne $env:VERIFY_SHA) {
+            throw "source revision mismatch: expected $env:VERIFY_SHA, got $head"
+          }
+          Write-Host "verified-head=$head"
+
+      - name: Verify imported source manifest
+        run: |
+          @'
+          import hashlib
+          import json
+          import pathlib
+          import subprocess
+
+          root = pathlib.Path(".")
+          manifest = json.loads((root / "SOURCE_MANIFEST.json").read_text(encoding="utf-8"))
+          checked = 0
+          for row in manifest["files"]:
+              repo_path = "projects/origami-g002/" + row["path"]
+              data = subprocess.check_output(["git", "show", "HEAD:" + repo_path])
+              digest = hashlib.sha256(data).hexdigest()
+              assert digest == row["sha256"], (row["path"], digest, row["sha256"])
+              assert len(data) == row["bytes"], (row["path"], len(data), row["bytes"])
+              checked += 1
+          print(f"source-manifest: {checked}/{len(manifest['files'])} exact Git blobs")
+          '@ | python -
+
+      - name: Install exact Zig 0.14.1
+        run: |
+          $url = "https://ziglang.org/download/$env:ZIG_VERSION/zig-x86_64-windows-$env:ZIG_VERSION.zip"
+          $zip = Join-Path $env:RUNNER_TEMP "zig-$env:ZIG_VERSION-windows-x86_64.zip"
+          $root = Join-Path $env:RUNNER_TEMP "zig-$env:ZIG_VERSION"
+          Invoke-WebRequest -Uri $url -OutFile $zip
+          $actual = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actual -ne $env:ZIG_WINDOWS_SHA256) {
+            throw "Zig archive SHA-256 mismatch: expected $env:ZIG_WINDOWS_SHA256, got $actual"
+          }
+          Expand-Archive -Path $zip -DestinationPath $root -Force
+          $zigDir = Join-Path $root "zig-x86_64-windows-$env:ZIG_VERSION"
+          $zigExe = Join-Path $zigDir "zig.exe"
+          if (-not (Test-Path $zigExe)) { throw "zig.exe not found at $zigExe" }
+          $zigDir | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          Write-Host "zig-archive-sha256=$actual"
+
+      - name: Toolchain identity
+        run: |
+          $version = (zig version).Trim()
+          if ($version -ne $env:ZIG_VERSION) { throw "expected Zig $env:ZIG_VERSION, got $version" }
+          python --version
+          node --version
+          Write-Host "zig-version=$version"
+
+      - name: Native Windows build
+        run: python scripts/build.py --target windows
+
+      - name: Verify generated source identity
+        run: |
+          @'
+          import pathlib
+          import subprocess
+
+          for rel in ["program/origami.rmal", "native/origami_program.h"]:
+              expected = subprocess.check_output(
+                  ["git", "show", "HEAD:projects/origami-g002/" + rel]
+              ).decode("utf-8")
+              actual = pathlib.Path(rel).read_text(encoding="utf-8")
+              assert actual == expected, rel + " regenerated text differs from exact-head source"
+          print("generated-source: text-identical after Windows newline normalization")
+          '@ | python -
+          if (-not (Test-Path "build/windows/origami.exe")) {
+            throw "build/windows/origami.exe was not produced"
+          }
+
+      - name: Execute all bounded Windows probes
+        run: |
+          $probes = @(
+            @{ Name = "centering"; Args = @("tests/centering.py", "--binary", "build/windows/origami.exe") },
+            @{ Name = "centering-run"; Args = @("tests/centering_run.py", "--binary", "build/windows/origami.exe") },
+            @{ Name = "homeward"; Args = @("tests/homeward.py", "--binary", "build/windows/origami.exe") },
+            @{ Name = "parity"; Args = @("tests/parity.py", "--binary", "build/windows/origami.exe") },
+            @{ Name = "host"; Args = @("native/test_host.py", "build/windows/origami.exe") }
+          )
+          $results = [ordered]@{}
+          $failures = 0
+          foreach ($probe in $probes) {
+            Write-Host "::group::$($probe.Name)"
+            $out = & python @($probe.Args) 2>&1
+            $code = $LASTEXITCODE
+            $out | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/$($probe.Name).txt"
+            $out
+            Write-Host "::endgroup::"
+            $results[$probe.Name] = $code
+            if ($code -ne 0) { $failures += 1 }
+          }
+          $results | ConvertTo-Json | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/probe-status.json"
+          Get-Content "$env:RUNNER_TEMP/probe-status.json"
+          if ($failures -ne 0) { throw "$failures bounded Windows probe(s) failed" }
+
+      - name: Diagnose centering boundary on probe failure
+        if: failure()
+        run: |
+          if (-not (Test-Path "build/windows/origami.exe")) {
+            Write-Host "No runtime binary; centering diagnostic not applicable."
+            exit 0
+          }
+          @'
+          import json
+          import math
+          import subprocess
+
+          exe = "build/windows/origami.exe"
+          request = {
+              "schema": "origami-centering-input-v1",
+              "q": 0.5,
+              "channels": [
+                  {"name": "😀" * 128, "points": [[0, -1e100], [1, 1e100]]}
+                  for _ in range(6)
+              ],
+              "paths": [
+                  {"name": "x" * 256, "points": [[0, -1e100, 1e100], [1, 1e100, -1e100]]}
+                  for _ in range(4)
+              ],
+              "core": [[-1e100, 1e100], [0, -0.0]],
+          }
+          r = subprocess.run(
+              [exe, "centre", "-"],
+              input=json.dumps(request, ensure_ascii=True, separators=(",", ":")),
+              text=True, capture_output=True, timeout=30
+          )
+          diagnostic = {"returncode": r.returncode, "stderr": r.stderr}
+          if r.stdout:
+              out = json.loads(r.stdout)
+              actual = out["channels"][0]
+              expected = -1e100 + 0.5 * (1e100 - (-1e100))
+              diagnostic.update({
+                  "channel0Amplitude": actual["amplitude"],
+                  "expectedRMALFormulaAmplitude": expected,
+                  "channel0NameMatches": actual["name"] == request["channels"][0]["name"],
+                  "channel0NameUtf16Units": len(actual["name"].encode("utf-16-le")) // 2,
+              })
+          print(json.dumps(diagnostic, ensure_ascii=True, indent=2))
+          '@ | python -
+
+      - name: Retain exact-head runtime receipt
+        if: always()
+        run: |
+          $evidence = Join-Path $env:RUNNER_TEMP "origami-g002-windows-evidence"
+          New-Item -ItemType Directory -Force -Path $evidence | Out-Null
+
+          foreach ($name in @("centering.txt", "centering-run.txt", "homeward.txt", "parity.txt", "host.txt", "probe-status.json")) {
+            $source = Join-Path $env:RUNNER_TEMP $name
+            if (Test-Path $source) { Copy-Item $source $evidence }
+          }
+          if (Test-Path "build/build-log.json") {
+            Copy-Item "build/build-log.json" (Join-Path $evidence "build-log.json")
+          }
+
+          $head = (git rev-parse HEAD).Trim()
+          $zigVersion = if (Get-Command zig -ErrorAction SilentlyContinue) { (zig version).Trim() } else { $null }
+          $binaryHash = if (Test-Path "build/windows/origami.exe") {
+            (Get-FileHash "build/windows/origami.exe" -Algorithm SHA256).Hash.ToLowerInvariant()
+          } else { $null }
+
+          $receipt = [ordered]@{
+            schema = "origami-g002-windows-runtime-ci/v1"
+            verifiedGitHead = $head
+            expectedGitHead = $env:VERIFY_SHA
+            workflowRunId = $env:GITHUB_RUN_ID
+            workflowRunAttempt = $env:GITHUB_RUN_ATTEMPT
+            runnerOS = $env:RUNNER_OS
+            runnerArch = $env:RUNNER_ARCH
+            zigVersion = $zigVersion
+            zigWindowsArchiveSHA256 = $env:ZIG_WINDOWS_SHA256
+            binaryPath = "projects/origami-g002/build/windows/origami.exe"
+            binarySHA256 = $binaryHash
+            probes = @("centering", "centering-run", "homeward", "parity", "host")
+            probeExitCodes = if (Test-Path (Join-Path $env:RUNNER_TEMP "probe-status.json")) {
+              Get-Content (Join-Path $env:RUNNER_TEMP "probe-status.json") -Raw | ConvertFrom-Json
+            } else { $null }
+            scope = "Exact-head Windows runtime probe of imported Origami G002 1.3.0 using Zig 0.14.1."
+            claimBoundary = "This probe does not establish Windows durability, dynamic-path generation, or a physical torsional transform/inverse law."
+          }
+          $receipt | ConvertTo-Json -Depth 4 | Set-Content -Encoding utf8 (Join-Path $evidence "WINDOWS_RUNTIME_RECEIPT.json")
+          Get-Content (Join-Path $evidence "WINDOWS_RUNTIME_RECEIPT.json")
+
+      - name: Upload exact-head runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: origami-g002-windows-runtime-${{ env.VERIFY_SHA }}
+          path: ${{ runner.temp }}/origami-g002-windows-evidence/
+          if-no-files-found: error
+          retention-days: 90
