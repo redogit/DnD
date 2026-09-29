@@ -1,71 +1,39 @@
-# Decision Field v0.6 — native engine persistence
-
-This project extends the recoverable Decision Field inside `redogit/DnD` without changing
-root RMAL/RMALC C23 authority. v0.5 connects exploration to component/core/surface replay.
-v0.6 persists the engine-owned native data graph and restores it in another process.
-
-## Current execution
+# Decision Field v0.7 — AnyFunctor Mirror / RMAL Homeward
 
 ```text
-actual v0.3 engine -> synchronized snapshot -> canonical DFNAT001 archive
--> create-only POSIX file -> independent process -> checked native reconstruction
--> explicit callback rebinding -> memoization / dependency / ID-preserving continuation
+actual RMAL VM -> explicitly bound AnyFunctor -> immutable Mirror FunctionObject
+-> existing native invocation/receipt engine -> separate admission
+-> checkpoint -> independent reader -> replay and exact Homeward
 ```
 
-The snapshot includes full native values, all state links, depths and provenance, transform
-edges and recovery receipts, successful and failed invocation records, cache indexes,
-obligations, counters, dependency indexes, scoped fixes, concessions and residual notes.
+See [Mirror / RMAL Homeward](docs/MIRROR_RMAL_HOMEWARD.md),
+[current state](CURRENT.md), [verification](evidence/v0_7/VERIFICATION.md), and the
+[runnable RMAL fixture](examples/mirror_homeward.rmal).
 
-The concrete SelfState codec preserves stance, orientation and marker sets. Other domains
-must provide an explicit exact native codec. This is not a dump of pointers/object memory.
+## Complete source build
 
-## Build the complete source bundle
-
-Requirements: C++23 compiler, CMake >= 3.25, Python 3, OpenSSL >= 3 development library.
-Native durable-file tests are enabled on POSIX; Windows file I/O is not implemented.
+Requirements: a C23 compiler, C++23 compiler, CMake >= 3.25, Python 3 and OpenSSL >= 3.
+From the complete source root, including the unchanged v0.3 dependency:
 
 ```sh
-cmake -S projects/decision-field -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build --parallel 2
-ctest --test-dir build --output-on-failure
+cmake -S . -B build/mirror -G Ninja -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
+  -DRMAL_BUILD_DECISION_FIELD=ON -DDF_REQUIRE_FULL_NATIVE=ON
+cmake --build build/mirror --parallel 2
+ctest --test-dir build/mirror --output-on-failure
 ```
 
-Linux with the exact predecessor source enables 13 tests. The original source is unchanged;
-`scripts/prepare_native_engine.py` verifies its SHA-256 and generates a snapshot-capable
-successor header only for the native targets. Older tests still use the exact original.
+Git-only users recover the exact original archive with
+`scripts/recover_predecessor.py`. The companion source bundle already contains it.
+Without that dependency, only the four standalone component/bridge tests are
+available; they are not the full native result. `DF_REQUIRE_FULL_NATIVE=ON` refuses
+that fallback. Root C23/ABI CI and full native local tests are separate scopes.
 
-## Git-only recovery
+This is one Mirror path, not all structural transforms, a universal AnyFunctor
+implementation, or mathematical proof. No camera/network/publication permission
+is added. Native file persistence is POSIX-only; callbacks and external result
+objects are not serialized. The process-local VM trace is not an OS/VM checkpoint.
 
-The repository contains the new implementations, tests and reconstruction instructions.
-The companion bundle includes the original 13-file predecessor. For a Git-only checkout,
-use `scripts/recover_predecessor.py` with the exact original v0.3 archive. Without it,
-CMake explicitly enables only the four standalone v0.5 component/bridge tests.
-Use `-DDF_ENABLE_NATIVE_PERSISTENCE=OFF` to run the nine predecessor/bridge tests without
-requiring OpenSSL. That configuration does not test persistence.
-
-## Files to read
-
-- `CURRENT.md`: observed state and boundaries.
-- `docs/NATIVE_PERSISTENCE.md`: checkpoint specification.
-- `docs/plans/2026-09-27-native-persistence.md`: implementation plan.
-- `evidence/v0_6/VERIFICATION.md`: fresh commands and results.
-- `evidence/v0_6/REVIEW.md`: defect, counterprobe and remaining limits.
-- `evidence/CONVERSATION_STRATEGIC_INPUTS.md`: original user direction.
-- `instructions/OPERATING_PROTOCOL.md`: previously accepted design rules.
-
-## Boundaries
-
-Capture is quiescent, not a concurrent process snapshot. Policy/callback code and result
-objects owned outside the engine are not serialized. A matching external policy, codec
-and transform registry must be supplied at restore. SHA-256 is integrity relative to a
-trusted digest, not authentication, encryption or scientific admission. An altered archive
-with a recomputed checksum can still describe a structurally valid different state.
-
-No state is discarded because it failed, became stale or recursed deeply.
-
-```text
-SIMPLER CORE != ERASED DIFFERENCES
-CHECKPOINT RESTORED != CLAIM PROVEN
-METHOD TRANSFER != EVIDENCE TRANSFER
-SUCCESSOR != REWRITTEN PREDECESSOR
-```
+The earlier v0.6 source and documentation are recoverable at PR #2 merge
+`141a60f58bdfe6d36774e0fba5e8350cb6ef5dcf`. Its evidence remains in `evidence/v0_6/`.
+The original v0.3 engine and DFNAT001 archive schema remain unchanged.

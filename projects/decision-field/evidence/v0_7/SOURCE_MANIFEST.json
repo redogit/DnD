@@ -1,0 +1,20 @@
+{
+  "schema": "decision-field/mirror-source-manifest/v1",
+  "base_pr_head": "e9def257e610aaee7c89765e96f81105092c929b",
+  "files": {
+    "CMakeLists.txt": {"bytes":3071,"sha256":"af0c6f19391d1083f2a6f6f1b5f339c4c233d84d4577c258b6b1db47d16410bd","git_blob":"3dc01af9675644463678bae1004f81ce8337f955"},
+    "include/rmal/rmal.h": {"bytes":2375,"sha256":"9268d3036acd72297113adf2ab8dcd3ba0883eb31337abe75b7d7f8b69a95a22","git_blob":"7f4c8dd9092eaaeb533bedba402902f16054c8c9"},
+    "tests/cpp_native_abi_test.cpp": {"bytes":104,"sha256":"516653732198a5793fc067fdeb976d6849faf3a4021bf73b0edc34bfb7dedcbd","git_blob":"3d6fbc6ec0472e4c0b730cfda89414e6dc3c77c1"},
+    "projects/decision-field/CMakeLists.txt": {"bytes":6181,"sha256":"4968993cc3853971c2cb9771df79eaeffe54b5e4d8e800cfbec55d28c2eb2993","git_blob":"0a5eea027981ef4d5a53ac00e0eb6f5100b3f9ce"},
+    "projects/decision-field/scripts/prepare_native_engine.py": {"bytes":1638,"sha256":"110844bcf4657ec7f388edc55b840cdcb5274bd8ad654c12f41ff2680dbbb6fd","git_blob":"bc3d47afa6e036ff2cb42e804c0e87d664b4eaeb"},
+    "projects/decision-field/include/decision_field/detail/function_accessors.inc": {"bytes":407,"sha256":"a24fd696cb2112c9cefd1058b49871fc69970579cc9c0b718cfa7a322866b94c","git_blob":"e34ffdb8bb29b1759ae0200dd1216b96f8c7e6af"},
+    "projects/decision-field/include/decision_field/anyfunctor_mirror.hpp": {"bytes":10655,"sha256":"aea30f3615f929c774a075413f02545c7c93ba768b2d2bc407c0a8ba611eff42","git_blob":"2a87498d659de2a3ba279bd37e6e8d40d2a010e3"},
+    "projects/decision-field/include/decision_field/rmal_mirror_host.hpp": {"bytes":5116,"sha256":"3fba94da88e17f602fa98c368221c942474142b380642caac95cc99198c4c5aa","git_blob":"573756df1dcb5656d3efeda615ef5215fb404d20"},
+    "projects/decision-field/tests/anyfunctor_mirror_tests.cpp": {"bytes":5371,"sha256":"cf24637c8c9696678d60ec15ec341862b171550fa5bc604d0a9115d956702917","git_blob":"b33a36a56f532c50b999a32c795fc40e0caaa4e5"},
+    "projects/decision-field/tests/rmal_mirror_tests.cpp": {"bytes":3484,"sha256":"fd972cb809fd3aa15baba6bdb97591c5cc0853ce4a088e8f0e490ec2d5c6312b","git_blob":"f771fa9e3d12161eed40e1eff941e9b8f862b7c8"},
+    "projects/decision-field/tests/rmal_mirror_process.cpp": {"bytes":4287,"sha256":"60d74af094d8382bc658b352ca872694791dac931baeda602efd472e934b832b","git_blob":"05bad9a62cfd1df7896b59fe3f07a18d05a614f9"},
+    "projects/decision-field/tests/rmal_mirror_process_test.py": {"bytes":1797,"sha256":"2ecde90f156fc3ccb3fb3a48b7fd477ec6401d096bc9ab06a685ddc44cd2c931","git_blob":"47428e1329fc26c6848d84c1b38ec8e215daa31b"},
+    "projects/decision-field/examples/mirror_homeward.rmal": {"bytes":755,"sha256":"3f11055505d3adf450d737f854d587b1c43ab331eea61475c049eaf20c7518a8","git_blob":"77b6625e02699ff26cd53fde1b501d038fb94a02"},
+    "projects/decision-field/scripts/check_mirror_manifest.py": {"bytes":1361,"sha256":"cbe1db9a178942d23d18ba3a101799d48787f6675a200144b08a6e9655a70ea1","git_blob":"5af7e02b8a57c0edb4f8c6b74fea8dbadfc7e427"}
+  }
+}

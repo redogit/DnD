@@ -1,7 +1,7 @@
 #ifndef RMAL_RMAL_H
 #define RMAL_RMAL_H
 
-#if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 202311L
+#if !defined(__cplusplus) && (!defined(__STDC_VERSION__) || __STDC_VERSION__ < 202311L)
 #error RMALC 3.1 requires ISO C23 or newer
 #endif
 
@@ -45,6 +45,10 @@ typedef struct {
     char message[512];
 } RmalStatus;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 const char *rmal_version(void);
 const char *rmal_language_name(void);
 const char *rmal_compiler_name(void);
@@ -77,5 +81,9 @@ void rmal_value_free(RmalValue *value);
 char *rmal_value_render(const RmalValue *value);
 
 bool rmal_selfcheck(char **report);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif
