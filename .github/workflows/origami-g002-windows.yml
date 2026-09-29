@@ -49,18 +49,19 @@ jobs:
           import hashlib
           import json
           import pathlib
+          import subprocess
 
           root = pathlib.Path(".")
           manifest = json.loads((root / "SOURCE_MANIFEST.json").read_text(encoding="utf-8"))
           checked = 0
           for row in manifest["files"]:
-              path = root / row["path"]
-              data = path.read_bytes()
+              repo_path = "projects/origami-g002/" + row["path"]
+              data = subprocess.check_output(["git", "show", "HEAD:" + repo_path])
               digest = hashlib.sha256(data).hexdigest()
               assert digest == row["sha256"], (row["path"], digest, row["sha256"])
               assert len(data) == row["bytes"], (row["path"], len(data), row["bytes"])
               checked += 1
-          print(f"source-manifest: {checked}/{len(manifest['files'])} exact files")
+          print(f"source-manifest: {checked}/{len(manifest['files'])} exact Git blobs")
           '@ | python -
 
       - name: Install exact Zig 0.14.1
@@ -93,7 +94,18 @@ jobs:
 
       - name: Verify generated source identity
         run: |
-          git diff --exit-code -- program/origami.rmal native/origami_program.h
+          @'
+          import pathlib
+          import subprocess
+
+          for rel in ["program/origami.rmal", "native/origami_program.h"]:
+              expected = subprocess.check_output(
+                  ["git", "show", "HEAD:projects/origami-g002/" + rel]
+              ).decode("utf-8")
+              actual = pathlib.Path(rel).read_text(encoding="utf-8")
+              assert actual == expected, rel + " regenerated text differs from exact-head source"
+          print("generated-source: text-identical after Windows newline normalization")
+          '@ | python -
           if (-not (Test-Path "build/windows/origami.exe")) {
             throw "build/windows/origami.exe was not produced"
           }
