@@ -60,6 +60,13 @@ char *rmal_manifest(const RmalBytecode *bytecode, bool json);
 char *rmal_audit(const RmalProgram *program, const RmalBytecode *bytecode);
 char *rmal_language_spec(bool json);
 
+/* Explicit host capability ABI; no functions are bound by default. */
+#define RMAL_NATIVE_API_VERSION 1
+typedef RmalStatus (*RmalNativeFunction)(void *context, const RmalValue *arguments,
+                                        size_t count, RmalValue *result);
+RmalStatus rmal_vm_bind_native(RmalVm *vm, const char *name, size_t arity,
+                               RmalNativeFunction callback, void *context);
+
 RmalVm *rmal_vm_create(void);
 void rmal_vm_free(RmalVm *vm);
 RmalStatus rmal_vm_run(RmalVm *vm, const RmalBytecode *bytecode, bool trace, RmalValue *result);
