@@ -1,0 +1,19 @@
+{
+  "sourceArchive": "13d_origami_production_workspace.zip",
+  "sources": [
+    {
+      "file": "13D_Origami_Circuit_Full_Specification.txt",
+      "sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e",
+      "preservedVerbatim": true
+    },
+    {
+      "file": "13d_origami_circuit_system.html",
+      "sha256": "d5bd50f0e9ba3b53f9479467b1ca2f2efcd891fc3e1679f3c6962b2c01c39fcd",
+      "preservedVerbatim": true
+    }
+  ],
+  "derivative": "audited-2.0",
+  "sourceClaimsValidated": false,
+  "auditRevision": "2026-09-27-audit-v2",
+  "claimLedger": "claims.json"
+}

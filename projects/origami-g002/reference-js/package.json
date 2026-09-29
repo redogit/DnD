@@ -1,0 +1,11 @@
+{
+  "name": "origami-13d-algorithm",
+  "version": "1.1.0-homeward",
+  "private": true,
+  "description": "13D reference algorithms with retained exploration and Homeward control",
+  "main": "index.cjs",
+  "bin": { "origami-13d": "bin/origami.cjs" },
+  "scripts": { "test": "node --test tests/*.test.cjs" },
+  "engines": { "node": ">=22" },
+  "license": "UNLICENSED"
+}

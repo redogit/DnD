@@ -1,0 +1,9 @@
+if command() == "encode" { run_encode(); }
+if command() == "recover" { run_recover(); }
+if command() == "decide" { run_decide(); }
+if command() == "simulate" { run_simulate(); }
+if command() == "geometry" { run_geometry(); }
+if command() == "rf" { run_rf(); }
+if command() == "explore" { run_explore(); }
+if command() == "centre" { run_centre(); }
+if command() == "centre-run" { run_centre_run(); }

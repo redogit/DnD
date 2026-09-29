@@ -1,0 +1,116 @@
+# Homeward Pass 001: immutable discovery references and one retained branch.
+# Host services supply JSON, numeric storage, and output only. Every control
+# transition, duplicate decision, parent link, and trace event executes here.
+fn exploration_id(node_ops, index) {
+  if index < 1 { return text("home"); }
+  return text("operations." + buffer_get(node_ops, index) + ".id");
+}
+fn exploration_note(node_ops, index) {
+  if index < 1 { return ""; }
+  return text("operations." + buffer_get(node_ops, index) + ".note");
+}
+fn exploration_has_id(node_ops, retained, id) {
+  let k = 0;
+  while k <= retained {
+    if exploration_id(node_ops, k) == id { return true; }
+    SET k = k + 1;
+  }
+  return false;
+}
+fn exploration_trace(seq, op, accepted, reason, phase, active, frontier, retained, node_ops, attempted_id, attempted_note) {
+  emit("{\"seq\":"); emit(seq);
+  emit(",\"op\":"); emit(quote(op));
+  emit(",\"accepted\":"); emit(accepted);
+  emit(",\"reason\":");
+  if accepted { emit(nil); } else { emit(quote(reason)); }
+  emit(",\"phase\":"); emit(quote(phase));
+  emit(",\"activeId\":"); emit(quote(exploration_id(node_ops, active)));
+  emit(",\"frontierId\":"); emit(quote(exploration_id(node_ops, frontier)));
+  emit(",\"retainedCount\":"); emit(retained);
+  emit(",\"attemptedId\":");
+  if op == "discover" { emit(quote(attempted_id)); } else { emit(nil); }
+  emit(",\"attemptedNote\":");
+  if op == "discover" { emit(quote(attempted_note)); } else { emit(nil); }
+  emit("}");
+  return nil;
+}
+fn run_explore() {
+  let operation_count = length("operations");
+  let node_ops = buffer_new(operation_count + 1);
+  let parents = buffer_new(operation_count + 1);
+  let retained = 0;
+  let active = 0;
+  let frontier = 0;
+  let phase = "exploring";
+  let i = 0;
+  let row = "";
+  let op = "";
+  let accepted = true;
+  let reason = "";
+  let attempted_id = "";
+  let attempted_note = "";
+  emit("{\"schema\":\"origami-exploration-v1\",\"homeId\":");
+  emit(quote(text("home")));
+  emit(",\"trace\":[");
+  exploration_trace(0, "start", true, "", phase, active, frontier, retained, node_ops, "", "");
+  while i < operation_count {
+    SET row = "operations." + i;
+    SET op = text(row + ".op");
+    SET accepted = true;
+    SET reason = "";
+    SET attempted_id = "";
+    SET attempted_note = "";
+    if op == "discover" {
+      SET attempted_id = text(row + ".id");
+      SET attempted_note = text(row + ".note");
+      if phase != "exploring" {
+        SET accepted = false;
+        SET reason = "exploration_held";
+      } else {
+        if exploration_has_id(node_ops, retained, attempted_id) {
+          SET accepted = false;
+          SET reason = "duplicate_id";
+        } else {
+          SET retained = retained + 1;
+          buffer_set(node_ops, retained, i);
+          buffer_set(parents, retained, active);
+          SET active = retained;
+          SET frontier = retained;
+        }
+      }
+    }
+    if op == "homeward" {
+      if phase == "exploring" {
+        if active < 1 { SET phase = "home"; } else { SET phase = "interrupted"; }
+      }
+    }
+    if op == "return_step" {
+      if phase == "exploring" {
+        SET accepted = false;
+        SET reason = "homeward_required";
+      } else {
+        if phase != "home" {
+          SET active = buffer_get(parents, active);
+          if active < 1 { SET phase = "home"; } else { SET phase = "returning"; }
+        }
+      }
+    }
+    emit(",");
+    exploration_trace(i + 1, op, accepted, reason, phase, active, frontier, retained, node_ops, attempted_id, attempted_note);
+    SET i = i + 1;
+  }
+  emit("],\"nodes\":[");
+  SET i = 0;
+  while i <= retained {
+    if i > 0 { emit(","); }
+    emit("{\"id\":"); emit(quote(exploration_id(node_ops, i)));
+    emit(",\"parentId\":");
+    if i < 1 { emit(nil); } else { emit(quote(exploration_id(node_ops, buffer_get(parents, i)))); }
+    emit(",\"note\":"); emit(quote(exploration_note(node_ops, i))); emit("}");
+    SET i = i + 1;
+  }
+  emit("],\"activeId\":"); emit(quote(exploration_id(node_ops, active)));
+  emit(",\"frontierId\":"); emit(quote(exploration_id(node_ops, frontier)));
+  emit(",\"phase\":"); emit(quote(phase)); emit("}");
+  return nil;
+}

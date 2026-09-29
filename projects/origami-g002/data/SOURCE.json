@@ -1,0 +1,14 @@
+{
+  "activeDirection": "G002 approved composite",
+  "approvalQuote": "This is the one proceed with this idea and discard the priors, except as an incorrect interpretations to be used as evidence of what went wrong.",
+  "approvalSource": "current chat, after combined graph",
+  "approvedVisualSHA256": "4b6376ef3e03a9953f378c1c5bc12f38443e695ddbd56e6fc207f6b4de610065",
+  "mapping": "q = channel time / 50 = original saved path order / its maximum; linear interpolation",
+  "sourceAuthority": "Historical illustrative arrays adopted as design reference by user; no external physical validation",
+  "files": {
+    "approved-composite.json": "ef1253042492d2b07969edee47a8bcba14a33a5bd9932ef0d398e722a1dc35e5",
+    "google-chart-3.vegalite.json": "c6490842a324397528fd35dc9e83a599458b52dcb39dad57b160f6da6266e213",
+    "google-chart-4.vegalite.json": "761048e306447c6cf4616ce031de1b88431c4f06592bfc21eef75ad7179ef9b6"
+  },
+  "inputFixtureSHA256": "6f1ac3e7ced05c2416dcf77442c57ac979f539ccaa5f03511a9c2b188064b065"
+}

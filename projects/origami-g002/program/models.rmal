@@ -1,0 +1,223 @@
+// Supporting mathematical models, ported from the audited JavaScript source.
+// All model formulas execute in RMAL. Host calls supply math, data and output.
+
+fn model_derivative(feed, x, y, z, target, offset) {
+  if feed == "lorenz" {
+    buffer_set(target, offset, 10.0 * (y - x));
+    buffer_set(target, offset + 1, x * (28.0 - z) - y);
+    buffer_set(target, offset + 2, x * y - 8.0 * z / 3.0);
+  } else {
+    buffer_set(target, offset, -y - z);
+    buffer_set(target, offset + 1, x + 0.2 * y);
+    buffer_set(target, offset + 2, 0.2 + z * (x - 5.7));
+  }
+  return 0;
+}
+
+fn run_simulate() {
+  let feed = text("feed");
+  let steps = integer("steps");
+  let x = number("initial.0");
+  let y = number("initial.1");
+  let z = number("initial.2");
+  let h = 0.01;
+  let half = 0;
+  let step_index = 0;
+  let next_x = 0.0;
+  let next_y = 0.0;
+  let k = buffer_new(12);
+  if feed == "lorenz" { SET h = 0.005; }
+  while step_index < steps {
+    if feed == "clifford" {
+      SET next_x = sin(-1.4 * y) + cos(-1.4 * x);
+      SET next_y = sin(1.6 * x) + 0.7 * cos(1.6 * y);
+      SET x = next_x;
+      SET y = next_y;
+      SET z = next_x * next_y * 0.5;
+    } else {
+      SET half = 0;
+      while half < 2 {
+        model_derivative(feed, x, y, z, k, 0);
+        model_derivative(feed,
+          x + (h / 2.0) * buffer_get(k, 0),
+          y + (h / 2.0) * buffer_get(k, 1),
+          z + (h / 2.0) * buffer_get(k, 2), k, 3);
+        model_derivative(feed,
+          x + (h / 2.0) * buffer_get(k, 3),
+          y + (h / 2.0) * buffer_get(k, 4),
+          z + (h / 2.0) * buffer_get(k, 5), k, 6);
+        model_derivative(feed,
+          x + h * buffer_get(k, 6),
+          y + h * buffer_get(k, 7),
+          z + h * buffer_get(k, 8), k, 9);
+        SET x = x + h * (buffer_get(k, 0) + 2.0 * buffer_get(k, 3) + 2.0 * buffer_get(k, 6) + buffer_get(k, 9)) / 6.0;
+        SET y = y + h * (buffer_get(k, 1) + 2.0 * buffer_get(k, 4) + 2.0 * buffer_get(k, 7) + buffer_get(k, 10)) / 6.0;
+        SET z = z + h * (buffer_get(k, 2) + 2.0 * buffer_get(k, 5) + 2.0 * buffer_get(k, 8) + buffer_get(k, 11)) / 6.0;
+        SET half = half + 1;
+      }
+    }
+    SET step_index = step_index + 1;
+  }
+  emit("{\"feed\":"); emit(quote(feed));
+  emit(",\"steps\":"); emit(steps);
+  emit(",\"numericalDt\":");
+  if feed == "clifford" { emit("null"); } else { emit(2.0 * h); }
+  emit(",\"state\":["); emit(x); emit(","); emit(y); emit(","); emit(z); emit("]}");
+  return 0;
+}
+
+fn run_geometry() {
+  let fold = number("fold");
+  let n = int_or("n", 13);
+  let a = num_or("a", 2.7);
+  let b = num_or("b", 2.7);
+  let gamma = num_or("gamma", 60.0);
+  let t = fold * PI / 180.0;
+  let g = gamma * PI / 180.0;
+  let q = sqrt(1.0 - pow(sin(g), 2.0) * pow(sin(t), 2.0));
+  let sheet_l = a * q;
+  let height = a * sin(g) * sin(t);
+  let shift = b * cos(g) / q;
+  let width = b * sin(g) * cos(t) / q;
+  let across_j = 2.0 * atan2(cos(g) * sin(t), cos(t)) * 180.0 / PI;
+  let i = 0;
+  let j = 0;
+  let first = true;
+  emit("{\"vertices\":[");
+  while j <= n {
+    SET i = 0;
+    while i <= n {
+      if first { SET first = false; } else { emit(","); }
+      emit("[");
+      emit(i * sheet_l + (j % 2) * shift - (n * sheet_l + shift) / 2.0);
+      emit(","); emit(j * width - n * width / 2.0);
+      emit(","); emit((i % 2) * height - height / 2.0);
+      emit("]");
+      SET i = i + 1;
+    }
+    SET j = j + 1;
+  }
+  emit("],\"a\":"); emit(a);
+  emit(",\"b\":"); emit(b);
+  emit(",\"gamma\":"); emit(gamma);
+  emit(",\"fold\":"); emit(fold);
+  emit(",\"L\":"); emit(sheet_l);
+  emit(",\"W\":"); emit(width);
+  emit(",\"h\":"); emit(height);
+  emit(",\"s\":"); emit(shift);
+  emit(",\"acrossI\":"); emit(2.0 * fold);
+  emit(",\"acrossJ\":"); emit(across_j);
+  emit(",\"zeroThickness\":true}");
+  return 0;
+}
+
+// A complex 2x2 matrix is row-major [real,imaginary] pairs in eight cells.
+fn complex_matrix_set(matrix, cell, real, imaginary) {
+  buffer_set(matrix, 2 * cell, real);
+  buffer_set(matrix, 2 * cell + 1, imaginary);
+  return 0;
+}
+
+// Distinct output buffer required. Work buffers are allocated once per RF call.
+fn complex_matrix_multiply(left, right, output) {
+  let row = 0;
+  let column = 0;
+  let inner = 0;
+  let left_index = 0;
+  let right_index = 0;
+  let lr = 0.0;
+  let li = 0.0;
+  let rr = 0.0;
+  let ri = 0.0;
+  let real = 0.0;
+  let imaginary = 0.0;
+  while row < 2 {
+    SET column = 0;
+    while column < 2 {
+      SET real = 0.0;
+      SET imaginary = 0.0;
+      SET inner = 0;
+      while inner < 2 {
+        SET left_index = 2 * (row * 2 + inner);
+        SET right_index = 2 * (inner * 2 + column);
+        SET lr = buffer_get(left, left_index);
+        SET li = buffer_get(left, left_index + 1);
+        SET rr = buffer_get(right, right_index);
+        SET ri = buffer_get(right, right_index + 1);
+        SET real = real + (lr * rr - li * ri);
+        SET imaginary = imaginary + (lr * ri + li * rr);
+        SET inner = inner + 1;
+      }
+      complex_matrix_set(output, row * 2 + column, real, imaginary);
+      SET column = column + 1;
+    }
+    SET row = row + 1;
+  }
+  return 0;
+}
+
+fn run_rf() {
+  let frequency = number("frequency");
+  let capacitance = num_or("options.capacitance", 0.75);
+  let inductance = num_or("options.inductance", 2.2);
+  let crease = num_or("options.crease", 1.5);
+  let resistance = num_or("options.resistance", 0.08);
+  let delay = num_or("options.delay", 10.0);
+  let w = 2.0 * PI * frequency * 1e9;
+  let phase = w * delay * 1e-12;
+  let co = cos(phase);
+  let si = sin(phase);
+  let branch = w * inductance * 1e-9 - 1.0 / (w * capacitance * 1e-12);
+  let line = buffer_new(8);
+  let series = buffer_new(8);
+  let shunt_scaled = buffer_new(8);
+  let intermediate = buffer_new(8);
+  let matrix = buffer_new(8);
+  let den_real = 0.0;
+  let den_imaginary = 0.0;
+  let abs_squared = 0.0;
+  let re = 0.0;
+  let im = 0.0;
+  let magnitude = 0.0;
+  let db = 0.0;
+  let lc_notch = 1.0 / (2.0 * PI * sqrt(inductance * 1e-9 * capacitance * 1e-12)) / 1e9;
+
+  complex_matrix_set(line, 0, co, 0.0);
+  complex_matrix_set(line, 1, 0.0, 50.0 * si);
+  complex_matrix_set(line, 2, 0.0, si / 50.0);
+  complex_matrix_set(line, 3, co, 0.0);
+  complex_matrix_set(series, 0, 1.0, 0.0);
+  complex_matrix_set(series, 1, resistance, w * crease * 1e-9);
+  complex_matrix_set(series, 2, 0.0, 0.0);
+  complex_matrix_set(series, 3, 1.0, 0.0);
+  complex_matrix_set(shunt_scaled, 0, 0.0, branch);
+  complex_matrix_set(shunt_scaled, 1, 0.0, 0.0);
+  complex_matrix_set(shunt_scaled, 2, 1.0, 0.0);
+  complex_matrix_set(shunt_scaled, 3, 0.0, branch);
+  complex_matrix_multiply(line, series, intermediate);
+  complex_matrix_multiply(intermediate, shunt_scaled, matrix);
+  complex_matrix_multiply(matrix, line, intermediate);
+
+  SET den_real = (buffer_get(intermediate, 0) + buffer_get(intermediate, 2) * (1.0 / 50.0)) + (buffer_get(intermediate, 4) * 50.0 + buffer_get(intermediate, 6));
+  SET den_imaginary = (buffer_get(intermediate, 1) + buffer_get(intermediate, 3) * (1.0 / 50.0)) + (buffer_get(intermediate, 5) * 50.0 + buffer_get(intermediate, 7));
+  SET abs_squared = den_real * den_real + den_imaginary * den_imaginary;
+  SET re = (2.0 * branch * den_imaginary) / abs_squared;
+  SET im = (2.0 * branch * den_real) / abs_squared;
+  if abs(branch) < 1e-12 { SET re = 0.0; SET im = 0.0; }
+  SET magnitude = hypot2(re, im);
+  emit("{\"frequency\":"); emit(frequency);
+  emit(",\"re\":"); emit(re);
+  emit(",\"im\":"); emit(im);
+  emit(",\"magnitude\":"); emit(magnitude);
+  if magnitude == 0.0 {
+    emit(",\"s21dB\":null,\"insertionLoss\":null,\"phaseDeg\":null,\"idealNotch\":true");
+  } else {
+    SET db = 20.0 * log10(magnitude);
+    emit(",\"s21dB\":"); emit(db);
+    emit(",\"insertionLoss\":"); emit(-db);
+    emit(",\"phaseDeg\":"); emit(atan2(im, re) * 180.0 / PI);
+    emit(",\"idealNotch\":false");
+  }
+  emit(",\"lcNotchGHz\":"); emit(lc_notch); emit("}");
+  return 0;
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "origami-g002-local-recheck/v1",
+  "dateUTC": "2026-09-29T13:35:58Z",
+  "sourceArtifactSHA256": "cd893dfba5bc3464ae65b04f6ad3efdba325e5db25c6b26caee3b176e4f5f27d",
+  "linuxBinarySHA256": "2a5316a770f889fcb9baa345b9dd3b461ac5cf6138f49ef1c71e7050e0d2e897",
+  "compiler": "GCC 13.3.0, -std=c2x, manual __STDC_VERSION__=202311L and warning suppression for package-source inspection; Zig 0.14.1 unavailable",
+  "compilerSelfcheck": "passed",
+  "combinedRMALCheck": "passed",
+  "checks": {
+    "centeringRun": 716,
+    "centeringSampler": 955,
+    "homeward": 53,
+    "host": 34,
+    "legacyParity": 230,
+    "homewardParity": 43,
+    "javascriptReference": 28
+  },
+  "failedAssertions": 0,
+  "scope": "Native Linux binary built from exact package source with a GCC accommodation; bounded source fixture, retention, control, host rejection and reference parity tests. The numbers count assertions/test cases with different scopes, not independent proof experiments.",
+  "platformBoundary": "The package had a Windows cross-build and PE32+ inspection. This source recheck did not build or execute on Windows; 1.3.0 Windows runtime remains unverified."
+}

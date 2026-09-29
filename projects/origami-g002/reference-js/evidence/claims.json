@@ -1,0 +1,968 @@
+{
+  "revision": "2026-09-27-audit-v2",
+  "source": "SPEC-13D-ORRLA-2026-V5.5",
+  "authority": "Documentary validation and explicitly scoped mathematical models",
+  "claim_ceiling": "No manufacturing or hardware performance certification",
+  "claims": [
+    {
+      "claim_id": "C01",
+      "claim": "The compact state-vector grouping agrees with the explicit dimension list.",
+      "status": "falsified",
+      "result": "The compact groups are 3+4+4+2; the enumerated groups are 3 spatial + 4 kinematic + 5 spectral + 1 coupling. Both total 13, but their memberships disagree.",
+      "claim_type": "definitional",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §2",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Count the named entries in each group; preserve the explicit D1–D13 list.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§2",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C02",
+      "claim": "The document defines six functional circuit layers.",
+      "status": "verified",
+      "result": "Six assignments are explicitly present and are reproduced in the layer guide.",
+      "claim_type": "descriptive",
+      "scope": "Document content only, not actual fabrication or circuit function.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§3",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Material thicknesses and electrical coupling for a manufacturable six-layer stack remain unspecified.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C03",
+      "claim": "The central multiplier/gyrator core produces a gravitational funnel, metric warping or an event horizon.",
+      "status": "unknown",
+      "result": "No metric, field equations, analog-equivalence model or experiment is supplied. These remain visualization metaphors.",
+      "claim_type": "causal",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §1, §5",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§1, §5",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C04",
+      "claim": "Folding produces the claimed semantic rotations without delamination.",
+      "status": "unknown",
+      "result": "No operational semantic transform, material stress model or delamination test is provided.",
+      "claim_type": "causal",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §1",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        },
+        {
+          "title": "Minco flex-circuit engineering FAQs",
+          "url": "https://www.minco.com/resource-center/circuit-faqs/"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§1",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C05",
+      "claim": "The 13 named channels establish 13 independent physical or mechanical degrees of freedom.",
+      "status": "unknown",
+      "result": "A named state vector is admissible, but its feasible configuration dimension is not established. Ideal Miura folding couples its crease angles.",
+      "claim_type": "formal",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §2",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        },
+        {
+          "title": "Schenk & Guest, Geometry of Miura-folded metamaterials (2013)",
+          "url": "https://www.pnas.org/doi/10.1073/pnas.1217998110"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§2",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "This does not prohibit a constrained 13-channel state representation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C06",
+      "claim": "A general linear 13D state can be recovered from only three projected coordinates.",
+      "status": "falsified",
+      "result": "A 3×13 matrix has nullity at least 10. Two inputs differing in a hidden coordinate collide under the displayed projection. The update retains those ten coordinates.",
+      "claim_type": "formal",
+      "scope": "The general linear lossless-reduction interpretation of the source, without a restricted input family or retained side data.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Rank–nullity and the executable collision/reconstruction checks in tests/engineering.test.cjs.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        },
+        {
+          "title": "Lundholm & Svensson, Clifford algebra, geometric algebra, and applications",
+          "url": "https://www.math.lmu.de/~lundholm/clifford.pdf"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§1, §5",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Restricted low-dimensional families and retained remainder are different cases.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C07",
+      "claim": "AD633 is a four-quadrant analog multiplier.",
+      "status": "verified",
+      "result": "Its nominal transfer is W=(X1−X2)(Y1−Y2)/(10 V)+Z.",
+      "claim_type": "descriptive",
+      "scope": "Manufacturer component property within datasheet conditions.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Analog Devices AD633 Rev K, pp. 3 and 5",
+          "url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ad633.pdf"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§5",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C08",
+      "claim": "The AD633 can directly process the specified 2.4–5.8 GHz microwave buses.",
+      "status": "falsified",
+      "result": "Its specified small-signal bandwidth is 1 MHz. A baseband/control role would require a different circuit architecture.",
+      "claim_type": "quantitative",
+      "scope": "Direct microwave-processing interpretation of the specified AD633 core.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Analog Devices AD633 Rev K, pp. 3 and 5",
+          "url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ad633.pdf"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§5, §10",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C09",
+      "claim": "The given AD633 pin assignments are correct.",
+      "status": "falsified",
+      "result": "PDIP pins 5 and 6 are swapped: 5 is −VS, 6 is Z. SOIC uses a different complete mapping; package selection is required.",
+      "claim_type": "descriptive",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §10",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Analog Devices AD633 Rev K, pp. 3 and 5",
+          "url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ad633.pdf"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§10",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Correct pinouts appear in the report; this is not a PCB layout sign-off.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C10",
+      "claim": "±15 V is an allowed nominal AD633 supply.",
+      "status": "verified",
+      "result": "The rated test supply is ±15 V; the operating range is ±8 to ±18 V.",
+      "claim_type": "quantitative",
+      "scope": "Static supply rating, not dynamic bias or microwave performance.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Analog Devices AD633 Rev K, pp. 3 and 5",
+          "url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ad633.pdf"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§10",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C11",
+      "claim": "MAVR-000120-14110P identifies a MACOM GaAs tuning varactor.",
+      "status": "verified",
+      "result": "The manufacturer lists the part; the suffix selects pocket tape. Capacitance and parasitics still require a bias-dependent model.",
+      "claim_type": "descriptive",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §6, §7",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "MACOM MAVR-000120-1411 Rev V8",
+          "url": "https://cdn.macom.com/datasheets/MAVR-000120-1411.pdf"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§6, §7",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Component identity does not validate the proposed tuning mechanism.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C12",
+      "claim": "Pyralux FR9111R has the named copper/polyimide constituents.",
+      "status": "verified",
+      "result": "Table 2 lists double-sided 35 µm copper, 25 µm acrylic adhesive, and 25 µm Kapton. The source omits adhesive and does not define the full six-layer construction.",
+      "claim_type": "descriptive",
+      "scope": "Product identity and listed laminate constituents.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Pyralux FR manufacturer datasheet, Table 2",
+          "url": "https://www.qnityelectronics.com/content/dam/electronics/amer/us/en/electronics/public/documents/en/EI-10113-Pyralux-FR-CCL-Data-Sheet.pdf"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§3, §7",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "FR9110R electrical typicals must not be silently assigned to this assembly.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C13",
+      "claim": "The proposed substrate tolerates repeated 180° folds without fatigue.",
+      "status": "unknown",
+      "result": "No cycle count, bend radius, total construction or durability evidence establishes this guarantee.",
+      "claim_type": "quantitative",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §3",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Pyralux FR manufacturer datasheet, Table 2",
+          "url": "https://www.qnityelectronics.com/content/dam/electronics/amer/us/en/electronics/public/documents/en/EI-10113-Pyralux-FR-CCL-Data-Sheet.pdf"
+        },
+        {
+          "title": "Minco flex-circuit engineering FAQs",
+          "url": "https://www.minco.com/resource-center/circuit-faqs/"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§3",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C14",
+      "claim": "Murata LBR-series GHz ceramic resonators are a verified BOM entry.",
+      "status": "unknown",
+      "result": "The checked official ceramic-resonator lineup does not verify this exact series/role. An exact part number and microwave model are needed.",
+      "claim_type": "descriptive",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §7",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Murata CERALOCK product lineup",
+          "url": "https://www.murata.com/en-global/products/timingdevice/ceralock/overview/lineup/lineupgen"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§7",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Failed identification is not proof that a product never existed; no substitute has been selected.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C15",
+      "claim": "DuPont Intex 5000 is the specified qualified RF crease ink.",
+      "status": "unknown",
+      "result": "The exact designation was not verified. Related Intexar PE874 documentation does not qualify the named ink or a GHz folding hinge.",
+      "claim_type": "descriptive",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §7",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "DuPont Intexar PE874 manufacturer datasheet",
+          "url": "https://www.ccieurolam.com/wp-content/uploads/PE874-TDS.pdf"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§7",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "PE874 is a related manufacturer document, not an admitted replacement or proof of nonexistence.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C16",
+      "claim": "A 52 µm trace width guarantees 50 Ω ±2 Ω for this assembly.",
+      "status": "unknown",
+      "result": "Required dielectric separations, adhesive/coverlay, permittivity and complete conductor geometry are missing. Width alone cannot establish the guarantee.",
+      "claim_type": "quantitative",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §7",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A field-solver result or calibrated coupon outside 48–52 Ω under the declared complete stack.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Rogers RF design tools",
+          "url": "https://www.rogerscorp.com/advanced-electronics-solutions/tools"
+        },
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§7",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "No exact stack impedance has been computed or measured.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C17",
+      "claim": "The 250 µm keepout and 12.5 µm score depth are production-qualified.",
+      "status": "unknown",
+      "result": "These are proposed dimensions. There is no process tolerance, cross-section, damage inspection or hinge qualification.",
+      "claim_type": "quantitative",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §7",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        },
+        {
+          "title": "Minco flex-circuit engineering FAQs",
+          "url": "https://www.minco.com/resource-center/circuit-faqs/"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§7",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C18",
+      "claim": "The assembly meets >10 MΩ DC isolation.",
+      "status": "unknown",
+      "result": "This is an acceptance target without a test voltage, environment or measured result.",
+      "claim_type": "quantitative",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §7",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§7",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C19",
+      "claim": "The literal supplied netlist is a complete executable S21 simulation.",
+      "status": "falsified",
+      "result": "The transmission lines lack four node terminals, and the diode model, active subcircuit, ports, bias and analysis are missing. The update supplies a separate passive reduction.",
+      "claim_type": "executable",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §6",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare literal declarations to documented ngspice syntax; inspect missing model definitions.",
+      "evidence": [
+        {
+          "title": "ngspice manual, transmission lines and component definitions",
+          "url": "https://ngspice.sourceforge.io/docs/ngspice-manual.pdf"
+        },
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§6",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "The repaired reference netlist has not been executed by ngspice in this environment.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C20",
+      "claim": "The supplied HTML calculates physical S21 in real time.",
+      "status": "falsified",
+      "result": "The HTML only interpolates frequency and polarization with sin(θ); it contains no scattering/network solver.",
+      "claim_type": "executable",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, original HTML",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Inspect the frequency/polarization assignments and all JavaScript in the original file.",
+      "evidence": [
+        {
+          "title": "Original HTML prototype",
+          "url": "13d_origami_circuit_system.html"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "original HTML",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C21",
+      "claim": "Mechanical folding establishes a 2.4→5.8 GHz operating transition.",
+      "status": "unknown",
+      "result": "No measured sweep, electromagnetic solution or fold-to-component law supports this transition. The source values remain visible as targets.",
+      "claim_type": "quantitative",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §6",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        },
+        {
+          "title": "MACOM MAVR-000120-1411 Rev V8",
+          "url": "https://cdn.macom.com/datasheets/MAVR-000120-1411.pdf"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§6",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C22",
+      "claim": "Insertion loss <−1.5 dB expresses a low-loss ceiling.",
+      "status": "falsified",
+      "result": "For IL=−20log10|S21|, a 1.5 dB ceiling is IL<1.5 dB, equivalently S21_dB>−1.5 dB with equal real matched references.",
+      "claim_type": "quantitative",
+      "scope": "The conventional positive insertion-loss interpretation of the stated low-loss checkout criterion.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Apply the logarithmic amplitude definition; an example |S21|=0.5 has positive loss 6.0206 dB.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        },
+        {
+          "title": "MathWorks ABCD-to-S parameter conversion",
+          "url": "https://www.mathworks.com/help/rf/ref/abcd2s.html"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§7",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C23",
+      "claim": "Maximum compression produces a measured 90° microwave polarization rotation.",
+      "status": "unknown",
+      "result": "The prototype computes 90 sin(θ). No field, polarization measurement or calibration supports the hardware result.",
+      "claim_type": "quantitative",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §7",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        },
+        {
+          "title": "Original HTML prototype",
+          "url": "13d_origami_circuit_system.html"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§7",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C24",
+      "claim": "The specified mesh and grounding geometry guarantee 60 dB shielding.",
+      "status": "unknown",
+      "result": "No assembly-level measurement supports this. Express the proposed target as shielding effectiveness ≥60 dB with reference, incidence and polarization defined.",
+      "claim_type": "quantitative",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §8",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Parker Chomerics shielding theory",
+          "url": "https://discover.parker.com/chomerics-tech-info-emi-shielding-theory"
+        },
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§8",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "The envelope in the scene is a coarse guide; it is not a mesh or shielding solver.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C25",
+      "claim": "Inverse-square decay is exponential as a function of radius.",
+      "status": "falsified",
+      "result": "r^−2 and exp(−kr) are different functions of r. Substituting a logarithmic spiral can make r^−2 exponential in angle, which is a different variable.",
+      "claim_type": "formal",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §4",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare logarithmic derivatives: −2/r versus constant −k.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§4",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C26",
+      "claim": "Resistors and a phase-inverted route establish retrocausal signals and −1.5 V automatically.",
+      "status": "unknown",
+      "result": "No negative supply network, transfer function or causal experiment establishes either behavior. Polarity inversion alone does not reverse time.",
+      "claim_type": "causal",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §4",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§4",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C27",
+      "claim": "The ordinary Hopf map is an invertible full-state 13D→3D encoder.",
+      "status": "falsified",
+      "result": "The ordinary Hopf map is S³→S² with circle fibers: distinct inputs share an image. The source specifies no different reversible construction.",
+      "claim_type": "formal",
+      "scope": "The ordinary Hopf-map interpretation; not every possible custom construction.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Lyons, An Elementary Introduction to the Hopf Fibration",
+          "url": "https://nilesjohnson.net/hopf-articles/Lyons_Elem-intro-Hopf-fibration.pdf"
+        },
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§5",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "A retained fiber coordinate or other side data changes the encoding problem.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C28",
+      "claim": "Mathematical reversibility establishes zero entropy generation in this powered circuit.",
+      "status": "unknown",
+      "result": "No thermodynamic model is supplied. Logical invertibility alone does not imply thermodynamic reversibility; a positive resistor with nonzero current dissipates I²R.",
+      "claim_type": "causal",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §5",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Bennett, Notes on Landauer’s principle and reversible computation",
+          "url": "https://arxiv.org/abs/physics/0210005"
+        },
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§5",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Ideal reversible-computation limits do not certify this proposed active analog device.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C29",
+      "claim": "An exceptional point alone forces a static, nonvolatile latch.",
+      "status": "falsified",
+      "result": "Counterexample: at γ=k>0, H=[[iγ,k],[k,−iγ]] is defective with H²=0, yet exp(−iHt)=I−iHt evolves with time. No retention mechanism is specified.",
+      "claim_type": "formal",
+      "scope": "The asserted general implication from exceptional-point operation to static nonvolatile memory.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Exact 2×2 matrix multiplication and exponential truncation.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§5",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "A specially designed memory with additional mechanisms is not excluded.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C30",
+      "claim": "The original HTML prototype implements the specification’s Cl(13,0) multivector propagation.",
+      "status": "falsified",
+      "result": "Cl(13,0) has 2¹³=8,192 basis blades; its vector subspace has 13. The original has neither rotor algebra nor multivector propagation.",
+      "claim_type": "executable",
+      "scope": "Original supplied HTML implementation only; not all possible interpretations of the proposed architecture.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Count ordered basis subsets; inspect original implementation.",
+      "evidence": [
+        {
+          "title": "Lundholm & Svensson, Clifford algebra, geometric algebra, and applications",
+          "url": "https://www.math.lmu.de/~lundholm/clifford.pdf"
+        },
+        {
+          "title": "Original HTML prototype",
+          "url": "13d_origami_circuit_system.html"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§9 / original HTML",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "The updated normalized vector-plane rotations are only grade-1 rotor action.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C31",
+      "claim": "A unit rotor establishes material permittivity tracking and lossless RF behavior.",
+      "status": "unknown",
+      "result": "Norm preservation of normalized coordinates is mathematical; material response, bandwidth, noise and dielectric modulation need separate evidence.",
+      "claim_type": "causal",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, §9",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Lundholm & Svensson, Clifford algebra, geometric algebra, and applications",
+          "url": "https://www.math.lmu.de/~lundholm/clifford.pdf"
+        },
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "§9",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C32",
+      "claim": "The original three-state Lorenz feed establishes hyperchaos.",
+      "status": "unknown",
+      "result": "The code implements the conventional three-state Lorenz equations and presents no Lyapunov-spectrum evidence for the stronger label. It is labeled Lorenz attractor in the app.",
+      "claim_type": "descriptive",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, original HTML",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original HTML prototype",
+          "url": "13d_origami_circuit_system.html"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "original HTML",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "No Lyapunov spectrum is computed here.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "C33",
+      "claim": "The specification is ready for production execution.",
+      "status": "unknown",
+      "result": "Its approval label is not a test result. Circuit models, BOM identities, stack geometry, manufacturing tolerances and physical acceptance evidence remain incomplete.",
+      "claim_type": "descriptive",
+      "scope": "The proposed assembly described by SPEC-13D-ORRLA-2026-V5.5, document header",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Compare the submitted claim with the source and the cited primary documentation; no physical sample was tested.",
+      "evidence": [
+        {
+          "title": "Original specification, V5.5",
+          "url": "13D_Origami_Circuit_Full_Specification.txt"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "document header",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "Documentary or mathematical evidence only; no assembled-device validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "V01",
+      "claim": "The updated ideal Miura tessellation preserves rigid parallelogram facets.",
+      "status": "verified",
+      "result": "Edge lengths, diagonals, angles, area, closure and planarity are preserved by the coordinate construction; bounded numerical sweeps corroborate the identities.",
+      "claim_type": "formal",
+      "scope": "Zero-thickness, one-parameter mathematical sheet; arbitrary visualization length scale.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Analytic local edges u=(L,0,±h), v=(±s,W,0): |u|=a, |v|=b, u·v=±ab cosγ. Run tests/engineering.test.cjs and research/verify_miura.py.",
+      "evidence": [
+        {
+          "title": "Schenk & Guest, Geometry of Miura-folded metamaterials (2013)",
+          "url": "https://www.pnas.org/doi/10.1073/pnas.1217998110"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "updated model",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "No finite-thickness collision, stress, fatigue, laminate or material validation.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "V02",
+      "claim": "The updated normalized 13D plane rotation is recoverable when the remainder is retained.",
+      "status": "verified",
+      "result": "The 2×2 rotation block is orthogonal. Negating its angle restores the full vector; the app retains all 13 rotated coordinates and the ten-coordinate remainder.",
+      "claim_type": "formal",
+      "scope": "Finite dimensionless vectors, declared plane/angle, and retained full output.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "Algebra RᵀR=I plus all 78 distinct coordinate-plane round trips in tests/engineering.test.cjs.",
+      "evidence": [
+        {
+          "title": "Lundholm & Svensson, Clifford algebra, geometric algebra, and applications",
+          "url": "https://www.math.lmu.de/~lundholm/clifford.pdf"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "updated model",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "This is not a full multivector simulator, physical energy conservation or a lossless 3D-only image.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    },
+    {
+      "claim_id": "V03",
+      "claim": "The explicit passive reduction produces a notch near 3.9181 GHz at its default L/C.",
+      "status": "verified",
+      "result": "For L=2.2 nH and C=0.75 pF, 1/(2π√LC)=3.918123848 GHz. The shunt series LC shorts its junction ideally; the supplied branch is a transmission notch.",
+      "claim_type": "quantitative",
+      "scope": "Only the documented ideal passive topology, 50 Ω references and default components.",
+      "preconditions": "Use the exact supplied document and any stated manufacturer test conditions.",
+      "falsifier": "A primary-source contradiction, a counterexample under the stated scope, or a failed defined measurement.",
+      "method": "ABCD calculation independently checked by nodal admittance at 1,501 frequencies; tests also check the exact-notch limit.",
+      "evidence": [
+        {
+          "title": "MathWorks ABCD-to-S parameter conversion",
+          "url": "https://www.mathworks.com/help/rf/ref/abcd2s.html"
+        }
+      ],
+      "provenance": {
+        "document": "SPEC-13D-ORRLA-2026-V5.5",
+        "section": "updated model",
+        "audit_date": "2026-09-27",
+        "source_sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e"
+      },
+      "limitations": "No varactor, gain, parasitic, EM, fold-dependent or measured-device behavior is admitted.",
+      "reproduction_steps": "Read the stated section and cited source; execute named tests where provided."
+    }
+  ]
+}

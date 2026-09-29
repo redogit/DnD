@@ -1,0 +1,31 @@
+{
+  "algorithm": "origami-13d-algorithm",
+  "version": "1.1.0-homeward",
+  "date": "2026-09-28",
+  "predecessorCommit": "5889c7141ae3cd89c3ae0dcd2d748939a544eefb",
+  "originals": [
+    {
+      "path": "source/13D_Origami_Circuit_Full_Specification.txt",
+      "sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e",
+      "preservedVerbatim": true
+    },
+    {
+      "path": "source/13d_origami_circuit_system.html",
+      "sha256": "d5bd50f0e9ba3b53f9479467b1ca2f2efcd891fc3e1679f3c6962b2c01c39fcd",
+      "preservedVerbatim": true
+    }
+  ],
+  "retainedNumericalModules": [
+    {
+      "path": "lib/engineering.js",
+      "sha256": "6d697c27a8b349d9069e74f6942eb781e8265e47186df33a15eee9b6c677fec5",
+      "predecessorPath": "dist/engineering.js"
+    },
+    {
+      "path": "lib/model.js",
+      "sha256": "57ee9eb1f7a52aade659ba801730e07448cfbf216c9691a44bfb9274f7f1209f",
+      "predecessorPath": "dist/model.js"
+    }
+  ],
+  "predecessorVersion": "1.0.0"
+}

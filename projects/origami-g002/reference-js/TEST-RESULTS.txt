@@ -1,0 +1,38 @@
+✔ serialized transform contains enough information to recover without source input (2.816962ms)
+✔ accepts only dense finite vectors and supported transformation metadata (4.822126ms)
+✔ decision sufficiency intersects whole fibers and rejects unusable contracts (0.765046ms)
+✔ command-line JSON pipeline runs without a browser (256.428442ms)
+PASS: 1,014 rigid facets at six fold states, 78 plane rotations/inverses, projection collision/residual, passive RF boundaries and LC notch
+✔ reference-js/tests/engineering.test.cjs (85.219422ms)
+✔ Homeward returns along retained ancestry and preserves a blocked discovery (2.6276ms)
+✔ Homeward at Home is idempotent in state; unrequested return is blocked (0.426355ms)
+✔ unique IDs include Home and prototype-like strings without corrupting lineage (0.258591ms)
+✔ Unicode and string notes survive exactly; a full bounded path remains connected (5.165755ms)
+✔ the complete schedule is validated; malformed shapes and limits are rejected (1.099461ms)
+✔ CLI explore emits valid JSON or a failure with empty stdout (154.932358ms)
+✔ programmatic inputs cannot replace validated operations or bypass the bound (0.596731ms)
+✔ CLI rejects malformed UTF-8 and BOM input without changing identifiers (130.63885ms)
+✔ a positive quarter turn carries D1 into D13 with the prescribed orientation (1.39687ms)
+✔ all 78 coordinate planes preserve norm and permit numerical recovery (4.712179ms)
+✔ serialized recovery reverses a noncommuting sequence without a saved original vector (0.348526ms)
+✔ equal visible coordinates and equal norms do not replace the ten-coordinate residual (0.311771ms)
+✔ encoding and recovery do not share mutable arrays with their callers (0.186432ms)
+✔ malformed and numerically overflowing transformations are rejected (0.426565ms)
+✔ decision sufficiency depends on whole fibers, not merely pairwise compatibility (0.9797ms)
+✔ decision groups use stored numeric values rather than rounded display coordinates (0.183627ms)
+✔ decision results do not alias source rows (0.206682ms)
+✔ invalid numeric observations and empty or non-string action sets are rejected (0.383941ms)
+✔ simulation preserves a Lorenz fixed point and uses independent initial-state copies (2.042636ms)
+✔ one Lorenz timestep agrees with independently integrated equations (1.983978ms)
+✔ each supported simulation is deterministic and finite over 1000 steps (15.603013ms)
+✔ simulation rejects inherited feed names, invalid counts and divergent states (0.455268ms)
+PASS: fixed point, independent integration reference, 60,000 stability steps, target boundaries and input guards
+✔ reference-js/tests/model.test.cjs (137.131724ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 400.005018

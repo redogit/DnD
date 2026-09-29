@@ -1,0 +1,13 @@
+{
+  "home": "H",
+  "operations": [
+    {"op": "discover", "id": "A", "note": "First discovery"},
+    {"op": "discover", "id": "B", "note": "Second discovery"},
+    {"op": "discover", "id": "C", "note": "Third discovery"},
+    {"op": "homeward"},
+    {"op": "discover", "id": "D", "note": "Attempt preserved; expansion held"},
+    {"op": "return_step"},
+    {"op": "return_step"},
+    {"op": "return_step"}
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "rmal/native-c23-windows-validation/v1",
+  "date": "2026-09-26",
+  "verified_head": "a58fb0de292f1dd3fb7abf4660e96822ad270fab",
+  "workflow": {
+    "name": "RMAL C23 Toolchain",
+    "run_id": 36244043491,
+    "conclusion": "success"
+  },
+  "linux": {
+    "job_id": 108376113424,
+    "target": "Linux / Clang / C23",
+    "conclusion": "success"
+  },
+  "windows": {
+    "job_id": 108376113544,
+    "runner_os": "Windows Server 2025",
+    "runner_version": "10.0.26100",
+    "image": "windows-2025-vs2026",
+    "clang_version": "20.1.8",
+    "clang_target": "x86_64-pc-windows-msvc",
+    "cmake_version": "4.4.3",
+    "ninja_version": "1.13.2",
+    "conclusion": "success",
+    "package": {
+      "install_stage": "success",
+      "staged_rmalc_smoke": "success",
+      "zip": "RMAL-3.1.0-windows-x64-c23.zip",
+      "upload": "success",
+      "artifact_id": 10906986534,
+      "artifact_name": "RMAL-3.1.0-windows-x64-c23",
+      "artifact_size_bytes": 640713
+    }
+  },
+  "passed": [
+    "toolchain discovery",
+    "CMake configure",
+    "strict C23 compile",
+    "rmalc version",
+    "native selfcheck",
+    "language-spec introspection",
+    "recovered-surface parser check",
+    "historical RMALC.rmal parser check",
+    "hello example execution",
+    "JSON manifest generation",
+    "CTest semantic regression suite",
+    "CMake install staging",
+    "staged rmalc.exe smoke test",
+    "Windows ZIP packaging",
+    "GitHub artifact upload"
+  ],
+  "semantic_witnesses": [
+    "CONST mutation rejection",
+    "typed equality",
+    "STATE/SET distinction",
+    "recursive functions",
+    "source-coordinate trace/manifest metadata"
+  ],
+  "boundaries": [
+    "WINDOWS_BUILD_PASS != UNIVERSAL_CORRECTNESS",
+    "COMPILED != SCIENTIFICALLY_VALID",
+    "TRACE != PROOF",
+    "FINITE_VERIFICATION != UNIVERSALITY"
+  ],
+  "claim_ceiling": "NATIVE_C23_WINDOWS_LINUX_AND_WINDOWS_SDK_PACKAGING_VERIFIED"
+}

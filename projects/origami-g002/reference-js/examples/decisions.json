@@ -1,0 +1,5 @@
+[
+  { "id": "state-a", "observation": [0, 0, 0], "actions": ["a", "b"] },
+  { "id": "state-b", "observation": [0, 0, 0], "actions": ["b", "c"] },
+  { "id": "state-c", "observation": [0, 0, 0], "actions": ["a", "c"] }
+]
