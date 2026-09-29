@@ -31,9 +31,24 @@ python3 native/test_host.py build/linux/origami
 node --test reference-js/tests/*.test.cjs
 ```
 
+When Zig is unavailable on Linux, the following **GCC 13 audit fallback** reproduces the local recheck. It uses C2x mode, manually defines the C23 version macro and suppresses warnings for this inspection. It is not the release compiler path or an ISO C23 conformance claim. The script checks that the bundled combined RMAL source and embedded header still match the six source modules, then runs RMALC selfcheck and program check.
+
+```bash
+bash scripts/build-gcc13-audit.sh
+python3 tests/centering_run.py --binary build/linux/origami
+python3 tests/centering.py --binary build/linux/origami
+python3 tests/homeward.py --binary build/linux/origami
+python3 tests/parity.py --binary build/linux/origami
+python3 tests/homeward_parity.py
+python3 native/test_host.py build/linux/origami
+node --test reference-js/tests/*.test.cjs
+```
+
 For Windows, `python3 scripts/build.py --target windows` cross-builds when Zig is available; the delivered package also contains `demo.cmd` and `verify.cmd`. This imported source tree has not been executed on Windows. The prior package's Windows build/format receipt does not establish Windows runtime behavior for 1.3.0.
 
 The [Linux recheck receipt](evidence/LOCAL_RECHECK_2026-09-29.json) records a GCC 13 C2x accommodation used because Zig was unavailable in that environment. It is a bounded independent run, not an official ISO C23/Zig build or a Windows test.
+
+The copied `toolchain/CURRENT.md` and `toolchain/README_COMPILER.md` are upstream snapshots from the source package. Their standalone Windows script paths are absent from this isolated import, and their CMake examples test the compiler rather than the Origami host and runner; use the project-level build and test steps above for Origami. Their historical Windows workflow receipts belong to the upstream RMAL toolchain, not to execution of Origami 1.3.0 on Windows.
 
 ## Remainder
 
