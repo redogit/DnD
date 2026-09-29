@@ -30,6 +30,15 @@ persistence; authenticated callbacks/source custody; native Windows durable I/O;
 complete four-ID semantic cataloging; and generic request classes. The original
 VM trace is process-local; source digest and native invocation trace persist.
 
+## AnyFunctor research alignment
+
+The later Work research specifies a singular partial evaluator and ten optional
+structural evaluators. Their exact relationship to this bounded Mirror path,
+proposed certificate checks and counterprobes are documented in
+[`docs/ANYFUNCTOR_STRUCTURAL_RECONCILIATION_2026-09-29.md`](docs/ANYFUNCTOR_STRUCTURAL_RECONCILIATION_2026-09-29.md).
+The structural planner and general evaluator are research targets, not v0.7
+runtime features or results.
+
 ## Way back
 
 v0.6 evidence remains unchanged under `evidence/v0_6/`; v0.5 under `evidence/v0_5/`.
