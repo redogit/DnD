@@ -1,0 +1,46 @@
+{
+  "root_tree": "9889f8b00de101f87c4ae23b1c1826f187dabf51",
+  "checks": {
+    "include": {
+      "local": "a4df0dc5719d857d659810639743b40125f9cc29",
+      "remote": "a4df0dc5719d857d659810639743b40125f9cc29",
+      "match": true
+    },
+    "tests": {
+      "local": "4751ed59669e68591002bdc95a1567633c55ec6b",
+      "remote": "4751ed59669e68591002bdc95a1567633c55ec6b",
+      "match": true
+    },
+    "scripts": {
+      "local": "96f9aecc3d030e968345b700d3c6111ed05b4435",
+      "remote": "96f9aecc3d030e968345b700d3c6111ed05b4435",
+      "match": true
+    },
+    "CMakeLists.txt": {
+      "local": "72623fd0a5bd17f474390a5411d08fc4e30a5cdd",
+      "remote": "72623fd0a5bd17f474390a5411d08fc4e30a5cdd",
+      "match": true
+    },
+    "README.md": {
+      "local": "1e08401c38935d55f61d3c8eaf02d0f311768651",
+      "remote": "1e08401c38935d55f61d3c8eaf02d0f311768651",
+      "match": true
+    },
+    "CURRENT.md": {
+      "local": "ad3fcd01eb9204a908a55118c651f39469243d43",
+      "remote": "ad3fcd01eb9204a908a55118c651f39469243d43",
+      "match": true
+    },
+    "docs/NATIVE_PERSISTENCE.md": {
+      "local": "e8482e1ebe52ca7bb7f7631b11a9e5a607358529",
+      "remote": "e8482e1ebe52ca7bb7f7631b11a9e5a607358529",
+      "match": true
+    },
+    "docs/plans/2026-09-27-native-persistence.md": {
+      "local": "856224677e3f03b0ee6e2f92e435eb46da8dd06c",
+      "remote": "856224677e3f03b0ee6e2f92e435eb46da8dd06c",
+      "match": true
+    }
+  },
+  "scope": "Complete executable include/tests/scripts trees, build file, current docs and new design/plan. Repository additionally retains earlier design/input documents that were not in the v0.5 companion source bundle."
+}

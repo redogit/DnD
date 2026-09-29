@@ -1,0 +1,21 @@
+{
+  "archive": "decision_field_prototype_v0_3_triadic.zip",
+  "archive_sha256": "91a25de44269e6f54d45c5744b38af09eef2daf25b8fedbdab79ca0b4a018292",
+  "recovery": "Exact attached archive extracted with path and hash checks; not reconstructed from prose",
+  "repository_boundary": "Current Git slice contains a recovery tool; recovered predecessor source is included in companion bundle",
+  "files": {
+    "BUILD_REPORT.md": "b19c48fe3d2b1fd61d995b999a1b51f496225c25c57777345327178d9f77acb7",
+    "CMakeLists.txt": "9c2780bfbe5562ef888b81c181b2adf13fdf7b6e83064ee60eeb3d64194bf2ff",
+    "README.md": "d0357ea0830e9c12e4fa024f5edfcb4109e07b248a2cc0ae1b0830af6a0fa8ac",
+    "SELF_OPPOSITE_REPORT.md": "a87dda286c2cdb73c3a45783aacdd711af3208dc7d1bc0a3fc0f8054658c6b2a",
+    "TRIADIC_SELF_ATTACK_REPORT.md": "59f2b2e6fcd876ef9c06be1e69de723e9d7e329fc0ad800bbc931ffb8a0558de",
+    "TRIADIC_SELF_ATTACK_RUN.txt": "a96e039d9641ea6e3313500c6ec1c1621eba84d44cb3731173ec365b615662dd",
+    "examples/demo.cpp": "6ec511dafa80a39040b1922c4577e52941b61a2867993cac7119227c293b65e6",
+    "examples/self_opposite.cpp": "a36b8701ff2f33717c68e99228e41f130f5376b944a299e480c5204d08352ae4",
+    "examples/triadic_self_attack.cpp": "9d2ea8d975f8430b68e3c7ec66002f4d8ff81424318135d14ae541a80fe71daa",
+    "include/decision_field/decision_field.hpp": "279c4e6cf1ac8b9f9896625bd761d9aa3ed9f89e865c8b47c0061fa28030a34b",
+    "include/decision_field/example_domain.hpp": "94bbabda01297af4314ca27328af84f200862dc815cc569256072651646e5673",
+    "include/decision_field/self_architecture_domain.hpp": "d046f78e2ca0bed36fd18d5b23892c2c71ccb91caf7e54484fb06a92fd80b1f1",
+    "tests/decision_field_tests.cpp": "bfc6f6bc808d348a5892d4d30938486c128d8b13611e0a4bdb31aaebb966c2d5"
+  }
+}

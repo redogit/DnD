@@ -1,101 +1,63 @@
-# CURRENT — Decision Field directional component analysis
+# CURRENT — Decision Field v0.6 native persistence
 
-**Date:** 2026-09-27
-**Status:** executable local slice verified before repository import
+Date: 2026-09-27. Continuation of PR #2 at `21e85bd293745b2ff2096fc1000c7a7058f3880b`.
+Root RMAL/RMALC C23 is unchanged; this continuation does not merge PR #2.
 
-## Preserved predecessor
+## Implemented
 
-The preserved predecessor lineage is the v0.3 Decision Field prototype developed through:
+- Complete engine-owned data checkpoint with full native SelfState codec.
+- Canonical versioned binary archive with SHA-256 and allocation guards.
+- External version-bound callback registry, no serialized executable callbacks.
+- Reciprocal native-link/dependency checks, increasing lineage depth, counter checks,
+  invocation/cache/edge consistency and input-derived invocation-key verification.
+- Create-only POSIX file publication with private staging, file fsync and directory fsync.
+- Independent process load and continuation preserving cache, IDs, stale/failure evidence,
+  repeated input bindings, zero-output receipts and zero-input generation.
+- Original v0.3 source stays unchanged; the build generates an explicitly versioned successor.
 
-```text
-quartet
--> lawful mirror
--> overlap
--> shared center
--> 16 x 12 baseline field
--> self-opposite test
--> triadic pole/pole/midpoint attack
--> unknown-distance surface discovery
-```
+## Measured fixture
 
-The predecessor remains identifiable through exact source hashes, evidence reports, and the source manifest. The current GitHub branch intentionally exposes the new component-analysis code as a standalone buildable slice instead of pretending that a partial reconstruction is the full v0.3 source tree.
-
-## New slice
-
-Added `include/decision_field/component_analysis.hpp`.
-
-Implemented:
-
-- signed horizontal directions: left/right;
-- signed vertical directions: up/down;
-- four planar diagonal directions;
-- explicit lateral +/- basis;
-- explicit orthogonal +/- basis;
-- arbitrary named parametric +/- axes;
-- obligation/evidence/cost weighted directional projection;
-- primary component grouping;
-- recursive component-of-component decomposition;
-- simpler-core joining across all retained members of retained primary components;
-- residual preservation for every non-stable dimension.
-
-## Meaning of primary
-
-`PRIMARY` means highest current obligation-relevant explanatory component under the declared scoring inputs.
-
-It does **not** mean highest covariance variance by definition.
-
-## Current scoring carrier
-
-For an observation and a positive signed basis direction:
+Writer and independent reader agree on 30,376 native states, 5 transform edges and 5
+invocations. Archive size is 8,755,589 bytes. The fixture includes the actual nearest and
+farther triadic explorations, then five explicit transform invocations. This is not the
+same fixture/count as the previous triadic report.
 
 ```text
-quality =
-    obligation_progress
-  + information_gain
-  + evidence_strength
-  - residual_cost
-  - recovery_cost
-  - decay_risk
-
-component_score =
-    positive_projection * max(0, quality)
+SHA-256: 8ab9f2b15524ac08d3d8cdf8959e7da344a301cca9a35a51530f86868309670a
+reader re-encoding equals writer bytes: YES
+new invocation and next-ID continuation: YES
+failed invocation / scoped fix / negative residual preserved: YES
+existing checkpoint overwrite refused: YES
 ```
-
-This is a first executable carrier, not the final universal scoring law.
-
-## Core join
-
-All retained members of retained primary components are compared coordinate-by-coordinate; representative states are not sufficient for a stability claim.
-
-If the observed range is within the declared tolerance, the coordinate is admitted into the simpler core.
-
-Otherwise it is preserved as a residual dimension with minimum/maximum extent.
 
 ## Verification
 
-Fresh local verification before import:
+GCC 14.2 Debug and Release with `-Werror`: 13/13 CTest targets each.
+Clang 17 ASan+UBSan with `-Werror`: 13/13, no sanitizer findings in this run.
+Standalone without predecessor: 4/4; native persistence is explicitly unavailable there.
 
-```text
-decision_field_tests                       PASS
-decision_field_self_opposite               PASS
-decision_field_triadic_self_attack         PASS
-decision_field_component_analysis_tests    PASS
+Altered-body probes with recomputed checksums: 239 rejected, 17 structurally valid changes
+accepted, out of 256 deterministic probes. This is not authentication or exhaustive fuzzing.
 
-4 / 4 PASS
-```
+## Corrections found
 
-See `evidence/BUILD_REPORT.md`.
+An internally self-consistent but forged cache key could previously pass restore checks.
+A failing regression test reproduced it. Restore now recomputes keys from transform
+identity/version, ordered source fingerprints and captured context. Clang also required
+an explicit unsigned-byte conversion in digest formatting; the repair did not change bytes.
 
-## Next development boundary
+## Remaining boundaries
 
-Connect the component analyzer directly to:
+- Quiescent engine data only: no thread/OS memory/process checkpoint.
+- External quartet/field/SurfaceObject results are not owned by the engine and need their
+  own persistence layer; their underlying engine state nodes are included.
+- Complete native recovery is demonstrated for SelfState, not arbitrary codec implementations.
+- The legacy context retains entropy/configuration fingerprints, not unavailable original bytes.
+- File durability is implemented for a trusted POSIX directory/filesystem, not power-loss-tested.
+  Windows durable file I/O is explicitly not implemented; no Windows verification is claimed.
+- SHA-256 does not authenticate source or grant evidence authority.
+- Structural operations still use predecessor callbacks, not unified first-class transforms.
+- Live cohort scheduling, RMAL execution integration and independent review remain outstanding.
+- Root C23 tests and GitHub Actions were not rerun/verified in this local continuation.
 
-1. the 192 baseline probe records;
-2. discovered `SurfaceDefinition` objects;
-3. synchronization-driven cohort reconfiguration;
-4. first-class SurfaceDefinition input/output;
-5. RMAL carriers once the semantics are independently stable.
-
-```text
-CURRENT EXECUTABLE SLICE != FINAL COMPONENT THEORY
-```
+See `evidence/v0_6` for new evidence. Prior v0.5 reports are preserved as historical records.

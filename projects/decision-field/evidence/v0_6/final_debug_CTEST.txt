@@ -1,0 +1,32 @@
+Internal ctest changing into directory: /mnt/data/df_v06_base/.worktrees/native-state/build-debug
+Test project /mnt/data/df_v06_base/.worktrees/native-state/build-debug
+      Start  1: decision_field_component_analysis_tests
+ 1/13 Test  #1: decision_field_component_analysis_tests ...   Passed    0.00 sec
+      Start  2: decision_field_core_coverage_tests
+ 2/13 Test  #2: decision_field_core_coverage_tests ........   Passed    0.00 sec
+      Start  3: decision_field_bridge_tests
+ 3/13 Test  #3: decision_field_bridge_tests ...............   Passed    0.02 sec
+      Start  4: decision_field_replay_integrity_tests
+ 4/13 Test  #4: decision_field_replay_integrity_tests .....   Passed    0.00 sec
+      Start  5: decision_field_predecessor_bridge_tests
+ 5/13 Test  #5: decision_field_predecessor_bridge_tests ...   Passed    0.01 sec
+      Start  6: decision_field_surface_bridge_tests
+ 6/13 Test  #6: decision_field_surface_bridge_tests .......   Passed    1.10 sec
+      Start  7: decision_field_native_snapshot_tests
+ 7/13 Test  #7: decision_field_native_snapshot_tests ......   Passed    0.01 sec
+      Start  8: decision_field_native_archive_tests
+ 8/13 Test  #8: decision_field_native_archive_tests .......   Passed    0.48 sec
+      Start  9: decision_field_checkpoint_file_tests
+ 9/13 Test  #9: decision_field_checkpoint_file_tests ......   Passed    0.01 sec
+      Start 10: decision_field_checkpoint_process_test
+10/13 Test #10: decision_field_checkpoint_process_test ....   Passed    4.49 sec
+      Start 11: decision_field_tests
+11/13 Test #11: decision_field_tests ......................   Passed    0.01 sec
+      Start 12: decision_field_self_opposite
+12/13 Test #12: decision_field_self_opposite ..............   Passed    0.04 sec
+      Start 13: decision_field_triadic_self_attack
+13/13 Test #13: decision_field_triadic_self_attack ........   Passed    0.42 sec
+
+100% tests passed, 0 tests failed out of 13
+
+Total Test time (real) =   6.61 sec
