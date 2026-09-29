@@ -1,0 +1,31 @@
+MODULE recovered_surface;
+EXPORT state_value
+STATE state_value = 1
+SET state_value = state_value + 1
+REQUIRE state_value == 2
+TYPE SemanticObject STATUS ACTIVE
+TRAIT Reconstructible
+CLASS Carrier
+RELATION Preserves ALLOW provenance DENY evidence_transfer
+RELATE Carrier AS Preserves TO SemanticObject AUTHORITY NONE EVIDENCE_TRANSFER DENY
+OPERATOR Reconstruct
+CONFIG Deterministic deterministic=true
+PROFILE Debug INCLUDE Deterministic
+CONTEXT Formalization authority=LOCAL evidence_transfer=DENY
+ENTITY Example.Entity KIND TEST STATUS ACTIVE
+ATTRIBUTE Example.Entity KEY state VALUE verified
+CLAIM C1 STATUS FORMULATED TEXT parser_accepts_recovered_surface
+EVIDENCE E1 TYPE EXACT_COMPUTATION LINEAGE native_cpp TEXT syntax_check
+BOUNDARY C1 CLAIM_CEILING PARSER_ONLY REASON no_semantic_promotion
+PRESERVE provenance history remainder
+ALLOW reconstruction
+DENY evidence_transfer
+OBLIGATION preserve_source
+INVARIANT source_identity
+COUNTERPROBE "reject unsupported semantic promotion"
+VERIFY "syntax remains reconstructible"
+REMAINDER typed_semantics
+SURFACE canonical
+TRACE execution
+CONTINUE
+STOP

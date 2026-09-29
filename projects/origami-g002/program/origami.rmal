@@ -1,0 +1,790 @@
+MODULE origami_algorithm;
+CONST PI = 3.141592653589793;
+
+# Native functions supply storage, JSON transport and standard math only.
+# Rotation, inverse ordering and decision intersections execute below in RMAL.
+fn num_or(path, fallback) {
+  if has(path) { return number(path); }
+  return fallback;
+}
+fn int_or(path, fallback) {
+  if has(path) { return integer(path); }
+  return fallback;
+}
+fn emit_bool(value) {
+  if value { emit("true"); } else { emit("false"); }
+  return nil;
+}
+fn emit_vector(buffer, start, count) {
+  let k = 0;
+  emit("[");
+  while k < count {
+    if k > 0 { emit(","); }
+    emit(buffer_get(buffer, start + k));
+    SET k = k + 1;
+  }
+  emit("]");
+  return nil;
+}
+fn rotate_in_place(buffer, i, j, degrees) {
+  let angle = degrees * PI / 180.0;
+  let c = cos(angle);
+  let s = sin(angle);
+  let x = buffer_get(buffer, i);
+  let y = buffer_get(buffer, j);
+  buffer_set(buffer, i, c * x - s * y);
+  buffer_set(buffer, j, s * x + c * y);
+  return nil;
+}
+fn check_norm(buffer, count) {
+  let k = 0;
+  let norm = 0.0;
+  while k < count {
+    SET norm = hypot2(norm, buffer_get(buffer, k));
+    SET k = k + 1;
+  }
+  return norm;
+}
+fn run_encode() {
+  let v = buffer_new(13);
+  let k = 0;
+  let count = 0;
+  let prefix = "";
+  while k < 13 {
+    buffer_set(v, k, number("vector." + k));
+    SET k = k + 1;
+  }
+  if has("rotations") { SET count = length("rotations"); }
+  SET k = 0;
+  while k < count {
+    SET prefix = "rotations." + k;
+    rotate_in_place(v, integer(prefix + ".i"), integer(prefix + ".j"), number(prefix + ".degrees"));
+    check_norm(v, 13);
+    SET k = k + 1;
+  }
+  emit("{\"schema\":\"origami-transform-v1\",\"visible\":");
+  emit_vector(v, 0, 3);
+  emit(",\"residual\":");
+  emit_vector(v, 3, 10);
+  emit(",\"rotations\":[");
+  SET k = 0;
+  while k < count {
+    if k > 0 { emit(","); }
+    SET prefix = "rotations." + k;
+    emit("{\"i\":"); emit(integer(prefix + ".i"));
+    emit(",\"j\":"); emit(integer(prefix + ".j"));
+    emit(",\"degrees\":"); emit(number(prefix + ".degrees")); emit("}");
+    SET k = k + 1;
+  }
+  emit("]}");
+  return nil;
+}
+fn run_recover() {
+  let v = buffer_new(13);
+  let k = 0;
+  let prefix = "";
+  while k < 3 {
+    buffer_set(v, k, number("visible." + k));
+    SET k = k + 1;
+  }
+  SET k = 0;
+  while k < 10 {
+    buffer_set(v, k + 3, number("residual." + k));
+    SET k = k + 1;
+  }
+  check_norm(v, 13);
+  SET k = length("rotations");
+  while k > 0 {
+    SET k = k - 1;
+    SET prefix = "rotations." + k;
+    rotate_in_place(v, integer(prefix + ".i"), integer(prefix + ".j"), -number(prefix + ".degrees"));
+    check_norm(v, 13);
+  }
+  emit_vector(v, 0, 13);
+  return nil;
+}
+fn same_observation(a, b) {
+  let k = 0;
+  let count = length(a + ".observation");
+  while k < count {
+    if number(a + ".observation." + k) != number(b + ".observation." + k) { return false; }
+    SET k = k + 1;
+  }
+  return true;
+}
+fn row_has_action(row, action) {
+  let k = 0;
+  let count = length(row + ".actions");
+  while k < count {
+    if text(row + ".actions." + k) == action { return true; }
+    SET k = k + 1;
+  }
+  return false;
+}
+fn earlier_action(row, index, action) {
+  let k = 0;
+  while k < index {
+    if text(row + ".actions." + k) == action { return true; }
+    SET k = k + 1;
+  }
+  return false;
+}
+fn run_decide() {
+  let count = length("");
+  let seen = buffer_new(count);
+  let members = buffer_new(count);
+  let i = 0;
+  let j = 0;
+  let k = 0;
+  let d = 0;
+  let first_fiber = true;
+  let first_id = true;
+  let first_action = true;
+  let all_sufficient = true;
+  let allowed = false;
+  let candidate = "";
+  let row = "";
+  emit("{\"fibers\":[");
+  while i < count {
+    if buffer_get(seen, i) == 0.0 {
+      SET row = "" + i;
+      if !first_fiber { emit(","); }
+      SET first_fiber = false;
+      emit("{\"observation\":[");
+      SET d = 0;
+      while d < length(row + ".observation") {
+        if d > 0 { emit(","); }
+        emit(number(row + ".observation." + d));
+        SET d = d + 1;
+      }
+      emit("],\"ids\":[");
+      SET j = 0;
+      SET first_id = true;
+      while j < count {
+        buffer_set(members, j, 0.0);
+        if same_observation(row, "" + j) {
+          buffer_set(members, j, 1.0);
+          buffer_set(seen, j, 1.0);
+          if !first_id { emit(","); }
+          SET first_id = false;
+          emit(quote(text(j + ".id")));
+        }
+        SET j = j + 1;
+      }
+      emit("],\"commonActions\":[");
+      SET k = 0;
+      SET first_action = true;
+      while k < length(row + ".actions") {
+        SET candidate = text(row + ".actions." + k);
+        SET allowed = !earlier_action(row, k, candidate);
+        SET j = 0;
+        while j < count {
+          if buffer_get(members, j) == 1.0 {
+            if !row_has_action("" + j, candidate) { SET allowed = false; }
+          }
+          SET j = j + 1;
+        }
+        if allowed {
+          if !first_action { emit(","); }
+          SET first_action = false;
+          emit(quote(candidate));
+        }
+        SET k = k + 1;
+      }
+      if first_action { SET all_sufficient = false; }
+      emit("]}");
+    }
+    SET i = i + 1;
+  }
+  emit("],\"sufficient\":"); emit_bool(all_sufficient); emit("}");
+  return nil;
+}
+
+// Supporting mathematical models, ported from the audited JavaScript source.
+// All model formulas execute in RMAL. Host calls supply math, data and output.
+
+fn model_derivative(feed, x, y, z, target, offset) {
+  if feed == "lorenz" {
+    buffer_set(target, offset, 10.0 * (y - x));
+    buffer_set(target, offset + 1, x * (28.0 - z) - y);
+    buffer_set(target, offset + 2, x * y - 8.0 * z / 3.0);
+  } else {
+    buffer_set(target, offset, -y - z);
+    buffer_set(target, offset + 1, x + 0.2 * y);
+    buffer_set(target, offset + 2, 0.2 + z * (x - 5.7));
+  }
+  return 0;
+}
+
+fn run_simulate() {
+  let feed = text("feed");
+  let steps = integer("steps");
+  let x = number("initial.0");
+  let y = number("initial.1");
+  let z = number("initial.2");
+  let h = 0.01;
+  let half = 0;
+  let step_index = 0;
+  let next_x = 0.0;
+  let next_y = 0.0;
+  let k = buffer_new(12);
+  if feed == "lorenz" { SET h = 0.005; }
+  while step_index < steps {
+    if feed == "clifford" {
+      SET next_x = sin(-1.4 * y) + cos(-1.4 * x);
+      SET next_y = sin(1.6 * x) + 0.7 * cos(1.6 * y);
+      SET x = next_x;
+      SET y = next_y;
+      SET z = next_x * next_y * 0.5;
+    } else {
+      SET half = 0;
+      while half < 2 {
+        model_derivative(feed, x, y, z, k, 0);
+        model_derivative(feed,
+          x + (h / 2.0) * buffer_get(k, 0),
+          y + (h / 2.0) * buffer_get(k, 1),
+          z + (h / 2.0) * buffer_get(k, 2), k, 3);
+        model_derivative(feed,
+          x + (h / 2.0) * buffer_get(k, 3),
+          y + (h / 2.0) * buffer_get(k, 4),
+          z + (h / 2.0) * buffer_get(k, 5), k, 6);
+        model_derivative(feed,
+          x + h * buffer_get(k, 6),
+          y + h * buffer_get(k, 7),
+          z + h * buffer_get(k, 8), k, 9);
+        SET x = x + h * (buffer_get(k, 0) + 2.0 * buffer_get(k, 3) + 2.0 * buffer_get(k, 6) + buffer_get(k, 9)) / 6.0;
+        SET y = y + h * (buffer_get(k, 1) + 2.0 * buffer_get(k, 4) + 2.0 * buffer_get(k, 7) + buffer_get(k, 10)) / 6.0;
+        SET z = z + h * (buffer_get(k, 2) + 2.0 * buffer_get(k, 5) + 2.0 * buffer_get(k, 8) + buffer_get(k, 11)) / 6.0;
+        SET half = half + 1;
+      }
+    }
+    SET step_index = step_index + 1;
+  }
+  emit("{\"feed\":"); emit(quote(feed));
+  emit(",\"steps\":"); emit(steps);
+  emit(",\"numericalDt\":");
+  if feed == "clifford" { emit("null"); } else { emit(2.0 * h); }
+  emit(",\"state\":["); emit(x); emit(","); emit(y); emit(","); emit(z); emit("]}");
+  return 0;
+}
+
+fn run_geometry() {
+  let fold = number("fold");
+  let n = int_or("n", 13);
+  let a = num_or("a", 2.7);
+  let b = num_or("b", 2.7);
+  let gamma = num_or("gamma", 60.0);
+  let t = fold * PI / 180.0;
+  let g = gamma * PI / 180.0;
+  let q = sqrt(1.0 - pow(sin(g), 2.0) * pow(sin(t), 2.0));
+  let sheet_l = a * q;
+  let height = a * sin(g) * sin(t);
+  let shift = b * cos(g) / q;
+  let width = b * sin(g) * cos(t) / q;
+  let across_j = 2.0 * atan2(cos(g) * sin(t), cos(t)) * 180.0 / PI;
+  let i = 0;
+  let j = 0;
+  let first = true;
+  emit("{\"vertices\":[");
+  while j <= n {
+    SET i = 0;
+    while i <= n {
+      if first { SET first = false; } else { emit(","); }
+      emit("[");
+      emit(i * sheet_l + (j % 2) * shift - (n * sheet_l + shift) / 2.0);
+      emit(","); emit(j * width - n * width / 2.0);
+      emit(","); emit((i % 2) * height - height / 2.0);
+      emit("]");
+      SET i = i + 1;
+    }
+    SET j = j + 1;
+  }
+  emit("],\"a\":"); emit(a);
+  emit(",\"b\":"); emit(b);
+  emit(",\"gamma\":"); emit(gamma);
+  emit(",\"fold\":"); emit(fold);
+  emit(",\"L\":"); emit(sheet_l);
+  emit(",\"W\":"); emit(width);
+  emit(",\"h\":"); emit(height);
+  emit(",\"s\":"); emit(shift);
+  emit(",\"acrossI\":"); emit(2.0 * fold);
+  emit(",\"acrossJ\":"); emit(across_j);
+  emit(",\"zeroThickness\":true}");
+  return 0;
+}
+
+// A complex 2x2 matrix is row-major [real,imaginary] pairs in eight cells.
+fn complex_matrix_set(matrix, cell, real, imaginary) {
+  buffer_set(matrix, 2 * cell, real);
+  buffer_set(matrix, 2 * cell + 1, imaginary);
+  return 0;
+}
+
+// Distinct output buffer required. Work buffers are allocated once per RF call.
+fn complex_matrix_multiply(left, right, output) {
+  let row = 0;
+  let column = 0;
+  let inner = 0;
+  let left_index = 0;
+  let right_index = 0;
+  let lr = 0.0;
+  let li = 0.0;
+  let rr = 0.0;
+  let ri = 0.0;
+  let real = 0.0;
+  let imaginary = 0.0;
+  while row < 2 {
+    SET column = 0;
+    while column < 2 {
+      SET real = 0.0;
+      SET imaginary = 0.0;
+      SET inner = 0;
+      while inner < 2 {
+        SET left_index = 2 * (row * 2 + inner);
+        SET right_index = 2 * (inner * 2 + column);
+        SET lr = buffer_get(left, left_index);
+        SET li = buffer_get(left, left_index + 1);
+        SET rr = buffer_get(right, right_index);
+        SET ri = buffer_get(right, right_index + 1);
+        SET real = real + (lr * rr - li * ri);
+        SET imaginary = imaginary + (lr * ri + li * rr);
+        SET inner = inner + 1;
+      }
+      complex_matrix_set(output, row * 2 + column, real, imaginary);
+      SET column = column + 1;
+    }
+    SET row = row + 1;
+  }
+  return 0;
+}
+
+fn run_rf() {
+  let frequency = number("frequency");
+  let capacitance = num_or("options.capacitance", 0.75);
+  let inductance = num_or("options.inductance", 2.2);
+  let crease = num_or("options.crease", 1.5);
+  let resistance = num_or("options.resistance", 0.08);
+  let delay = num_or("options.delay", 10.0);
+  let w = 2.0 * PI * frequency * 1e9;
+  let phase = w * delay * 1e-12;
+  let co = cos(phase);
+  let si = sin(phase);
+  let branch = w * inductance * 1e-9 - 1.0 / (w * capacitance * 1e-12);
+  let line = buffer_new(8);
+  let series = buffer_new(8);
+  let shunt_scaled = buffer_new(8);
+  let intermediate = buffer_new(8);
+  let matrix = buffer_new(8);
+  let den_real = 0.0;
+  let den_imaginary = 0.0;
+  let abs_squared = 0.0;
+  let re = 0.0;
+  let im = 0.0;
+  let magnitude = 0.0;
+  let db = 0.0;
+  let lc_notch = 1.0 / (2.0 * PI * sqrt(inductance * 1e-9 * capacitance * 1e-12)) / 1e9;
+
+  complex_matrix_set(line, 0, co, 0.0);
+  complex_matrix_set(line, 1, 0.0, 50.0 * si);
+  complex_matrix_set(line, 2, 0.0, si / 50.0);
+  complex_matrix_set(line, 3, co, 0.0);
+  complex_matrix_set(series, 0, 1.0, 0.0);
+  complex_matrix_set(series, 1, resistance, w * crease * 1e-9);
+  complex_matrix_set(series, 2, 0.0, 0.0);
+  complex_matrix_set(series, 3, 1.0, 0.0);
+  complex_matrix_set(shunt_scaled, 0, 0.0, branch);
+  complex_matrix_set(shunt_scaled, 1, 0.0, 0.0);
+  complex_matrix_set(shunt_scaled, 2, 1.0, 0.0);
+  complex_matrix_set(shunt_scaled, 3, 0.0, branch);
+  complex_matrix_multiply(line, series, intermediate);
+  complex_matrix_multiply(intermediate, shunt_scaled, matrix);
+  complex_matrix_multiply(matrix, line, intermediate);
+
+  SET den_real = (buffer_get(intermediate, 0) + buffer_get(intermediate, 2) * (1.0 / 50.0)) + (buffer_get(intermediate, 4) * 50.0 + buffer_get(intermediate, 6));
+  SET den_imaginary = (buffer_get(intermediate, 1) + buffer_get(intermediate, 3) * (1.0 / 50.0)) + (buffer_get(intermediate, 5) * 50.0 + buffer_get(intermediate, 7));
+  SET abs_squared = den_real * den_real + den_imaginary * den_imaginary;
+  SET re = (2.0 * branch * den_imaginary) / abs_squared;
+  SET im = (2.0 * branch * den_real) / abs_squared;
+  if abs(branch) < 1e-12 { SET re = 0.0; SET im = 0.0; }
+  SET magnitude = hypot2(re, im);
+  emit("{\"frequency\":"); emit(frequency);
+  emit(",\"re\":"); emit(re);
+  emit(",\"im\":"); emit(im);
+  emit(",\"magnitude\":"); emit(magnitude);
+  if magnitude == 0.0 {
+    emit(",\"s21dB\":null,\"insertionLoss\":null,\"phaseDeg\":null,\"idealNotch\":true");
+  } else {
+    SET db = 20.0 * log10(magnitude);
+    emit(",\"s21dB\":"); emit(db);
+    emit(",\"insertionLoss\":"); emit(-db);
+    emit(",\"phaseDeg\":"); emit(atan2(im, re) * 180.0 / PI);
+    emit(",\"idealNotch\":false");
+  }
+  emit(",\"lcNotchGHz\":"); emit(lc_notch); emit("}");
+  return 0;
+}
+
+# Homeward Pass 001: immutable discovery references and one retained branch.
+# Host services supply JSON, numeric storage, and output only. Every control
+# transition, duplicate decision, parent link, and trace event executes here.
+fn exploration_id(node_ops, index) {
+  if index < 1 { return text("home"); }
+  return text("operations." + buffer_get(node_ops, index) + ".id");
+}
+fn exploration_note(node_ops, index) {
+  if index < 1 { return ""; }
+  return text("operations." + buffer_get(node_ops, index) + ".note");
+}
+fn exploration_has_id(node_ops, retained, id) {
+  let k = 0;
+  while k <= retained {
+    if exploration_id(node_ops, k) == id { return true; }
+    SET k = k + 1;
+  }
+  return false;
+}
+fn exploration_trace(seq, op, accepted, reason, phase, active, frontier, retained, node_ops, attempted_id, attempted_note) {
+  emit("{\"seq\":"); emit(seq);
+  emit(",\"op\":"); emit(quote(op));
+  emit(",\"accepted\":"); emit(accepted);
+  emit(",\"reason\":");
+  if accepted { emit(nil); } else { emit(quote(reason)); }
+  emit(",\"phase\":"); emit(quote(phase));
+  emit(",\"activeId\":"); emit(quote(exploration_id(node_ops, active)));
+  emit(",\"frontierId\":"); emit(quote(exploration_id(node_ops, frontier)));
+  emit(",\"retainedCount\":"); emit(retained);
+  emit(",\"attemptedId\":");
+  if op == "discover" { emit(quote(attempted_id)); } else { emit(nil); }
+  emit(",\"attemptedNote\":");
+  if op == "discover" { emit(quote(attempted_note)); } else { emit(nil); }
+  emit("}");
+  return nil;
+}
+fn run_explore() {
+  let operation_count = length("operations");
+  let node_ops = buffer_new(operation_count + 1);
+  let parents = buffer_new(operation_count + 1);
+  let retained = 0;
+  let active = 0;
+  let frontier = 0;
+  let phase = "exploring";
+  let i = 0;
+  let row = "";
+  let op = "";
+  let accepted = true;
+  let reason = "";
+  let attempted_id = "";
+  let attempted_note = "";
+  emit("{\"schema\":\"origami-exploration-v1\",\"homeId\":");
+  emit(quote(text("home")));
+  emit(",\"trace\":[");
+  exploration_trace(0, "start", true, "", phase, active, frontier, retained, node_ops, "", "");
+  while i < operation_count {
+    SET row = "operations." + i;
+    SET op = text(row + ".op");
+    SET accepted = true;
+    SET reason = "";
+    SET attempted_id = "";
+    SET attempted_note = "";
+    if op == "discover" {
+      SET attempted_id = text(row + ".id");
+      SET attempted_note = text(row + ".note");
+      if phase != "exploring" {
+        SET accepted = false;
+        SET reason = "exploration_held";
+      } else {
+        if exploration_has_id(node_ops, retained, attempted_id) {
+          SET accepted = false;
+          SET reason = "duplicate_id";
+        } else {
+          SET retained = retained + 1;
+          buffer_set(node_ops, retained, i);
+          buffer_set(parents, retained, active);
+          SET active = retained;
+          SET frontier = retained;
+        }
+      }
+    }
+    if op == "homeward" {
+      if phase == "exploring" {
+        if active < 1 { SET phase = "home"; } else { SET phase = "interrupted"; }
+      }
+    }
+    if op == "return_step" {
+      if phase == "exploring" {
+        SET accepted = false;
+        SET reason = "homeward_required";
+      } else {
+        if phase != "home" {
+          SET active = buffer_get(parents, active);
+          if active < 1 { SET phase = "home"; } else { SET phase = "returning"; }
+        }
+      }
+    }
+    emit(",");
+    exploration_trace(i + 1, op, accepted, reason, phase, active, frontier, retained, node_ops, attempted_id, attempted_note);
+    SET i = i + 1;
+  }
+  emit("],\"nodes\":[");
+  SET i = 0;
+  while i <= retained {
+    if i > 0 { emit(","); }
+    emit("{\"id\":"); emit(quote(exploration_id(node_ops, i)));
+    emit(",\"parentId\":");
+    if i < 1 { emit(nil); } else { emit(quote(exploration_id(node_ops, buffer_get(parents, i)))); }
+    emit(",\"note\":"); emit(quote(exploration_note(node_ops, i))); emit("}");
+    SET i = i + 1;
+  }
+  emit("],\"activeId\":"); emit(quote(exploration_id(node_ops, active)));
+  emit(",\"frontierId\":"); emit(quote(exploration_id(node_ops, frontier)));
+  emit(",\"phase\":"); emit(quote(phase)); emit("}");
+  return nil;
+}
+
+# The source q coordinates define each independent piecewise-linear curve.
+# Exact knots return stored values. Binary interval search keeps the bounded
+# multi-frame runner within the same instruction budget as the sampler.
+fn centering_value(points, q, coordinate) {
+  let low = 0;
+  let high = length(points) - 1;
+  let middle = 0;
+  let knot = 0.0;
+  let left_q = 0.0;
+  let right_q = 0.0;
+  let left_value = 0.0;
+  let right_value = 0.0;
+  let fraction = 0.0;
+  while low <= high {
+    SET middle = (low + high) / 2;
+    SET knot = number(points + "." + middle + ".0");
+    if q == knot { return number(points + "." + middle + "." + coordinate); }
+    if q < knot { SET high = middle - 1; } else { SET low = middle + 1; }
+  }
+  # Validation guarantees q in [0,1] and knots at both endpoints.
+  SET left_q = number(points + "." + high + ".0");
+  SET right_q = number(points + "." + low + ".0");
+  SET left_value = number(points + "." + high + "." + coordinate);
+  SET right_value = number(points + "." + low + "." + coordinate);
+  SET fraction = (q - left_q) / (right_q - left_q);
+  return left_value + fraction * (right_value - left_value);
+}
+# Each frame has 86 numeric cells: 6 amplitudes, 8 path coordinates, then
+# 24 fully retained xyz triples. Both commands use this evaluator and emitter.
+fn centering_sample(values, offset, q) {
+  let channel = 0;
+  let path = 0;
+  let point = 0;
+  let prefix = "";
+  while channel < 6 {
+    buffer_set(values, offset + channel, centering_value("channels." + channel + ".points", q, 1));
+    SET channel = channel + 1;
+  }
+  while path < 4 {
+    SET prefix = "paths." + path + ".points";
+    buffer_set(values, offset + 6 + path * 2, centering_value(prefix, q, 1));
+    buffer_set(values, offset + 7 + path * 2, centering_value(prefix, q, 2));
+    SET path = path + 1;
+  }
+  SET path = 0;
+  while path < 4 {
+    SET channel = 0;
+    while channel < 6 {
+      SET point = offset + 14 + (path * 6 + channel) * 3;
+      buffer_set(values, point, buffer_get(values, offset + 6 + path * 2));
+      buffer_set(values, point + 1, buffer_get(values, offset + 7 + path * 2));
+      buffer_set(values, point + 2, buffer_get(values, offset + channel));
+      SET channel = channel + 1;
+    }
+    SET path = path + 1;
+  }
+  return nil;
+}
+fn centering_emit_values(values, offset) {
+  let channel = 0;
+  let path = 0;
+  emit(",\"channels\":[");
+  while channel < 6 {
+    if channel > 0 { emit(","); }
+    emit("{\"name\":"); emit(quote(text("channels." + channel + ".name")));
+    emit(",\"amplitude\":"); emit(buffer_get(values, offset + channel)); emit("}");
+    SET channel = channel + 1;
+  }
+  emit("],\"paths\":[");
+  while path < 4 {
+    if path > 0 { emit(","); }
+    emit("{\"name\":"); emit(quote(text("paths." + path + ".name")));
+    emit(",\"xy\":"); emit_vector(values, offset + 6 + path * 2, 2); emit("}");
+    SET path = path + 1;
+  }
+  emit("],\"points\":[");
+  SET path = 0;
+  while path < 4 {
+    SET channel = 0;
+    while channel < 6 {
+      if path * 6 + channel > 0 { emit(","); }
+      emit("{\"pathIndex\":"); emit(path);
+      emit(",\"channelIndex\":"); emit(channel);
+      emit(",\"xyz\":"); emit_vector(values, offset + 14 + (path * 6 + channel) * 3, 3); emit("}");
+      SET channel = channel + 1;
+    }
+    SET path = path + 1;
+  }
+  emit("]");
+  return nil;
+}
+fn centering_emit_core() {
+  let k = 0;
+  emit(",\"core\":[");
+  while k < length("core") {
+    if k > 0 { emit(","); }
+    emit("["); emit(number("core." + k + ".0")); emit(",");
+    emit(number("core." + k + ".1")); emit("]");
+    SET k = k + 1;
+  }
+  emit("]");
+  return nil;
+}
+fn run_centre() {
+  let q = number("q");
+  let values = buffer_new(86);
+  centering_sample(values, 0, q);
+  emit("{\"schema\":\"origami-centering-frame-v1\",\"q\":"); emit(q);
+  emit(",\"markerQ\":0.8");
+  centering_emit_values(values, 0);
+  centering_emit_core();
+  emit("}");
+  return nil;
+}
+
+# One bounded run. Frames keep complete sampled values and immutable input
+# note references. Home is frame 0; source paths may dip inside the core circle.
+# Every transition, parent choice, interpolation and composition executes here.
+fn centering_run_trace(seq, op, accepted, reason, phase, active, frontier, retained, attempted_q, attempted_note, homeward_requested) {
+  emit("{\"seq\":"); emit(seq);
+  emit(",\"op\":"); emit(quote(op));
+  emit(",\"accepted\":"); emit(accepted);
+  emit(",\"reason\":");
+  if accepted { emit(nil); } else { emit(quote(reason)); }
+  emit(",\"phase\":"); emit(quote(phase));
+  emit(",\"atHome\":"); emit(active <= 0);
+  emit(",\"activeFrameId\":"); emit(active);
+  emit(",\"frontierFrameId\":"); emit(frontier);
+  emit(",\"retainedCount\":"); emit(retained);
+  emit(",\"attemptedQ\":");
+  if op == "advance" { emit(attempted_q); } else { emit(nil); }
+  emit(",\"attemptedNote\":");
+  if op == "advance" { emit(quote(attempted_note)); } else { emit(nil); }
+  emit(",\"homewardRequested\":"); emit(homeward_requested); emit("}");
+  return nil;
+}
+fn run_centre_run() {
+  let operation_count = length("operations");
+  let values = buffer_new((operation_count + 1) * 86);
+  # Metadata stride 3: q, parent frame, note's source operation index.
+  let metadata = buffer_new((operation_count + 1) * 3);
+  let retained = 1;
+  let active = 0;
+  let frontier = 0;
+  let phase = "exploring";
+  let i = 0;
+  let row = "";
+  let op = "";
+  let accepted = true;
+  let reason = "";
+  let attempted_q = 0.0;
+  let attempted_note = "";
+  let homeward_requested = false;
+  buffer_set(metadata, 0, 1);
+  centering_sample(values, 0, 1.0);
+  emit("{\"schema\":\"origami-centering-run-v1\",\"runId\":"); emit(quote(text("runId")));
+  emit(",\"homeFrameId\":0");
+  centering_emit_core();
+  emit(",\"trace\":[");
+  centering_run_trace(0, "start", true, "", phase, active, frontier, retained, 0.0, "", false);
+  while i < operation_count {
+    SET row = "operations." + i;
+    SET op = text(row + ".op");
+    SET accepted = true;
+    SET reason = "";
+    SET attempted_q = 0.0;
+    SET attempted_note = "";
+    SET homeward_requested = op == "homeward";
+    if op == "advance" {
+      SET attempted_q = number(row + ".q");
+      SET attempted_note = text(row + ".note");
+      if has(row + ".homeward") { SET homeward_requested = boolean(row + ".homeward"); }
+    }
+    # The priority signal changes phase before a competing advance is judged.
+    if homeward_requested {
+      if active <= 0 { SET phase = "home"; } else { SET phase = "returning"; }
+    }
+    if op == "advance" {
+      if homeward_requested {
+        SET accepted = false;
+        SET reason = "homeward_override";
+      } else {
+        if phase != "exploring" {
+          SET accepted = false;
+          SET reason = "exploration_held";
+        } else {
+          if attempted_q >= buffer_get(metadata, active * 3) {
+            SET accepted = false;
+            SET reason = "not_outward";
+          } else {
+            buffer_set(metadata, retained * 3, attempted_q);
+            buffer_set(metadata, retained * 3 + 1, active);
+            buffer_set(metadata, retained * 3 + 2, i);
+            centering_sample(values, retained * 86, attempted_q);
+            SET active = retained;
+            SET frontier = retained;
+            SET retained = retained + 1;
+          }
+        }
+      }
+    }
+    if op == "return_step" {
+      if phase == "exploring" {
+        SET accepted = false;
+        SET reason = "homeward_required";
+      } else {
+        if active > 0 {
+          # Follow exactly one stored parent; never sample or invert on return.
+          SET active = buffer_get(metadata, active * 3 + 1);
+          if active <= 0 { SET phase = "home"; }
+        }
+      }
+    }
+    emit(",");
+    centering_run_trace(i + 1, op, accepted, reason, phase, active, frontier, retained, attempted_q, attempted_note, homeward_requested);
+    SET i = i + 1;
+  }
+  emit("],\"frames\":[");
+  SET i = 0;
+  while i < retained {
+    if i > 0 { emit(","); }
+    emit("{\"id\":"); emit(i);
+    emit(",\"parentId\":");
+    if i == 0 { emit(nil); } else { emit(buffer_get(metadata, i * 3 + 1)); }
+    emit(",\"q\":"); emit(buffer_get(metadata, i * 3));
+    emit(",\"note\":");
+    if i == 0 { emit(quote("")); } else { emit(quote(text("operations." + buffer_get(metadata, i * 3 + 2) + ".note"))); }
+    centering_emit_values(values, i * 86);
+    emit("}");
+    SET i = i + 1;
+  }
+  emit("],\"activeFrameId\":"); emit(active);
+  emit(",\"frontierFrameId\":"); emit(frontier);
+  emit(",\"phase\":"); emit(quote(phase));
+  emit(",\"atHome\":"); emit(active <= 0); emit("}");
+  return nil;
+}
+
+if command() == "encode" { run_encode(); }
+if command() == "recover" { run_recover(); }
+if command() == "decide" { run_decide(); }
+if command() == "simulate" { run_simulate(); }
+if command() == "geometry" { run_geometry(); }
+if command() == "rf" { run_rf(); }
+if command() == "explore" { run_explore(); }
+if command() == "centre" { run_centre(); }
+if command() == "centre-run" { run_centre_run(); }

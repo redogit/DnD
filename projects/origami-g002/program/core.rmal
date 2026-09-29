@@ -1,0 +1,201 @@
+MODULE origami_algorithm;
+CONST PI = 3.141592653589793;
+
+# Native functions supply storage, JSON transport and standard math only.
+# Rotation, inverse ordering and decision intersections execute below in RMAL.
+fn num_or(path, fallback) {
+  if has(path) { return number(path); }
+  return fallback;
+}
+fn int_or(path, fallback) {
+  if has(path) { return integer(path); }
+  return fallback;
+}
+fn emit_bool(value) {
+  if value { emit("true"); } else { emit("false"); }
+  return nil;
+}
+fn emit_vector(buffer, start, count) {
+  let k = 0;
+  emit("[");
+  while k < count {
+    if k > 0 { emit(","); }
+    emit(buffer_get(buffer, start + k));
+    SET k = k + 1;
+  }
+  emit("]");
+  return nil;
+}
+fn rotate_in_place(buffer, i, j, degrees) {
+  let angle = degrees * PI / 180.0;
+  let c = cos(angle);
+  let s = sin(angle);
+  let x = buffer_get(buffer, i);
+  let y = buffer_get(buffer, j);
+  buffer_set(buffer, i, c * x - s * y);
+  buffer_set(buffer, j, s * x + c * y);
+  return nil;
+}
+fn check_norm(buffer, count) {
+  let k = 0;
+  let norm = 0.0;
+  while k < count {
+    SET norm = hypot2(norm, buffer_get(buffer, k));
+    SET k = k + 1;
+  }
+  return norm;
+}
+fn run_encode() {
+  let v = buffer_new(13);
+  let k = 0;
+  let count = 0;
+  let prefix = "";
+  while k < 13 {
+    buffer_set(v, k, number("vector." + k));
+    SET k = k + 1;
+  }
+  if has("rotations") { SET count = length("rotations"); }
+  SET k = 0;
+  while k < count {
+    SET prefix = "rotations." + k;
+    rotate_in_place(v, integer(prefix + ".i"), integer(prefix + ".j"), number(prefix + ".degrees"));
+    check_norm(v, 13);
+    SET k = k + 1;
+  }
+  emit("{\"schema\":\"origami-transform-v1\",\"visible\":");
+  emit_vector(v, 0, 3);
+  emit(",\"residual\":");
+  emit_vector(v, 3, 10);
+  emit(",\"rotations\":[");
+  SET k = 0;
+  while k < count {
+    if k > 0 { emit(","); }
+    SET prefix = "rotations." + k;
+    emit("{\"i\":"); emit(integer(prefix + ".i"));
+    emit(",\"j\":"); emit(integer(prefix + ".j"));
+    emit(",\"degrees\":"); emit(number(prefix + ".degrees")); emit("}");
+    SET k = k + 1;
+  }
+  emit("]}");
+  return nil;
+}
+fn run_recover() {
+  let v = buffer_new(13);
+  let k = 0;
+  let prefix = "";
+  while k < 3 {
+    buffer_set(v, k, number("visible." + k));
+    SET k = k + 1;
+  }
+  SET k = 0;
+  while k < 10 {
+    buffer_set(v, k + 3, number("residual." + k));
+    SET k = k + 1;
+  }
+  check_norm(v, 13);
+  SET k = length("rotations");
+  while k > 0 {
+    SET k = k - 1;
+    SET prefix = "rotations." + k;
+    rotate_in_place(v, integer(prefix + ".i"), integer(prefix + ".j"), -number(prefix + ".degrees"));
+    check_norm(v, 13);
+  }
+  emit_vector(v, 0, 13);
+  return nil;
+}
+fn same_observation(a, b) {
+  let k = 0;
+  let count = length(a + ".observation");
+  while k < count {
+    if number(a + ".observation." + k) != number(b + ".observation." + k) { return false; }
+    SET k = k + 1;
+  }
+  return true;
+}
+fn row_has_action(row, action) {
+  let k = 0;
+  let count = length(row + ".actions");
+  while k < count {
+    if text(row + ".actions." + k) == action { return true; }
+    SET k = k + 1;
+  }
+  return false;
+}
+fn earlier_action(row, index, action) {
+  let k = 0;
+  while k < index {
+    if text(row + ".actions." + k) == action { return true; }
+    SET k = k + 1;
+  }
+  return false;
+}
+fn run_decide() {
+  let count = length("");
+  let seen = buffer_new(count);
+  let members = buffer_new(count);
+  let i = 0;
+  let j = 0;
+  let k = 0;
+  let d = 0;
+  let first_fiber = true;
+  let first_id = true;
+  let first_action = true;
+  let all_sufficient = true;
+  let allowed = false;
+  let candidate = "";
+  let row = "";
+  emit("{\"fibers\":[");
+  while i < count {
+    if buffer_get(seen, i) == 0.0 {
+      SET row = "" + i;
+      if !first_fiber { emit(","); }
+      SET first_fiber = false;
+      emit("{\"observation\":[");
+      SET d = 0;
+      while d < length(row + ".observation") {
+        if d > 0 { emit(","); }
+        emit(number(row + ".observation." + d));
+        SET d = d + 1;
+      }
+      emit("],\"ids\":[");
+      SET j = 0;
+      SET first_id = true;
+      while j < count {
+        buffer_set(members, j, 0.0);
+        if same_observation(row, "" + j) {
+          buffer_set(members, j, 1.0);
+          buffer_set(seen, j, 1.0);
+          if !first_id { emit(","); }
+          SET first_id = false;
+          emit(quote(text(j + ".id")));
+        }
+        SET j = j + 1;
+      }
+      emit("],\"commonActions\":[");
+      SET k = 0;
+      SET first_action = true;
+      while k < length(row + ".actions") {
+        SET candidate = text(row + ".actions." + k);
+        SET allowed = !earlier_action(row, k, candidate);
+        SET j = 0;
+        while j < count {
+          if buffer_get(members, j) == 1.0 {
+            if !row_has_action("" + j, candidate) { SET allowed = false; }
+          }
+          SET j = j + 1;
+        }
+        if allowed {
+          if !first_action { emit(","); }
+          SET first_action = false;
+          emit(quote(candidate));
+        }
+        SET k = k + 1;
+      }
+      if first_action { SET all_sufficient = false; }
+      emit("]}");
+    }
+    SET i = i + 1;
+  }
+  emit("],\"sufficient\":"); emit_bool(all_sufficient); emit("}");
+  return nil;
+}

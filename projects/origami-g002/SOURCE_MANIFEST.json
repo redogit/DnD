@@ -1,0 +1,437 @@
+{
+  "schema": "origami-g002-source-import/v1",
+  "sourceArtifactName": "Origami_RMAL_Centering_Run_1.3.0_Windows_x64.zip",
+  "sourceArtifactSHA256": "cd893dfba5bc3464ae65b04f6ad3efdba325e5db25c6b26caee3b176e4f5f27d",
+  "sourceVersion": "1.3.0-centering-run",
+  "sourceUpstreamRMALCommit": "4282676da043cca93b1622532d94ae419d9795ab",
+  "importPolicy": "Exact byte copies listed below; this subtree is a private, source-only import. Generated README and local recheck receipt are separate.",
+  "excludedFromImport": [
+    "Windows executables and Linux build products",
+    "full private research record, Library identities and scratch paths",
+    "duplicate toolchain/upstream-source tree and rmalc-baseline executable",
+    "historical prior-interpretation package copies and old build logs",
+    "website/Pages assets"
+  ],
+  "files": [
+    {
+      "path": "data/RUN_SOURCE.json",
+      "sha256": "0fd58542b9a56f37e94d29f16d05fd848cc10712675db64f1e27c2eea1d0ff62",
+      "bytes": 609
+    },
+    {
+      "path": "data/SOURCE.json",
+      "sha256": "08591be70a177b0c14ea91311cee65772a45794d7ecec12aa5fae58e18c980d5",
+      "bytes": 1012
+    },
+    {
+      "path": "data/approved-composite.json",
+      "sha256": "ef1253042492d2b07969edee47a8bcba14a33a5bd9932ef0d398e722a1dc35e5",
+      "bytes": 209994
+    },
+    {
+      "path": "data/google-chart-3.vegalite.json",
+      "sha256": "c6490842a324397528fd35dc9e83a599458b52dcb39dad57b160f6da6266e213",
+      "bytes": 819009
+    },
+    {
+      "path": "data/google-chart-4.vegalite.json",
+      "sha256": "761048e306447c6cf4616ce031de1b88431c4f06592bfc21eef75ad7179ef9b6",
+      "bytes": 119663
+    },
+    {
+      "path": "docs/ACTIVE_DIRECTION.md",
+      "sha256": "799004f6c8dd9b9ad353faf1c06f7c0ed81073e129915ebb28e04e2b176c772b",
+      "bytes": 4002
+    },
+    {
+      "path": "docs/CENTRE_CONTRACT.md",
+      "sha256": "5d1443d86bdf5c258ab997be139727454a8d08f4ec7f7a7f9afd2c42bae7ec31",
+      "bytes": 2694
+    },
+    {
+      "path": "docs/CENTRE_RUN_CONTRACT.md",
+      "sha256": "7415d50152830646e6eceb8cf704bbb4ce87baacfe857931839d774c42f84a25",
+      "bytes": 5266
+    },
+    {
+      "path": "evidence/runner-demo.json",
+      "sha256": "cfce5aa9983c38d959d651dc73a7f1b514de6cade3f669c17b2902107c99baf7",
+      "bytes": 21688
+    },
+    {
+      "path": "examples/centering-run.json",
+      "sha256": "b51318632d6b1061a67571ebecf42ec923ddfd445fc70da416b0037d61f83c57",
+      "bytes": 210306
+    },
+    {
+      "path": "examples/centering.json",
+      "sha256": "6f1ac3e7ced05c2416dcf77442c57ac979f539ccaa5f03511a9c2b188064b065",
+      "bytes": 209636
+    },
+    {
+      "path": "examples/decisions.json",
+      "sha256": "d3b6bde9bb64f207bbb8cd01393f7a3e48575dbda0c79f55ecb0cc0f0aaa5311",
+      "bytes": 219
+    },
+    {
+      "path": "examples/encode.json",
+      "sha256": "b430fd681cfa14185de89221c329c4496b975bb15626a4a1295b475b99ac7458",
+      "bytes": 176
+    },
+    {
+      "path": "examples/geometry.json",
+      "sha256": "047f4b64202c345ee0a1c22dd3221517f3b43ac077cc96ee2449a62714056662",
+      "bytes": 57
+    },
+    {
+      "path": "examples/homeward.json",
+      "sha256": "9ddf0fb3327f202ce842fc5ccf44e531819c607f2b105bb16125cdb1a321028b",
+      "bytes": 412
+    },
+    {
+      "path": "examples/rf.json",
+      "sha256": "1d66c827048821f932fdf94e8d6efe5ee45725df986530c81fa1c95bdfcce974",
+      "bytes": 76
+    },
+    {
+      "path": "examples/simulation.json",
+      "sha256": "0be2de45f46658e751b0cf741c1a4eb26d106215dca06c8bd065244b85caf296",
+      "bytes": 60
+    },
+    {
+      "path": "native/README.md",
+      "sha256": "16613de417748c154f382927325b726da45446a331e1eb44425bba8aecedd878",
+      "bytes": 4043
+    },
+    {
+      "path": "native/main.c",
+      "sha256": "228af9980d263f0484f87cd028471264feef4e1ed23cc68f89535656274e56d7",
+      "bytes": 32814
+    },
+    {
+      "path": "native/origami_program.h",
+      "sha256": "8bb7cbd56ecee51dce9f2a50aa4e3daddfe6227beb3ec62ea73623705195dd41",
+      "bytes": 132203
+    },
+    {
+      "path": "native/test_host.py",
+      "sha256": "a5174702e2a69a4f00bafa57a17d049ab017e4ca45b41bb41cac3f805e78f285",
+      "bytes": 3018
+    },
+    {
+      "path": "program/centering.rmal",
+      "sha256": "fa39b90688517182fd70b5dfbf36df00eb354de3d58594ed192190e8cd153ccb",
+      "bytes": 3899
+    },
+    {
+      "path": "program/centering_run.rmal",
+      "sha256": "69330bb18d7d32409ded408d006b2e34ba0c0ca1e550649f6f7c4f0cb5d0187d",
+      "bytes": 4658
+    },
+    {
+      "path": "program/core.rmal",
+      "sha256": "40e47c6b4e9bfcabdd0e01c5a84a6f3c8c36700da051e088979f9569d3a82919",
+      "bytes": 5186
+    },
+    {
+      "path": "program/dispatch.rmal",
+      "sha256": "92393db6389988d4dc4a7e6c4145f17f3e54ef675f26e042c5725e502c437f48",
+      "bytes": 399
+    },
+    {
+      "path": "program/exploration.rmal",
+      "sha256": "a4ec539f6745134b293acd0d92524dd38887c0c92b5327c7f9a117ad6aa8ee39",
+      "bytes": 4169
+    },
+    {
+      "path": "program/models.rmal",
+      "sha256": "c8fc95466f945b4a54098eaf9337d3fa5e1189a88d6cb9e7f750a77e48d8f088",
+      "bytes": 7884
+    },
+    {
+      "path": "program/origami.rmal",
+      "sha256": "6fb0482301b72d3e023e29afddf6cb9f19acfda52b32bdfc96939208052759c6",
+      "bytes": 26200
+    },
+    {
+      "path": "reference-js/README.md",
+      "sha256": "8c70b59167c09e51f2f56af83473c144d7d18f1445f171c385ed9af78ef4758a",
+      "bytes": 8774
+    },
+    {
+      "path": "reference-js/SHA256SUMS",
+      "sha256": "2ac23beafd140f29b212b6cb9907cd1e6735cd535e1f0506a0a791f1b01b130e",
+      "bytes": 2120
+    },
+    {
+      "path": "reference-js/SOURCE-MANIFEST.json",
+      "sha256": "14c65ef8c64039d1176b515d8c6d65941ca6ce6fa7358e5b8a8d7728ed0c5e83",
+      "bytes": 984
+    },
+    {
+      "path": "reference-js/TEST-RESULTS.txt",
+      "sha256": "6773e0e60e54bdda695c3692983106260851747e87b49b91e0e9c0c920da95d8",
+      "bytes": 2822
+    },
+    {
+      "path": "reference-js/bin/origami.cjs",
+      "sha256": "ddedcc1766b2638b23f89862273a2363d0ebb9a0ca27e0b3843303444b6e1433",
+      "bytes": 2485
+    },
+    {
+      "path": "reference-js/evidence/claims.json",
+      "sha256": "2c17a3f85656d35f2b1c77c9f943217d34c1f97bc6b379b95b131bccfdbcb015",
+      "bytes": 53393
+    },
+    {
+      "path": "reference-js/evidence/provenance.json",
+      "sha256": "3fca486a3d5808405262922874b1aa769e796a266c19cbb2376c9ec0a0ed1644",
+      "bytes": 587
+    },
+    {
+      "path": "reference-js/evidence/validation-report.md",
+      "sha256": "deb6e43522cba3c1ae3594ccc2b6a814fb2c97ad16e5be21a6cf256541c7bdd3",
+      "bytes": 25888
+    },
+    {
+      "path": "reference-js/examples/decisions.json",
+      "sha256": "d3b6bde9bb64f207bbb8cd01393f7a3e48575dbda0c79f55ecb0cc0f0aaa5311",
+      "bytes": 219
+    },
+    {
+      "path": "reference-js/examples/encode.json",
+      "sha256": "b430fd681cfa14185de89221c329c4496b975bb15626a4a1295b475b99ac7458",
+      "bytes": 176
+    },
+    {
+      "path": "reference-js/examples/geometry.json",
+      "sha256": "047f4b64202c345ee0a1c22dd3221517f3b43ac077cc96ee2449a62714056662",
+      "bytes": 57
+    },
+    {
+      "path": "reference-js/examples/rf.json",
+      "sha256": "1d66c827048821f932fdf94e8d6efe5ee45725df986530c81fa1c95bdfcce974",
+      "bytes": 76
+    },
+    {
+      "path": "reference-js/examples/simulation.json",
+      "sha256": "0be2de45f46658e751b0cf741c1a4eb26d106215dca06c8bd065244b85caf296",
+      "bytes": 60
+    },
+    {
+      "path": "reference-js/index.cjs",
+      "sha256": "f3c6dfb0d122242c58569da5aee212bdf286a113c1a37920c75fbfc498ed2ead",
+      "bytes": 6413
+    },
+    {
+      "path": "reference-js/lib/engineering.js",
+      "sha256": "6d697c27a8b349d9069e74f6942eb781e8265e47186df33a15eee9b6c677fec5",
+      "bytes": 3483
+    },
+    {
+      "path": "reference-js/lib/exploration.cjs",
+      "sha256": "bfbb2fb99aa06df9259e36c8adf62c81003ee8b69bc928c327a7e8c269ae0af2",
+      "bytes": 3796
+    },
+    {
+      "path": "reference-js/lib/model.js",
+      "sha256": "57ee9eb1f7a52aade659ba801730e07448cfbf216c9691a44bfb9274f7f1209f",
+      "bytes": 1108
+    },
+    {
+      "path": "reference-js/package.json",
+      "sha256": "4662c3c4cd08d44706941707494640690e5a1101a12ec785a198e6a802b9e192",
+      "bytes": 367
+    },
+    {
+      "path": "reference-js/source/13D_Origami_Circuit_Full_Specification.txt",
+      "sha256": "27843a1b991399b8f12588d32f79ed92226ed64ad3d9d84b2fe587c5848f902e",
+      "bytes": 9938
+    },
+    {
+      "path": "reference-js/source/13d_origami_circuit_system.html",
+      "sha256": "d5bd50f0e9ba3b53f9479467b1ca2f2efcd891fc3e1679f3c6962b2c01c39fcd",
+      "bytes": 13082
+    },
+    {
+      "path": "reference-js/tests/core.test.cjs",
+      "sha256": "50f80669c1be8420399830693956e5bdf12ea1ac9396e667f2dadb811f20cc1b",
+      "bytes": 3211
+    },
+    {
+      "path": "reference-js/tests/engineering.test.cjs",
+      "sha256": "23481e485834460ccdd5ce06b29a1e5157c48d8c2aa177ddad29fa3fd91ddb07",
+      "bytes": 1932
+    },
+    {
+      "path": "reference-js/tests/exploration.test.cjs",
+      "sha256": "5a13f363c2515692490cd3550224c6c56ce186dcfadf7ae6fe368c3459116500",
+      "bytes": 6015
+    },
+    {
+      "path": "reference-js/tests/independent.test.cjs",
+      "sha256": "9de09c68287f0b02814c5d50b67629ef89fa7bb46eeea41f42810d2b8bd1484e",
+      "bytes": 7359
+    },
+    {
+      "path": "reference-js/tests/model.test.cjs",
+      "sha256": "9d2e72951b6f59b68c2b141a0ee4b2a583972d2b91c2fee6c887d79672a8bcf4",
+      "bytes": 1305
+    },
+    {
+      "path": "scripts/build.py",
+      "sha256": "0297ea163d3b4a8e2e4267512521ebc7a0a0cb7c589cf48c87ccac32b6703069",
+      "bytes": 3320
+    },
+    {
+      "path": "tests/centering.py",
+      "sha256": "ef8fc1b18c80db5deedf72532896a4b21104e3e5399f4e11f6821c07cd0cab46",
+      "bytes": 10855
+    },
+    {
+      "path": "tests/centering_run.py",
+      "sha256": "16c07ab0f0fbd1dfe3d49928fa888fd6687b17520c99ec3d1a5528aaae28d197",
+      "bytes": 14564
+    },
+    {
+      "path": "tests/homeward.py",
+      "sha256": "653890c78828724250dbf14aa89abacec3994a1e141ffa0f1e663f7de694a566",
+      "bytes": 7638
+    },
+    {
+      "path": "tests/homeward_parity.py",
+      "sha256": "722b609efe18ec7c7a721bb2066ffed7d42a7c25c018a56e77b582c13a7cfa1e",
+      "bytes": 1703
+    },
+    {
+      "path": "tests/parity.py",
+      "sha256": "78b4dfd2298dc558cf3d832a85a97ac69d0ec96ae6c6c3706128b48666e7fa31",
+      "bytes": 6200
+    },
+    {
+      "path": "toolchain/CMakeLists.txt",
+      "sha256": "ea8d4d914c7592fb51b0896ba88fb8321e425bd00c3415654ec77d72ec9b73ca",
+      "bytes": 2547
+    },
+    {
+      "path": "toolchain/CURRENT.md",
+      "sha256": "5113def7bb82aaea659a2f79c5e1292462c69bc7ba15bda2ce742eafb0f43fbc",
+      "bytes": 2493
+    },
+    {
+      "path": "toolchain/README_COMPILER.md",
+      "sha256": "9c3fd0245ccaa5ff9eafadbac0cf1a236b9e4b529f5a64aa640ffdb36cf3a6fb",
+      "bytes": 1401
+    },
+    {
+      "path": "toolchain/docs/RMAL_C23_WINDOWS.md",
+      "sha256": "967445baf9de8c33b3fbf8c2e6a7c66911c41d06c915b436f85a8e5276ee4185",
+      "bytes": 2076
+    },
+    {
+      "path": "toolchain/evidence/RMAL_C23_WINDOWS_VALIDATION_2026-09-26.json",
+      "sha256": "b94ea55130290fb2a9c3b1e6a48845ae85b7b6774a15b2f616210e8fbfbbe15c",
+      "bytes": 1912
+    },
+    {
+      "path": "toolchain/examples/hello.rmal",
+      "sha256": "268870cd0bef245bb3ae238822b68023c5470205bee52abe151faf80efad6efe",
+      "bytes": 264
+    },
+    {
+      "path": "toolchain/include/rmal/rmal.h",
+      "sha256": "ef050981cbd054a6dcc49344fe31a5a1dee81e44455a5936f77468d4ff63ffba",
+      "bytes": 2485
+    },
+    {
+      "path": "toolchain/spec/RMAL_EBNF.md",
+      "sha256": "40722c989d0a69270928c20bc77583725e4b362101c5b8b0e9a0c658b7e1c07d",
+      "bytes": 2818
+    },
+    {
+      "path": "toolchain/spec/RMAL_LANGUAGE_SPEC_3.md",
+      "sha256": "2242d3eafcc1d12afc86565bf4a581cebcc1fd19eb9a295498b5a2e4e282eff0",
+      "bytes": 8060
+    },
+    {
+      "path": "toolchain/src/c23/part01.inc",
+      "sha256": "dc171d1590ae64b91ffc35dae43787f904c88330e308519800cd03da249c1057",
+      "bytes": 2908
+    },
+    {
+      "path": "toolchain/src/c23/part02.inc",
+      "sha256": "1402f026252b5511e102795e28aa41a448135c3d7597442ccaca2b21c34f7d29",
+      "bytes": 6327
+    },
+    {
+      "path": "toolchain/src/c23/part03.inc",
+      "sha256": "a57e241c31d355905c2e8f5dd9f877c8a6ebcc18a369b24e69bf3b67a491f893",
+      "bytes": 11352
+    },
+    {
+      "path": "toolchain/src/c23/part04.inc",
+      "sha256": "00656fef55b86997d98cec89b0cbb58a989344a9dda904de99c2215c24362783",
+      "bytes": 21846
+    },
+    {
+      "path": "toolchain/src/c23/part05.inc",
+      "sha256": "bb3d90aa12e96a954823103ba4fdc0972c1f6a525f8fde1991b52862a5d2ecf8",
+      "bytes": 3285
+    },
+    {
+      "path": "toolchain/src/main.c",
+      "sha256": "a3f05056af8bf4153db78f96357c40e128ea53490718c9af1b1a5d9b22a5afe6",
+      "bytes": 3610
+    },
+    {
+      "path": "toolchain/src/rmal.c",
+      "sha256": "a2f514e8f84106614d0ee65f84126e64a7fe5b96562e2e4d2e63d296b1acde42",
+      "bytes": 130
+    },
+    {
+      "path": "toolchain/tests/const_immutable_reject.rmal",
+      "sha256": "cc5b95889aa4e003b3fe4437b74c7f2965e0614b6b0f507d850147c575c27112",
+      "bytes": 63
+    },
+    {
+      "path": "toolchain/tests/legacy.rmal",
+      "sha256": "718ed316da33753a7a7b096fcff713e66173c57c41799d568fb4544f2f64f1d8",
+      "bytes": 783
+    },
+    {
+      "path": "toolchain/tests/numeric-extension.rmal",
+      "sha256": "8306c1f79014727d9102fbbedf606cbb67cd54c60e79eb1c1ae1e1b4f5c7d94c",
+      "bytes": 439
+    },
+    {
+      "path": "toolchain/tests/numeric-host.c",
+      "sha256": "e143fc7c5388d672cba94b023bb4b7fcf58d9062c8a25793b053c5b87e48eea6",
+      "bytes": 3386
+    },
+    {
+      "path": "toolchain/tests/recovered_surface.rmal",
+      "sha256": "0ac6f28da1f0905a21ff59264bb334d4d15060fbdecd301f3a3d776baade8bc2",
+      "bytes": 1099
+    },
+    {
+      "path": "toolchain/tests/test_w114_sign_normalization.py",
+      "sha256": "becefbadf73ea54cf0bb5312b7533cfd4536d4070b1f0b8350f99a3074056cf4",
+      "bytes": 780
+    },
+    {
+      "path": "toolchain/tests/typed_equality.rmal",
+      "sha256": "a0281524e4963fcf98a44faac89c0037a508363669bfc532532509caa11b6d70",
+      "bytes": 96
+    },
+    {
+      "path": "toolchain/tests/verify_dynamic_rmal.py",
+      "sha256": "e39f0f9de1b86fe9ee6510410870cac2440186042ce8c9130525397bb9b2eb4d",
+      "bytes": 1092
+    },
+    {
+      "path": "toolchain/tests/verify_w114_sign_normalization.py",
+      "sha256": "e4abfa95e57eb8a948cdf2e82c79b3200be2b34cc80d2d4cb5cc3c348377243c",
+      "bytes": 6018
+    }
+  ]
+}

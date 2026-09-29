@@ -1,0 +1,18 @@
+MODULE numeric_extension;
+REQUIRE 1.25 + 2.75 == 4.0;
+REQUIRE 2.5e-2 * 4 == 0.1;
+REQUIRE 5.0 / 2 == 2.5;
+REQUIRE -2.5 == 0.0 - 2.5;
+REQUIRE 2 < 2.5;
+REQUIRE 2.5 >= 2;
+REQUIRE 1 != 1.0;
+REQUIRE 5 / 2 == 2;
+REQUIRE true != 1;
+REQUIRE 1e-320 > 0.0;
+REQUIRE 1e-999 == 0.0;
+fn square(x) { return x * x; }
+STATE count = 0;
+STATE sum = 0.0;
+while count < 3 { SET sum = sum + square(0.5); SET count = count + 1; }
+REQUIRE sum == 0.75;
+return sum;

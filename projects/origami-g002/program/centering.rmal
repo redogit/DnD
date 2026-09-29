@@ -1,0 +1,114 @@
+# The source q coordinates define each independent piecewise-linear curve.
+# Exact knots return stored values. Binary interval search keeps the bounded
+# multi-frame runner within the same instruction budget as the sampler.
+fn centering_value(points, q, coordinate) {
+  let low = 0;
+  let high = length(points) - 1;
+  let middle = 0;
+  let knot = 0.0;
+  let left_q = 0.0;
+  let right_q = 0.0;
+  let left_value = 0.0;
+  let right_value = 0.0;
+  let fraction = 0.0;
+  while low <= high {
+    SET middle = (low + high) / 2;
+    SET knot = number(points + "." + middle + ".0");
+    if q == knot { return number(points + "." + middle + "." + coordinate); }
+    if q < knot { SET high = middle - 1; } else { SET low = middle + 1; }
+  }
+  # Validation guarantees q in [0,1] and knots at both endpoints.
+  SET left_q = number(points + "." + high + ".0");
+  SET right_q = number(points + "." + low + ".0");
+  SET left_value = number(points + "." + high + "." + coordinate);
+  SET right_value = number(points + "." + low + "." + coordinate);
+  SET fraction = (q - left_q) / (right_q - left_q);
+  return left_value + fraction * (right_value - left_value);
+}
+# Each frame has 86 numeric cells: 6 amplitudes, 8 path coordinates, then
+# 24 fully retained xyz triples. Both commands use this evaluator and emitter.
+fn centering_sample(values, offset, q) {
+  let channel = 0;
+  let path = 0;
+  let point = 0;
+  let prefix = "";
+  while channel < 6 {
+    buffer_set(values, offset + channel, centering_value("channels." + channel + ".points", q, 1));
+    SET channel = channel + 1;
+  }
+  while path < 4 {
+    SET prefix = "paths." + path + ".points";
+    buffer_set(values, offset + 6 + path * 2, centering_value(prefix, q, 1));
+    buffer_set(values, offset + 7 + path * 2, centering_value(prefix, q, 2));
+    SET path = path + 1;
+  }
+  SET path = 0;
+  while path < 4 {
+    SET channel = 0;
+    while channel < 6 {
+      SET point = offset + 14 + (path * 6 + channel) * 3;
+      buffer_set(values, point, buffer_get(values, offset + 6 + path * 2));
+      buffer_set(values, point + 1, buffer_get(values, offset + 7 + path * 2));
+      buffer_set(values, point + 2, buffer_get(values, offset + channel));
+      SET channel = channel + 1;
+    }
+    SET path = path + 1;
+  }
+  return nil;
+}
+fn centering_emit_values(values, offset) {
+  let channel = 0;
+  let path = 0;
+  emit(",\"channels\":[");
+  while channel < 6 {
+    if channel > 0 { emit(","); }
+    emit("{\"name\":"); emit(quote(text("channels." + channel + ".name")));
+    emit(",\"amplitude\":"); emit(buffer_get(values, offset + channel)); emit("}");
+    SET channel = channel + 1;
+  }
+  emit("],\"paths\":[");
+  while path < 4 {
+    if path > 0 { emit(","); }
+    emit("{\"name\":"); emit(quote(text("paths." + path + ".name")));
+    emit(",\"xy\":"); emit_vector(values, offset + 6 + path * 2, 2); emit("}");
+    SET path = path + 1;
+  }
+  emit("],\"points\":[");
+  SET path = 0;
+  while path < 4 {
+    SET channel = 0;
+    while channel < 6 {
+      if path * 6 + channel > 0 { emit(","); }
+      emit("{\"pathIndex\":"); emit(path);
+      emit(",\"channelIndex\":"); emit(channel);
+      emit(",\"xyz\":"); emit_vector(values, offset + 14 + (path * 6 + channel) * 3, 3); emit("}");
+      SET channel = channel + 1;
+    }
+    SET path = path + 1;
+  }
+  emit("]");
+  return nil;
+}
+fn centering_emit_core() {
+  let k = 0;
+  emit(",\"core\":[");
+  while k < length("core") {
+    if k > 0 { emit(","); }
+    emit("["); emit(number("core." + k + ".0")); emit(",");
+    emit(number("core." + k + ".1")); emit("]");
+    SET k = k + 1;
+  }
+  emit("]");
+  return nil;
+}
+fn run_centre() {
+  let q = number("q");
+  let values = buffer_new(86);
+  centering_sample(values, 0, q);
+  emit("{\"schema\":\"origami-centering-frame-v1\",\"q\":"); emit(q);
+  emit(",\"markerQ\":0.8");
+  centering_emit_values(values, 0);
+  centering_emit_core();
+  emit("}");
+  return nil;
+}

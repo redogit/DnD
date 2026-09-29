@@ -1,0 +1,10 @@
+{
+  "activeDirection": "G002 approved combined graph",
+  "requestSHA256": "b51318632d6b1061a67571ebecf42ec923ddfd445fc70da416b0037d61f83c57",
+  "nativeOutputSHA256": "cfce5aa9983c38d959d651dc73a7f1b514de6cade3f669c17b2902107c99baf7",
+  "programSHA256": "6fb0482301b72d3e023e29afddf6cb9f19acfda52b32bdfc96939208052759c6",
+  "baseProvenance": "SOURCE.json",
+  "curveArraysUnchanged": true,
+  "schedule": "four committed departures, same-operation Homeward override, held attempt, four parent returns, home no-op",
+  "units": "Source coordinates and amplitude display heights; q is normalized source progress"
+}
