@@ -1,0 +1,54 @@
+name: Decision Field synthetic structural probe
+
+on:
+  push:
+    paths:
+      - 'projects/decision-field/experiments/structural/**'
+      - 'projects/decision-field/evidence/structural_probe_2026_09_30/**'
+      - '.github/workflows/decision-field-structural-probe.yml'
+  pull_request:
+    paths:
+      - 'projects/decision-field/experiments/structural/**'
+      - 'projects/decision-field/evidence/structural_probe_2026_09_30/**'
+      - '.github/workflows/decision-field-structural-probe.yml'
+
+permissions:
+  contents: read
+
+env:
+  VERIFY_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
+jobs:
+  synthetic:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.VERIFY_SHA }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify exact source identity
+        shell: bash
+        run: test "$(git rev-parse HEAD)" = "$VERIFY_SHA"
+      - name: Synthetic contract tests
+        run: python -m unittest discover -s projects/decision-field/experiments/structural -p 'test_*.py' -v
+      - name: Contract tests with optimized Python
+        run: python -O -m unittest discover -s projects/decision-field/experiments/structural -p 'test_*.py' -v
+      - name: Retain and independently recheck the finite receipt
+        shell: bash
+        run: |
+          mkdir -p structural-evidence
+          python projects/decision-field/experiments/structural/probe.py --output structural-evidence/PROCESS_RECEIPT.json
+          python projects/decision-field/experiments/structural/probe.py --verify structural-evidence/PROCESS_RECEIPT.json
+          python projects/decision-field/experiments/structural/probe.py --verify projects/decision-field/evidence/structural_probe_2026_09_30/PROCESS_RECEIPT.json
+          printf '%s\n' "$VERIFY_SHA" > structural-evidence/SOURCE_REVISION.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-structural-${{ matrix.os }}
+          path: structural-evidence/
+          if-no-files-found: error

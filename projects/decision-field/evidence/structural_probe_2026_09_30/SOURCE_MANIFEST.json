@@ -1,0 +1,82 @@
+{
+  "schema": "decision-field/synthetic-structural-source-manifest/v1",
+  "base_master": "2f9fbe3b1964194d8f7b525c6fc90a22b3ff7df9",
+  "scope": "reconstructed synthetic implementation and freshly retained evidence; excludes this manifest",
+  "files": {
+    ".github/workflows/decision-field-structural-probe.yml": {
+      "bytes": 2185,
+      "sha256": "762931540c7722347a29855b4897f5cb7257180130be019a52af5ba38cea06dc",
+      "git_blob": "acc571f70028a4c0107e1b2b70b10995447b7833"
+    },
+    "projects/decision-field/CURRENT.md": {
+      "bytes": 3217,
+      "sha256": "4f04d466491a01f9b7432d88a270535b4fa19475f937e6278935a2eee61ff98d",
+      "git_blob": "cf11849662ec8e653bf1a8be7653ce7f31f17408"
+    },
+    "projects/decision-field/experiments/structural/README.md": {
+      "bytes": 6794,
+      "sha256": "6bc74862b3319de9963ffb21da23aa59c7c89995706d72912dc2d5695e8f72f4",
+      "git_blob": "d8af1fc85018be3079bffc38e98a8b24b5e1d4bd"
+    },
+    "projects/decision-field/experiments/structural/checker.py": {
+      "bytes": 3774,
+      "sha256": "82f34af8df4fc49aafaf0342958fee5d4562132fe6be6e015cd97d7336d55971",
+      "git_blob": "8cc97008da735784a056a8b3bdbd044c20771648"
+    },
+    "projects/decision-field/experiments/structural/model.py": {
+      "bytes": 15388,
+      "sha256": "955e428cb4d37450ecdcd4d41ec4bc6db61f1bb55728670718f5a3a9dfa92fb0",
+      "git_blob": "3351bb42c3eced5306794e0ebf451c31cc7596e1"
+    },
+    "projects/decision-field/experiments/structural/probe.py": {
+      "bytes": 12472,
+      "sha256": "dc09ac1edb20c787eaa1d8f146e31a8484205b88b5b5e80821d293e4300b9154",
+      "git_blob": "e7f8891ddc0b41f8970f09c9aa884c4cc196bb76"
+    },
+    "projects/decision-field/experiments/structural/source_graph.json": {
+      "bytes": 5550,
+      "sha256": "b9e3498d5b3f3487e8c7f1954b082ddae7647ce8b0ba370511c111e63dd790e0",
+      "git_blob": "173d7594897af2bc176935a4fb40827d2b42dd1e"
+    },
+    "projects/decision-field/experiments/structural/test_structural.py": {
+      "bytes": 15447,
+      "sha256": "8c852dfae4a08c8a31ff2fcaa88e9aa146be680550a11774e26bea21b5037e4a",
+      "git_blob": "5162e4608e42119971297e65a164afff2efa0b51"
+    },
+    "projects/decision-field/evidence/structural_probe_2026_09_30/OPTIMIZED_TESTS.txt": {
+      "bytes": 4036,
+      "sha256": "1777629176c44096215348271bb727ca4c4da5b49cf133f9ff1a89d577959612",
+      "git_blob": "8db0acc08326b7bfdf3e738198e2dd752147a6c4"
+    },
+    "projects/decision-field/evidence/structural_probe_2026_09_30/PROCESS_RECEIPT.json": {
+      "bytes": 366026,
+      "sha256": "9e8565d2fef18eb0f3098898c34b0242d1a3316e1c7684378bf607c30cbbdce7",
+      "git_blob": "34f95f099a659b4ae63629eaad139b8b695aea09"
+    },
+    "projects/decision-field/evidence/structural_probe_2026_09_30/RECEIPT_REPLAY.txt": {
+      "bytes": 75,
+      "sha256": "ad3c096c68fa81250eb1151538eb1da8a9522a5acad8b25490e0c7f9b1d54dfd",
+      "git_blob": "4171a69a643f2593514d7c681485600519828553"
+    },
+    "projects/decision-field/evidence/structural_probe_2026_09_30/ROOT_PYTHON_TESTS.txt": {
+      "bytes": 465,
+      "sha256": "9621cf5ba65252e6856f0afd7ef6414304ce2e308ec380ec5cdf2bb98de90e80",
+      "git_blob": "599b3b0d192165e7e8c8755510d77f84730f6aef"
+    },
+    "projects/decision-field/evidence/structural_probe_2026_09_30/TESTS.txt": {
+      "bytes": 4036,
+      "sha256": "316fb66a4177b9e36709c848a300e2aa28b6f0b2e7cecadcc4ab1ea670cd6890",
+      "git_blob": "1f4f8751296727d66319a62b92b91e052dcd3e70"
+    },
+    "projects/decision-field/evidence/structural_probe_2026_09_30/V0_7_SOURCE_IDENTITY.txt": {
+      "bytes": 58,
+      "sha256": "376466e70702af9e35697d12df3dc39c97b672800407d9a9b74737f00faae336",
+      "git_blob": "ef9394de8fb563951af283c40a7fb853db84c27f"
+    },
+    "projects/decision-field/evidence/structural_probe_2026_09_30/VERIFICATION.md": {
+      "bytes": 4991,
+      "sha256": "3a6878fc88434a36fd767ec696c1929522b7e18a7a5bd7eaa83a1d03a003bfc2",
+      "git_blob": "77471405e390b083a06f7df5b0e983cb2036c658"
+    }
+  }
+}

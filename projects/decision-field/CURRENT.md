@@ -39,6 +39,17 @@ proposed certificate checks and counterprobes are documented in
 The structural planner and general evaluator are research targets, not v0.7
 runtime features or results.
 
+## Separate synthetic structural increment — 2026-09-30
+
+The [standalone structural experiment](experiments/structural/README.md) implements
+occurrence-preserving DuplicateEvaluator proposals, an independent synthetic
+checker, append-only history, exact source/predecessor receipts and separate
+admission. Its 24-schedule panel retains smaller occurrence-alias and
+authority-removal failures. [Evidence and recovery chronology](evidence/structural_probe_2026_09_30/VERIFICATION.md)
+remain separate from v0.7. The dated crosswalk above remains the historical
+design input. No runtime binding, general evaluator family, Pareto planner,
+behavioral equivalence, universality or P-versus-NP result is added.
+
 ## Way back
 
 v0.6 evidence remains unchanged under `evidence/v0_6/`; v0.5 under `evidence/v0_5/`.
