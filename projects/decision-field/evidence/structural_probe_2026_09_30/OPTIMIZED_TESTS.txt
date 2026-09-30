@@ -24,6 +24,6 @@ test_source_envelope_cannot_initialize_unusable_active_projection (test_structur
 test_stale_verified_predecessor_cannot_replace_new_active (test_structural.StructuralTests.test_stale_verified_predecessor_cannot_replace_new_active) ... ok
 
 ----------------------------------------------------------------------
-Ran 24 tests in 10.434s
+Ran 24 tests in 12.556s
 
 OK

@@ -12,6 +12,8 @@ python3 projects/decision-field/experiments/structural/probe.py --verify /tmp/st
 
 Choose an unused output path; the writer refuses overwrite. `--source` explicitly selects the trusted canonical synthetic source. The reader rechecks recorded proposals without rerunning generators. Fresh generation and receipt replay are separate observations.
 
+The scoped `.gitattributes` rules retain LF bytes for this experiment and its evidence on Windows as well as Linux. CRLF conversion changes the frozen fixture and receipt identities and is correctly rejected by the canonical-byte checks.
+
 ## Object and authority
 
 `source_graph.json` is an invented frozen fixture, not recovered Work observations or a mathematical theorem. Its 11 ordered source occurrences include a wrapper, two adapters, three identical integer payloads with distinct occurrence/evidence/object/source IDs, a same-payload occurrence across an authority boundary, a differently represented equal value, two apparent cycle nodes, and a wide state reached by a dependency tagged irrelevant. All source occurrences remain mandatory. Depth, cycle and relevance tags are synthetic declarations; no computation is executed to substantiate them.

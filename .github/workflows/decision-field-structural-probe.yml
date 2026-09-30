@@ -3,11 +3,13 @@ name: Decision Field synthetic structural probe
 on:
   push:
     paths:
+      - '.gitattributes'
       - 'projects/decision-field/experiments/structural/**'
       - 'projects/decision-field/evidence/structural_probe_2026_09_30/**'
       - '.github/workflows/decision-field-structural-probe.yml'
   pull_request:
     paths:
+      - '.gitattributes'
       - 'projects/decision-field/experiments/structural/**'
       - 'projects/decision-field/evidence/structural_probe_2026_09_30/**'
       - '.github/workflows/decision-field-structural-probe.yml'

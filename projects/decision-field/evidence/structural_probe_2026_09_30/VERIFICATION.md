@@ -50,6 +50,14 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 The Linux/Windows workflow repeats normal and optimized contracts, generates a
 fresh receipt, replays fresh and checked-in receipts, and retains the exact
 checked-out revision. CI observations remain separate from these local results.
+The first Windows run at `b185166c54714aff0f47efdc156592c0723abefe`
+(Actions run `36749227760`, job `110003230312`) rejected the fixture as
+noncanonical: Git's automatic CRLF checkout changed its final LF byte. A local
+checkout with `core.autocrlf=true` reproduced that exact rejection. Scoped
+`.gitattributes` rules now preserve LF for the experiment and its evidence,
+without relaxing the checker. `CHECKOUT_REGRESSION.txt` records the reproduction
+and corrected checkout checks; subsequent CI observations must be identified by
+their own revision.
 `SOURCE_MANIFEST.json` binds this checkout's code and evidence file bytes; it
 does not certify correctness or record a future commit's identity.
 

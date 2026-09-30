@@ -1,0 +1,6 @@
+# The synthetic fixture, receipts and manifests are exact-byte witnesses.
+/.gitattributes text eol=lf
+/.github/workflows/decision-field-structural-probe.yml text eol=lf
+/projects/decision-field/CURRENT.md text eol=lf
+/projects/decision-field/experiments/structural/** text eol=lf
+/projects/decision-field/evidence/structural_probe_2026_09_30/** text eol=lf

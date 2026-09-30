@@ -3,10 +3,15 @@
   "base_master": "2f9fbe3b1964194d8f7b525c6fc90a22b3ff7df9",
   "scope": "reconstructed synthetic implementation and freshly retained evidence; excludes this manifest",
   "files": {
+    ".gitattributes": {
+      "bytes": 357,
+      "sha256": "e43fe7a163a29eb23b704d1ef3ee29968366ac19b1ab010a04061ae8f3201e3d",
+      "git_blob": "dd9d8a3dd1a20738eb52468d0fe61b6f05f0e7ab"
+    },
     ".github/workflows/decision-field-structural-probe.yml": {
-      "bytes": 2185,
-      "sha256": "762931540c7722347a29855b4897f5cb7257180130be019a52af5ba38cea06dc",
-      "git_blob": "acc571f70028a4c0107e1b2b70b10995447b7833"
+      "bytes": 2235,
+      "sha256": "3ce02ede7ef9029adfcf3d79eb86f764ab5ae08bed6115b77ae1b25b6a60d9a5",
+      "git_blob": "8bc26de7d359243ef12a1b1a15db128a76438399"
     },
     "projects/decision-field/CURRENT.md": {
       "bytes": 3217,
@@ -14,9 +19,9 @@
       "git_blob": "cf11849662ec8e653bf1a8be7653ce7f31f17408"
     },
     "projects/decision-field/experiments/structural/README.md": {
-      "bytes": 6794,
-      "sha256": "6bc74862b3319de9963ffb21da23aa59c7c89995706d72912dc2d5695e8f72f4",
-      "git_blob": "d8af1fc85018be3079bffc38e98a8b24b5e1d4bd"
+      "bytes": 7033,
+      "sha256": "6f375e35e0ac24ebe383cdcc41366d5571cee4ff0e89b40bdf88db2fa6b748ca",
+      "git_blob": "ab4c7349afe294d36bcb78d33209dcefcd399eaa"
     },
     "projects/decision-field/experiments/structural/checker.py": {
       "bytes": 3774,
@@ -43,10 +48,15 @@
       "sha256": "8c852dfae4a08c8a31ff2fcaa88e9aa146be680550a11774e26bea21b5037e4a",
       "git_blob": "5162e4608e42119971297e65a164afff2efa0b51"
     },
+    "projects/decision-field/evidence/structural_probe_2026_09_30/CHECKOUT_REGRESSION.txt": {
+      "bytes": 804,
+      "sha256": "b8fcf4f4286e5423bf8a80e7754de3d6f6749d117e16f43799cc4c21393bedba",
+      "git_blob": "7b84f802359a42c474b46e8c5c5feb522bd010a6"
+    },
     "projects/decision-field/evidence/structural_probe_2026_09_30/OPTIMIZED_TESTS.txt": {
       "bytes": 4036,
-      "sha256": "1777629176c44096215348271bb727ca4c4da5b49cf133f9ff1a89d577959612",
-      "git_blob": "8db0acc08326b7bfdf3e738198e2dd752147a6c4"
+      "sha256": "24a7f1b0a60be0c50939e310f2d730df2642a5f8e2bf9fb4d5b6415b43ad771d",
+      "git_blob": "fa748f5ebb6f7213359d162f150f63103b803516"
     },
     "projects/decision-field/evidence/structural_probe_2026_09_30/PROCESS_RECEIPT.json": {
       "bytes": 366026,
@@ -65,8 +75,8 @@
     },
     "projects/decision-field/evidence/structural_probe_2026_09_30/TESTS.txt": {
       "bytes": 4036,
-      "sha256": "316fb66a4177b9e36709c848a300e2aa28b6f0b2e7cecadcc4ab1ea670cd6890",
-      "git_blob": "1f4f8751296727d66319a62b92b91e052dcd3e70"
+      "sha256": "93b0dab6da5f23b37fb0b5675cbabd1590c0cdc10006d90225168d616bd9b001",
+      "git_blob": "b44660924e5112e7b144db4e589d2e46b351a3d7"
     },
     "projects/decision-field/evidence/structural_probe_2026_09_30/V0_7_SOURCE_IDENTITY.txt": {
       "bytes": 58,
@@ -74,9 +84,9 @@
       "git_blob": "ef9394de8fb563951af283c40a7fb853db84c27f"
     },
     "projects/decision-field/evidence/structural_probe_2026_09_30/VERIFICATION.md": {
-      "bytes": 4991,
-      "sha256": "3a6878fc88434a36fd767ec696c1929522b7e18a7a5bd7eaa83a1d03a003bfc2",
-      "git_blob": "77471405e390b083a06f7df5b0e983cb2036c658"
+      "bytes": 5542,
+      "sha256": "e3509f25dad9d448e0720e733647940ccdafb84a585bbf95d651124d6bff5de7",
+      "git_blob": "1e26417e175c7b1080be9de63dd0103d38c2db06"
     }
   }
 }
