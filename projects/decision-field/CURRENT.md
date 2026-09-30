@@ -50,6 +50,11 @@ remain separate from v0.7. The dated crosswalk above remains the historical
 design input. No runtime binding, general evaluator family, Pareto planner,
 behavioral equivalence, universality or P-versus-NP result is added.
 
+The [receipt-ingress follow-up](evidence/structural_receipt_boundary_2026_09_30/VERIFICATION.md)
+checks file read budgets and rejects malformed blob containers and excessive
+JSON nesting explicitly. It preserves the original finite-panel receipt and
+adds four counterprobe tests; history/admission semantics and K are unchanged.
+
 ## Way back
 
 v0.6 evidence remains unchanged under `evidence/v0_6/`; v0.5 under `evidence/v0_5/`.

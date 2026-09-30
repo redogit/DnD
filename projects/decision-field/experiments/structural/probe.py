@@ -6,7 +6,7 @@ import itertools
 import json
 from pathlib import Path
 
-from model import DuplicateEvaluator, Session, canonical, digest, observe, projection, reconstruct
+from model import MAX_BYTES, DuplicateEvaluator, Session, canonical, digest, observe, projection, reconstruct
 
 ACTIONS = ('left', 'right', 'alias', 'authority')
 HEX_FIELDS = {'source_hex', 'active_hex', 'candidate', 'source_bytes', 'predecessor_bytes'}
@@ -151,6 +151,8 @@ def verify_report(source: bytes, report: dict) -> bool:
         if report['source_sha256'] != digest(source):
             raise ValueError('receipt trusted source mismatch')
         blobs = report['blobs']
+        if type(blobs) is not dict:
+            raise ValueError('invalid receipt blob container')
         for sha, value in blobs.items():
             if digest(bytes.fromhex(value)) != sha:
                 raise ValueError('receipt blob digest mismatch')
@@ -202,6 +204,15 @@ def verify_report(source: bytes, report: dict) -> bool:
     return True
 
 
+def _read_bounded(path: Path, maximum: int, label: str) -> bytes:
+    # One overflow byte detects excess without consuming an unbounded file.
+    with path.open('rb') as stream:
+        raw = stream.read(maximum + 1)
+    if len(raw) > maximum:
+        raise ValueError(label + ' byte envelope exceeded')
+    return raw
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source', type=Path, default=Path(__file__).with_name('source_graph.json'))
@@ -209,12 +220,13 @@ def main():
     parser.add_argument('--output', type=Path, help='create a receipt file; never overwrite an existing file')
     args = parser.parse_args()
     try:
-        source = args.source.read_bytes()
+        source = _read_bounded(args.source, MAX_BYTES, 'source')
         if args.verify:
-            raw = args.verify.read_bytes()
-            if len(raw) > MAX_REPORT_BYTES:
-                raise ValueError('receipt byte envelope exceeded')
-            report = json.loads(raw)
+            raw = _read_bounded(args.verify, MAX_REPORT_BYTES, 'receipt')
+            try:
+                report = json.loads(raw)
+            except RecursionError as exc:
+                raise ValueError('receipt JSON nesting exceeds parser capacity') from exc
             if canonical(report) != raw:
                 raise ValueError('receipt requires exact canonical JSON bytes')
             verify_report(source, report)

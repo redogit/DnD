@@ -50,6 +50,8 @@ The fixture moves from `(24,20,3,2,2,2,1,8,1)` to `(22,20,3,2,0,2,1,8,1)`. These
 
 Canonical ASCII JSON graphs are bounded by 65,536 bytes, 64 occurrences/bodies, 128 edges, 16 authorities and nesting depth 16. Initial A must also fit. Malformed proposals up to 131,072 bytes may be retained but cannot pass. The panel report has a separate 2 MiB envelope.
 
+The CLI now limits bytes returned by file reads to each source/report budget plus one overflow byte before parsing. Buffered I/O may fetch additional filesystem bytes; this is not a total-memory or timing bound. Malformed blob containers and receipt JSON that exceeds parser stack capacity return explicit rejection. The [ingress counterprobes](../../evidence/structural_receipt_boundary_2026_09_30/VERIFICATION.md) retain failures, controls and fresh 28-test results. The earlier 24-test evidence and process receipt remain unchanged at their original revision; fresh generation still produces that exact receipt.
+
 ## Finite panel and recovery
 
 `probe.py` permutes two scoped instances of the same DuplicateEvaluator (overlapping pairs 1/2 and 2/3), an occurrence alias with redirected edges, and authority removal with relabeling. Both negative proposals are smaller in bytes and active-node count. Every attempt uses freshly observed A and has separate generation/check/admission events.

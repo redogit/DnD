@@ -1,0 +1,4 @@
+{"admissions": 48, "orders": 24, "reconstructions": 96, "rejections": 48}
+PASS exact source recovery and 24 recorded schedules (generator not rerun)
+PASS exact source recovery and 24 recorded schedules (generator not rerun)
+PASS fresh receipt byte-identical to prior 24-schedule receipt: 9e8565d2fef18eb0f3098898c34b0242d1a3316e1c7684378bf607c30cbbdce7

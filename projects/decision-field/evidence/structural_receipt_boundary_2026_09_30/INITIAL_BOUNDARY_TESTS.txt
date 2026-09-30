@@ -1,0 +1,8 @@
+test_cli_limits_consumed_bytes_before_rejecting_oversized_files (test_receipt_boundary.ReceiptBoundaryTests.test_cli_limits_consumed_bytes_before_rejecting_oversized_files) ... ok
+test_cli_rejects_non_mapping_blobs_without_traceback (test_receipt_boundary.ReceiptBoundaryTests.test_cli_rejects_non_mapping_blobs_without_traceback) ... ok
+test_non_mapping_blobs_return_verification_rejection (test_receipt_boundary.ReceiptBoundaryTests.test_non_mapping_blobs_return_verification_rejection) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.063s
+
+OK

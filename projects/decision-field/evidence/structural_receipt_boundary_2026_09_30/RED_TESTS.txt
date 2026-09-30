@@ -1,0 +1,79 @@
+test_cli_limits_consumed_bytes_before_rejecting_oversized_files (test_receipt_boundary.ReceiptBoundaryTests.test_cli_limits_consumed_bytes_before_rejecting_oversized_files) ... 
+  test_cli_limits_consumed_bytes_before_rejecting_oversized_files (test_receipt_boundary.ReceiptBoundaryTests.test_cli_limits_consumed_bytes_before_rejecting_oversized_files) (oversized='source') ... FAIL
+  test_cli_limits_consumed_bytes_before_rejecting_oversized_files (test_receipt_boundary.ReceiptBoundaryTests.test_cli_limits_consumed_bytes_before_rejecting_oversized_files) (oversized='receipt') ... FAIL
+test_cli_rejects_non_mapping_blobs_without_traceback (test_receipt_boundary.ReceiptBoundaryTests.test_cli_rejects_non_mapping_blobs_without_traceback) ... FAIL
+test_non_mapping_blobs_return_verification_rejection (test_receipt_boundary.ReceiptBoundaryTests.test_non_mapping_blobs_return_verification_rejection) ... 
+  test_non_mapping_blobs_return_verification_rejection (test_receipt_boundary.ReceiptBoundaryTests.test_non_mapping_blobs_return_verification_rejection) (blobs=None) ... FAIL
+  test_non_mapping_blobs_return_verification_rejection (test_receipt_boundary.ReceiptBoundaryTests.test_non_mapping_blobs_return_verification_rejection) (blobs=[]) ... FAIL
+  test_non_mapping_blobs_return_verification_rejection (test_receipt_boundary.ReceiptBoundaryTests.test_non_mapping_blobs_return_verification_rejection) (blobs=0) ... FAIL
+  test_non_mapping_blobs_return_verification_rejection (test_receipt_boundary.ReceiptBoundaryTests.test_non_mapping_blobs_return_verification_rejection) (blobs='blobs') ... FAIL
+
+======================================================================
+FAIL: test_cli_limits_consumed_bytes_before_rejecting_oversized_files (test_receipt_boundary.ReceiptBoundaryTests.test_cli_limits_consumed_bytes_before_rejecting_oversized_files) (oversized='source')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/test_receipt_boundary.py", line 73, in test_cli_limits_consumed_bytes_before_rejecting_oversized_files
+    self.assertLessEqual(consumed[source_path], MAX_BYTES + 1)
+AssertionError: 66560 not less than or equal to 65537
+
+======================================================================
+FAIL: test_cli_limits_consumed_bytes_before_rejecting_oversized_files (test_receipt_boundary.ReceiptBoundaryTests.test_cli_limits_consumed_bytes_before_rejecting_oversized_files) (oversized='receipt')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/test_receipt_boundary.py", line 74, in test_cli_limits_consumed_bytes_before_rejecting_oversized_files
+    self.assertLessEqual(consumed[receipt_path], probe.MAX_REPORT_BYTES + 1)
+AssertionError: 2098176 not less than or equal to 2097153
+
+======================================================================
+FAIL: test_cli_rejects_non_mapping_blobs_without_traceback (test_receipt_boundary.ReceiptBoundaryTests.test_cli_rejects_non_mapping_blobs_without_traceback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/test_receipt_boundary.py", line 40, in test_cli_rejects_non_mapping_blobs_without_traceback
+    self.assertTrue(result.stderr.startswith('REJECTED:'), result.stderr)
+AssertionError: False is not true : Traceback (most recent call last):
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/probe.py", line 233, in <module>
+    main()
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/probe.py", line 220, in main
+    verify_report(source, report)
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/probe.py", line 154, in verify_report
+    for sha, value in blobs.items():
+                      ^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'items'
+
+
+======================================================================
+FAIL: test_non_mapping_blobs_return_verification_rejection (test_receipt_boundary.ReceiptBoundaryTests.test_non_mapping_blobs_return_verification_rejection) (blobs=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/test_receipt_boundary.py", line 28, in test_non_mapping_blobs_return_verification_rejection
+    self.assertIsInstance(caught.exception, ValueError)
+AssertionError: AttributeError("'NoneType' object has no attribute 'items'") is not an instance of <class 'ValueError'>
+
+======================================================================
+FAIL: test_non_mapping_blobs_return_verification_rejection (test_receipt_boundary.ReceiptBoundaryTests.test_non_mapping_blobs_return_verification_rejection) (blobs=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/test_receipt_boundary.py", line 28, in test_non_mapping_blobs_return_verification_rejection
+    self.assertIsInstance(caught.exception, ValueError)
+AssertionError: AttributeError("'list' object has no attribute 'items'") is not an instance of <class 'ValueError'>
+
+======================================================================
+FAIL: test_non_mapping_blobs_return_verification_rejection (test_receipt_boundary.ReceiptBoundaryTests.test_non_mapping_blobs_return_verification_rejection) (blobs=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/test_receipt_boundary.py", line 28, in test_non_mapping_blobs_return_verification_rejection
+    self.assertIsInstance(caught.exception, ValueError)
+AssertionError: AttributeError("'int' object has no attribute 'items'") is not an instance of <class 'ValueError'>
+
+======================================================================
+FAIL: test_non_mapping_blobs_return_verification_rejection (test_receipt_boundary.ReceiptBoundaryTests.test_non_mapping_blobs_return_verification_rejection) (blobs='blobs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/test_receipt_boundary.py", line 28, in test_non_mapping_blobs_return_verification_rejection
+    self.assertIsInstance(caught.exception, ValueError)
+AssertionError: AttributeError("'str' object has no attribute 'items'") is not an instance of <class 'ValueError'>
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.072s
+
+FAILED (failures=7)
