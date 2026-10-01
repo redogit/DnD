@@ -5,7 +5,7 @@ set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
-add_library(rmal STATIC src/rmal.c)
+add_library(rmal STATIC src/rmal.c src/word_dna.c)
 target_include_directories(rmal PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(rmalc src/main.c)
@@ -50,6 +50,7 @@ if(BUILD_TESTING)
   add_test(NAME rmal_example_check COMMAND rmalc check ${CMAKE_CURRENT_SOURCE_DIR}/examples/hello.rmal)
   add_test(NAME rmal_example_run COMMAND rmalc run ${CMAKE_CURRENT_SOURCE_DIR}/examples/hello.rmal)
   add_test(NAME rmal_recovered_surface COMMAND rmalc check ${CMAKE_CURRENT_SOURCE_DIR}/tests/recovered_surface.rmal)
+  add_test(NAME rmal_word_dna_carrier_check COMMAND rmalc check ${CMAKE_CURRENT_SOURCE_DIR}/examples/word_dna_triplex.rmal)
   add_test(NAME rmal_const_immutable COMMAND rmalc run ${CMAKE_CURRENT_SOURCE_DIR}/tests/const_immutable_reject.rmal)
   set_tests_properties(rmal_const_immutable PROPERTIES WILL_FAIL TRUE)
   add_test(NAME rmal_typed_equality COMMAND rmalc run ${CMAKE_CURRENT_SOURCE_DIR}/tests/typed_equality.rmal)
@@ -59,6 +60,10 @@ if(BUILD_TESTING)
   add_executable(rmal_native_callback_test tests/native_callback_test.c)
   target_link_libraries(rmal_native_callback_test PRIVATE rmal)
   add_test(NAME rmal_native_callback_test COMMAND rmal_native_callback_test)
+
+  add_executable(rmal_word_dna_test tests/word_dna_test.c)
+  target_link_libraries(rmal_word_dna_test PRIVATE rmal)
+  add_test(NAME rmal_word_dna_test COMMAND rmal_word_dna_test)
 endif()
 
 # C++ consumes the stable C ABI; implementation remains C23.
