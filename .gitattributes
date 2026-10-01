@@ -5,5 +5,6 @@
 /projects/decision-field/experiments/structural/** text eol=lf
 /projects/decision-field/evidence/structural_probe_2026_09_30/** text eol=lf
 /projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/** text eol=lf
+/projects/decision-field/evidence/structural_adapter_2026_09_30/** text eol=lf
 # Retain unittest's raw subtest output, including trailing spaces.
 /projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/RED_TESTS.txt -whitespace

@@ -1,0 +1,34 @@
+test_adapter_checker_does_not_call_generator (test_adapter.AdapterTests.test_adapter_checker_does_not_call_generator) ... ok
+test_adapter_receipt_rejects_lost_order_and_relabelled_failure (test_adapter.AdapterTests.test_adapter_receipt_rejects_lost_order_and_relabelled_failure) ... ERROR
+test_adapter_reduction_cannot_pay_for_any_other_k_increase (test_adapter.AdapterTests.test_adapter_reduction_cannot_pay_for_any_other_k_increase) ... ok
+test_checked_pair_reduces_depth_preserving_exact_identity_and_history (test_adapter.AdapterTests.test_checked_pair_reduces_depth_preserving_exact_identity_and_history) ... ok
+test_depth_must_strictly_drop_even_when_duplicate_count_drops (test_adapter.AdapterTests.test_depth_must_strictly_drop_even_when_duplicate_count_drops) ... ok
+test_exactly_recoverable_smaller_forgeries_cannot_cross_distinctions (test_adapter.AdapterTests.test_exactly_recoverable_smaller_forgeries_cannot_cross_distinctions) ... ok
+test_finite_adapter_receipt_replays_without_any_generator (test_adapter.AdapterTests.test_finite_adapter_receipt_replays_without_any_generator) ... ERROR
+test_noop_stale_and_unverified_adapter_proposals_do_not_admit (test_adapter.AdapterTests.test_noop_stale_and_unverified_adapter_proposals_do_not_admit) ... ok
+test_opaque_historical_adapters_are_not_certified_by_name (test_adapter.AdapterTests.test_opaque_historical_adapters_are_not_certified_by_name) ... ok
+test_pair_cannot_be_reordered_or_lose_a_source_occurrence (test_adapter.AdapterTests.test_pair_cannot_be_reordered_or_lose_a_source_occurrence) ... ok
+test_three_evaluator_orders_recover_each_step (test_adapter.AdapterTests.test_three_evaluator_orders_recover_each_step) ... ok
+
+======================================================================
+ERROR: test_adapter_receipt_rejects_lost_order_and_relabelled_failure (test_adapter.AdapterTests.test_adapter_receipt_rejects_lost_order_and_relabelled_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 198, in test_adapter_receipt_rejects_lost_order_and_relabelled_failure
+    report = run_probe(source, adapter=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: run_probe() got an unexpected keyword argument 'adapter'
+
+======================================================================
+ERROR: test_finite_adapter_receipt_replays_without_any_generator (test_adapter.AdapterTests.test_finite_adapter_receipt_replays_without_any_generator)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 187, in test_finite_adapter_receipt_replays_without_any_generator
+    report = run_probe(source, adapter=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: run_probe() got an unexpected keyword argument 'adapter'
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.273s
+
+FAILED (errors=2)

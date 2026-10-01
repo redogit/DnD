@@ -6,21 +6,28 @@ import itertools
 import json
 from pathlib import Path
 
-from model import MAX_BYTES, DuplicateEvaluator, Session, canonical, digest, observe, projection, reconstruct
+from model import (MAX_BYTES, AdapterEvaluator, DuplicateEvaluator, Session, adapter_pairs,
+                   canonical, digest, observe, occurrences, projection, reconstruct)
 
 ACTIONS = ('left', 'right', 'alias', 'authority')
 HEX_FIELDS = {'source_hex', 'active_hex', 'candidate', 'source_bytes', 'predecessor_bytes'}
 REPORT_SCHEMA = 'decision-field/synthetic-structural-receipt/v1'
+ADAPTER_REPORT_SCHEMA = 'decision-field/synthetic-adapter-receipt/v1'
+ADAPTER_ACTIONS = ('left', 'right', 'adapter', 'authority')
+ADAPTER_SCOPE = ('occ:adapter-1', 'occ:adapter-2')
 CLAIM_CEILING = 'finite synthetic structural recovery only; no behavioral equivalence, universality, runtime integration or P-versus-NP result'
 MAX_REPORT_BYTES = 2 * 1024 * 1024
 
 
-def attempt(s: Session, action: str):
+def attempt(s: Session, action: str, adapter=False):
+    if adapter and action == 'adapter':
+        return s.generate(AdapterEvaluator(ADAPTER_SCOPE))
     if action in ('left', 'right'):
         scope = ('occ:dup-1', 'occ:dup-2') if action == 'left' else ('occ:dup-2', 'occ:dup-3')
         return s.generate(DuplicateEvaluator(scope, 'DuplicateEvaluator:' + action))
     # Deliberately smaller and structurally well-formed forgeries, not parser errors.
-    obj = json.loads(DuplicateEvaluator(('occ:dup-1', 'occ:dup-2')).generate(s.active))
+    active = AdapterEvaluator(ADAPTER_SCOPE).generate(s.active) if adapter else s.active
+    obj = json.loads(DuplicateEvaluator(('occ:dup-1', 'occ:dup-2')).generate(active))
     if action == 'alias':
         obj['occurrences'] = [n for n in obj['occurrences'] if n['occurrence_id'] != 'occ:dup-2']
         for edge in obj['edges']:
@@ -29,7 +36,7 @@ def attempt(s: Session, action: str):
                     edge[endpoint] = 'occ:dup-1'
     elif action == 'authority':
         obj['authorities'] = [a for a in obj['authorities'] if a['authority_id'] != 'auth:checker']
-        for n in obj['occurrences']:
+        for n in occurrences(obj):
             if n['authority_id'] == 'auth:checker':
                 n['authority_id'] = 'auth:owner'
     else:
@@ -75,17 +82,26 @@ def _same(actual, expected, label):
         raise ValueError('receipt mismatch: ' + label)
 
 
-def _validate_action(before: bytes, candidate: bytes, action: str):
+def _validate_action(before: bytes, candidate: bytes, action: str, adapter=False):
     """Check declared panel coverage from graph distinctions, not evaluator labels."""
     old, new = projection(before), projection(candidate)
+    if adapter:
+        old_pairs = [tuple(n['occurrence_id'] for n in pair) for pair in adapter_pairs(old)]
+        new_pairs = [tuple(n['occurrence_id'] for n in pair) for pair in adapter_pairs(new)]
+        expected_pairs = [ADAPTER_SCOPE] if action in ('adapter', 'authority') else old_pairs
+        _same(new_pairs, expected_pairs, 'declared adapter pair')
+        if action == 'adapter':
+            _same([(n['occurrence_id'], n['body_id']) for n in occurrences(new)],
+                  [(n['occurrence_id'], n['body_id']) for n in occurrences(old)], 'adapter body bindings')
+            return
     if action in ('left', 'right'):
         ids = ('occ:dup-1', 'occ:dup-2') if action == 'left' else ('occ:dup-2', 'occ:dup-3')
-        by_id = {n['occurrence_id']: n for n in old['occurrences']}
+        by_id = {n['occurrence_id']: n for n in occurrences(old)}
         selected = {by_id[i]['body_id'] for i in ids}
         representative = min(selected)
         expected = [(n['occurrence_id'], representative if n['body_id'] in selected else n['body_id'])
-                    for n in old['occurrences']]
-        _same([(n['occurrence_id'], n['body_id']) for n in new['occurrences']], expected, 'declared duplicate scope')
+                    for n in occurrences(old)]
+        _same([(n['occurrence_id'], n['body_id']) for n in occurrences(new)], expected, 'declared duplicate scope')
         return
     expected_source = json.loads(reconstruct(before))
     if action == 'alias':
@@ -107,20 +123,22 @@ def _validate_action(before: bytes, candidate: bytes, action: str):
         raise ValueError('negative witness is not the exact declared source alteration')
 
 
-def run_probe(source: bytes) -> dict:
+def run_probe(source: bytes, adapter=False) -> dict:
     blobs, cases = {}, []
     admissions = rejections = 0
-    for order in itertools.permutations(ACTIONS):
+    actions = ADAPTER_ACTIONS if adapter else ACTIONS
+    admitted_actions = ('left', 'right', 'adapter') if adapter else ('left', 'right')
+    for order in itertools.permutations(actions):
         s = Session(source)
         initial_k, steps = observe(s.active).vector(), []
         for action in order:
             before, prefix = s.active, s.history
-            p = attempt(s, action)
+            p = attempt(s, action, adapter)
             _same(s.active.hex(), before.hex(), 'GENERATE changed A')
             c = s.verify(p.proposal_id)
             _same(s.active.hex(), before.hex(), 'VERIFY changed A')
             admitted = s.admit(p.proposal_id, c.check_id)
-            if admitted != (action in ('left', 'right')):
+            if admitted != (action in admitted_actions):
                 raise ValueError('unexpected discrimination')
             if s.history[:len(prefix)] != prefix or reconstruct(s.active) != source:
                 raise ValueError('history or exact reconstruction failed')
@@ -133,7 +151,7 @@ def run_probe(source: bytes) -> dict:
                           'failed_proposal_retained': not admitted and s.proposal(p.proposal_id) == p})
         cases.append({'order': order, 'initial_k': initial_k, 'final_k': observe(s.active).vector(),
                       'final_active_sha256': digest(s.active), 'steps': steps, 'history': _history(s, blobs)})
-    report = {'schema': REPORT_SCHEMA, 'source_sha256': digest(source),
+    report = {'schema': ADAPTER_REPORT_SCHEMA if adapter else REPORT_SCHEMA, 'source_sha256': digest(source),
               'summary': {'orders': len(cases), 'admissions': admissions, 'rejections': rejections,
                           'reconstructions': sum(len(c['steps']) for c in cases)},
               'cases': cases, 'blobs': blobs, 'claim_ceiling': CLAIM_CEILING}
@@ -145,18 +163,21 @@ def verify_report(source: bytes, report: dict) -> bool:
     """Replay stored proposal bytes against the caller's trusted source, without generators."""
     try:
         if (type(report) is not dict or set(report) != {'schema', 'source_sha256', 'summary', 'cases', 'blobs', 'claim_ceiling'} or
-                len(canonical(report)) > MAX_REPORT_BYTES or report['schema'] != REPORT_SCHEMA or
+                len(canonical(report)) > MAX_REPORT_BYTES or report['schema'] not in (REPORT_SCHEMA, ADAPTER_REPORT_SCHEMA) or
                 report['claim_ceiling'] != CLAIM_CEILING):
             raise ValueError('receipt envelope/schema')
         if report['source_sha256'] != digest(source):
             raise ValueError('receipt trusted source mismatch')
+        adapter = report['schema'] == ADAPTER_REPORT_SCHEMA
+        actions = ADAPTER_ACTIONS if adapter else ACTIONS
+        admitted_actions = ('left', 'right', 'adapter') if adapter else ('left', 'right')
         blobs = report['blobs']
         if type(blobs) is not dict:
             raise ValueError('invalid receipt blob container')
         for sha, value in blobs.items():
             if digest(bytes.fromhex(value)) != sha:
                 raise ValueError('receipt blob digest mismatch')
-        _same([case['order'] for case in report['cases']], list(itertools.permutations(ACTIONS)), 'order coverage')
+        _same([case['order'] for case in report['cases']], list(itertools.permutations(actions)), 'order coverage')
         admissions = rejections = reconstructions = 0
         for case in report['cases']:
             if set(case) != {'order', 'initial_k', 'final_k', 'final_active_sha256', 'steps', 'history'}:
@@ -171,14 +192,15 @@ def verify_report(source: bytes, report: dict) -> bool:
                 before = s.active
                 generated = expected_events[1 + 3 * i]['payload']
                 p = s.propose(generated['evaluator_id'], bytes.fromhex(generated['candidate']))
-                _validate_action(before, p.candidate, action)
+                _validate_action(before, p.candidate, action, adapter)
                 # Recompute, do not trust the recorded certificate/status/cost prediction.
                 _same(s.history[-1].payload, generated, 'generated proposal/recovery receipt')
                 c = s.verify(p.proposal_id)
                 admitted = s.admit(p.proposal_id, c.check_id)
-                if admitted != (action in ('left', 'right')) or reconstruct(s.active) != source:
+                if admitted != (action in admitted_actions) or reconstruct(s.active) != source:
                     raise ValueError('replay discrimination/reconstruction mismatch')
-                if generated['evaluator_id'] != ('DuplicateEvaluator:' if admitted else 'forged:') + action:
+                expected_evaluator = 'AdapterEvaluator' if action == 'adapter' else ('DuplicateEvaluator:' if admitted else 'forged:') + action
+                if generated['evaluator_id'] != expected_evaluator:
                     raise ValueError('evaluator/action mismatch')
                 if not admitted and (len(p.candidate) >= len(before) or
                                      observe(p.candidate).active_nodes >= observe(before).active_nodes):
@@ -215,12 +237,14 @@ def _read_bounded(path: Path, maximum: int, label: str) -> bytes:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source', type=Path, default=Path(__file__).with_name('source_graph.json'))
+    parser.add_argument('--source', type=Path, help='trusted canonical source (defaults to the selected panel fixture)')
+    parser.add_argument('--adapter', action='store_true', help='use the bounded adapter/duplicate panel and fixture')
     parser.add_argument('--verify', type=Path, help='replay a recorded receipt against trusted --source')
     parser.add_argument('--output', type=Path, help='create a receipt file; never overwrite an existing file')
     args = parser.parse_args()
     try:
-        source = _read_bounded(args.source, MAX_BYTES, 'source')
+        source_path = args.source or Path(__file__).with_name('adapter_source_graph.json' if args.adapter else 'source_graph.json')
+        source = _read_bounded(source_path, MAX_BYTES, 'source')
         if args.verify:
             raw = _read_bounded(args.verify, MAX_REPORT_BYTES, 'receipt')
             try:
@@ -232,7 +256,7 @@ def main():
             verify_report(source, report)
             print('PASS exact source recovery and 24 recorded schedules (generator not rerun)')
         else:
-            report = run_probe(source)
+            report = run_probe(source, adapter=args.adapter)
             if args.output:
                 with args.output.open('xb') as out:
                     out.write(canonical(report))

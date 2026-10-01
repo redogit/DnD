@@ -55,6 +55,15 @@ checks file read budgets and rejects malformed blob containers and excessive
 JSON nesting explicitly. It preserves the original finite-panel receipt and
 adds four counterprobe tests; history/admission semantics and K are unchanged.
 
+The [bounded AdapterEvaluator follow-up](evidence/structural_adapter_2026_09_30/VERIFICATION.md)
+adds a separate synthetic lift/lower fixture and a recoverable two-occurrence
+structural macro. Independent checks require matching ownership, inverse type
+contracts and empty boundary effects. Admission protects every K component and
+strictly decreases adapter depth. Mixed DuplicateEvaluator orderings preserve exact
+source recovery; smaller boundary-crossing failures remain in history. The old
+fixture, historical receipts and frozen v0.7 source identities remain unchanged.
+This extends only the standalone experiment, with no runtime or planner binding.
+
 ## Way back
 
 v0.6 evidence remains unchanged under `evidence/v0_6/`; v0.5 under `evidence/v0_5/`.

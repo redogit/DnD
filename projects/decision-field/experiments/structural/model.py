@@ -10,6 +10,7 @@ MAX_BYTES = 65536
 MAX_NODES, MAX_EDGES, MAX_AUTHORITIES = 64, 128, 16
 SOURCE_SCHEMA = 'decision-field/synthetic-source/v1'
 ACTIVE_SCHEMA = 'decision-field/synthetic-projection/v1'
+ADAPTER_SCHEMA = 'decision-field/synthetic-projection/v2'
 CONTRACT = 'exact-ordered-source+occurrence+authority+evidence/v1'
 NODE_FIELDS = {'occurrence_id', 'semantic_object_id', 'source_id', 'chronology',
                'authority_id', 'evidence_ids', 'obligations', 'kind',
@@ -102,12 +103,23 @@ def _payload(payload):
         raise ValueError('invalid bounded coordinate-width tag')
 
 
+def occurrences(obj):
+    """Ordered identity records, including the two retained records of each pair."""
+    return [node for entry in obj['occurrences']
+            for node in (entry['adapter_pair'] if 'adapter_pair' in entry else [entry])]
+
+
+def adapter_pairs(obj):
+    return [entry['adapter_pair'] for entry in obj['occurrences'] if 'adapter_pair' in entry]
+
+
 def _graph(obj, active=False):
     node_key = 'occurrences' if active else 'nodes'
     fields = {'schema', 'graph_id', 'authorities', node_key, 'edges'}
     if active:
         fields.add('bodies')
-    if set(obj) != fields or obj['schema'] != (ACTIVE_SCHEMA if active else SOURCE_SCHEMA):
+    schemas = (ACTIVE_SCHEMA, ADAPTER_SCHEMA) if active else (SOURCE_SCHEMA,)
+    if set(obj) != fields or obj['schema'] not in schemas:
         raise ValueError('unexpected graph schema')
     _id(obj['graph_id'])
     authorities = _records(obj['authorities'], 'authority_id', MAX_AUTHORITIES)
@@ -115,7 +127,20 @@ def _graph(obj, active=False):
         if set(authority) != {'authority_id', 'scope'}:
             raise ValueError('invalid authority boundary')
         _id(authority['scope'])
-    nodes = _records(obj[node_key], 'occurrence_id', MAX_NODES)
+    records = obj[node_key]
+    if active and obj['schema'] == ADAPTER_SCHEMA:
+        if type(records) is not list or len(records) > MAX_NODES:
+            raise ValueError('invalid adapter projection envelope')
+        for entry in records:
+            if type(entry) is not dict:
+                raise ValueError('invalid adapter entry')
+            if 'adapter_pair' in entry and (set(entry) != {'adapter_pair'} or
+                    type(entry['adapter_pair']) is not list or len(entry['adapter_pair']) != 2):
+                raise ValueError('requires a flat two-occurrence adapter pair')
+        if not adapter_pairs(obj):
+            raise ValueError('v2 requires a compact adapter pair')
+        records = occurrences(obj)
+    nodes = _records(records, 'occurrence_id', MAX_NODES)
     if not nodes or not authorities:
         raise ValueError('empty source/projection')
     for node in nodes:
@@ -169,6 +194,7 @@ def initial_projection(source: bytes) -> bytes:
 def reconstruct(active: bytes) -> bytes:
     """Expand bindings, not receipt bytes; preserve source order/chronology exactly."""
     obj = projection(active)
+    obj['occurrences'] = occurrences(obj)
     bodies = {b['body_id']: b['payload'] for b in obj.pop('bodies')}
     if set(bodies) != {n['body_id'] for n in obj['occurrences']}:
         raise ValueError('missing or unreachable body')
@@ -199,13 +225,14 @@ class K:
 def observe(active: bytes) -> K:
     """Explicit finite accounting; depth/cycle tags are not execution semantics."""
     obj = projection(active)
-    nodes, bodies, edges = obj['occurrences'], obj['bodies'], obj['edges']
+    nodes, bodies, edges = occurrences(obj), obj['bodies'], obj['edges']
     owners = {}
     for n in nodes:
         owners.setdefault(n['body_id'], set()).add((n['authority_id'], n['kind']))
     groups = Counter((canonical(b['payload']), tuple(sorted(owners.get(b['body_id'], ())))) for b in bodies)
-    return K(len(nodes) + len(bodies) + len(obj['authorities']), len(edges) + len(nodes),
-             max(n['call_depth'] for n in nodes), max(n['adapter_depth'] for n in nodes),
+    depth = max(1 if 'adapter_pair' in entry else entry['adapter_depth'] for entry in obj['occurrences'])
+    return K(len(obj['occurrences']) + len(bodies) + len(obj['authorities']), len(edges) + len(nodes),
+             max(n['call_depth'] for n in nodes), depth,
              sum(v - 1 for v in groups.values()),
              sum(e['relation'] == 'cycle' for e in edges),
              sum(e['relation'] == 'dependency' for e in edges),
@@ -242,9 +269,13 @@ def certificate_reference(source: bytes, predecessor: bytes, candidate: bytes) -
 
 def mutation_radius(before: bytes, after: bytes) -> int:
     a, b = projection(before), projection(after)
-    old = {n['occurrence_id']: n for n in a['occurrences']}
-    new = {n['occurrence_id']: n for n in b['occurrences']}
-    return sum(old.get(k) != new.get(k) for k in old.keys() | new.keys())
+    old = {n['occurrence_id']: n for n in occurrences(a)}
+    new = {n['occurrence_id']: n for n in occurrences(b)}
+    changed = {k for k in old.keys() | new.keys() if old.get(k) != new.get(k)}
+    pairs_a = {tuple(n['occurrence_id'] for n in pair) for pair in adapter_pairs(a)}
+    pairs_b = {tuple(n['occurrence_id'] for n in pair) for pair in adapter_pairs(b)}
+    changed.update(k for pair in pairs_a ^ pairs_b for k in pair)
+    return len(changed)
 
 
 @dataclass(frozen=True)
@@ -254,7 +285,7 @@ class DuplicateEvaluator:
 
     def generate(self, active: bytes) -> bytes:
         obj = projection(active)
-        nodes = {n['occurrence_id']: n for n in obj['occurrences']}
+        nodes = {n['occurrence_id']: n for n in occurrences(obj)}
         if len(set(self.scope)) != len(self.scope) or not set(self.scope) <= nodes.keys():
             raise ValueError('invalid occurrence scope')
         bodies = {b['body_id']: b for b in obj['bodies']}
@@ -265,11 +296,62 @@ class DuplicateEvaluator:
             groups.setdefault(key, []).append(n['body_id'])
         replacements = {body: min(group) for group in groups.values() for body in group}
         # Rewrite all bindings of a selected body: overlapping scopes retain all users.
-        for n in obj['occurrences']:
+        for n in occurrences(obj):
             n['body_id'] = replacements.get(n['body_id'], n['body_id'])
-        used = {n['body_id'] for n in obj['occurrences']}
+        used = {n['body_id'] for n in occurrences(obj)}
         obj['bodies'] = [b for b in obj['bodies'] if b['body_id'] in used]
         return canonical(obj)
+
+
+@dataclass(frozen=True)
+class AdapterEvaluator:
+    """Propose one declared depth-(1,2) lift/lower pair; never verifies or admits."""
+    scope: tuple[str, str]
+    evaluator_id: str = 'AdapterEvaluator'
+
+    def generate(self, active: bytes) -> bytes:
+        obj = projection(active)
+        if len(self.scope) != 2 or len(set(self.scope)) != 2:
+            raise ValueError('requires two distinct adapter occurrences')
+        bodies = {b['body_id']: b['payload'] for b in obj['bodies']}
+        for i in range(len(obj['occurrences']) - 1):
+            pair = obj['occurrences'][i:i + 2]
+            if tuple(n.get('occurrence_id') for n in pair) != self.scope:
+                continue
+            one, two = pair
+            if ([n['kind'] for n in pair] != ['adapter', 'adapter'] or
+                    [n['adapter_depth'] for n in pair] != [1, 2] or
+                    one['authority_id'] != two['authority_id']):
+                return active
+            a, b = (bodies[n['body_id']].get('adapter_contract') for n in pair)
+            fields = {'direction', 'input_type', 'output_type', 'owner_id', 'inverse_id', 'boundary_effects'}
+            if any(type(c) is not dict or set(c) != fields for c in (a, b)):
+                return active
+            if any(type(c[k]) is not str or not 1 <= len(c[k]) <= 128
+                   for c in (a, b) for k in fields - {'boundary_effects'}):
+                return active
+            if ((a['direction'], b['direction']) != ('lift', 'lower') or
+                    a['input_type'] != b['output_type'] or a['output_type'] != b['input_type'] or
+                    a['owner_id'] != b['owner_id'] or a['inverse_id'] != b['inverse_id'] or
+                    a['boundary_effects'] != [] or b['boundary_effects'] != []):
+                return active
+            incident = [e for e in obj['edges'] if e['from'] in self.scope or e['to'] in self.scope]
+            internal = [e for e in incident if e['from'] == self.scope[0] and e['to'] == self.scope[1]
+                        and e['relation'] == 'adapter' and e['relevant']]
+            incoming = [e for e in incident if e['to'] == self.scope[0] and e['from'] not in self.scope
+                        and e['relation'] == 'call' and e['relevant']]
+            outgoing = [e for e in incident if e['from'] == self.scope[1] and e['to'] not in self.scope
+                        and e['relation'] == 'call' and e['relevant']]
+            if len(incident) != 3 or any(len(edges) != 1 for edges in (internal, incoming, outgoing)):
+                return active
+            nodes = {n['occurrence_id']: n for n in occurrences(obj)}
+            if any(nodes.get(endpoint, {}).get('authority_id') != one['authority_id']
+                   for endpoint in (incoming[0]['from'], outgoing[0]['to'])):
+                return active
+            obj['schema'] = ADAPTER_SCHEMA
+            obj['occurrences'][i:i + 2] = [{'adapter_pair': pair}]
+            return canonical(obj)
+        return active
 
 
 @dataclass(frozen=True)
@@ -343,7 +425,7 @@ class Session:
         self._append('GENERATE', 'authority:synthetic-generator', payload)
         return p
 
-    def generate(self, evaluator: DuplicateEvaluator) -> StructuralProposal:
+    def generate(self, evaluator: DuplicateEvaluator | AdapterEvaluator) -> StructuralProposal:
         return self.propose(evaluator.evaluator_id, evaluator.generate(self._active))
 
     def verify(self, proposal_id: str):

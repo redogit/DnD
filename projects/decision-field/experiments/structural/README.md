@@ -62,4 +62,65 @@ All 24 schedules retain two admissions and two rejections, with exact recovery a
 
 `GENERATE != VERIFY != ADMIT`; `ACTIVE_GRAPH != FULL_HISTORY`; `STRUCTURAL_EQ != BEHAVIORAL_EQ`.
 
-Only finite synthetic payload-sharing proposals/checks/admission are implemented. The general evaluator family, Pareto planner, runtime seam and recursive/universal evaluator remain unimplemented. No behavioral equivalence, universality, optimality, termination, polynomial bound or P-versus-NP result follows. The [evidence](../../evidence/structural_probe_2026_09_30/VERIFICATION.md) separates current reruns, prior conversation-reported results and the lost original commit.
+Only finite synthetic payload-sharing and the bounded adapter-pair increment below are implemented. The general evaluator family, Pareto planner, runtime seam and recursive/universal evaluator remain unimplemented. No behavioral equivalence, universality, optimality, termination, polynomial bound or P-versus-NP result follows. The [evidence](../../evidence/structural_probe_2026_09_30/VERIFICATION.md) separates current reruns, prior conversation-reported results and the lost original commit.
+
+## Bounded AdapterEvaluator increment — 2026-09-30
+
+`adapter_source_graph.json` is a **new synthetic fixture**, derived from the unchanged
+`source_graph.json`. It changes only `graph_id` and adds `adapter_contract` payload
+declarations to the two existing adapter occurrences. The original payloads, ordered
+occurrence/object/source/evidence/authority identities, edges and chronology remain.
+The original opaque adapter labels do not certify a lift/lower pair; the evaluator
+returns unchanged A for that historical fixture. Earlier v1 receipts remain valid
+and fresh generation must retain their exact bytes.
+
+The new declaration specifies direction, input/output types, owner, inverse-pair ID
+and boundary effects. `AdapterEvaluator` proposes only one adjacent ordered
+depth-(1,2) lift/lower pair per attempt. Eligibility requires the same owner and
+authority, matching inverse-pair IDs, inverse input/output type contracts and empty
+boundary-effect lists. The graph must have exactly one relevant incoming call,
+one internal adapter edge and one relevant outgoing call, with same-authority
+external endpoints. Fan-in, fan-out and other incident effects/edges block it.
+These are explicit synthetic declarations, **not proof that executable adapters
+are inverses**. No callbacks or runtime operations are evaluated.
+
+Projection v2 replaces the two top-level occurrence entries with one
+`{"adapter_pair":[lift,lower]}` entry. Both complete original occurrence records
+remain ordered inside it, and all payload bodies, source edges and authority records
+remain addressable. This is a structural macro, not occurrence elimination.
+`reconstruct` expands the pair and body bindings to exact source bytes without
+using the recovery receipt's source copy. Nested/overlapping/duplicate occurrence
+pairs are disallowed. DuplicateEvaluator operates on the expanded identity records
+and preserves the macro across later sharing proposals.
+
+For v2, `active_nodes` counts top-level occurrence entries (one per macro), payload
+bodies and authorities. `active_edges` still counts every source edge and every
+expanded occurrence-to-body binding. `adapter_depth` is the maximum of unchanged
+unpacked depth tags and depth 1 for each compact pair. Other K definitions above
+are unchanged. This counts active representation structure; it does not count
+retained metadata as erased or establish an execution-depth improvement. The macro
+adds JSON bytes; byte-volume costs are recorded separately and are not K bounds.
+
+The checker independently inspects every compact pair, including proposals bearing
+another evaluator's label. Exact recovery alone is insufficient. All nine K
+components must remain nonincreasing, and any pair-structure change or proposal
+labelled AdapterEvaluator must strictly decrease global `adapter_depth`. Thus a
+duplicate-body saving cannot pay for unchanged adapter depth, nor can an adapter
+reduction pay for a larger protected component. Unchanged pairs may coexist with
+subsequent DuplicateEvaluator admissions.
+
+```sh
+python3 projects/decision-field/experiments/structural/probe.py --adapter --output /tmp/adapter-receipt.json
+python3 projects/decision-field/experiments/structural/probe.py --adapter --verify /tmp/adapter-receipt.json
+```
+
+The new panel permutes left/right DuplicateEvaluator scopes, AdapterEvaluator and
+a forged compact-pair candidate that removes the other authority boundary and
+relabels its occurrence. That negative is smaller in bytes and active-node count,
+but is rejected and retained. All 24 schedules require three admissions, one
+rejection and exact source reconstruction after every attempt. The panel moves
+from `(24,20,3,2,2,2,1,8,1)` to `(21,20,3,1,0,2,1,8,1)` and records 312 history
+events. The reader rechecks recorded candidate bytes without calling either
+generator. Tests also force exactly recoverable smaller pairs across separately
+declared ownership, type and boundary distinctions, ensuring structural recovery
+cannot substitute for the adapter contract. See the [new evidence](../../evidence/structural_adapter_2026_09_30/VERIFICATION.md).

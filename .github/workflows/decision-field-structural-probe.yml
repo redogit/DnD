@@ -7,6 +7,7 @@ on:
       - 'projects/decision-field/experiments/structural/**'
       - 'projects/decision-field/evidence/structural_probe_2026_09_30/**'
       - 'projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/**'
+      - 'projects/decision-field/evidence/structural_adapter_2026_09_30/**'
       - '.github/workflows/decision-field-structural-probe.yml'
   pull_request:
     paths:
@@ -14,6 +15,7 @@ on:
       - 'projects/decision-field/experiments/structural/**'
       - 'projects/decision-field/evidence/structural_probe_2026_09_30/**'
       - 'projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/**'
+      - 'projects/decision-field/evidence/structural_adapter_2026_09_30/**'
       - '.github/workflows/decision-field-structural-probe.yml'
 
 permissions:
@@ -50,6 +52,10 @@ jobs:
           python projects/decision-field/experiments/structural/probe.py --output structural-evidence/PROCESS_RECEIPT.json
           python projects/decision-field/experiments/structural/probe.py --verify structural-evidence/PROCESS_RECEIPT.json
           python projects/decision-field/experiments/structural/probe.py --verify projects/decision-field/evidence/structural_probe_2026_09_30/PROCESS_RECEIPT.json
+          python projects/decision-field/experiments/structural/probe.py --adapter --output structural-evidence/ADAPTER_RECEIPT.json
+          python projects/decision-field/experiments/structural/probe.py --adapter --verify structural-evidence/ADAPTER_RECEIPT.json
+          python projects/decision-field/experiments/structural/probe.py --adapter --verify projects/decision-field/evidence/structural_adapter_2026_09_30/PROCESS_RECEIPT.json
+          python projects/decision-field/scripts/check_mirror_manifest.py
           printf '%s\n' "$VERIFY_SHA" > structural-evidence/SOURCE_REVISION.txt
       - uses: actions/upload-artifact@v4
         with:

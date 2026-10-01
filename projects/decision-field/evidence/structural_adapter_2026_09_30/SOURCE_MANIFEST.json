@@ -1,0 +1,123 @@
+{
+  "schema": "decision-field/synthetic-adapter-source-manifest/v1",
+  "predecessor_revision": "4fc3883a1c3389063abb72926d63e85166c99542",
+  "master_base": "2f9fbe3b1964194d8f7b525c6fc90a22b3ff7df9",
+  "scope": "modified implementation, new fixture and evidence; original source included for lineage; excludes this manifest",
+  "files": {
+    ".gitattributes": {
+      "bytes": 690,
+      "sha256": "b397852fab361436d0147350c73f8e9108ddcee67ed027a1906282ea3bf69c0e",
+      "git_blob": "5d0d5d5ac7703ffbd456d50bcab84cde34234d0d"
+    },
+    ".github/workflows/decision-field-structural-probe.yml": {
+      "bytes": 3073,
+      "sha256": "9be68fdbe991204cb3af91da37e7e13a8fcccaf3507b1392cc531c453ce68854",
+      "git_blob": "bc4c72d3fe98af32019befd18183ed3fcea55c85"
+    },
+    "projects/decision-field/CURRENT.md": {
+      "bytes": 4205,
+      "sha256": "ae815be5bbffc7dccea1d230a0edf47ac883ab6aa0f29a5435e3fc97986e573b",
+      "git_blob": "ed4ce9bf33a610c227a809edb073747b2f688981"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/BASELINE_TESTS.txt": {
+      "bytes": 4699,
+      "sha256": "4ec9855c389eab3881d008dc25fdca8a91a30fe7da29445f7b0c5aadf4312d1d",
+      "git_blob": "a5e0f73f0dea6f88c2068da49eb09bd6dbf957d6"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/COUNTERPROBES.json": {
+      "bytes": 870580,
+      "sha256": "5a7f9b9bdd54db87fc1f1f088c5ba8f0c05af11b0a05f004ffae4278ef53760e",
+      "git_blob": "d1a6987eb0b16488a72bf275c226bc6484fe8764"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/OPTIMIZED_TESTS.txt": {
+      "bytes": 6385,
+      "sha256": "08db70abaa020c2d943042c059fab4b1e2b15cf26f4125c108bf314712e5f80b",
+      "git_blob": "d3039a9111e33cc3bea69722761b7a3777d96bd5"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/PROCESS_RECEIPT.json": {
+      "bytes": 401889,
+      "sha256": "02f6782b977b3783e1068566fe2d987472692fd361f67a425347749220fe406d",
+      "git_blob": "20fe9facb4ee5b68a3c8cca7b650aee69e414e4c"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/RECEIPT_REPLAY.txt": {
+      "bytes": 816,
+      "sha256": "dc04af528195ce691d57f5ca17b2e4e0bdf30fb94350c4dcc5203198f3cffea7",
+      "git_blob": "8e91394f2b802613ba67ab1301984ea3dd73652c"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/RED_RECEIPT_TESTS.txt": {
+      "bytes": 3154,
+      "sha256": "a7c7e308f6a2b4fe4be75a4bc3e1310c691eaf27ac71fc3d03bd2a3717e767cd",
+      "git_blob": "89369b5dbb5ade88e18dc8ad4b4fe9556c9dda70"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/RED_TESTS.txt": {
+      "bytes": 8218,
+      "sha256": "9e28800041f3562656f0f76e2e1380c6f0752df98fb338bdf7f40ed98a2cbe50",
+      "git_blob": "df2edfc89422de6d2b1780c29bb10252ccbe2665"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/REVIEW.md": {
+      "bytes": 1572,
+      "sha256": "2cf2b49becb3ff93540f1a26f19529edf88972d6449b019928af67096e9af3a6",
+      "git_blob": "fee0e58af6026ac94604d13cf3214af78b789424"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/ROOT_PYTHON_TESTS.txt": {
+      "bytes": 465,
+      "sha256": "9621cf5ba65252e6856f0afd7ef6414304ce2e308ec380ec5cdf2bb98de90e80",
+      "git_blob": "599b3b0d192165e7e8c8755510d77f84730f6aef"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/TESTS.txt": {
+      "bytes": 6385,
+      "sha256": "953dc110d67fb521e5803a58b3b0b57f52c979b224574c7015610fb432a85ec1",
+      "git_blob": "235d12cf450d403136917bf37cd3d6e307597595"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/V0_7_SOURCE_IDENTITY.txt": {
+      "bytes": 58,
+      "sha256": "376466e70702af9e35697d12df3dc39c97b672800407d9a9b74737f00faae336",
+      "git_blob": "ef9394de8fb563951af283c40a7fb853db84c27f"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/VERIFICATION.md": {
+      "bytes": 7428,
+      "sha256": "e98133a07cf168f6a07eebc052e2bd8a17181e090ed307c5e187e923f0480c3a",
+      "git_blob": "7a10d8c59cd9167071bdd8f8b7d9e6faf1698dc3"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/counterprobes.py": {
+      "bytes": 3859,
+      "sha256": "b701cfdfd44810945a2717a04c0494b88348aae17a69ba3fe2e1c402e0f5d0b0",
+      "git_blob": "139fc046bde2d060f39ece2a13363d227b6692cc"
+    },
+    "projects/decision-field/experiments/structural/README.md": {
+      "bytes": 11768,
+      "sha256": "2aed9784e99af412b5b632ffb3b39210e7d44fcfafd4e872147feee33c5bd346",
+      "git_blob": "18621498850c4a9127be046a48542b1a111b7fdb"
+    },
+    "projects/decision-field/experiments/structural/adapter_source_graph.json": {
+      "bytes": 5925,
+      "sha256": "e6efe13fe84a606c35dbf2503dd93db277df59a94c823837357da05c8f7f1b1c",
+      "git_blob": "0a5c4bc37646425f58e28db5cf30da2bad2a9f45"
+    },
+    "projects/decision-field/experiments/structural/checker.py": {
+      "bytes": 6843,
+      "sha256": "123427eb9072a9b78282cc7eaf72ebc88074c381c38f0199c4193cc535dde144",
+      "git_blob": "4fcbf9f7f2e88aa88e0e2bfb6357721f18af2eee"
+    },
+    "projects/decision-field/experiments/structural/model.py": {
+      "bytes": 19977,
+      "sha256": "e9aa8825d3ec1a4d86cdb1880fa48818045bd191347ba85c57bd17efa851c631",
+      "git_blob": "08e099e321f7ce6331f17973127fbae80d459a63"
+    },
+    "projects/decision-field/experiments/structural/probe.py": {
+      "bytes": 14897,
+      "sha256": "d3046c8f7525c95f9f5d1d8d4885b9dd53c7b218de57bf2facd55dcb4ab17b3e",
+      "git_blob": "9294296912c411270678bebf8611d8e2c8006ad0"
+    },
+    "projects/decision-field/experiments/structural/source_graph.json": {
+      "bytes": 5550,
+      "sha256": "b9e3498d5b3f3487e8c7f1954b082ddae7647ce8b0ba370511c111e63dd790e0",
+      "git_blob": "173d7594897af2bc176935a4fb40827d2b42dd1e"
+    },
+    "projects/decision-field/experiments/structural/test_adapter.py": {
+      "bytes": 10787,
+      "sha256": "9708b0d299a4c54dfbde5e98ac8495976393a6952c19eb116af3b5896ebf1c6a",
+      "git_blob": "124e8d77fe388599165a176492b938f95fa4cb68"
+    }
+  }
+}
