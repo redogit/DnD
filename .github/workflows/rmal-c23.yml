@@ -51,6 +51,7 @@ jobs:
         with:
           ref: ${{ env.VERIFY_SHA }}
           persist-credentials: false
+          fetch-depth: 0
       - name: Verify source identity
         run: test "$(git rev-parse HEAD)" = "$VERIFY_SHA"
       - name: Toolchain
