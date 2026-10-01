@@ -78,8 +78,24 @@ jobs:
         run: build/linux-c23/rmalc manifest tests/recovered_surface.rmal --json
       - name: Tests
         run: ctest --test-dir build/linux-c23 --output-on-failure
-      - name: Verify locally tested Mirror source identities
-        run: python3 projects/decision-field/scripts/check_mirror_manifest.py
+      - name: Verify frozen Mirror v0.7 source identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          git archive "$VERIFY_SHA" | tar -x -C "$tmp"
+          mirror_cmake_blob="$(python3 - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("projects/decision-field/evidence/v0_7/SOURCE_MANIFEST.json").read_text())
+          print(manifest["files"]["CMakeLists.txt"]["git_blob"])
+          PY
+          )"
+          git cat-file blob "$mirror_cmake_blob" > "$tmp/CMakeLists.txt"
+          python3 "$tmp/projects/decision-field/scripts/check_mirror_manifest.py" --root "$tmp"
+          echo "Frozen Mirror CMake verified in temporary witness tree."
+          echo "Current root CMake remains the exact-head build/test input."
       - name: Retain exact integration sources
         if: always()
         shell: bash
