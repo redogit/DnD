@@ -1,6 +1,6 @@
 # CURRENT — RMAL 3.1 / RMALC 3.1 C23
 
-**Date:** 2026-09-26
+**Date:** 2026-10-01
 
 ## Current implementation authority
 
@@ -121,7 +121,6 @@ Until exact-head CI succeeds:
 
 Not universal compiler correctness. Not full 2.1.x parity. Not scientific validation.
 
-
 ## September 29 continuation — explicit native host / Mirror bridge
 
 PR #3 extends the VM with opt-in native callback bindings and a C-compatible API
@@ -137,3 +136,31 @@ Root compiler/ABI CI and the full native integration suite are separate evidence
 scopes. The full native suite requires the exact original v0.3 source; the supplied
 companion bundle includes it. No Windows durable checkpoint implementation or
 universal AnyFunctor/compiler proof is implied.
+
+## October 1 continuation — WordDNA triplex native carrier
+
+The root C23 library now has an additive `rmal/word_dna.h` semantic carrier for
+word-level exact UTF-8 identity, Unicode-scalar atom indexing, learned feature/span
+pairing, four ID roles (occurrence, semantic object, supports, clarity), and three
+strict directed successor axes: linguistic, computational and epistemic.
+
+Each triplex occurrence stores only three `uint32_t` successor indices. Reverse
+predecessor lookup is derived by scan, trading O(n) reverse lookup for minimal
+canonical connection storage. Each axis rejects second successors, second
+predecessors and cycles; branching remains a separate graph/Decision Field concern.
+
+Folding is non-destructive: fold contacts borrow an immutable WordDNA and
+`UNFOLD(FOLD(x))` is tested for exact UTF-8 byte recovery. A PIV textual projection
+hook exposes Unicode scalar identity without embedding PIV font bytes.
+
+Current atomization is Unicode scalar segmentation, not full UAX #29 extended
+grapheme segmentation. Learning policy and semantic folding laws are also explicit
+remainder. New WordDNA names are native API concepts, not promoted RMAL lexer
+keywords. `examples/word_dna_triplex.rmal` carries the design through existing
+TYPE/RELATION/OPERATOR/INVARIANT/BOUNDARY forms.
+
+Vocabulary and claim boundaries are cataloged in
+`spec/RMAL_WORD_DNA_VOCABULARY_3_1.md`.
+
+`NATIVE_WORD_DNA_CARRIER != NEW_RMAL_SOURCE_KEYWORDS`
+`EXACT_UTF8_ROUNDTRIP != UNIVERSAL_SEMANTIC_FOLDING`
