@@ -63,6 +63,9 @@ strictly decreases adapter depth. Mixed DuplicateEvaluator orderings preserve ex
 source recovery; smaller boundary-crossing failures remain in history. The old
 fixture, historical receipts and frozen v0.7 source identities remain unchanged.
 This extends only the standalone experiment, with no runtime or planner binding.
+The [checkout follow-up](evidence/structural_adapter_2026_09_30/CHECKOUT_FIX.md)
+retains the first Windows CI manifest failure and the scoped LF repair for the
+14 frozen native source witnesses; their committed source bytes are unchanged.
 
 ## Way back
 

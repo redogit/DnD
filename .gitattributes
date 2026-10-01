@@ -8,3 +8,18 @@
 /projects/decision-field/evidence/structural_adapter_2026_09_30/** text eol=lf
 # Retain unittest's raw subtest output, including trailing spaces.
 /projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/RED_TESTS.txt -whitespace
+# Frozen v0.7 identities are now checked on Windows as exact source bytes.
+/CMakeLists.txt text eol=lf
+/include/rmal/rmal.h text eol=lf
+/tests/cpp_native_abi_test.cpp text eol=lf
+/projects/decision-field/CMakeLists.txt text eol=lf
+/projects/decision-field/scripts/prepare_native_engine.py text eol=lf
+/projects/decision-field/include/decision_field/detail/function_accessors.inc text eol=lf
+/projects/decision-field/include/decision_field/anyfunctor_mirror.hpp text eol=lf
+/projects/decision-field/include/decision_field/rmal_mirror_host.hpp text eol=lf
+/projects/decision-field/tests/anyfunctor_mirror_tests.cpp text eol=lf
+/projects/decision-field/tests/rmal_mirror_tests.cpp text eol=lf
+/projects/decision-field/tests/rmal_mirror_process.cpp text eol=lf
+/projects/decision-field/tests/rmal_mirror_process_test.py text eol=lf
+/projects/decision-field/examples/mirror_homeward.rmal text eol=lf
+/projects/decision-field/scripts/check_mirror_manifest.py text eol=lf

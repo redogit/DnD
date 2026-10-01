@@ -1,0 +1,158 @@
+[
+  {
+    "core.autocrlf": "true",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/scripts/check_mirror_manifest.py\", line 30, in <module>\n    print(f'PASS {check(args.root)} source identities; MANIFEST_MATCH != RUNTIME_TEST')\n                  ^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/scripts/check_mirror_manifest.py\", line 23, in check\n    raise ValueError('source identity mismatch: ' + name)\nValueError: source identity mismatch: CMakeLists.txt\n",
+    "files": [
+      {
+        "path": "CMakeLists.txt",
+        "sha256_matches": false,
+        "CRLF_count": 76
+      },
+      {
+        "path": "include/rmal/rmal.h",
+        "sha256_matches": false,
+        "CRLF_count": 89
+      },
+      {
+        "path": "tests/cpp_native_abi_test.cpp",
+        "sha256_matches": false,
+        "CRLF_count": 2
+      },
+      {
+        "path": "projects/decision-field/CMakeLists.txt",
+        "sha256_matches": false,
+        "CRLF_count": 92
+      },
+      {
+        "path": "projects/decision-field/scripts/prepare_native_engine.py",
+        "sha256_matches": false,
+        "CRLF_count": 29
+      },
+      {
+        "path": "projects/decision-field/include/decision_field/detail/function_accessors.inc",
+        "sha256_matches": false,
+        "CRLF_count": 4
+      },
+      {
+        "path": "projects/decision-field/include/decision_field/anyfunctor_mirror.hpp",
+        "sha256_matches": false,
+        "CRLF_count": 164
+      },
+      {
+        "path": "projects/decision-field/include/decision_field/rmal_mirror_host.hpp",
+        "sha256_matches": false,
+        "CRLF_count": 83
+      },
+      {
+        "path": "projects/decision-field/tests/anyfunctor_mirror_tests.cpp",
+        "sha256_matches": false,
+        "CRLF_count": 72
+      },
+      {
+        "path": "projects/decision-field/tests/rmal_mirror_tests.cpp",
+        "sha256_matches": false,
+        "CRLF_count": 52
+      },
+      {
+        "path": "projects/decision-field/tests/rmal_mirror_process.cpp",
+        "sha256_matches": false,
+        "CRLF_count": 52
+      },
+      {
+        "path": "projects/decision-field/tests/rmal_mirror_process_test.py",
+        "sha256_matches": false,
+        "CRLF_count": 24
+      },
+      {
+        "path": "projects/decision-field/examples/mirror_homeward.rmal",
+        "sha256_matches": false,
+        "CRLF_count": 14
+      },
+      {
+        "path": "projects/decision-field/scripts/check_mirror_manifest.py",
+        "sha256_matches": false,
+        "CRLF_count": 30
+      }
+    ]
+  },
+  {
+    "core.autocrlf": "false",
+    "exit": 0,
+    "stdout": "PASS 14 source identities; MANIFEST_MATCH != RUNTIME_TEST\n",
+    "stderr": "",
+    "files": [
+      {
+        "path": "CMakeLists.txt",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "include/rmal/rmal.h",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "tests/cpp_native_abi_test.cpp",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/CMakeLists.txt",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/scripts/prepare_native_engine.py",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/include/decision_field/detail/function_accessors.inc",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/include/decision_field/anyfunctor_mirror.hpp",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/include/decision_field/rmal_mirror_host.hpp",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/tests/anyfunctor_mirror_tests.cpp",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/tests/rmal_mirror_tests.cpp",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/tests/rmal_mirror_process.cpp",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/tests/rmal_mirror_process_test.py",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/examples/mirror_homeward.rmal",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      },
+      {
+        "path": "projects/decision-field/scripts/check_mirror_manifest.py",
+        "sha256_matches": true,
+        "CRLF_count": 0
+      }
+    ]
+  }
+]

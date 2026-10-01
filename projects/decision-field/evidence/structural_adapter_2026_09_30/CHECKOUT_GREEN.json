@@ -1,0 +1,23 @@
+[
+  {
+    "core.autocrlf": "true",
+    "check": "frozen identities",
+    "exit": 0,
+    "stdout": "PASS 14 source identities; MANIFEST_MATCH != RUNTIME_TEST\n",
+    "stderr": ""
+  },
+  {
+    "core.autocrlf": "true",
+    "check": "adapter replay",
+    "exit": 0,
+    "stdout": "PASS exact source recovery and 24 recorded schedules (generator not rerun)\n",
+    "stderr": ""
+  },
+  {
+    "core.autocrlf": "false",
+    "check": "frozen identities",
+    "exit": 0,
+    "stdout": "PASS 14 source identities; MANIFEST_MATCH != RUNTIME_TEST\n",
+    "stderr": ""
+  }
+]
