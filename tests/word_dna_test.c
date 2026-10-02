@@ -52,6 +52,38 @@ int main(void) {
     CHECK(!rmal_word_dna_create_n((const char *)invalid, sizeof invalid, 1, 1, &st));
     CHECK(!st.ok);
 
+    /* Length-bounded U+0000 must not truncate the C-string PIV projection. */
+    const char nul_surface[] = {'A', '\0', 'B'};
+    RmalWordDna *nul_word = rmal_word_dna_create_n(
+        nul_surface, sizeof nul_surface, 40, 50, &st);
+    CHECK(nul_word && st.ok);
+    CHECK(rmal_word_dna_utf8_size(nul_word) == sizeof nul_surface);
+    CHECK(memcmp(rmal_word_dna_utf8(nul_word), nul_surface, sizeof nul_surface) == 0);
+    piv = rmal_word_dna_render_piv(nul_word);
+    CHECK(piv && strcmp(piv,
+        "PIV_FONT|WordDNA occurrence=40 semantic=50 atoms=3 supports=0 clarity=0 "
+        "[U+0041:A][U+0000:\\0][U+0042:B]\n") == 0);
+    free(piv);
+    CHECK(rmal_word_dna_occurrence_id(nul_word) == 40);
+    CHECK(rmal_word_dna_semantic_object_id(nul_word) == 50);
+    CHECK(rmal_word_dna_utf8_size(nul_word) == sizeof nul_surface);
+    CHECK(memcmp(rmal_word_dna_utf8(nul_word), nul_surface, sizeof nul_surface) == 0);
+    CHECK(rmal_word_dna_atom_count(nul_word) == 3);
+    for (size_t i = 0; i < sizeof nul_surface; ++i) {
+        CHECK(rmal_word_dna_atom_at(nul_word, i, &atom));
+        CHECK(atom.byte_offset == i && atom.byte_length == 1);
+        CHECK(atom.unicode_scalar == (uint32_t)nul_surface[i]);
+    }
+    fold = rmal_word_dna_fold_create(nul_word, &st);
+    CHECK(fold && st.ok);
+    CHECK(rmal_word_dna_fold_roundtrip_exact(fold));
+    unfolded = rmal_word_dna_unfold_utf8(fold, &unfolded_n);
+    CHECK(unfolded && unfolded_n == sizeof nul_surface);
+    CHECK(memcmp(unfolded, nul_surface, unfolded_n) == 0);
+    free(unfolded);
+    rmal_word_dna_fold_free(fold);
+    rmal_word_dna_free(nul_word);
+
     RmalTriplexWordDna *t = rmal_triplex_word_dna_create();
     CHECK(t);
     size_t a = 0, b = 0, c = 0;
