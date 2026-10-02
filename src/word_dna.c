@@ -484,10 +484,13 @@ char *rmal_word_dna_render_piv(const RmalWordDna *word) {
 
     for (size_t i = 0; i < word->atom_count; ++i) {
         const RmalWordDnaAtom *atom = &word->atoms[i];
+        /* Keep U+0000 visible without embedding a C-string terminator. */
+        const char *display = atom->unicode_scalar == 0
+                            ? "\\0" : word->utf8 + atom->byte_offset;
+        const size_t display_size = atom->unicode_scalar == 0
+                                  ? 2 : atom->byte_length;
         if (!text_appendf(&buffer, "[U+%04" PRIX32 ":", atom->unicode_scalar) ||
-            !text_append_bytes(&buffer,
-                               word->utf8 + atom->byte_offset,
-                               atom->byte_length) ||
+            !text_append_bytes(&buffer, display, display_size) ||
             !text_appendf(&buffer, "]")) {
             free(buffer.data);
             return NULL;

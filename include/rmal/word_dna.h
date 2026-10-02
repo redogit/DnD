@@ -79,7 +79,9 @@ size_t rmal_word_dna_pair_count(const RmalWordDna *word);
 bool rmal_word_dna_pair_at(const RmalWordDna *word, size_t index,
                            RmalWordDnaPairView *out);
 
-/* Human-visible projection hook. No PIV font bytes are embedded. */
+/* Human-visible NUL-terminated projection; caller frees the result.
+ * U+0000 is displayed as [U+0000:\0] without changing canonical UTF-8.
+ * No PIV font bytes are embedded. SOURCE_IDENTITY != RENDERING. */
 char *rmal_word_dna_render_piv(const RmalWordDna *word);
 
 /* Fold borrows word; the word must outlive the fold. */
