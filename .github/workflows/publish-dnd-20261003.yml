@@ -84,3 +84,5 @@ jobs:
             exit 1
           fi
           gh release create "$TAG"             DnD-2026-10-03.zip             DnD-2026-10-03.zip.sha256             --repo "$GITHUB_REPOSITORY"             --target "$TARGET_SHA"             --title "$TITLE"             --notes-file RELEASE_NOTES.md             --prerelease
+
+# one-shot release trigger
