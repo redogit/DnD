@@ -21,6 +21,7 @@ df_test(decision_field_component_analysis_tests tests/component_analysis_tests.c
 df_test(decision_field_core_coverage_tests tests/core_coverage_tests.cpp)
 df_test(decision_field_bridge_tests tests/bridge_tests.cpp)
 df_test(decision_field_replay_integrity_tests tests/replay_integrity_tests.cpp)
+df_test(decision_field_local_plane_tests tests/local_plane_tests.cpp)
 
 # Explicit source dependency: never manufacture an engine substitute when absent.
 set(DF_PREDECESSOR_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/predecessor/v0_3" CACHE PATH "Verified v0.3 source directory")
