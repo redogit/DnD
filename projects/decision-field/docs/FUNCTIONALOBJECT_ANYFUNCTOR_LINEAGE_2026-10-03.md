@@ -65,7 +65,10 @@ machine has returned to an identical global state.
 
 ## Executable increment
 
-`include/decision_field/local_plane.hpp` adds a bounded local routing index.\n`include/decision_field/anyfunctor_local_plane.hpp` binds that index to the existing\nAnyFunctor admission path: the plane can only integrate after the real invocation\nreturns `ExecutionStatus::Succeeded`.
+\`include/decision_field/local_plane.hpp\` adds a bounded local routing index.
+\`include/decision_field/anyfunctor_local_plane.hpp\` binds that index to the existing
+AnyFunctor admission path: the plane can only integrate after the real invocation
+returns \`ExecutionStatus::Succeeded\`.
 
 A plane:
 
@@ -113,7 +116,18 @@ SHORTER_WIRING != LESS_OBLIGATION
 
 ## Regression probe
 
-`tests/local_plane_tests.cpp` checks the standalone carrier. The existing\n`tests/anyfunctor_mirror_tests.cpp` additionally checks the live seam: an equal-valued\nbut distinct source occurrence may reuse the local route while AnyFunctor still creates\na distinct occurrence-bound invocation. Rejected AnyFunctor admission becomes a retained\nlocal residual.\n\nThe standalone test checks:
+\`tests/local_plane_tests.cpp\` checks the standalone carrier. The additive
+\`tests/anyfunctor_local_plane_tests.cpp\` checks the live seam against the preserved
+v0.7 AnyFunctor carrier: an equal-valued but distinct source occurrence may reuse the
+local route while AnyFunctor still creates a distinct occurrence-bound invocation.
+Rejected AnyFunctor admission becomes a retained local residual.
+
+The preserved \`tests/anyfunctor_mirror_tests.cpp\` and
+\`projects/decision-field/CMakeLists.txt\` remain byte-identical to the v0.7 source
+manifest. The successor has its own build surface at
+\`successor/local-plane/CMakeLists.txt\`.
+
+The standalone test checks:
 
 - one obligation is rejected because this carrier is explicitly plural;
 - the four stair stages remain ordered;
