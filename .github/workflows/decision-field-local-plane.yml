@@ -1,0 +1,32 @@
+name: Decision Field Local Plane
+
+on:
+  pull_request:
+    paths:
+      - "projects/decision-field/include/decision_field/local_plane.hpp"
+      - "projects/decision-field/include/decision_field/anyfunctor_local_plane.hpp"
+      - "projects/decision-field/tests/local_plane_tests.cpp"
+      - "projects/decision-field/tests/anyfunctor_local_plane_tests.cpp"
+      - "projects/decision-field/successor/local-plane/**"
+      - ".github/workflows/decision-field-local-plane.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  standalone:
+    name: ${{ matrix.os }} / C++23 local plane
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S projects/decision-field/successor/local-plane -B build/local-plane -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build/local-plane --config Release
+      - name: Test
+        run: ctest --test-dir build/local-plane -C Release --output-on-failure
