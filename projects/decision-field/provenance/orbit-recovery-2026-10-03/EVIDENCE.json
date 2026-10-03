@@ -1,0 +1,208 @@
+{
+  "schema": "dnd/orbit-custody-dependency-recovery/1",
+  "date": "2026-10-03",
+  "dnd_baseline": "57786dd85cb13c4a8f657ae4a66ca6d4058854fa",
+  "decision": "WITHHELD",
+  "engine_identity": "RECOVERED_EXACT",
+  "custody_execution": "BLOCKED_MISSING_SOURCE_BLOB",
+  "promotion": false,
+  "source": {
+    "repository": "redogit/conscience64",
+    "anchor": "ea546a415261ca21ae3be39dbe070e8ecade19f6",
+    "archive_path": "research/cross-carrier/2026-09-13/internal-update/internal_connection_test_2026-09-13.zip",
+    "archive_git_blob": "02bd91c27903f0ba6781c80ebff687d1a271b5ab",
+    "introduced_commit": "d02fe69465c7c39d70b2ea16579230d637027993",
+    "introducing_pr": 1,
+    "introducing_branch": "update/internal-workspace-20260914",
+    "merge_commit": "83d5bab5623dbbfff669a6fbbc3a27a4c48bfc1f",
+    "identical_archive_git_blob_at": [
+      "d02fe69465c7c39d70b2ea16579230d637027993",
+      "83d5bab5623dbbfff669a6fbbc3a27a4c48bfc1f",
+      "ea546a415261ca21ae3be39dbe070e8ecade19f6"
+    ],
+    "member_prefix": "connection_next/extracted/orbit_lab_reflow_1_0/engine/",
+    "direct_repository_path_lookup_http_status": 404,
+    "importer_path": "research/cross-carrier/2026-09-13/internal-update/global_search/import_working_packet.py",
+    "importer_git_blob": "ef7ab99808b8efc6b3f857b7de3b766b2e83ff6f",
+    "import_statement": "from orbit_lab import OrbitLab",
+    "inventory_git_blob": "eac450ffc2a49306f2c88e6d2897bc8e0c8cd81e",
+    "manifest_git_blob": "e786ec03e8fc4b9868bbe1b46a6caf673dcb0cf6",
+    "inventory_members_verified": 736,
+    "inventory_mismatches": 0,
+    "custody_manifest_entries_verified": 29,
+    "custody_manifest_mismatches": 0
+  },
+  "archives": [
+    {
+      "name": "internal_connection_test_2026-09-13.zip",
+      "bytes": 4648372,
+      "sha256": "c18a59b2922e8556eff08077b7a4774f6dc08ad9cbca12234ab945624aa8545d",
+      "member_count": 736,
+      "missing_source_digest_matches": []
+    },
+    {
+      "name": "HARD_WORK_WORD_CARRIER_ANYFUNCTOR_ORBIT_2026-09-30.zip",
+      "bytes": 85969,
+      "sha256": "bc60b41efd9186426ebe3f82af244a1c6bb73896fec5d206d203f530dfbcad2a",
+      "member_count": 36,
+      "missing_source_digest_matches": []
+    },
+    {
+      "name": "Word_Carrier_Collector_ANYINVOCATION_PARITY_SUCCESSOR_SEALED_2026-09-30.zip",
+      "bytes": 2630692,
+      "sha256": "60e7f3ad4d5ef1d8067e3f6cf78cf158d01203f5dec1dbe240c12f90d8b9b960",
+      "member_count": 834,
+      "missing_source_digest_matches": []
+    }
+  ],
+  "file_identities": {
+    "engine/orbit_lab.py": {
+      "bytes": 203048,
+      "sha256": "2910df6adb525143423fb23676e5aaf376669cd7686401b42f63d64863fe1f18"
+    },
+    "engine/tests/test_orbit_lab.py": {
+      "bytes": 2532,
+      "sha256": "fe426c89b8762c90f81c12b06e6da85a080508028f5abd8da0c5431007bf8912"
+    },
+    "custody/test_verified_custody.py": {
+      "bytes": 4208,
+      "sha256": "cfbf808cfcb9e105e58f54420a78cb1a39655498fee515e76e290b4719e09241"
+    },
+    "custody/verified_custody_adapter.py": {
+      "bytes": 3379,
+      "sha256": "09847836a94fb0e21f773324470a08e29cf8ae9e595e7c11a7e8fd800747b6c4"
+    },
+    "orbit_integration/orbit_state.json": {
+      "bytes": 123802,
+      "sha256": "e6e7107afb01125aaee8ef6a2e3739867dc16f1234126097b8a0383aff30863a"
+    },
+    "orbit_integration/ORBIT_THREE_NODE_RESULT.json": {
+      "bytes": 5503,
+      "sha256": "babeb0b8a13086e2ac22c96115ca277fcb6705c960da75ac2c3caae13cba8780"
+    },
+    "temporary_path_relocated_test": {
+      "bytes": 4425,
+      "sha256": "a3363c483ba8601ab6bde37d4a998b5211a22cd073030a72b01deff47484e27f"
+    }
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "execution": [
+    {
+      "probe": "retained_orbit_unit_tests",
+      "cwd": "/workspace/scratch/51f17ecc01d9/recovery/source/connection_next/extracted/orbit_lab_reflow_1_0/engine",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_orbit_lab.py",
+        "-v"
+      ],
+      "PYTHONPATH": "/workspace/scratch/51f17ecc01d9/recovery/source/connection_next/extracted/orbit_lab_reflow_1_0/engine",
+      "exit_code": 0,
+      "tests_run": 8,
+      "failures": 0,
+      "scope": "Only test_orbit_lab.py; not historical 209-test suite"
+    },
+    {
+      "probe": "unchanged_custody_test_with_engine",
+      "cwd": "/workspace/scratch/51f17ecc01d9",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/51f17ecc01d9/recovery/custody/custody/test_verified_custody.py"
+      ],
+      "PYTHONPATH": "/workspace/scratch/51f17ecc01d9/recovery/source/connection_next/extracted/orbit_lab_reflow_1_0/engine",
+      "exit_code": 1,
+      "custody_checks_completed": 0,
+      "cause": "Historical absolute fixture path absent"
+    },
+    {
+      "probe": "path_relocated_custody_test_with_engine",
+      "cwd": "/workspace/scratch/51f17ecc01d9",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/51f17ecc01d9/recovery/relocated/test_verified_custody.py"
+      ],
+      "PYTHONPATH": "/workspace/scratch/51f17ecc01d9/recovery/source/connection_next/extracted/orbit_lab_reflow_1_0/engine:/workspace/scratch/51f17ecc01d9/recovery/custody/custody",
+      "exit_code": 1,
+      "custody_checks_completed": 0,
+      "custody_checks_expected": 7,
+      "cause": "CustodyVerificationError: source blob missing",
+      "modifications": "Only the three path-prefix substitutions recorded below; test assertions and adapter unchanged"
+    }
+  ],
+  "path_relocations": {
+    "/mnt/data/orbit_successor_fresh_extract/engine": "/workspace/scratch/51f17ecc01d9/recovery/source/connection_next/extracted/orbit_lab_reflow_1_0/engine",
+    "/mnt/data/orbit_verified_custody": "/workspace/scratch/51f17ecc01d9/recovery/custody-run",
+    "/mnt/data/orbit_real_integration": "/workspace/scratch/51f17ecc01d9/recovery/custody/orbit_integration"
+  },
+  "missing_fixture": {
+    "sha256": "c390a188b2d3e167e18dca776cdb0945f3e534c0e45c7a5066b1a9aebe31ad60",
+    "source_occurrence_id": "occurrence-710993e5d9",
+    "content_identity_id": "contentidentity-4ec137ac01",
+    "historical_path": "/mnt/data/orbit_real_integration/blobs/c390a188b2d3e167e18dca776cdb0945f3e534c0e45c7a5066b1a9aebe31ad60",
+    "exact_bytes_recovered": false,
+    "replacement_generated": false,
+    "expected_digest_changed": false,
+    "state_file_digest_is_not_the_missing_blob_digest": true
+  },
+  "search_scope": {
+    "owner_wide_default_branch_queries": [
+      "orbit_lab_reflow_1_0",
+      "2910df6adb525143423fb23676e5aaf376669cd7686401b42f63d64863fe1f18",
+      "c390a188b2d3e167e18dca776cdb0945f3e534c0e45c7a5066b1a9aebe31ad60"
+    ],
+    "related_repositories": [
+      "redogit/redogit",
+      "redogit/Other-Projects",
+      "redogit/DnD",
+      "redogit/RMAL"
+    ],
+    "related_query": "orbit_lab",
+    "related_returned_paths": [
+      "redogit/DnD/projects/decision-field/provenance/CODE_CROSS_CORRELATION_2026-10-03.md"
+    ],
+    "source_blob_digest_github_hits": 0,
+    "anchor_tree_entries": 815,
+    "anchor_tree_truncated": false,
+    "archive_path_history_commits_returned": [
+      "d02fe69465c7c39d70b2ea16579230d637027993"
+    ],
+    "branch_inventory_count": 140,
+    "branch_page_counts": [
+      100,
+      40,
+      0
+    ],
+    "terminal_cursor": null,
+    "introducing_branch_still_listed": false,
+    "all_branch_trees_scanned": false,
+    "exhaustive_all_history_claim": false
+  },
+  "logs": [
+    {
+      "path": "01-exact-test-with-engine.txt",
+      "bytes": 444,
+      "sha256": "69a8c08eb55086406b41938fcb99ab3b60e8f0df8ac93fe54cda213c7395df50"
+    },
+    {
+      "path": "02-relocated-test-with-engine.txt",
+      "bytes": 1143,
+      "sha256": "23f047302daa45067bd51f168d04f27cd72928f13b9af03bc3741a2403e353db"
+    },
+    {
+      "path": "03-orbit-retained-tests.txt",
+      "bytes": 820,
+      "sha256": "bb38d41b26d387b64090e700351f55148781bbc5251418ec45cfa1c7cd0e51fc"
+    }
+  ],
+  "next_gate": "Recover or exactly reproduce the faithful source export and verify its pinned digest; complete all seven custody checks before any current-DnD integration and authority-equivalence review.",
+  "claim_ceiling": "Exact source recovery and bounded local test evidence. Historical result JSON is not a new passing test. No runtime promotion, authenticated authority, production admission or theorem claim."
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/51f17ecc01d9/recovery/relocated/test_verified_custody.py", line 25, in <module>
+    r=verified_copy_and_record(lab=lab,source_occurrence_id=source_occ,source_context_id=source_ctx,destination_context_id=dest_ctx,source_blob_dir=SOURCE_BLOBS,destination_blob_dir=ROOT/'dest',obligation_ids=[obl],provenance_class='TEST',provenance='verified-custody-test',identity_key='verified-custody:positive')
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/51f17ecc01d9/recovery/custody/custody/verified_custody_adapter.py", line 22, in verified_copy_and_record
+    if not source.is_file(): raise CustodyVerificationError('source blob missing')
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verified_custody_adapter.CustodyVerificationError: source blob missing

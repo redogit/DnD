@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/51f17ecc01d9/recovery/custody/custody/test_verified_custody.py", line 9, in <module>
+    RES=json.load(open('/mnt/data/orbit_real_integration/ORBIT_THREE_NODE_RESULT.json'))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/orbit_real_integration/ORBIT_THREE_NODE_RESULT.json'
