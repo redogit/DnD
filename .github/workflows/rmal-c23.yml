@@ -3,6 +3,7 @@ name: RMAL C23 Toolchain
 on:
   push:
     paths:
+      - ".gitattributes"
       - "CMakeLists.txt"
       - "include/**"
       - "src/**"
@@ -20,6 +21,7 @@ on:
       - ".github/workflows/rmal-c23.yml"
   pull_request:
     paths:
+      - ".gitattributes"
       - "CMakeLists.txt"
       - "include/**"
       - "src/**"
