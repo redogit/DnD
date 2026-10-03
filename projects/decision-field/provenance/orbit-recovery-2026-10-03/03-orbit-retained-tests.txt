@@ -1,0 +1,13 @@
+test_claim (test_orbit_lab.OrbitLabV02Tests.test_claim) ... ok
+test_current_probe_limit_and_expansion (test_orbit_lab.OrbitLabV02Tests.test_current_probe_limit_and_expansion) ... ok
+test_identity_dedupe (test_orbit_lab.OrbitLabV02Tests.test_identity_dedupe) ... ok
+test_provenance_class_required (test_orbit_lab.OrbitLabV02Tests.test_provenance_class_required) ... ok
+test_quarantine (test_orbit_lab.OrbitLabV02Tests.test_quarantine) ... ok
+test_relation_payload (test_orbit_lab.OrbitLabV02Tests.test_relation_payload) ... ok
+test_subject_scoped_orbit (test_orbit_lab.OrbitLabV02Tests.test_subject_scoped_orbit) ... ok
+test_supersedes_cycle_rejected (test_orbit_lab.OrbitLabV02Tests.test_supersedes_cycle_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.027s
+
+OK
