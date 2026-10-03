@@ -1,0 +1,58 @@
+name: Verified reconciliation probes
+
+on:
+  push:
+    paths:
+      - 'projects/decision-field/experiments/structural/**'
+      - 'projects/decision-field/evidence/structural_*_2026_09_30/**'
+      - 'tests/DYNAMIC_RMAL_CHARACTERS.rmal'
+      - 'tests/verify_dynamic_rmal.py'
+      - '.github/workflows/verified-reconciliation.yml'
+  pull_request:
+    paths:
+      - 'projects/decision-field/experiments/structural/**'
+      - 'projects/decision-field/evidence/structural_*_2026_09_30/**'
+      - 'tests/DYNAMIC_RMAL_CHARACTERS.rmal'
+      - 'tests/verify_dynamic_rmal.py'
+      - '.github/workflows/verified-reconciliation.yml'
+
+permissions:
+  contents: read
+
+env:
+  VERIFY_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
+jobs:
+  reconcile:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.VERIFY_SHA }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify exact source identity
+        shell: bash
+        run: test "$(git rev-parse HEAD)" = "$VERIFY_SHA"
+      - name: Structural contract tests
+        run: python -m unittest discover -s projects/decision-field/experiments/structural -p 'test_*.py' -v
+      - name: Structural contract tests optimized
+        run: python -O -m unittest discover -s projects/decision-field/experiments/structural -p 'test_*.py' -v
+      - name: Generate and independently replay receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="${RUNNER_TEMP}/structural-reconciliation"
+          mkdir -p "$tmp"
+          python projects/decision-field/experiments/structural/probe.py --output "$tmp/duplicate.json"
+          python projects/decision-field/experiments/structural/probe.py --verify "$tmp/duplicate.json"
+          python projects/decision-field/experiments/structural/probe.py --adapter --output "$tmp/adapter.json"
+          python projects/decision-field/experiments/structural/probe.py --adapter --verify "$tmp/adapter.json"
+      - name: Verify Dynamic RMAL recovered contract
+        run: python tests/verify_dynamic_rmal.py

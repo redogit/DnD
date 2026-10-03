@@ -1,0 +1,39 @@
+MODULE word_dna_triplex;
+SURFACE canonical
+
+TYPE WordDNA STATUS NATIVE_C23_EXTENSION
+TYPE SurfaceStrand STATUS EXACT_UTF8
+TYPE SurfaceAtom STATUS UNICODE_SCALAR
+TYPE LearnedStrand STATUS APPEND_ONLY_ANNOTATION
+TYPE PairMap STATUS TYPED_ALIGNMENT
+TYPE TriplexWordDNA STATUS THREE_DIRECTED_LIST_AXES
+TYPE FoldContact STATUS DERIVED_CARRIER
+TYPE PIVProjection STATUS HUMAN_VISIBLE_CARRIER
+
+RELATION LinguisticNext DIRECTION FORWARD CARDINALITY ZERO_OR_ONE
+RELATION ComputationalNext DIRECTION FORWARD CARDINALITY ZERO_OR_ONE
+RELATION EpistemicNext DIRECTION FORWARD CARDINALITY ZERO_OR_ONE
+RELATION SurfacePairsFeature EVIDENCE_TRANSFER DENY
+RELATION FoldContactRel PRESERVE source_identity
+
+OPERATOR FoldWordDNA PRESERVE ExactUTF8
+OPERATOR UnfoldWordDNA PRESERVE ExactUTF8
+OPERATOR RenderPIV PRESERVE source_identity
+
+PRESERVE occurrence_identity semantic_identity exact_utf8 provenance history remainder
+ALLOW learned_features pair_map fold_contacts piv_projection
+DENY destructive_surface_normalization implicit_branch evidence_transfer
+
+OBLIGATION exact_utf8_roundtrip
+OBLIGATION strict_chain_axes
+OBLIGATION source_rendering_separation
+INVARIANT canonical_surface_immutable
+INVARIANT three_successor_slots_only
+INVARIANT unfold_fold_exact_utf8
+BOUNDARY WordDNA CLAIM_CEILING NATIVE_CARRIER_ONLY REASON source_keywords_not_promoted
+BOUNDARY SurfaceAtom CLAIM_CEILING UNICODE_SCALAR_ONLY REASON full_grapheme_segmentation_open
+BOUNDARY PIVProjection CLAIM_CEILING TEXTUAL_HOOK_ONLY REASON font_bytes_not_embedded
+REMAINDER unicode_extended_grapheme_segmentation learning_policy semantic_fold_law
+VERIFY "WordDNA native tests establish only the declared bounded carrier invariants"
+TRACE word_dna_triplex
+CONTINUE

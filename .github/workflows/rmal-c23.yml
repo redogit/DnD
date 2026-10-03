@@ -51,6 +51,7 @@ jobs:
         with:
           ref: ${{ env.VERIFY_SHA }}
           persist-credentials: false
+          fetch-depth: 0
       - name: Verify source identity
         run: test "$(git rev-parse HEAD)" = "$VERIFY_SHA"
       - name: Toolchain
@@ -78,17 +79,46 @@ jobs:
         run: build/linux-c23/rmalc manifest tests/recovered_surface.rmal --json
       - name: Tests
         run: ctest --test-dir build/linux-c23 --output-on-failure
-      - name: Verify locally tested Mirror source identities
-        run: python3 projects/decision-field/scripts/check_mirror_manifest.py
+      - name: Verify frozen Mirror v0.7 source identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          git archive "$VERIFY_SHA" | tar -x -C "$tmp"
+          mirror_cmake_blob="$(python3 - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("projects/decision-field/evidence/v0_7/SOURCE_MANIFEST.json").read_text())
+          print(manifest["files"]["CMakeLists.txt"]["git_blob"])
+          PY
+          )"
+          git cat-file blob "$mirror_cmake_blob" > "$tmp/CMakeLists.txt"
+          python3 "$tmp/projects/decision-field/scripts/check_mirror_manifest.py" --root "$tmp"
+          echo "Frozen Mirror CMake verified in temporary witness tree."
+          echo "Current root CMake remains the exact-head build/test input."
       - name: Retain exact integration sources
         if: always()
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/rmal-source"
-          git archive --format=zip --output="$RUNNER_TEMP/rmal-source/rmal-native-source.zip" "$VERIFY_SHA" CMakeLists.txt include/rmal src tests examples/hello.rmal spec README.md README_COMPILER.md CURRENT.md scripts projects/decision-field
+          git archive --format=zip --output="$RUNNER_TEMP/rmal-source/rmal-native-source.zip" "$VERIFY_SHA" CMakeLists.txt include/rmal src tests examples/hello.rmal examples/word_dna_triplex.rmal spec README.md README_COMPILER.md CURRENT.md scripts projects/decision-field
           printf '%s\n' "$VERIFY_SHA" > "$RUNNER_TEMP/rmal-source/SOURCE_REVISION.txt"
-          sha256sum "$RUNNER_TEMP/rmal-source/rmal-native-source.zip" > "$RUNNER_TEMP/rmal-source/SHA256SUMS.txt"
+          (cd "$RUNNER_TEMP/rmal-source" && sha256sum rmal-native-source.zip > SHA256SUMS.txt)
+      - name: Verify retained source reproduction
+        shell: bash
+        run: |
+          set -euo pipefail
+          retained="$(mktemp -d)"
+          cp "$RUNNER_TEMP/rmal-source/"* "$retained/"
+          (cd "$retained" && sha256sum -c SHA256SUMS.txt)
+          test "$(cat "$retained/SOURCE_REVISION.txt")" = "$VERIFY_SHA"
+          unzip -q "$retained/rmal-native-source.zip" -d "$retained/source"
+          cmp examples/word_dna_triplex.rmal "$retained/source/examples/word_dna_triplex.rmal"
+          cmake -S "$retained/source" -B "$retained/build" -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release
+          cmake --build "$retained/build" --parallel
+          ctest --test-dir "$retained/build" --output-on-failure
       - name: Upload private reproduction source
         if: always()
         uses: actions/upload-artifact@v4

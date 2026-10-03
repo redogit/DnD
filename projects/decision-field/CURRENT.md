@@ -46,3 +46,21 @@ The earlier CURRENT/readme are recoverable at the exact PR #2 merge above.
 The v0.6 large checkpoint digest remains
 `8ab9f2b15524ac08d3d8cdf8959e7da344a301cca9a35a51530f86868309670a`.
 The frozen v0.3 engine and DFNAT001 wire schema are unchanged.
+
+
+## October 3 reconciliation — verified additive successors
+
+The repository now carries the bounded synthetic structural checker recovered from
+closed PR #7. It implements only finite DuplicateEvaluator and AdapterEvaluator
+proposal/check/admission experiments with exact source reconstruction, immutable
+history and retained negative receipts. It is not wired into the native Mirror engine
+and does not claim behavioral equivalence, universality, optimality, termination or a
+complexity result.
+
+The exact Dynamic RMAL character-contract fixture required by the already-present
+`tests/verify_dynamic_rmal.py` is restored from Git blob
+`c6b86d1c81479b742134ee08ca9e83b087afcf9d`; this is a recovery repair, not a
+compiled Dynamic RMAL runtime.
+
+Cross-lineage decisions and withheld peer implementations are recorded in
+`provenance/CODE_CROSS_CORRELATION_2026-10-03.md`.
