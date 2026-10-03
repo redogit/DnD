@@ -3,6 +3,7 @@ name: Verified reconciliation probes
 on:
   push:
     paths:
+      - ".gitattributes"
       - 'projects/decision-field/experiments/structural/**'
       - 'projects/decision-field/evidence/structural_*_2026_09_30/**'
       - 'tests/DYNAMIC_RMAL_CHARACTERS.rmal'
@@ -10,6 +11,7 @@ on:
       - '.github/workflows/verified-reconciliation.yml'
   pull_request:
     paths:
+      - ".gitattributes"
       - 'projects/decision-field/experiments/structural/**'
       - 'projects/decision-field/evidence/structural_*_2026_09_30/**'
       - 'tests/DYNAMIC_RMAL_CHARACTERS.rmal'
