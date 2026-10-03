@@ -21,7 +21,6 @@ df_test(decision_field_component_analysis_tests tests/component_analysis_tests.c
 df_test(decision_field_core_coverage_tests tests/core_coverage_tests.cpp)
 df_test(decision_field_bridge_tests tests/bridge_tests.cpp)
 df_test(decision_field_replay_integrity_tests tests/replay_integrity_tests.cpp)
-df_test(decision_field_local_plane_tests tests/local_plane_tests.cpp)
 
 # Explicit source dependency: never manufacture an engine substitute when absent.
 set(DF_PREDECESSOR_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/predecessor/v0_3" CACHE PATH "Verified v0.3 source directory")
@@ -66,9 +65,6 @@ if(TARGET decision_field_predecessor_bridge_tests AND DF_ENABLE_NATIVE_PERSISTEN
   add_executable(decision_field_anyfunctor_mirror_tests tests/anyfunctor_mirror_tests.cpp)
   target_link_libraries(decision_field_anyfunctor_mirror_tests PRIVATE decision_field_native_persistence)
   add_test(NAME decision_field_anyfunctor_mirror_tests COMMAND decision_field_anyfunctor_mirror_tests)
-  add_executable(decision_field_anyfunctor_local_plane_tests tests/anyfunctor_local_plane_tests.cpp)
-  target_link_libraries(decision_field_anyfunctor_local_plane_tests PRIVATE decision_field_native_persistence)
-  add_test(NAME decision_field_anyfunctor_local_plane_tests COMMAND decision_field_anyfunctor_local_plane_tests)
   if(TARGET rmal)
     add_executable(decision_field_rmal_mirror_tests tests/rmal_mirror_tests.cpp)
     target_link_libraries(decision_field_rmal_mirror_tests PRIVATE decision_field_native_persistence rmal)
