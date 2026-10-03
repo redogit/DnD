@@ -76,3 +76,30 @@ The browsable GitHub slice introduced by this branch contains the new standalone
 PARTIAL SOURCE IMPORT != LOST PREDECESSOR
 HASHED PREDECESSOR != BROWSABLE CURRENT SOURCE
 ```
+
+
+## Historical FunctionalObject lineage anchor
+
+The local-plane successor also records an older user-authored dataflow carrier without
+copying or rewriting it into the active source tree:
+
+```text
+repository: BanalityOfSeeking/ServeExcel
+path: FunctionalObject.cs
+earliest visible path commit: cd5bfe729d7461e9773ac4873767096c8e6146a0
+date: 2019-06-10
+blob: fc2716e1a3c4c2c7ea18541f25d94a26d24dca54
+```
+
+The historical shape supplies provenance for ordered buffers, plural operations/checks,
+and reusable links. Modern obligation identity, admission, residual retention,
+occurrence identity, Homeward recovery, and local route indexing are successor
+semantics, not retroactive claims about the 2019 implementation.
+
+See `docs/FUNCTIONALOBJECT_ANYFUNCTOR_LINEAGE_2026-10-03.md`.
+
+```text
+HISTORICAL_SHAPE != CURRENT_SEMANTICS
+SUCCESSOR_RELATION != SOURCE_REWRITE
+KNOWN_ROUTE != KNOWN_ANSWER
+```
