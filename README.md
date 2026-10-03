@@ -1,5 +1,7 @@
 # RMAL
 
+> **Public page:** https://redogit.github.io/DnD/ · **Main / About:** https://redogit.github.io/redogit/
+
 **RMAL — Ryan McMillan April Language**
 
 This repository is the canonical Git home for RMAL and RMALC.
