@@ -2,7 +2,7 @@
 #include <iostream>
 int main(){std::cerr<<"FAIL: first-class AnyFunctor Mirror implementation absent\n";return 1;}
 #else
-#include "decision_field/anyfunctor_mirror.hpp"
+#include "decision_field/anyfunctor_local_plane.hpp"
 #include "decision_field/self_state_codec.hpp"
 #include <iostream>
 #include <stdexcept>
@@ -31,6 +31,25 @@ int main(){
     const auto count=e.state_count();
     const auto again=AnyFunctor(e,in);CHECK(again.memoized);CHECK(again.invocation_id==a.invocation_id);
     CHECK(e.state_count()==count);
+
+    // LocalPlane remembers admitted wiring, never the output. The first local observation
+    // can consume an already verified AnyFunctor receipt; the next occurrence still runs
+    // through AnyFunctor while route selection is reused locally.
+    auto local_plane=LocalPlaneFor("fixture-local-plane@1",mirror);
+    const auto local_first=LocalAnyFunctor(local_plane,e,in,"mirror/self");
+    CHECK(local_first.execution.memoized);
+    CHECK(local_first.transition.integrated);CHECK(!local_first.transition.reused);
+    CHECK(local_plane.resolve(LocalContextSignature(in.execution_space,in.context.configuration_fingerprint),"mirror/self")==
+          std::optional<std::string>{mirror.id()});
+    const auto local_again=LocalAnyFunctor(local_plane,e,in,"mirror/self");
+    CHECK(local_again.execution.memoized);CHECK(local_again.transition.reused);
+    CHECK(local_plane.route_count()==1);CHECK(local_plane.revision()==1);
+
+    const AnyInvocation<SelfState> local_twin_in{mirror,{twin},{"context:A",""},"fixture-space@1"};
+    const auto local_twin=LocalAnyFunctor(local_plane,e,local_twin_in,"mirror/self");
+    CHECK(!local_twin.execution.memoized);CHECK(local_twin.transition.reused);
+    CHECK(local_twin.execution.sources==std::vector<StateId>{twin});
+    CHECK(local_twin.execution.invocation_id!=a.invocation_id);
     in.context.configuration_fingerprint="context:B";
     const auto other_context=AnyFunctor(e,in);CHECK(!other_context.memoized);CHECK(other_context.invocation_id!=a.invocation_id);
     in.sources={twin};in.context.configuration_fingerprint="context:A";
@@ -44,6 +63,11 @@ int main(){
     CHECK(denied.admitted.empty());CHECK(denied.retained_candidates.size()==1);CHECK(e.state_count()==before);
     CHECK(denied.retained_candidates[0]==p.mirror(value,absolute_axes(),o));
     CHECK(!denied.violations.empty());CHECK(e.edge(denied.edge_id).from_states[0]==root);
+    const auto local_denied=LocalAnyFunctor(
+        local_plane,e,AnyInvocation<SelfState>{bad,{root},{"context:A",""},"fixture-space@1"},"mirror/absolute");
+    CHECK(local_denied.execution.admission==ExecutionStatus::Rejected);
+    CHECK(!local_denied.transition.integrated);CHECK(local_denied.transition.residual_index.has_value());
+    CHECK(local_plane.residuals().back().reason=="execution-not-admitted");
     rejects([&]{(void)Homeward(e,bad,denied.invocation_id);});
     auto changed_axes=lawful_axes();changed_axes.evidence_refs.push_back("new axes provenance");
     const auto revision=FunctionObject<SelfState>::mirror("self-policy@1",changed_axes,o,p,codec);
@@ -67,6 +91,6 @@ int main(){
     auto wrong=o;wrong.id="different obligation";
     const auto wrong_fn=FunctionObject<SelfState>::mirror("self-policy@1",lawful_axes(),wrong,p,codec);
     rejects([&]{(void)AnyFunctor(restored,AnyInvocation<SelfState>{wrong_fn,{root},{},"fixture-space@1"});});
-    std::cout<<"PASS AnyFunctor Mirror: shared invocation, separate admission, exact rejected candidate retention, occurrence/context keys, involution, checkpoint replay and Homeward\n";
+    std::cout<<"PASS AnyFunctor Mirror + local plane: shared invocation, separate admission, route reuse without output caching, retained rejection, occurrence/context keys, involution, checkpoint replay and Homeward\n";
 }
 #endif
