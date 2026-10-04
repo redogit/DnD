@@ -189,3 +189,101 @@ that exact digest with a preserved invocation), then rerun all seven custody che
 Only after a complete passing run may current-DnD integration and authority-equivalence
 review be considered. Byte recovery or the eight engine tests alone do not grant
 promotion, authenticated authority, or a theorem claim.
+
+## Exact Orbit source-blob trace — 2026-10-04
+
+**Decision: WITHHELD. Exact source export remains unrecovered.** The expected
+SHA-256 remains `c390a188b2d3e167e18dca776cdb0945f3e534c0e45c7a5066b1a9aebe31ad60`;
+occurrence `occurrence-710993e5d9` and content identity
+`contentidentity-4ec137ac01` remain unchanged. No replacement bytes were synthesized.
+No custody checks are newly claimed as passing, and no authority-equivalence or
+integration review was initiated.
+
+### Additional searched locations
+
+All Git blob objects reachable from the captured branch, tag and available PR-head
+refs were read, SHA-256 hashed, and searched for the digest, both Orbit identities,
+`final_loop_run`, and the linked native invocation/binding IDs:
+
+| Repository | Captured refs | Reachable commits | Unique Git blobs scanned |
+|---|---:|---:|---:|
+| `redogit/DnD` | 18 | 201 | 541 |
+| `redogit/conscience64` | 343 | 1,712 | 1,976 |
+| `redogit/redogit` | 112 | 613 | 656 |
+| `redogit/Other-Projects-` | 211 | 1,237 | 1,518 |
+| `redogit/RMAL` | 3 | 13 | 320 |
+
+This scans historical blob bytes, not only current indexed source. **5,011 Git
+blobs and 3,024 file members in 17 distinct ZIPs**, including nested archives,
+returned zero exact digest matches and no scan errors. ZIPs include the original
+conscience64 recovery and its embedded Orbit archive, the pinned custody and Word
+Carrier successor packages, the native AnyInvocation hard-work package, and DnD's
+`dnd-2026-10-03` release asset. The release asset's SHA-256 agrees with its published
+digest `8eacf8d52c15c1638601e2e95c8fd37415b509c09d8c7740b4558701b15bbb1f`.
+Exact per-repository heads, ref names, archive digests and reference locations are
+retained in [source-trace evidence](orbit-source-trace-2026-10-04/EVIDENCE.json), with
+the read-only scanner alongside it.
+
+Additional Library searches used the exact digest/identities, native occurrence,
+invocation, `final_loop_run`, `faithful.tsv`, `bridge_receipts.tsv`, and the pinned
+archive titles. The independently retained `native_export_faithful.tsv` is 1,658
+bytes with SHA-256
+`783690e7896a44b0a233655d2e1e7540fc03b0b581451947de756bc508005a77`.
+It belongs to native occurrence `O-13E0F1A8A938D91D`, not this third occurrence.
+Its exact bytes were hashed and rejected as a substitute; its filename is not proof
+of source identity.
+
+Release inventories returned no releases for conscience64, redogit,
+Other-Projects-, or RMAL; DnD's released ZIP was inspected as above.
+All 69 conscience64 workflow runs created in the bounded UTC window
+`2026-09-30T00:00:00Z..2026-10-01T23:59:59Z` returned empty artifact lists. Their
+run IDs and results are retained in
+[artifact-search.json](orbit-source-trace-2026-10-04/artifact-search.json).
+The repository-wide artifact-list endpoint was unavailable through the connected
+reader; per-run artifact listing provided the bounded coverage instead.
+
+### Narrowed missing export and invocation information
+
+The exact retained `orbit_integration/integrate.py`, SHA-256
+`ef1369dc0e71a37f95f8a66debd459208ec6dfac87980d0029d992363fc33b69`, reads
+`/mnt/data/final_loop_run/exports/faithful.tsv` verbatim and writes those bytes into
+the SHA-256-addressed blob shelf. It does not generate the native export.
+Orbit metadata `artifact-13f1e6bf2e` and the retained
+`upstream/THIRD_REAL_OCCURRENCE_BRIDGE_RECEIPTS.tsv` identify:
+
+- native source occurrence: `O-C43A633D6BF3B789`;
+- native invocation: `AINV-C6C1E9095108DC89`;
+- native binding: `BIND-C4A839B279AD514C`;
+- obligation: `wcc-exact-v1`;
+- source ledger: `current_conversation_2026-09-20`, ordinal `6`, authority
+  `RAW_OCCURRENCE`.
+
+The pinned successor retains that native ledger occurrence and exporter source.
+Its `export-anyinvocation` command requires occurrence, function-object,
+function-occurrence, context, context-version, obligation, role, resource-envelope,
+and optional continuation arguments. The retained Orbit metadata/receipt does not
+recover the exact final-loop command's function-object/function-occurrence IDs,
+context ID/version, role, resource-envelope, continuation argument, or the exact
+`--root`/checkpoint used. Receipt continuation `LOCAL_ADMIT` describes the consumer
+outcome and must not be silently substituted for the export's continuation argument.
+The exporter also binds native ledger fields and exact output framing; the local
+AINV/BIND IDs are not reversible encodings of the full command or export bytes.
+
+The smallest missing artifact is therefore the original
+`/mnt/data/final_loop_run/exports/faithful.tsv` (or its exact blob-shelf copy),
+verified against the unchanged digest. If only an invocation record survives,
+recover its complete argv, native checkpoint, and stdout/framing record before
+considering any independent exact-reproduction work. This trace did not run the
+exporter or manufacture a candidate.
+
+### Coverage and next gate
+
+Captured reachable history is covered; dangling objects, deleted/unadvertised
+refs, private or inaccessible repositories, other workflow time windows, expired
+artifacts, and unmaterialized Library archives are not claimed as searched.
+Library ranked retrieval is not a whole-Library byte inventory. Absence from these
+searched locations does not prove global loss.
+
+Keep the bundle withheld. Recover and verify the exact source blob, then rerun all
+seven unchanged custody checks with the recovered exact engine. The prior 0/7
+completion result remains the execution boundary until that gate succeeds.

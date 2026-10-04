@@ -1,0 +1,420 @@
+{
+  "repository": "redogit/conscience64",
+  "created_window": "2026-09-30T00:00:00Z..2026-10-01T23:59:59Z",
+  "runs": [
+    {
+      "run_id": 36925119678,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36868949977,
+      "name": "Public research updates",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36936955474,
+      "name": "Public research updates",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36925119692,
+      "name": "Verify current research manifest",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36925119718,
+      "name": "Verify spatial UI",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36822991475,
+      "name": "Public research updates",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36785110531,
+      "name": "Public research updates",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36762994338,
+      "name": "Hodge Decision Field",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36762994215,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36757112207,
+      "name": "Invariant Atlas integrity",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36751651309,
+      "name": "Hodge Decision Field",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36757116826,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36757116824,
+      "name": "Hodge Decision Field",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36751651419,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36740869249,
+      "name": "Hodge Decision Field",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36751645309,
+      "name": "Invariant Atlas integrity",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36747887898,
+      "name": "Invariant Atlas integrity",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36740447511,
+      "name": "Invariant Atlas integrity",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36740869398,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36740266264,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36739569669,
+      "name": "Hodge Decision Field",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36739569988,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36740447339,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36740266330,
+      "name": "Invariant Atlas integrity",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36733123250,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36733123375,
+      "name": "Verify current research manifest",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36729347632,
+      "name": "Verify spatial UI",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36733123340,
+      "name": "Verify spatial UI",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36729347630,
+      "name": "Verify current research manifest",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36729347504,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36729197280,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36728835494,
+      "name": "Verify spatial UI",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36729197046,
+      "name": "Verify current research manifest",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36728835462,
+      "name": "Verify current research manifest",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36729197168,
+      "name": "Verify spatial UI",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36716724278,
+      "name": "Public research updates",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36674493629,
+      "name": "Public research updates",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36666988683,
+      "name": "Verify live public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36728835446,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36666969073,
+      "name": "Sync Conscience64 public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36666983259,
+      "name": "pages build and deployment",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36653483464,
+      "name": "Verify live public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36653479016,
+      "name": "pages build and deployment",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36666969078,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36653467308,
+      "name": "Sync Conscience64 public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36653467361,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651707537,
+      "name": "Verify live public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651703851,
+      "name": "pages build and deployment",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651690707,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651690715,
+      "name": "Sync Conscience64 public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651642842,
+      "name": "pages build and deployment",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651646911,
+      "name": "Verify live public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651630452,
+      "name": "Sync Conscience64 public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651214311,
+      "name": "Verify live public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651630305,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651214194,
+      "name": "Verify spatial UI",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651630314,
+      "name": "Verify public playground projects",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651214186,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651214204,
+      "name": "Verify public playground projects",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651205496,
+      "name": "Verify public playground projects",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651205460,
+      "name": "Verify live public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651205526,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36650775334,
+      "name": "Verify live public test bed",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36651205449,
+      "name": "Verify spatial UI",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36650775462,
+      "name": "Verify public playground projects",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36650775424,
+      "name": "Verify spatial UI",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36650775384,
+      "name": "REDOGIT local verification",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36650591774,
+      "name": "Verify public playground projects",
+      "artifacts": [],
+      "error": false
+    },
+    {
+      "run_id": 36650591694,
+      "name": "Verify spatial UI",
+      "artifacts": [],
+      "error": false
+    }
+  ]
+}
