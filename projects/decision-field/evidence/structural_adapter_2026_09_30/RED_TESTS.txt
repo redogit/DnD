@@ -1,0 +1,97 @@
+test_adapter_checker_does_not_call_generator (test_adapter.AdapterTests.test_adapter_checker_does_not_call_generator) ... FAIL
+test_adapter_reduction_cannot_pay_for_any_other_k_increase (test_adapter.AdapterTests.test_adapter_reduction_cannot_pay_for_any_other_k_increase) ... ERROR
+test_checked_pair_reduces_depth_preserving_exact_identity_and_history (test_adapter.AdapterTests.test_checked_pair_reduces_depth_preserving_exact_identity_and_history) ... FAIL
+test_depth_must_strictly_drop_even_when_duplicate_count_drops (test_adapter.AdapterTests.test_depth_must_strictly_drop_even_when_duplicate_count_drops) ... FAIL
+test_exactly_recoverable_smaller_forgeries_cannot_cross_distinctions (test_adapter.AdapterTests.test_exactly_recoverable_smaller_forgeries_cannot_cross_distinctions) ... FAIL
+test_noop_stale_and_unverified_adapter_proposals_do_not_admit (test_adapter.AdapterTests.test_noop_stale_and_unverified_adapter_proposals_do_not_admit) ... FAIL
+test_opaque_historical_adapters_are_not_certified_by_name (test_adapter.AdapterTests.test_opaque_historical_adapters_are_not_certified_by_name) ... FAIL
+test_pair_cannot_be_reordered_or_lose_a_source_occurrence (test_adapter.AdapterTests.test_pair_cannot_be_reordered_or_lose_a_source_occurrence) ... ok
+test_three_evaluator_orders_recover_each_step (test_adapter.AdapterTests.test_three_evaluator_orders_recover_each_step) ... FAIL
+
+======================================================================
+ERROR: test_adapter_reduction_cannot_pay_for_any_other_k_increase (test_adapter.AdapterTests.test_adapter_reduction_cannot_pay_for_any_other_k_increase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 144, in test_adapter_reduction_cannot_pay_for_any_other_k_increase
+    self.assertEqual(c.k_after[3], 1)
+                     ~~~~~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+FAIL: test_adapter_checker_does_not_call_generator (test_adapter.AdapterTests.test_adapter_checker_does_not_call_generator)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 179, in test_adapter_checker_does_not_call_generator
+    p = s.generate(self.evaluator())
+                   ^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 41, in evaluator
+    self.assertTrue(hasattr(model, 'AdapterEvaluator'), 'bounded AdapterEvaluator is missing')
+AssertionError: False is not true : bounded AdapterEvaluator is missing
+
+======================================================================
+FAIL: test_checked_pair_reduces_depth_preserving_exact_identity_and_history (test_adapter.AdapterTests.test_checked_pair_reduces_depth_preserving_exact_identity_and_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 45, in test_checked_pair_reduces_depth_preserving_exact_identity_and_history
+    source, evaluator = declared_source(), self.evaluator()
+                                           ^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 41, in evaluator
+    self.assertTrue(hasattr(model, 'AdapterEvaluator'), 'bounded AdapterEvaluator is missing')
+AssertionError: False is not true : bounded AdapterEvaluator is missing
+
+======================================================================
+FAIL: test_depth_must_strictly_drop_even_when_duplicate_count_drops (test_adapter.AdapterTests.test_depth_must_strictly_drop_even_when_duplicate_count_drops)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 132, in test_depth_must_strictly_drop_even_when_duplicate_count_drops
+    self.assertIn('no_strict_adapter_reduction', c.reasons)
+AssertionError: 'no_strict_adapter_reduction' not found in ('malformed_or_unrecoverable_candidate',)
+
+======================================================================
+FAIL: test_exactly_recoverable_smaller_forgeries_cannot_cross_distinctions (test_adapter.AdapterTests.test_exactly_recoverable_smaller_forgeries_cannot_cross_distinctions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 87, in test_exactly_recoverable_smaller_forgeries_cannot_cross_distinctions
+    evaluator = self.evaluator()
+                ^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 41, in evaluator
+    self.assertTrue(hasattr(model, 'AdapterEvaluator'), 'bounded AdapterEvaluator is missing')
+AssertionError: False is not true : bounded AdapterEvaluator is missing
+
+======================================================================
+FAIL: test_noop_stale_and_unverified_adapter_proposals_do_not_admit (test_adapter.AdapterTests.test_noop_stale_and_unverified_adapter_proposals_do_not_admit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 163, in test_noop_stale_and_unverified_adapter_proposals_do_not_admit
+    s, evaluator = Session(declared_source()), self.evaluator()
+                                               ^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 41, in evaluator
+    self.assertTrue(hasattr(model, 'AdapterEvaluator'), 'bounded AdapterEvaluator is missing')
+AssertionError: False is not true : bounded AdapterEvaluator is missing
+
+======================================================================
+FAIL: test_opaque_historical_adapters_are_not_certified_by_name (test_adapter.AdapterTests.test_opaque_historical_adapters_are_not_certified_by_name)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 66, in test_opaque_historical_adapters_are_not_certified_by_name
+    self.assertEqual(self.evaluator().generate(s.A), s.A)
+                     ^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 41, in evaluator
+    self.assertTrue(hasattr(model, 'AdapterEvaluator'), 'bounded AdapterEvaluator is missing')
+AssertionError: False is not true : bounded AdapterEvaluator is missing
+
+======================================================================
+FAIL: test_three_evaluator_orders_recover_each_step (test_adapter.AdapterTests.test_three_evaluator_orders_recover_each_step)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 149, in test_three_evaluator_orders_recover_each_step
+    evaluator = self.evaluator()
+                ^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2318c60e5e77/DnD/projects/decision-field/experiments/structural/test_adapter.py", line 41, in evaluator
+    self.assertTrue(hasattr(model, 'AdapterEvaluator'), 'bounded AdapterEvaluator is missing')
+AssertionError: False is not true : bounded AdapterEvaluator is missing
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.050s
+
+FAILED (failures=7, errors=1)

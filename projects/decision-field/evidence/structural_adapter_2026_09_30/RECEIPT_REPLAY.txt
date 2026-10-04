@@ -1,0 +1,10 @@
+duplicate: {"admissions": 48, "orders": 24, "reconstructions": 96, "rejections": 48}
+duplicate: PASS exact source recovery and 24 recorded schedules (generator not rerun)
+duplicate: PASS exact source recovery and 24 recorded schedules (generator not rerun)
+PASS identical fresh/saved bytes=366026 sha256=9e8565d2fef18eb0f3098898c34b0242d1a3316e1c7684378bf607c30cbbdce7
+history_events=312 final_active_digests=1
+adapter: {"admissions": 72, "orders": 24, "reconstructions": 96, "rejections": 24}
+adapter: PASS exact source recovery and 24 recorded schedules (generator not rerun)
+adapter: PASS exact source recovery and 24 recorded schedules (generator not rerun)
+PASS identical fresh/saved bytes=401889 sha256=02f6782b977b3783e1068566fe2d987472692fd361f67a425347749220fe406d
+history_events=312 final_active_digests=1

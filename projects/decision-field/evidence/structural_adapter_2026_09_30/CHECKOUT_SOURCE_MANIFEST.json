@@ -1,0 +1,37 @@
+{
+  "schema": "decision-field/adapter-checkout-followup-manifest/v1",
+  "predecessor_revision": "16ce3c64e68c28899d8e5634e9d73f4c93c3f461",
+  "scope": "checkout configuration and appended failure/control/review evidence; initial SOURCE_MANIFEST remains bound to predecessor; excludes this manifest",
+  "files": {
+    ".gitattributes": {
+      "bytes": 1655,
+      "sha256": "714e19f236b331192039ca3ecaf6da6b559f2a84590391004d717ad32053e657",
+      "git_blob": "610e6971e2b73b26fd3307e1d01f09360a0e16f5"
+    },
+    "projects/decision-field/CURRENT.md": {
+      "bytes": 4444,
+      "sha256": "c90fca71da7e338beb72a831c4bf9a381a28ff8ea8346166775349cc35eacd19",
+      "git_blob": "0239b1fdfdcbb48a1c6e24f678796fb25d007150"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/CHECKOUT_FIX.md": {
+      "bytes": 2286,
+      "sha256": "11cad082600af4b5150552523a2b8f4c7c892e8eff41613991ce95d5cec050d6",
+      "git_blob": "5b25b23286b1b1769bca5eae23a3c3a7950eff9b"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/CHECKOUT_GREEN.json": {
+      "bytes": 561,
+      "sha256": "d99358c9d7a5d8da2694a78e27628fd80274455b7e5678b7fc6f5e10fe5b101d",
+      "git_blob": "c7f6713babb09192adfb2a0f93242f720de95543"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/CHECKOUT_RED.json": {
+      "bytes": 4825,
+      "sha256": "887de3a9d9a9074dc5e18bb3283c0e30760e315cb46ea8af995d2f4814dcad43",
+      "git_blob": "8f482720ffbb6a517b95dcdeb1537c29a87f356a"
+    },
+    "projects/decision-field/evidence/structural_adapter_2026_09_30/WINDOWS_CI_FAILURE.json": {
+      "bytes": 12706,
+      "sha256": "00f2d77b3982fdcc395202d63ca8fd31379ab37d88bcc76b2a0580f7b3e77d59",
+      "git_blob": "84b3499584dcacb0e4f2a0235cf818c56e820aa2"
+    }
+  }
+}

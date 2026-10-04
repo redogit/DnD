@@ -1,0 +1,7 @@
+Local checkout regression, Python 3.12.14; this simulates Git CRLF conversion, not the Windows OS.
+RED at b185166c54714aff0f47efdc156592c0723abefe with core.autocrlf=true: ValueError: requires exact canonical JSON object bytes
+GREEN exact fresh checkout bytes: projects/decision-field/experiments/structural/source_graph.json SHA256 b9e3498d5b3f3487e8c7f1954b082ddae7647ce8b0ba370511c111e63dd790e0
+GREEN exact fresh checkout bytes: projects/decision-field/evidence/structural_probe_2026_09_30/PROCESS_RECEIPT.json SHA256 9e8565d2fef18eb0f3098898c34b0242d1a3316e1c7684378bf607c30cbbdce7
+GREEN normal contracts: 24/24 under core.autocrlf=true fresh checkout
+GREEN optimized contracts: 24/24 under core.autocrlf=true fresh checkout
+PASS exact source recovery and 24 recorded schedules (generator not rerun)

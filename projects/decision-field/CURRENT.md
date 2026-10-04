@@ -39,6 +39,34 @@ proposed certificate checks and counterprobes are documented in
 The structural planner and general evaluator are research targets, not v0.7
 runtime features or results.
 
+## Separate synthetic structural increment — 2026-09-30
+
+The [standalone structural experiment](experiments/structural/README.md) implements
+occurrence-preserving DuplicateEvaluator proposals, an independent synthetic
+checker, append-only history, exact source/predecessor receipts and separate
+admission. Its 24-schedule panel retains smaller occurrence-alias and
+authority-removal failures. [Evidence and recovery chronology](evidence/structural_probe_2026_09_30/VERIFICATION.md)
+remain separate from v0.7. The dated crosswalk above remains the historical
+design input. No runtime binding, general evaluator family, Pareto planner,
+behavioral equivalence, universality or P-versus-NP result is added.
+
+The [receipt-ingress follow-up](evidence/structural_receipt_boundary_2026_09_30/VERIFICATION.md)
+checks file read budgets and rejects malformed blob containers and excessive
+JSON nesting explicitly. It preserves the original finite-panel receipt and
+adds four counterprobe tests; history/admission semantics and K are unchanged.
+
+The [bounded AdapterEvaluator follow-up](evidence/structural_adapter_2026_09_30/VERIFICATION.md)
+adds a separate synthetic lift/lower fixture and a recoverable two-occurrence
+structural macro. Independent checks require matching ownership, inverse type
+contracts and empty boundary effects. Admission protects every K component and
+strictly decreases adapter depth. Mixed DuplicateEvaluator orderings preserve exact
+source recovery; smaller boundary-crossing failures remain in history. The old
+fixture, historical receipts and frozen v0.7 source identities remain unchanged.
+This extends only the standalone experiment, with no runtime or planner binding.
+The [checkout follow-up](evidence/structural_adapter_2026_09_30/CHECKOUT_FIX.md)
+retains the first Windows CI manifest failure and the scoped LF repair for the
+14 frozen native source witnesses; their committed source bytes are unchanged.
+
 ## Way back
 
 v0.6 evidence remains unchanged under `evidence/v0_6/`; v0.5 under `evidence/v0_5/`.

@@ -1,0 +1,8 @@
+test_exact_cyclotomic_square (test_w114_sign_normalization.W114SignNormalizationTests.test_exact_cyclotomic_square) ... ok
+test_prime571_counterprobe (test_w114_sign_normalization.W114SignNormalizationTests.test_prime571_counterprobe) ... ok
+test_standard_difference_word (test_w114_sign_normalization.W114SignNormalizationTests.test_standard_difference_word) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK

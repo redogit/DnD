@@ -1,0 +1,30 @@
+test_cli_rejects_excessive_json_nesting_without_traceback (test_receipt_boundary.ReceiptBoundaryTests.test_cli_rejects_excessive_json_nesting_without_traceback) ... FAIL
+
+======================================================================
+FAIL: test_cli_rejects_excessive_json_nesting_without_traceback (test_receipt_boundary.ReceiptBoundaryTests.test_cli_rejects_excessive_json_nesting_without_traceback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/test_receipt_boundary.py", line 84, in test_cli_rejects_excessive_json_nesting_without_traceback
+    self.assertTrue(result.stderr.startswith('REJECTED:'), result.stderr)
+AssertionError: False is not true : Traceback (most recent call last):
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/probe.py", line 242, in <module>
+    main()
+  File "/workspace/scratch/54b1cad63196/DnD/projects/decision-field/experiments/structural/probe.py", line 226, in main
+    report = json.loads(raw)
+             ^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 354, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded while decoding a JSON array from a unicode string
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.046s
+
+FAILED (failures=1)

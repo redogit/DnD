@@ -1,0 +1,118 @@
+{
+  "schema": "decision-field/synthetic-receipt-boundary-source-manifest/v1",
+  "predecessor_revision": "37c2653acb336bd06114f8ab5b176260c7a73b9c",
+  "master_base": "2f9fbe3b1964194d8f7b525c6fc90a22b3ff7df9",
+  "scope": "repaired synthetic source and new evidence; excludes this manifest; old receipts remain bound to their prior revision",
+  "files": {
+    ".gitattributes": {
+      "bytes": 611,
+      "sha256": "1c622f4dee9fc8b2a73be280ea970a01cd4a434689413dbbdd7ea9cd12dcd83a",
+      "git_blob": "0bdf66ef5740e84672899c89a6379622382f4f76"
+    },
+    ".github/workflows/decision-field-structural-probe.yml": {
+      "bytes": 2405,
+      "sha256": "4b845e1598a0cb7a9282ffa16aa949dd4a2ea85d14f857d644ce1777264aa90d",
+      "git_blob": "9b5fe1481b91e08bf3af916f49b2af86ee3b865b"
+    },
+    "projects/decision-field/CURRENT.md": {
+      "bytes": 3547,
+      "sha256": "3282fac3970e0d4564948cb7bb1ed6048f4beef695c717370f7b2a28d09959ee",
+      "git_blob": "906b2d66ede6b027253ee5cdb7b46c283de0c0a1"
+    },
+    "projects/decision-field/experiments/structural/README.md": {
+      "bytes": 7649,
+      "sha256": "2aad108e5da6f119b1c0f8315f6db3cb582ac04fde4c36632f5c3898bc4fcf35",
+      "git_blob": "08013797db9c16024eebabfb1611c51c979067d8"
+    },
+    "projects/decision-field/experiments/structural/checker.py": {
+      "bytes": 3774,
+      "sha256": "82f34af8df4fc49aafaf0342958fee5d4562132fe6be6e015cd97d7336d55971",
+      "git_blob": "8cc97008da735784a056a8b3bdbd044c20771648"
+    },
+    "projects/decision-field/experiments/structural/model.py": {
+      "bytes": 15388,
+      "sha256": "955e428cb4d37450ecdcd4d41ec4bc6db61f1bb55728670718f5a3a9dfa92fb0",
+      "git_blob": "3351bb42c3eced5306794e0ebf451c31cc7596e1"
+    },
+    "projects/decision-field/experiments/structural/probe.py": {
+      "bytes": 12999,
+      "sha256": "1bd56c19c0008efb6a4c9495a3d9e5750995ba5e0b5b6e8e8196676211b5d332",
+      "git_blob": "8e00de8977690801b7c3501e302c4e11a9f54b98"
+    },
+    "projects/decision-field/experiments/structural/source_graph.json": {
+      "bytes": 5550,
+      "sha256": "b9e3498d5b3f3487e8c7f1954b082ddae7647ce8b0ba370511c111e63dd790e0",
+      "git_blob": "173d7594897af2bc176935a4fb40827d2b42dd1e"
+    },
+    "projects/decision-field/experiments/structural/test_receipt_boundary.py": {
+      "bytes": 4657,
+      "sha256": "24b26c34731877410c3e4445ec1ed50f6d175bbd50cf7df9b17a4ae146351f5e",
+      "git_blob": "a7e964af4bf0762a3fd8f00c474d63d5c7648f3c"
+    },
+    "projects/decision-field/experiments/structural/test_structural.py": {
+      "bytes": 15447,
+      "sha256": "8c852dfae4a08c8a31ff2fcaa88e9aa146be680550a11774e26bea21b5037e4a",
+      "git_blob": "5162e4608e42119971297e65a164afff2efa0b51"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/COUNTERPROBES.json": {
+      "bytes": 3552,
+      "sha256": "2d9909aab76f79d4d16ed36b86570cbe21ac397cec46904731f063de39c55732",
+      "git_blob": "3ad249cedd25bb479d2e360e0b12b82434f0db2c"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/INITIAL_BOUNDARY_TESTS.txt": {
+      "bytes": 594,
+      "sha256": "27778d78ee351f1457cafe0367b6b3f659bdc74d29be0411f2822a581eef67d0",
+      "git_blob": "c1169f07d121460761d842d6cf2535f1df133973"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/NESTING_2000_CONTROL.txt": {
+      "bytes": 265,
+      "sha256": "cd070daedea74130dd6dbdca9c45fe672b5473246d4b33bb2a88d3983f415d93",
+      "git_blob": "367f7eca1cc61b4b99d7d14c2779188b3fa086f4"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/OPTIMIZED_TESTS.txt": {
+      "bytes": 4700,
+      "sha256": "6218ae60e97c0fd5f909c9f8a9aed900d927034311ea7a215fd59c2318df46e8",
+      "git_blob": "d296d2fa47508f9389935d58bdedeab6771418e2"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/RECEIPT_REPLAY.txt": {
+      "bytes": 353,
+      "sha256": "ae25d28c017a4fe8d7792225caf21a6336e6296cf1ce029179483666942a7b72",
+      "git_blob": "8ecb9f2fa56e1a2090a59cdf9c557098aeb960a7"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/RED_NESTING_TEST.txt": {
+      "bytes": 2008,
+      "sha256": "dfa5450c0b9c514b695a54615dc4954310d42750a02d5aa25b704a7b3e43a0a6",
+      "git_blob": "9ec4d07b414f783b80e1a57e60a118036dde0f91"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/RED_TESTS.txt": {
+      "bytes": 7135,
+      "sha256": "f61b4fef3e0e187db0347570bd67d7b42c448f9385ba84b98ee69e2a8f4b6741",
+      "git_blob": "4a4cd825370eda419699f3cb97a4aec3edc29f55"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/REVIEW.md": {
+      "bytes": 1101,
+      "sha256": "72e1deec3cbd8136aa5774f3041c71badbeaee601a693c0b1574e555d5cd9e37",
+      "git_blob": "5d163ea78a5adede7ce00889b634591a163948fd"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/ROOT_PYTHON_TESTS.txt": {
+      "bytes": 465,
+      "sha256": "9621cf5ba65252e6856f0afd7ef6414304ce2e308ec380ec5cdf2bb98de90e80",
+      "git_blob": "599b3b0d192165e7e8c8755510d77f84730f6aef"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/TESTS.txt": {
+      "bytes": 4700,
+      "sha256": "83ff74b59ef0550e1d07b1870e338ac0c0073c5f78fab6c2907880fe37f8bc19",
+      "git_blob": "6b5a3134afe61c2b0c3a22e438ea7bad99eba84d"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/V0_7_SOURCE_IDENTITY.txt": {
+      "bytes": 58,
+      "sha256": "376466e70702af9e35697d12df3dc39c97b672800407d9a9b74737f00faae336",
+      "git_blob": "ef9394de8fb563951af283c40a7fb853db84c27f"
+    },
+    "projects/decision-field/evidence/structural_receipt_boundary_2026_09_30/VERIFICATION.md": {
+      "bytes": 4490,
+      "sha256": "85940c80ca6cfdb084def2519893674e06fcb244bb00989812ae98641c414e5a",
+      "git_blob": "88f2872cb58889015b66d937ca6b4556ca071bb7"
+    }
+  }
+}

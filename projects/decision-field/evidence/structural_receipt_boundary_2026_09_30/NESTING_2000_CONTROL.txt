@@ -1,0 +1,6 @@
+test_cli_rejects_excessive_json_nesting_without_traceback (test_receipt_boundary.ReceiptBoundaryTests.test_cli_rejects_excessive_json_nesting_without_traceback) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.045s
+
+OK
