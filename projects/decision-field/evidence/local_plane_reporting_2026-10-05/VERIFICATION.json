@@ -1,0 +1,91 @@
+{
+  "identity": "LOCAL_PLANE_REPORTING_MERGE_VERIFICATION_2026-10-05",
+  "recorded_at_utc": "2026-10-06T01:47:10.297635+00:00",
+  "base_commit": "01dfbdecf23404b26e57d0abca5d3a67b67cff22",
+  "audit_input_sha256": "7279494ec4c03b3bd716f4e1426ff76985680921a8d373c5187d1eff65d1954d",
+  "input_manifest_entries": 47,
+  "source_recovery": "Current GitHub connector reads matched frozen blob identities. Local clone failed DNS. Partial-source build, not full checkout.",
+  "patch_sha256": "ed1372a8e0b4bc87701699d6539018d98a20accccca4458efcb2ac39488b756c",
+  "checks": {
+    "source_blob_matches": 4,
+    "standalone_gcc": "PASS: frozen and patched",
+    "reporting_tests": 6,
+    "reporting_tests_passed": 6,
+    "expected_red_failures": 2,
+    "native_cases": 8,
+    "patched_probe_byte_identical": true,
+    "clang": "PASS: standalone test and identical eight-case probe output",
+    "lateral_edge_records": 8,
+    "relation_schema_checks": "PASS; not semantic proof of candidate connections",
+    "native_journal_gate": "OPEN: blank obligation-ID exception unrecorded by LocalPlane",
+    "original_controller_gate": "UNRESOLVED",
+    "full_native_AnyFunctor_suite": "NOT_RUN: bounded standalone scope",
+    "independent_replication": false
+  },
+  "ctest_passed": 1,
+  "ctest_total": 1,
+  "staged_reporting_tests_passed": 6,
+  "production_preprocessed_equal": true,
+  "native_probe_sha256": "b9045af1be1d7620373d329e8b20a0a9b8acb8d0d0cb35420e5c521ffa4da2db",
+  "environment": {
+    "python": "Python 3.13.5",
+    "gcc": "g++ (Debian 14.2.0-19) 14.2.0",
+    "clang": "clang version 17.0.0 (https://github.com/swiftlang/llvm-project.git 10999b6d034fe318f3d56c83bddb6572593a8bb0)",
+    "cmake": "cmake version 3.31.6"
+  },
+  "logs": {
+    "red": "test_rejected_routes_cannot_overwrite_admitted_route (test_reporting_boundary.ReportingBoundaryTests.test_rejected_routes_cannot_overwrite_admitted_route) ... ok\ntest_revision_is_not_complete_state_identity (test_reporting_boundary.ReportingBoundaryTests.test_revision_is_not_complete_state_identity) ... ok\ntest_same_descriptors_do_not_identify_same_outcome (test_reporting_boundary.ReportingBoundaryTests.test_same_descriptors_do_not_identify_same_outcome) ... ok\ntest_stdout_does_not_claim_a_complexity_measurement (test_reporting_boundary.ReportingBoundaryTests.test_stdout_does_not_claim_a_complexity_measurement) ... FAIL\ntest_stdout_does_not_claim_unobserved_control_execution (test_reporting_boundary.ReportingBoundaryTests.test_stdout_does_not_claim_unobserved_control_execution) ... FAIL\ntest_validation_failure_limitation_is_exposed_not_erased (test_reporting_boundary.ReportingBoundaryTests.test_validation_failure_limitation_is_exposed_not_erased) ... ok\n\n======================================================================\nFAIL: test_stdout_does_not_claim_a_complexity_measurement (test_reporting_boundary.ReportingBoundaryTests.test_stdout_does_not_claim_a_complexity_measurement)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/mnt/data/merge_localplane/replay/tests/test_reporting_boundary.py\", line 18, in test_stdout_does_not_claim_a_complexity_measurement\n    self.assertNotIn('average-O(1)', output)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'average-O(1)' unexpectedly found in 'PASS local plane: four-stage stair, plural obligations, admitted route integration, average-O(1) reuse lookup, and retained residuals without output caching\\n'\n\n======================================================================\nFAIL: test_stdout_does_not_claim_unobserved_control_execution (test_reporting_boundary.ReportingBoundaryTests.test_stdout_does_not_claim_unobserved_control_execution)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/mnt/data/merge_localplane/replay/tests/test_reporting_boundary.py\", line 13, in test_stdout_does_not_claim_unobserved_control_execution\n    self.assertNotIn('four-stage stair', output)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'four-stage stair' unexpectedly found in 'PASS local plane: four-stage stair, plural obligations, admitted route integration, average-O(1) reuse lookup, and retained residuals without output caching\\n'\n\n----------------------------------------------------------------------\nRan 6 tests in 0.007s\n\nFAILED (failures=2)\n",
+    "green": "test_rejected_routes_cannot_overwrite_admitted_route (test_reporting_boundary.ReportingBoundaryTests.test_rejected_routes_cannot_overwrite_admitted_route) ... ok\ntest_revision_is_not_complete_state_identity (test_reporting_boundary.ReportingBoundaryTests.test_revision_is_not_complete_state_identity) ... ok\ntest_same_descriptors_do_not_identify_same_outcome (test_reporting_boundary.ReportingBoundaryTests.test_same_descriptors_do_not_identify_same_outcome) ... ok\ntest_stdout_does_not_claim_a_complexity_measurement (test_reporting_boundary.ReportingBoundaryTests.test_stdout_does_not_claim_a_complexity_measurement) ... ok\ntest_stdout_does_not_claim_unobserved_control_execution (test_reporting_boundary.ReportingBoundaryTests.test_stdout_does_not_claim_unobserved_control_execution) ... ok\ntest_validation_failure_limitation_is_exposed_not_erased (test_reporting_boundary.ReportingBoundaryTests.test_validation_failure_limitation_is_exposed_not_erased) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n",
+    "staged_green": "test_rejected_routes_cannot_overwrite_admitted_route (test_reporting_boundary.ReportingBoundaryTests.test_rejected_routes_cannot_overwrite_admitted_route) ... ok\ntest_revision_is_not_complete_state_identity (test_reporting_boundary.ReportingBoundaryTests.test_revision_is_not_complete_state_identity) ... ok\ntest_same_descriptors_do_not_identify_same_outcome (test_reporting_boundary.ReportingBoundaryTests.test_same_descriptors_do_not_identify_same_outcome) ... ok\ntest_stdout_does_not_claim_a_complexity_measurement (test_reporting_boundary.ReportingBoundaryTests.test_stdout_does_not_claim_a_complexity_measurement) ... ok\ntest_stdout_does_not_claim_unobserved_control_execution (test_reporting_boundary.ReportingBoundaryTests.test_stdout_does_not_claim_unobserved_control_execution) ... ok\ntest_validation_failure_limitation_is_exposed_not_erased (test_reporting_boundary.ReportingBoundaryTests.test_validation_failure_limitation_is_exposed_not_erased) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n",
+    "ctest": "Internal ctest changing into directory: /mnt/data/merge_localplane/build\nTest project /mnt/data/merge_localplane/build\n    Start 1: decision_field_local_plane_successor_tests\n1/1 Test #1: decision_field_local_plane_successor_tests ...   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   0.01 sec\n"
+  },
+  "files": {
+    "projects/decision-field/docs/FUNCTIONALOBJECT_ANYFUNCTOR_LINEAGE_2026-10-03.md": {
+      "bytes": 7572,
+      "sha256": "07db34d6ae40be9de50de62416536875ee69745eb2e0e61887f05cf4ab29ce93",
+      "git_blob_sha1": "5db1c2e63b19a9c84a83ee98c253f982c5a1301d"
+    },
+    "projects/decision-field/evidence/local_plane_reporting_2026-10-05/DIFFERENTIALS.json": {
+      "bytes": 4289,
+      "sha256": "29ff08c7f877b96f0e43869058a83320c0a6ceae4818c0e8cb6a2ef3392a96ae",
+      "git_blob_sha1": "2140430427237fbf344bc5a6e4987d1403f99ede"
+    },
+    "projects/decision-field/evidence/local_plane_reporting_2026-10-05/LATERALS.json": {
+      "bytes": 7187,
+      "sha256": "1219757a5761a2e9945759c5a9448df284dd302e2f3f78c30d0e73d8caea2c3a",
+      "git_blob_sha1": "72d597ff08e931c5e8ef11eaa7c039535c84922c"
+    },
+    "projects/decision-field/evidence/local_plane_reporting_2026-10-05/README.md": {
+      "bytes": 4794,
+      "sha256": "d4dcc1af096fe2c3e2f96f800149e9195ab737b0f02c9f7433f5e30d9d0c00c9",
+      "git_blob_sha1": "17e92a6b7ad1806e95c5ad48d7e071330ec5bbbc"
+    },
+    "projects/decision-field/evidence/local_plane_reporting_2026-10-05/evidence/native_probe.json": {
+      "bytes": 2065,
+      "sha256": "b9045af1be1d7620373d329e8b20a0a9b8acb8d0d0cb35420e5c521ffa4da2db",
+      "git_blob_sha1": "d85c957397f2a51fdc4a73d61e162e0ea1cc5543"
+    },
+    "projects/decision-field/evidence/local_plane_reporting_2026-10-05/src/differential_probe.cpp": {
+      "bytes": 3483,
+      "sha256": "053497b284774e524bf8641c59cbb8ca04577db4ca55ee4c83be83cbbc0aab66",
+      "git_blob_sha1": "1a9a8c39cde39c28c69957462e0f0d33c093209a"
+    },
+    "projects/decision-field/evidence/local_plane_reporting_2026-10-05/tests/test_reporting_boundary.py": {
+      "bytes": 2754,
+      "sha256": "554bb38f1d66b0a693358d4482374d7b63b2bcf452ed46b52175893b8e4412f7",
+      "git_blob_sha1": "175de5da5754056477e9caf17c525f7fc66f4086"
+    },
+    "projects/decision-field/include/decision_field/local_plane.hpp": {
+      "bytes": 7738,
+      "sha256": "9dad878e5dda00d67b0921b7e131f09217f0b3dec3b4554d0455ec520726d2e4",
+      "git_blob_sha1": "6e45f5bb1e35bf9762cdc4f3e9251c386ce0267a"
+    },
+    "projects/decision-field/tests/local_plane_tests.cpp": {
+      "bytes": 3853,
+      "sha256": "36b3838e67facdd78eae52a0eb566447ce680fca25686644adc600b26d50053a",
+      "git_blob_sha1": "965c42d7f39e330b1fcd8491bb187a31a1c982ca"
+    }
+  },
+  "hosted_ci": "NOT_CLAIMED_BY_LOCAL_RECEIPT",
+  "admission": "Reporting/test/evidence integration only; no runtime/language/model authority promotion"
+}

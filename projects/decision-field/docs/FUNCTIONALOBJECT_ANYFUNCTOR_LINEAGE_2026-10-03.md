@@ -130,7 +130,7 @@ manifest. The successor has its own build surface at
 The standalone test checks:
 
 - one obligation is rejected because this carrier is explicitly plural;
-- the four stair stages remain ordered;
+- the four static stage descriptors remain ordered (not an executed traversal);
 - the first admitted relation changes the local-plane revision;
 - the same relation reuses the existing route without growing the plane;
 - a conflicting route is retained as residual and cannot overwrite the admitted route;
@@ -140,3 +140,32 @@ The standalone test checks:
 
 This is a local architectural successor probe, not a global complexity result or a
 claim that `FunctionalObject.cs` was already AnyFunctor.
+
+## 2026-10-05 audit: descriptors, differentials, and lateral relations
+
+The four-role diagram above is a semantic design description. In the implementation,
+`LocalPlaneTransition::stages` is a default-initialized array; identical labels appear
+on admitted, reused, conflicting, incomplete, and rejected observations. Those labels
+do not witness an executed four-state controller, nor the user's clarified
+`0 -> 1 -> 0 -> 2`, followed by directed `1 -> 2` wiring and segment advancement.
+No equivalence mapping between those structures has been established.
+
+`revision()` counts new integrated routes, not complete state changes. Reuse changes
+an occurrence and an internal reuse count without changing the route revision.
+Conflicts and rejected observations add residuals without changing that revision.
+Returning to the same control role or revision must not collapse those distinctions.
+
+The verified lateral seam remains `AnyFunctor -> admission -> local route recording`.
+The source preserves separate execution and transition receipts; a route is not an
+answer, a lateral relation is not historical identity, and a pointer is not independent
+confirmation. Its underlying engine and native seam were not rerun in this audit.
+
+A fresh direct-API diagnostic also records a narrower validation limitation: an empty
+satisfied-obligation ID throws after allocating an occurrence, without appending a
+LocalPlane residual. The outer diagnostic preserves that failed attempt. The native
+implementation has not been changed to provide an attempt journal, and its existing
+three rejection branches must not be described as universal failure capture.
+
+The reporting correction leaves routing behavior unchanged. Historical receipts and
+original source bytes remain frozen. Neither the unrecovered wiring criterion nor
+segment-advance semantics are filled by a guessed Boolean or an invented controller.

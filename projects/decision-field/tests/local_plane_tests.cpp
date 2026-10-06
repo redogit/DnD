@@ -80,6 +80,9 @@ int main() {
     CHECK(!rejected.integrated);
     CHECK(rejected.residual_index.has_value());
     CHECK(!plane.resolve("context:C", "mirror/self").has_value());
+    // Identical descriptors must not be read as identical executed outcomes.
+    CHECK(rejected.stages == first.stages);
+    CHECK(rejected.occurrence != first.occurrence);
 
     const auto new_context = plane.observe(
         "context:D", "mirror/self", "AnyFunctor:Mirror:route-A", all, true);
@@ -94,6 +97,6 @@ int main() {
     CHECK(plane.residuals()[2].reason == "execution-not-admitted");
 
     std::cout
-        << "PASS local plane: four-stage stair, plural obligations, admitted route integration, "
-           "average-O(1) reuse lookup, and retained residuals without output caching\n";
+        << "PASS local plane: static stage descriptors, plural obligations, admitted route integration, "
+           "route reuse and retained residuals; no control-trace or complexity verification\n";
 }
