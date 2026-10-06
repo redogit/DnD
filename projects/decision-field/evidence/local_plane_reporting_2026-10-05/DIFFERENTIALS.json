@@ -1,0 +1,69 @@
+{
+  "identity": "THREE_STATE_DIFFERENTIALS_LATERALS_2026-10-05",
+  "meaning": "Recorded behavior/contract differences in this audit; not an assertion of the user's universal definition of differential.",
+  "items": [
+    {
+      "id": "D01",
+      "subject": "Three control labels versus four static semantic descriptors",
+      "basis": "Current user statement; frozen LocalPlane header and native cases",
+      "finding": "The array [0,1,2,3] is identical on admitted and rejected outcomes; it is not an executed traversal.",
+      "action": "Local comments, test report, and design clarification distinguish descriptors from evidence.",
+      "status": "REPORTING_REPAIRED_LOCALLY",
+      "remaining": "Original 0->1->0->2 implementation and correspondence remain UNRESOLVED."
+    },
+    {
+      "id": "D02",
+      "subject": "Repeated zero versus repeated occurrence",
+      "basis": "Current user control sequence; distinct native observation IDs",
+      "finding": "The two visits to role 0 must remain separate occurrences. Equality of carried values is neither asserted nor denied.",
+      "action": "Retain occurrence identity separately from the control role; no fourth named control state is introduced.",
+      "status": "CONTRACT_DISTINCTION_RECORDED",
+      "remaining": "Original occurrence/segment representation not recovered."
+    },
+    {
+      "id": "D03",
+      "subject": "Route revision versus complete state identity",
+      "basis": "Fresh native reuse and conflict cases",
+      "finding": "Reuse increments occurrence and internal reuse_count while revision stays fixed. Conflict increments residual count with fixed revision.",
+      "action": "Record observed differences in route revision, route count, residual count, occurrence, and outcome separately.",
+      "status": "FRESHLY_CHARACTERIZED",
+      "remaining": "The public differential vector is not a complete internal-state reconstruction."
+    },
+    {
+      "id": "D04",
+      "subject": "Traversal versus directed wiring",
+      "basis": "Current user statement",
+      "finding": "Traversing 1->0->2 is not by itself evidence of subsequently constructing the required 1->2 connection.",
+      "action": "Record proposed links with source/destination occurrence references, segment context, direction, obligations and evidence references; no reverse edge is inferred.",
+      "status": "REQUIREMENT_RECORDED_NOT_IMPLEMENTED",
+      "remaining": "The original proper-wiring rule, bindings and source code are UNRESOLVED."
+    },
+    {
+      "id": "D05",
+      "subject": "Wiring proposal versus permission to advance",
+      "basis": "Current user statement",
+      "finding": "Correct wiring precedes advancement; a generated edge, stage label, route hit or caller-supplied Boolean cannot supply the missing rule.",
+      "action": "Keep advancement unwarranted until the source-defined wiring predicate and its scoped verification are available.",
+      "status": "UNRESOLVED",
+      "remaining": "No controller, guessed coverage threshold or synthetic completeness flag is introduced."
+    },
+    {
+      "id": "D06",
+      "subject": "Reported rejection versus input-validation exception",
+      "basis": "Fresh invalid_obligation_id and after_invalid cases",
+      "finding": "A blank satisfied-obligation ID throws after allocating occurrence 6, with residual count unchanged; next valid call returns occurrence 7.",
+      "action": "Retain failed attempt in outer diagnostic evidence and explicitly limit native failure-custody claims.",
+      "status": "NATIVE_JOURNAL_GAP_OPEN",
+      "remaining": "No production exception/transaction semantics changed. This does not assert every validation path has this behavior."
+    },
+    {
+      "id": "D07",
+      "subject": "Passing examples versus a verified complexity bound",
+      "basis": "Original standalone test stdout and source body",
+      "finding": "The functional test neither measures nor proves the advertised asymptotic complexity.",
+      "action": "Remove average-O(1) from the test success message; preserve the separately scoped design statement.",
+      "status": "REPORTING_REPAIRED_LOCALLY",
+      "remaining": "No complexity statement was disproved by this output edit; no latency or memory benchmark was run."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+[
+{"case":"integrate","occurrence":0,"revision_before":0,"revision_after":1,"routes_before":0,"routes_after":1,"residuals_before":0,"residuals_after":0,"integrated":true,"reused":false,"stages":[0,1,2,3],"route_A_preserved":true},
+{"case":"reuse","occurrence":1,"revision_before":1,"revision_after":1,"routes_before":1,"routes_after":1,"residuals_before":0,"residuals_after":0,"integrated":false,"reused":true,"stages":[0,1,2,3],"route_A_preserved":true},
+{"case":"conflict","occurrence":2,"revision_before":1,"revision_after":1,"routes_before":1,"routes_after":1,"residuals_before":0,"residuals_after":1,"integrated":false,"reused":false,"stages":[0,1,2,3],"residual_occurrence":2,"reason":"integrated-route-conflict","route_A_preserved":true},
+{"case":"missing_obligation","occurrence":3,"revision_before":1,"revision_after":1,"routes_before":1,"routes_after":1,"residuals_before":1,"residuals_after":2,"integrated":false,"reused":false,"stages":[0,1,2,3],"residual_occurrence":3,"reason":"obligation-coverage-incomplete","route_A_preserved":true},
+{"case":"rejected_execution","occurrence":4,"revision_before":1,"revision_after":1,"routes_before":1,"routes_after":1,"residuals_before":2,"residuals_after":3,"integrated":false,"reused":false,"stages":[0,1,2,3],"residual_occurrence":4,"reason":"execution-not-admitted","route_A_preserved":true},
+{"case":"new_context","occurrence":5,"revision_before":1,"revision_after":2,"routes_before":1,"routes_after":2,"residuals_before":3,"residuals_after":3,"integrated":true,"reused":false,"stages":[0,1,2,3],"route_A_preserved":true},
+{"case":"invalid_obligation_id","exception":"satisfied obligation id must not be empty","revision_before":2,"revision_after":2,"routes_before":2,"routes_after":2,"residuals_before":3,"residuals_after":3,"failure_preserved_by":"outer-diagnostic-only"},
+{"case":"after_invalid","occurrence":7,"revision_before":2,"revision_after":2,"routes_before":2,"routes_after":2,"residuals_before":3,"residuals_after":3,"integrated":false,"reused":true,"stages":[0,1,2,3],"route_A_preserved":true}
+]

@@ -48,6 +48,9 @@ struct LocalPlaneTransition {
     std::size_t occurrence{};
     std::size_t revision_before{};
     std::size_t revision_after{};
+    // Static semantic descriptors, not an executed control trace. All outcomes
+    // carry these labels, including rejected or obligation-incomplete attempts.
+    // Consult integrated/reused/residual_index for the recorded route outcome.
     std::array<LocalPlaneStage, 4> stages{
         LocalPlaneStage::Receive,
         LocalPlaneStage::Contextualize,
