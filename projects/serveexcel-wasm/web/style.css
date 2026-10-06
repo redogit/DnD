@@ -1,0 +1,11 @@
+:root { color-scheme: dark; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #050505; color: #f3f3f3; }
+main { width: min(900px, 94vw); border: 1px solid #555; background: #111; padding: 20px; box-shadow: 0 0 0 1px #000 inset; }
+h1 { margin: 0 0 6px; color: #fff; }
+p { color: #aaa; }
+textarea { width: 100%; min-height: 320px; resize: vertical; border: 1px solid #555; background: #000; color: #eee; padding: 12px; }
+.actions { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
+button { border: 1px solid #f33; background: #a00; color: #fff; padding: 10px 16px; cursor: pointer; }
+button:hover { background: #d00; }
+output { color: #bbb; }
