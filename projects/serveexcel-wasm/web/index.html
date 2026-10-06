@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ServeExcel Wasm</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main>
+    <h1>ServeExcel</h1>
+    <p>Data → inferred schema → Wasm workbook → .xlsx</p>
+    <textarea id="data" spellcheck="false">[
+  {"name":"Ada","score":98,"active":true},
+  {"name":"Grace","score":97,"active":true}
+]</textarea>
+    <div class="actions">
+      <button id="export">Export .xlsx</button>
+      <output id="status">Ready</output>
+    </div>
+  </main>
+  <script type="module">
+    import { serveExcel } from "./serveexcel.js";
+    const data = document.querySelector("#data");
+    const status = document.querySelector("#status");
+    document.querySelector("#export").addEventListener("click", async () => {
+      try {
+        status.textContent = "Building…";
+        const rows = JSON.parse(data.value);
+        const size = await serveExcel().report("Browser export").sheet("Data").data(rows).file("serveexcel.xlsx").save();
+        status.textContent = `Exported ${size.toLocaleString()} bytes`;
+      } catch (error) {
+        status.textContent = error.message;
+      }
+    });
+  </script>
+</body>
+</html>
